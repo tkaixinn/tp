@@ -40,13 +40,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chellappan Ramiah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chellu19.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Chellu19)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Backend
 
 ### Kee Zhen Xian
 
