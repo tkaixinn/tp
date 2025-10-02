@@ -273,53 +273,104 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
 *{More to be added}*
 
+|    | Profile<br>As a…                                     | Feature<br>I can…                                                                       | Benefit<br>so that I can…                                                                                | Priority |
+| -- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------- |
+| 1  | user                                                 | add a contact                                                                           | track the people I've met                                                                                | High     |
+| 2  | user                                                 | delete a contact                                                                        | keep my network and knowledge tidy and relevant.                                                         | High     |
+| 3  | user                                                 | view all my contacts                                                                    | easily recall who I met.                                                                                 | High     |
+| 4  | user                                                 | add cultural notes                                                                      | recall important details about them.                                                                     | High     |
+| 5  | sociable user who meets people from different places | tag contacts with “where we met” labels (e.g. “business course”, “xx networking event”) | remember the context in which I met them.                                                                | High     |
+| 6  | user                                                 | edit a contact                                                                          | fix any errors I made when adding a contact.                                                             | High     |
+| 7  | forgetful user                                       | search my contacts by name                                                              | find the right person even if I forget their exact name.                                                 | High     |
+| 8  | first-time exchange student user                     | get help with the commands                                                              | know how to use the app.                                                                                 | Medium   |
+| 9  | busy exchange student                                | centralise and track all my trip-related contacts and cultural notes in the app         | save time switching between scattered apps.                                                              | Medium   |
+| 10 | sociable user who meets many people                  | tag contacts with role labels<br>(e.g. “classmate,” “local buddy,” “travel buddy”),     | organise people by roles.                                                                                | Medium   |
+| 11 | forgetful user                                       | filter contacts by the country I met them in                                            | find people when I don’t remember anything except where we met.                                          | Medium   |
+| 12 | user                                                 | filter contacts by tag                                                                  | find people I am looking for based on the role required.                                                 | Medium   |
+| 13 | user who cannot remember everyone’s time zones       | have every contact’s local time displayed                                               | avoid contacting them at odd hours.                                                                      | Medium   |
+| 14 | user who cannot remember everyone’s preferences      | have every contact’s preferred communication channel listed                             | contact them on the platform that they are most comfortable with.                                        | Medium   |
+| 15 | first-time exchange student user                     | see sample contacts and notes when I open the app                                       | immediately explore how to organise people and cultural details without having to add my own data first. | Low      |
+| 16 | user                                                 | view a timeline of interactions and trips                                               | reflect on my exchange journey after it ends.                                                            | Low      |
+| 17 | user                                                 | import contacts from my phone or social apps                                            | quickly populate my network without manually typing everything.                                          | Low      |
+| 18 | user                                                 | set reminders to follow up with friends                                                 | keep connections alive beyond a single meeting.                                                          | Low      |
+| 19 | organised user                                       | archive contacts                                                                        | keep my network relevant.                                                                                | Low      |
+| 20 | auditory learner                                     | record the pronunciation of contacts’ names                                             | remember the pronunciation of names that are foreign to me.                                              | Low      |
+| 21 | visual user                                          | create map visuals to visualise networks                                                | so that I can see clusters of connections easily.                                                        | Low      |
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Worldly` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 Add a Contact**
+
+Actor: User
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add someone to their contacts
+2. User types the command to add the contact
+3. Wordly validates each field: name, phone, email, and country
+4. If all fields are valid, the system adds the new contact to the list
+5. The new contact appears in the contact list view
 
     Use case ends.
 
 **Extensions**
+3a. If a field is invalid → Wordly shows an error message
+etc. “relevant error message/fields are name, number, email & country”
 
-* 2a. The list is empty.
+b.  If contact already exists → Wordly shows another error message 
+etc. “A contact with this email/phone already exists.”
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
+**Use Case: UC02 View Contact**
 
-    * 3a1. AddressBook shows an error message.
+Actor: User
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User chooses to view contact
+2. User types view
+3. System retrieves all contact and cultural notes
+4. System displays the list of contacts in alphabetical order including names, countries, and notes.
+
+    Use case ends.
+
+**Extensions**
+3a.  If there are no contacts → Wordly shows an error message
+etc. “You have no contacts yet. Use ‘add’ to create one”
+
+<br>
+
+**Use Case: UC03 Delete Contact**
+
+Actor: User
+
+**MSS**
+
+1. User chooses to delete someone from their contacts
+2. User types the command to delete the contact
+3. System validates the name
+4. If the name is valid, the system deletes the contact from the list
+5. The contact no longer appears in the list
+
+**Extension**
+3a. If the name is invalid → system shows an error message
+etc. "Invalid name. Only letters, spaces, hyphens, and apostrophes are allowed, max 50 characters."
+
+<br>
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should respond within two seconds.
+5. The contact name or other information should not contain any words deemed offensive.
+6. The user interface should be intuitive enough for users who are not IT-savvy.
+7. The system is offered as a free online service.
 
 *{More to be added}*
 
@@ -327,6 +378,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Cultural note**: A short user-generated entry recording cultural tips, etiquette reminders, or unique local insights (e.g., greetings, taboos)
+* **First Meet Circumstances**: A note describing how/where the user first met the contact (e.g., “Met at orientation event,” “Group project partner”), to strengthen recall. 
+* **Alias**: A shortcut keyword (e.g., typing t for “todo,” e for “event”) to speed up data entry.
 
 --------------------------------------------------------------------------------------------------------------------
 
