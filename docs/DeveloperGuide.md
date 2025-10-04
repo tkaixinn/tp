@@ -262,13 +262,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Exchange students on short-term programs abroad are adventurous and eager to maximise their limited time. 
+* They simultaneously juggle academics, cultural exploration, and networking.
+* They face challenges remembering people, maintaining connections, remembering cultural details and managing scattered communication across different apps. 
+* Their goals are forging lasting friendships and global networks.
+
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+Our app helps exchange students build and sustain meaningful global connections while avoiding cultural missteps. 
+Centralising contacts and notes makes it easier to remember people and cultural nuances. 
+Unlike scattered chat apps, it’s tailored for short but intense exchange journeys, ensuring friendships and networks last beyond the program.
 
 
 ### User stories
