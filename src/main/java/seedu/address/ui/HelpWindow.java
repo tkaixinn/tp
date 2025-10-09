@@ -5,10 +5,14 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+
 
 /**
  * Controller for a help page
@@ -27,6 +31,14 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private TableView<CommandEntry> commandTableView;
+
+    @FXML
+    private TableColumn<CommandEntry, String> actionColumn;
+
+    @FXML
+    private TableColumn<CommandEntry, String> formatColumn;
     /**
      * Creates a new HelpWindow.
      *
@@ -42,6 +54,29 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Initializes the HelpWindow after its FXML is loaded.
+     * Sets up the table columns and populates the command reference table.
+     */
+    @FXML
+    public void initialize() {
+        actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
+        formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
+
+        commandTableView.getItems().addAll(
+                new CommandEntry("Add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…\n"
+                        + "e.g., add n/James Ho p/22224444 e/jamesho@example.com "
+                        + "a/123, Clementi Rd, 1234665 t/friend t/colleague"),
+                new CommandEntry("Clear", "clear"),
+                new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
+                new CommandEntry("Edit", "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
+                        + "e.g., edit 2 n/James Lee e/jameslee@example.com"),
+                new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
+                new CommandEntry("List", "list"),
+                new CommandEntry("Help", "help")
+        );
     }
 
     /**
