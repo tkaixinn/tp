@@ -116,7 +116,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            String[] splitTags = tagName.split(",");
+            String[] splitTags = tagName.split("PLACEHOLDER");
             for (String tag : splitTags) {
                 String trimmedTag = tag.trim();
                 if (trimmedTag.isEmpty() || !Tag.isValidTagName(trimmedTag)) {
@@ -127,4 +127,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }
