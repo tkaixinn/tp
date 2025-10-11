@@ -55,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        
+
         if (!isNull(person.getCountry())) {
             country.setVisible(true);
             country.setText(person.getCountry().countryName);
