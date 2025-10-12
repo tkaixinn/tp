@@ -40,6 +40,9 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * If country is included in initialisation.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
