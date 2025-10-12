@@ -104,9 +104,7 @@ public class EditCommand extends Command {
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return hasCountry
-                ? new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTags)
-                : new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTags);
     }
 
     @Override
@@ -243,6 +241,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
