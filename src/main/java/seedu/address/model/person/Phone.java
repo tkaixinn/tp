@@ -1,13 +1,13 @@
 package seedu.address.model.person;
 
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Locale;
+
+import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import com.google.i18n.phonenumbers.NumberParseException;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -18,7 +18,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should be valid international numbers (e.g. +6598765432) " +
-            "or contain at least 3 digits if no country code is provided.";
+                    "or contain at least 3 digits if no country code is provided.";
 
     public static final String VALIDATION_REGEX = "^[+]?([0-9\\-()\\s]){3,}$";
     public final String value;
@@ -93,11 +93,10 @@ public class Phone {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Phone)) {
+        if (!(other instanceof Phone otherPhone)) {
             return false;
         }
 
-        Phone otherPhone = (Phone) other;
         return value.equals(otherPhone.value);
     }
 
