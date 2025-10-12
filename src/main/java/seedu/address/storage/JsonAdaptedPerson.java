@@ -106,10 +106,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (culture == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Culture.class.getSimpleName()));
-        }
-        final Culture modelCulture = new Culture(culture);
+        final Culture modelCulture = (culture == null) ? new Culture("") : new Culture(culture);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCulture, modelTags);

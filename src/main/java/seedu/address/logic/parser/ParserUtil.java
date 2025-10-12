@@ -103,7 +103,10 @@ public class ParserUtil {
      * @throws ParseException if the given {@code culture} is invalid.
      */
     public static Culture parseCulture(String culture) throws ParseException {
-        requireNonNull(culture);
+        if (culture == null) {
+            throw new ParseException("Culture cannot be null");
+        }
+        // Allow empty or whitespace-only input
         String trimmedCulture = culture.trim();
         return new Culture(trimmedCulture);
     }

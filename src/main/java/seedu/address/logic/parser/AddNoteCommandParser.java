@@ -28,7 +28,7 @@ public class AddNoteCommandParser implements Parser<AddNoteCommand> {
      *   "name: Alice B.  note: Loves Nasi Lemak and durian."
      */
     private static final Pattern ADDNOTE_COMMAND_FORMAT =
-        Pattern.compile("(?i)name:\\s*(?<name>.*?)\\s+note:\\s*(?<note>.+)");
+        Pattern.compile("(?i)name:\\s*(?<name>.*?)\\s+note:\\s*(?<note>.*)");
 
     @Override
     public AddNoteCommand parse(String args) throws ParseException {

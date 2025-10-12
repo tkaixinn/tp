@@ -7,7 +7,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Culture; // or rename to Note if you prefer
+import seedu.address.model.person.Culture;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -41,10 +41,10 @@ public class AddNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> allPersons = model.getAddressBook().getPersonList();
 
         // Find the person with the matching name
-        Person personToEdit = lastShownList.stream()
+        Person personToEdit = allPersons.stream()
             .filter(p -> p.getName().equals(name))
             .findFirst()
             .orElse(null);
@@ -59,7 +59,7 @@ public class AddNoteCommand extends Command {
             personToEdit.getPhone(),
             personToEdit.getEmail(),
             personToEdit.getAddress(),
-            culture, // updated note
+            culture,
             personToEdit.getTags()
         );
 
@@ -76,7 +76,7 @@ public class AddNoteCommand extends Command {
         String message = !culture.value.isEmpty()
             ? MESSAGE_ADD_NOTE_SUCCESS
             : MESSAGE_DELETE_NOTE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, personToEdit.getName());
     }
 
     @Override
