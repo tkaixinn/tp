@@ -49,22 +49,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 
-        Optional<String> countryOptional = argMultimap.getValue(PREFIX_COUNTRY);
-        Optional<Country> countryParsed = Optional.empty();
-        if (countryOptional.isPresent()) {
-            countryParsed = ParserUtil.parseCountry(countryOptional.get());
+        Optional<String> countryString = argMultimap.getValue(PREFIX_COUNTRY);
+        Optional<Country> countryOptional = Optional.empty();
+
+        if (countryString.isPresent()) {
+            countryOptional = ParserUtil.parseCountry(countryString.get());
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person;
-        if (countryParsed.isPresent()) {
-            person = new Person(name, phone, email, address, countryParsed.get(), tagList);
-        } else {
-            person = new Person(name, phone, email, address, tagList);
-        }
+        Person person = countryOptional
+                .map(country -> new Person(name, phone, email, address, country, tagList))
+                .orElseGet(() -> new Person(name, phone, email, address, tagList));
 
         return new AddCommand(person);
+
     }
 
     /**

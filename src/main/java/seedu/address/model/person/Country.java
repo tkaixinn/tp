@@ -8,13 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces";
+    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Allows alphabetic words separated by spaces.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "([\\p{L}][\\p{L} '\\-]*)?";
 
     public final String countryName;
 
