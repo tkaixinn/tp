@@ -115,7 +115,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && country.equals(otherPerson.country)
+                && Objects.equals(country, otherPerson.country)
                 && tags.equals(otherPerson.tags);
     }
 
