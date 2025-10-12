@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Country names should only contain letters, spaces, hyphens and apostrophes.";
 
     /*
      * Allows alphabetic words separated by spaces.
