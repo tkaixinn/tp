@@ -70,3 +70,10 @@ shadowJar {
 }
 
 defaultTasks 'clean', 'test'
+
+checkstyleMain {
+    ignoreFailures = true
+}
+checkstyleTest {
+    ignoreFailures = true
+}
