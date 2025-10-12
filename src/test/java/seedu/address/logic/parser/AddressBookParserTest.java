@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CULTURE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.CultureCommand;
+import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -25,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Culture;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -97,11 +97,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_culture() throws Exception {
-        final Culture culture = new Culture("Some culture notes.");
-        CultureCommand command = (CultureCommand) parser.parseCommand(CultureCommand.COMMAND_WORD + " "
-            + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CULTURE + culture.value);
-        assertEquals(new CultureCommand(INDEX_FIRST_PERSON, culture), command);
+    public void parseCommand_note() throws Exception {
+        final Culture note = new Culture("Some culture notes.");
+        final String name = "Alice Pauline";
+        AddNoteCommand command = (AddNoteCommand) parser.parseCommand(
+            AddNoteCommand.COMMAND_WORD + " name: " + name + " note: " + note.value);
+        assertEquals(new AddNoteCommand(new Name(name), note), command);
     }
 
 }

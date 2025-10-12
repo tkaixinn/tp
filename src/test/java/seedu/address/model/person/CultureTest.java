@@ -15,8 +15,8 @@ public class CultureTest {
         assertTrue(culture.equals(culture));
 
         // same values -> returns true
-        Culture remarkCopy = new Culture(culture.value);
-        assertTrue(culture.equals(remarkCopy));
+        Culture cultureCopy = new Culture(culture.value);
+        assertTrue(culture.equals(cultureCopy));
 
         // different types -> returns false
         assertFalse(culture.equals(1));
