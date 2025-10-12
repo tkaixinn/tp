@@ -37,7 +37,8 @@ public class CultureCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withCulture(CULTURE_STUB).build();
 
-        CultureCommand remarkCommand = new CultureCommand(INDEX_FIRST_PERSON, new Culture(editedPerson.getCulture().value));
+        CultureCommand remarkCommand = new CultureCommand(INDEX_FIRST_PERSON,
+            new Culture(editedPerson.getCulture().value));
 
         String expectedMessage = String.format(CultureCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
