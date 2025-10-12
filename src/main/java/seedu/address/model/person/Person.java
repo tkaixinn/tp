@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,6 +36,14 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        removeOldCountryTags();
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
     }
 
     public Name getName() {
@@ -72,6 +81,20 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Removes existing country-related tags.
+     * (Assumes tags with names matching country names or flags)
+     */
+    private void removeOldCountryTags() {
+        String []isoCountries = Locale.getISOCountries();
+        Set<String> allCountryNames = new HashSet<>();
+        for (String isoCountry : isoCountries) {
+            allCountryNames.add(new Locale("", isoCountry).getDisplayCountry());
+        }
+        this.tags.removeIf(tag -> allCountryNames.stream()
+                .anyMatch(country -> country.equalsIgnoreCase(tag.tagName)));
     }
 
     /**
