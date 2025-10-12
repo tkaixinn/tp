@@ -17,8 +17,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should be valid international numbers (e.g. +6598765432) " +
-                    "or contain at least 3 digits if no country code is provided.";
+            "Phone numbers should be valid international numbers (e.g. +6598765432) "
+                    + "or contain at least 3 digits if no country code is provided.";
 
     public static final String VALIDATION_REGEX = "^[+]?([0-9\\-()\\s]){3,}$";
     public final String value;
