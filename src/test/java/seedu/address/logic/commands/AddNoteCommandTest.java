@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -47,7 +46,7 @@ public class AddNoteCommandTest {
 
         AddNoteCommand command = new AddNoteCommand(targetName, note);
 
-        String expectedMessage = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
@@ -69,7 +68,7 @@ public class AddNoteCommandTest {
 
         AddNoteCommand command = new AddNoteCommand(targetName, emptyNote);
 
-        String expectedMessage = String.format(AddNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(AddNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson.getName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
@@ -83,7 +82,9 @@ public class AddNoteCommandTest {
         Culture note = new Culture("Some note");
         AddNoteCommand command = new AddNoteCommand(invalidName, note);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_PERSON_NOT_FOUND);
+        // execute_personNotFound_failure
+        String expectedMessage = String.format(AddNoteCommand.MESSAGE_PERSON_NOT_FOUND, invalidName.fullName);
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test

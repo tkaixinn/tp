@@ -32,11 +32,9 @@ public class AddNoteCommandParserTest {
 
     @Test
     public void parse_emptyNote_success() {
-        String userInput = " " + PREFIX_NAME + VALID_NAME + " " + PREFIX_NOTE;
-
+        String userInput = "name: Alice Pauline note: ";
         AddNoteCommand expectedCommand =
-            new AddNoteCommand(new Name(VALID_NAME), new Culture(EMPTY_NOTE));
-
+            new AddNoteCommand(new Name("Alice Pauline"), new Culture(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
