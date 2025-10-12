@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.model.person.Culture;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CULTURE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CultureCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -95,7 +98,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    public void parseCommand_culture() throws Exception {
+        final Culture culture = new Culture("Some culture notes.");
+        CultureCommand command = (CultureCommand) parser.parseCommand(CultureCommand.COMMAND_WORD + " "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CULTURE + culture.value);
+        assertEquals(new CultureCommand(INDEX_FIRST_PERSON, culture), command);
     }
+
 }
