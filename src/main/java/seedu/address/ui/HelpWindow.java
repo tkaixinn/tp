@@ -65,14 +65,39 @@ public class HelpWindow extends UiPart<Stage> {
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
 
+        formatColumn.setCellFactory(column -> {
+            return new javafx.scene.control.TableCell<CommandEntry, String>() {
+                private final javafx.scene.text.Text text = new javafx.scene.text.Text();
+
+                {
+                    text.wrappingWidthProperty().bind(formatColumn.widthProperty().subtract(10));
+                    setGraphic(text);
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        text.setText(null);
+                    } else {
+                        text.setText(item);
+                    }
+                }
+            };
+        });
+
+        commandTableView.setFixedCellSize(-1);
+
         commandTableView.getItems().addAll(
-                new CommandEntry("Add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…\n"
-                        + "e.g., add n/James Ho p/22224444 e/jamesho@example.com "
-                        + "a/123, Clementi Rd, 1234665 t/friend t/colleague"),
+                new CommandEntry("Add", "add name: NAME phone: PHONE email: EMAIL address: ADDRESS "
+                        + "[country: COUNTRY] [tag: TAG]…\n"
+                        + "e.g., add name: James Ho phone: 22224444 email: jamesho@example.com "
+                        + "address: 123, Clementi Rd, 1234665 country: Singapore tag: friend tag: colleague"),
                 new CommandEntry("Clear", "clear"),
                 new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
-                new CommandEntry("Edit", "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
-                        + "e.g., edit 2 n/James Lee e/jameslee@example.com"),
+                new CommandEntry("Edit", "edit INDEX [name: NAME] [phone: PHONE] [email: EMAIL] "
+                        +  "[address: ADDRESS] [country: COUNTRY] [tag: TAG]…\n"
+                        + "e.g., edit 2 name: James Lee email: jameslee@example.com"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
                 new CommandEntry("List", "list"),
                 new CommandEntry("Help", "help")
