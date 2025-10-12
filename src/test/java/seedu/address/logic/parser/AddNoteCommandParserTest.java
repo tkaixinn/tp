@@ -14,11 +14,11 @@ import seedu.address.model.person.Name;
 
 public class AddNoteCommandParserTest {
 
-    private final AddNoteCommandParser parser = new AddNoteCommandParser();
-
     private static final String VALID_NAME = "Alice Pauline";
     private static final String VALID_NOTE = "Enjoys Nasi Lemak";
     private static final String EMPTY_NOTE = "";
+
+    private final AddNoteCommandParser parser = new AddNoteCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

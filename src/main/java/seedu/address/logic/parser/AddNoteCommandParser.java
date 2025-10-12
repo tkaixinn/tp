@@ -13,7 +13,8 @@ import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new {@code AddNoteCommand} object.
- * Expected format: addnote name: <name> note: <note text>
+ *
+ * <p>Expected format: {@code addnote name: &lt;name&gt; note: &lt;note text&gt;}</p>
  */
 public class AddNoteCommandParser implements Parser<AddNoteCommand> {
 
