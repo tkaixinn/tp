@@ -44,7 +44,7 @@ public class Person {
         this.culture = culture;
         this.tags.addAll(tags);
     }
-  
+
      /**
      * If country is included in initialisation.
      */
