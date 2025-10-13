@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +13,8 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -23,6 +25,8 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Country country;
+    private final Culture culture;
     private final Set<Tag> tags = new HashSet<>();
 
 
@@ -31,11 +35,50 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
+        requireAllNonNull(name, phone, email, address, culture, tags, preferredChannel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.country = null;
+        this.culture = culture;
+        this.tags.addAll(tags);
+    }
+  
+     /**
+     * If country is included in initialisation.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.country = country;
+        this.culture = new Culture("");
+        this.tags.addAll(tags);
+
+        removeOldCountryTags();
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
+    }
+
+    /**
+     * If both culture notes and country is included in initialisation.
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+              Country country, Culture culture, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, culture, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.country = country;
+        this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = preferredChannel;
     }
@@ -56,8 +99,17 @@ public class Person {
         return address;
     }
 
+    public Culture getCulture() {
+        return culture;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
@@ -75,6 +127,20 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Removes existing country-related tags.
+     * (Assumes tags with names matching country names or flags)
+     */
+    private void removeOldCountryTags() {
+        String []isoCountries = Locale.getISOCountries();
+        Set<String> allCountryNames = new HashSet<>();
+        for (String isoCountry : isoCountries) {
+            allCountryNames.add(new Locale("", isoCountry).getDisplayCountry());
+        }
+        this.tags.removeIf(tag -> allCountryNames.stream()
+                .anyMatch(country -> country.equalsIgnoreCase(tag.tagName)));
     }
 
     /**
@@ -97,6 +163,9 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && culture.equals(otherPerson.culture)
+                && Objects.equals(country, otherPerson.country)
+                && culture.equals(otherPerson.culture)
                 && tags.equals(otherPerson.tags)
                 && preferredChannel.equals(otherPerson.preferredChannel);
     }
@@ -123,7 +192,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, preferredChannel);
+        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel);
     }
 
     @Override
@@ -133,6 +202,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("country", country)
+                .add("culture", culture)
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .toString();

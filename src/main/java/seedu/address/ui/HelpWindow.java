@@ -5,10 +5,14 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+
 
 /**
  * Controller for a help page
@@ -27,6 +31,14 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private TableView<CommandEntry> commandTableView;
+
+    @FXML
+    private TableColumn<CommandEntry, String> actionColumn;
+
+    @FXML
+    private TableColumn<CommandEntry, String> formatColumn;
     /**
      * Creates a new HelpWindow.
      *
@@ -42,6 +54,54 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Initializes the HelpWindow after its FXML is loaded.
+     * Sets up the table columns and populates the command reference table.
+     */
+    @FXML
+    public void initialize() {
+        actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
+        formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
+
+        formatColumn.setCellFactory(column -> {
+            return new javafx.scene.control.TableCell<CommandEntry, String>() {
+                private final javafx.scene.text.Text text = new javafx.scene.text.Text();
+
+                {
+                    text.wrappingWidthProperty().bind(formatColumn.widthProperty().subtract(10));
+                    setGraphic(text);
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        text.setText(null);
+                    } else {
+                        text.setText(item);
+                    }
+                }
+            };
+        });
+
+        commandTableView.setFixedCellSize(-1);
+
+        commandTableView.getItems().addAll(
+                new CommandEntry("Add", "add name: NAME phone: PHONE email: EMAIL address: ADDRESS "
+                        + "[country: COUNTRY] [tag: TAG]…\n"
+                        + "e.g., add name: James Ho phone: 22224444 email: jamesho@example.com "
+                        + "address: 123, Clementi Rd, 1234665 country: Singapore tag: friend tag: colleague"),
+                new CommandEntry("Clear", "clear"),
+                new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
+                new CommandEntry("Edit", "edit INDEX [name: NAME] [phone: PHONE] [email: EMAIL] "
+                        +  "[address: ADDRESS] [country: COUNTRY] [tag: TAG]…\n"
+                        + "e.g., edit 2 name: James Lee email: jameslee@example.com"),
+                new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
+                new CommandEntry("List", "list"),
+                new CommandEntry("Help", "help")
+        );
     }
 
     /**

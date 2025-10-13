@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.isNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Country;
+import seedu.address.model.person.Culture;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -29,6 +33,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String country;
+    private final String culture;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String preferredChannel;
 
@@ -40,11 +46,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("country") String country, @JsonProperty("culture") String culture,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("preferredChannel") String preferredChannel) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.country = country;
+        this.culture = culture;
         this.preferredChannel = preferredChannel;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -59,6 +68,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        country = source.getCountry() != null ? source.getCountry().toString() : null;
+        culture = source.getCulture().value;
         preferredChannel = source.getPreferredChannel().name();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -66,9 +77,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -108,6 +121,13 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Culture modelCulture = (culture == null) ? new Culture("") : new Culture(culture);
+
+        if (!isNull(country) && !Country.isValidCountry(country)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Country modelCountry = isNull(country) ? null : new Country(country);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Person.CommunicationChannel modelChannel;
@@ -122,7 +142,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException("Invalid communication channel in JSON: " + preferredChannel);
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelChannel);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelCulture, modelTags, modelChannel);
     }
 
 }
