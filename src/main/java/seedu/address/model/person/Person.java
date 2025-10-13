@@ -33,9 +33,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
+    public Person(Name name, Phone phone, Email email, Address address, Culture culture, Set<Tag> tags, 
+                 CommunicationChannel preferredChannel) {
+        requireAllNonNull(name, phone, email, address, culture, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
