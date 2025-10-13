@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
+import seedu.address.model.person.Culture;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String country;
+    private final String culture;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -40,13 +42,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("country") String country,
+            @JsonProperty("country") String country, @JsonProperty("culture") String culture,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.culture = culture;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,6 +64,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry() != null ? source.getCountry().toString() : null;
+        culture = source.getCulture().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,13 +115,15 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Culture modelCulture = (culture == null) ? new Culture("") : new Culture(culture);
+
         if (!isNull(country) && !Country.isValidCountry(country)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelCulture, modelTags);
     }
 
 }

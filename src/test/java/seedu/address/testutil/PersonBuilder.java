@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
+import seedu.address.model.person.Culture;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COUNTRY = "Singapore";
+    public static final String DEFAULT_CULTURE = "";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Country country;
+    private Culture culture;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         country = new Country(DEFAULT_COUNTRY);
+        culture = new Culture(DEFAULT_CULTURE);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         country = personToCopy.getCountry();
+        culture = personToCopy.getCulture();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -96,6 +101,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCulture(String culture) {
+        this.culture = new Culture(culture);
+        return this;
+    }
+
+    /**
      * Sets the {@code Country} of the {@code Person} that we are building.
      */
     public PersonBuilder withCountry(String country) {
@@ -104,7 +117,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, tags);
+        return new Person(name, phone, email, address, country, culture, tags);
     }
 
 }

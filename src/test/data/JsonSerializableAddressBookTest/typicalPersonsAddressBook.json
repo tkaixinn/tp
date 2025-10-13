@@ -7,9 +7,8 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "country": "Singapore",
-      "tags": [
-        "friends"
-      ]
+      "culture": "",
+      "tags": ["friends"]
     },
     {
       "name": "Benson Meier",
@@ -17,10 +16,8 @@
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
       "country": "Singapore",
-      "tags": [
-        "owesMoney",
-        "friends"
-      ]
+      "culture": "He can't drink alcohol!",
+      "tags": ["owesMoney", "friends"]
     },
     {
       "name": "Carl Kurz",
@@ -28,6 +25,7 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "country": "United States",
+      "culture": "",
       "tags": []
     },
     {
@@ -36,9 +34,8 @@
       "email": "cornelia@example.com",
       "address": "10th street",
       "country": "Singapore",
-      "tags": [
-        "friends"
-      ]
+      "culture": "",
+      "tags": ["friends"]
     },
     {
       "name": "Elle Meyer",
@@ -46,6 +43,7 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "country": "United States",
+      "culture": "",
       "tags": []
     },
     {
@@ -54,6 +52,7 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "country": "United States",
+      "culture": "",
       "tags": []
     },
     {
@@ -62,6 +61,7 @@
       "email": "anna@example.com",
       "address": "4th street",
       "country": "United States",
+      "culture": "",
       "tags": []
     }
   ]
