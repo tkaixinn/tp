@@ -27,7 +27,6 @@ public class Person {
     private final Address address;
     private final Country country;
     private final Culture culture;
-    private final Country country;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -54,7 +53,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.country = country;
-        this.culture = new Culture(""); 
+        this.culture = new Culture("");
         this.tags.addAll(tags);
 
         removeOldCountryTags();
@@ -65,7 +64,7 @@ public class Person {
             this.tags.add(countryTag);
         }
     }
-  
+
     /**
      * If both culture notes and country is included in initialisation.
      */
@@ -79,7 +78,7 @@ public class Person {
         this.country = country;
         this.culture = culture;
         this.tags.addAll(tags);
-}
+    }
 
     public Name getName() {
         return name;
@@ -100,7 +99,7 @@ public class Person {
     public Culture getCulture() {
         return culture;
     }
-  
+
     public Country getCountry() {
         return country;
     }

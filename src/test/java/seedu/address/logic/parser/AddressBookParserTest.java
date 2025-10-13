@@ -85,23 +85,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
-                () -> parser.parseCommand(""));
-    }
-
-    @Test
     public void parseCommand_note() throws Exception {
         final Culture note = new Culture("Some culture notes.");
         final String name = "Alice Pauline";
-        AddNoteCommand command = (AddNoteCommand) parser.parseCommand(
-            AddNoteCommand.COMMAND_WORD + " name: " + name + " note: " + note.value);
+        AddNoteCommand command = (AddNoteCommand) parser.parseCommand(AddNoteCommand.COMMAND_WORD
+            + " name: " + name + " note: " + note.value);
         assertEquals(new AddNoteCommand(new Name(name), note), command);
     }
 

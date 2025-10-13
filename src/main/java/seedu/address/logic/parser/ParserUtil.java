@@ -115,6 +115,8 @@ public class ParserUtil {
         // Allow empty or whitespace-only input
         String trimmedCulture = culture.trim();
         return new Culture(trimmedCulture);
+    }
+    /**
      * Parses an optional {@code String country} into an {@code Country}.
      * Leading and trailing whitespaces will be trimmed.
      *

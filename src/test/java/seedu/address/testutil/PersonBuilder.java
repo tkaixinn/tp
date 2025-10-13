@@ -107,7 +107,7 @@ public class PersonBuilder {
         this.culture = new Culture(culture);
         return this;
     }
-  
+
     /**
      * Sets the {@code Country} of the {@code Person} that we are building.
      */

@@ -59,6 +59,7 @@ public class AddNoteCommand extends Command {
             personToEdit.getPhone(),
             personToEdit.getEmail(),
             personToEdit.getAddress(),
+            personToEdit.getCountry(),
             culture,
             personToEdit.getTags()
         );

@@ -102,14 +102,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-
+        Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Culture updatedCulture = personToEdit.getCulture();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedCulture, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
+            updatedCulture, updatedTags);
     }
 
     @Override
