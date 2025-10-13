@@ -90,8 +90,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Person person = countryOptional
-        .map(country -> new Person(name, phone, email, address, country, culture, tagList, preferredChannel))
-        .orElseGet(() -> new Person(name, phone, email, address, culture, tagList, preferredChannel));
+                .map(country -> new Person(name, phone, email, address, country, culture, tagList))
+                .orElseGet(() -> new Person(name, phone, email, address, culture, tagList));
 
         return new AddCommand(person);
     }
