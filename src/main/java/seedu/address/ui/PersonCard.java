@@ -47,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label culture;  
+    private Label culture;
     private Label channel;
 
 
