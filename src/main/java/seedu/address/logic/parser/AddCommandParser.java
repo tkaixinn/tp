@@ -58,8 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             case "EMAIL":
                 preferredChannel = Person.CommunicationChannel.EMAIL;
                 break;
-            case "PLATFORM":
-                preferredChannel = Person.CommunicationChannel.PLATFORM;
+            case "SMS":
+                preferredChannel = Person.CommunicationChannel.SMS;
                 break;
             case "WHATSAPP":
                 preferredChannel = Person.CommunicationChannel.WHATSAPP;
@@ -68,7 +68,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 preferredChannel = Person.CommunicationChannel.TELEGRAM;
                 break;
             default:
-                throw new ParseException("Invalid communication channel. Choose PHONE, EMAIL, or PLATFORM.");
+                throw new ParseException("Invalid communication channel. Choose PHONE, EMAIL, SMS, TELEGRAM, WHATSAPP.");
             }
         }
 
