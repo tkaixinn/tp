@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -30,12 +31,25 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("9312 1534")); // spaces within digits
+    }
+
+    @Test
+    public void countryDetection_validNumbers_success() {
+        assertEquals("SG", new Phone("+6598765432").getCountryCode());
+        assertEquals("US", new Phone("+14155552671").getCountryCode());
+        assertEquals("IN", new Phone("+919876543210").getCountryCode());
+    }
+
+    @Test
+    public void toString_formatsCorrectly() {
+        assertEquals("+6598765432 (SG)", new Phone("+6598765432").toString());
     }
 
     @Test

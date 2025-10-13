@@ -1,0 +1,10 @@
+{
+    "java.completion.importOrder": [
+        "#",
+        "java",
+        "javax",
+        "org",
+        "com",
+        ""
+    ]
+}
