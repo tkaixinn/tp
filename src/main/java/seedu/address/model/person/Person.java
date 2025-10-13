@@ -28,7 +28,7 @@ public class Person {
     private final Country country;
     private final Culture culture;
     private final Set<Tag> tags = new HashSet<>();
-    
+
 
     /**
      * Every field must be present and not null.
