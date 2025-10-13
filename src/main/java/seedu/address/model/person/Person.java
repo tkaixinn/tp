@@ -35,12 +35,12 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Culture culture, Set<Tag> tags,
                  CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, culture, tags);
+        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.country = null;
+        this.country = country;
         this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = preferredChannel;
