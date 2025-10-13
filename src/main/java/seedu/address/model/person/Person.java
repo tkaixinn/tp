@@ -49,7 +49,7 @@ public class Person {
      /**
      * If country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags, 
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags,
                  CommunicationChannel preferredChannel) {
         requireAllNonNull(name, phone, email, address, tags, preferredChannel);
         this.name = name;
