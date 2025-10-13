@@ -28,30 +28,27 @@ public class Person {
     private final Country country;
     private final Culture culture;
     private final Set<Tag> tags = new HashSet<>();
-
+    
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Culture culture, Set<Tag> tags,
-                 CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
+    public Person(Name name, Phone phone, Email email, Address address, Culture culture, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, culture, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.country = country;
+        this.country = null;
         this.culture = culture;
         this.tags.addAll(tags);
-        this.preferredChannel = preferredChannel;
     }
 
-     /**
+    /**
      * If country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags,
-                 CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -73,8 +70,22 @@ public class Person {
      * If both culture notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-              Country country, Culture culture, Set<Tag> tags, CommunicationChannel preferredChannel) {
+              Country country, Culture culture, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, culture, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.country = country;
+        this.culture = culture;
+        this.tags.addAll(tags);
+    }
+    /**
+     * If culture notes, country and preferredChannel is included in initialisation.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Culture culture,
+                  Set<Tag> tags, CommunicationChannel preferredChannel) {
+        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
         this.name = name;
         this.phone = phone;
         this.email = email;
