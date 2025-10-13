@@ -79,9 +79,8 @@ Adds a person to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* Automatically adds a tag with the person's country if a country code is provided with the phone number.
+* A person can have any number of tags (including 0).
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 country:Singapore note:Vegetarian`
@@ -148,7 +147,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `addnote name:NAME note:NOTE`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-sensitive. e.g `hans` will match `hans` but not `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 
 Examples:
