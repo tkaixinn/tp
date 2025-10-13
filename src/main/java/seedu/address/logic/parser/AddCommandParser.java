@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
+
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -31,9 +33,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_CHANNEL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_CHANNEL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -45,7 +47,32 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.PLATFORM;
+
+        if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
+            String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
+            switch(channelInput) {
+            case "PHONE":
+                preferredChannel = Person.CommunicationChannel.PHONE;
+                break;
+            case "EMAIL":
+                preferredChannel = Person.CommunicationChannel.EMAIL;
+                break;
+            case "PLATFORM":
+                preferredChannel = Person.CommunicationChannel.PLATFORM;
+                break;
+            case "WHATSAPP":
+                preferredChannel = Person.CommunicationChannel.WHATSAPP;
+                break;
+            case "TELEGRAM":
+                preferredChannel = Person.CommunicationChannel.TELEGRAM;
+                break;
+            default:
+                throw new ParseException("Invalid communication channel. Choose PHONE, EMAIL, or PLATFORM.");
+            }
+        }
+
+        Person person = new Person(name, phone, email, address, tagList, preferredChannel);
 
         return new AddCommand(person);
     }
