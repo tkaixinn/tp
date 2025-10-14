@@ -233,7 +233,7 @@ public class Person {
                 .add("address", address)
                 .add("country", country)
                 .add("culture", culture)
-                .add("tags", tags)
+                .add("tags", tags);
                 if (preferredChannel != null) {
                 builder.add("preferredChannel", preferredChannel).toString();
                 }
