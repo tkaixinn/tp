@@ -234,8 +234,9 @@ public class Person {
                 .add("country", country)
                 .add("culture", culture)
                 .add("tags", tags)
-                .add("preferredChannel", preferredChannel)
-                .toString();
+                if (preferredChannel != null) {
+                builder.add("preferredChannel", preferredChannel).toString();
+                }
     }
 
 }
