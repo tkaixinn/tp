@@ -226,15 +226,16 @@ public class Person {
 
     @Override
     public String toString() {
-        return getClass().getCanonicalName()
-            + "{name=" + name
-            + ", phone=" + phone
-            + ", email=" + email
-            + ", address=" + address
-            + ", country=" + country
-            + ", culture=" + culture
-            + ", tags=" + tags + "}";
-}
-
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("country", country)
+                .add("culture", culture)
+                .add("tags", tags)
+                .add("preferredChannel", preferredChannel)
+                .toString();
+    }
 
 }
