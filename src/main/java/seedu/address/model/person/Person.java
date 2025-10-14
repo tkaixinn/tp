@@ -42,7 +42,7 @@ public class Person {
         this.country = null;
         this.culture = culture;
         this.tags.addAll(tags);
-        this.preferredChannel = null;
+        this.preferredChannel = CommunicationChannel.EMAIL;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Person {
         this.country = country;
         this.culture = new Culture("");
         this.tags.addAll(tags);
-        this.preferredChannel = null;
+        this.preferredChannel = CommunicationChannel.EMAIL;
 
         removeOldCountryTags();
 
@@ -81,7 +81,7 @@ public class Person {
         this.country = country;
         this.culture = culture;
         this.tags.addAll(tags);
-        this.preferredChannel = null;
+        this.preferredChannel = CommunicationChannel.EMAIL;
     }
 
     /**
