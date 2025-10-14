@@ -147,11 +147,21 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `addnote name:NAME note:NOTE`
 
+Examples:
+* `addnote name:John Doe note:Cannot drink alcohol`
+
+### Finding contacts by tag `findtag`
+
+Finds persons who are tagged with all of the given keywords.
+
+Format: `findtag TAG`
+
 * The search is case-sensitive. e.g `hans` will match `hans` but not `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 
 Examples:
-* `addnote name:John Doe note:Cannot drink alcohol`
+* `findtag friends`
+* `findtag friends colleagues`
 
 ### Clearing all entries : `clear`
 
