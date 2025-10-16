@@ -77,7 +77,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: CHANNEL [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
 
 * Automatically adds a tag with the person's country if a country code is provided with the phone number.
 * A person can have any number of tags (including 0).
@@ -96,7 +96,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [tag:TAG]…​`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [channel: CHANNEL] [country:COUNTRY] [tag:TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -143,7 +143,7 @@ Examples:
 
 ### Adding a note to existing persons: `addnote`
 
-Finds persons whose names contain any of the given keywords.
+Adds a cultural note to an existing contact.
 
 Format: `addnote name:NAME note:NOTE`
 
