@@ -90,13 +90,14 @@ public class HelpWindow extends UiPart<Stage> {
 
         commandTableView.getItems().addAll(
                 new CommandEntry("Add", "add name: NAME phone: PHONE email: EMAIL address: ADDRESS "
+                        + "channel: CHANNEL "
                         + "[country: COUNTRY] [tag: TAG]…\n"
                         + "e.g., add name: James Ho phone: 22224444 email: jamesho@example.com "
                         + "address: 123, Clementi Rd, 1234665 country: Singapore tag: friend tag: colleague"),
                 new CommandEntry("Clear", "clear"),
                 new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
                 new CommandEntry("Edit", "edit INDEX [name: NAME] [phone: PHONE] [email: EMAIL] "
-                        +  "[address: ADDRESS] [country: COUNTRY] [tag: TAG]…\n"
+                        +  "[address: ADDRESS] [channel: CHANNEL] [country: COUNTRY] [tag: TAG]…\n"
                         + "e.g., edit 2 name: James Lee email: jameslee@example.com"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
                 new CommandEntry("List", "list"),
