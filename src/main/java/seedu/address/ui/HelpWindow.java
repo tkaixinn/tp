@@ -99,7 +99,10 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("Edit", "edit INDEX [name: NAME] [phone: PHONE] [email: EMAIL] "
                         +  "[address: ADDRESS] [channel: CHANNEL] [country: COUNTRY] [tag: TAG]…\n"
                         + "e.g., edit 2 name: James Lee email: jameslee@example.com"),
+                new CommandEntry("Add cultural note",
+                        "addnote name:NAME note:NOTE\n e.g. addnote name:John note:does not eat beef"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
+                new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("List", "list"),
                 new CommandEntry("Help", "help")
         );
