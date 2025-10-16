@@ -43,6 +43,12 @@ public class Person {
         this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = CommunicationChannel.EMAIL;
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
     }
 
     /**
@@ -82,6 +88,12 @@ public class Person {
         this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = CommunicationChannel.EMAIL;
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
     }
 
     /**
@@ -99,6 +111,12 @@ public class Person {
         this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = preferredChannel;
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
     }
 
     /**
@@ -116,6 +134,12 @@ public class Person {
         this.culture = culture;
         this.tags.addAll(tags);
         this.preferredChannel = preferredChannel;
+
+        String countryName = phone.getCountryName();
+        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
+            Tag countryTag = new Tag(countryName);
+            this.tags.add(countryTag);
+        }
     }
 
     public enum CommunicationChannel {
