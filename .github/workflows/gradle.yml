@@ -1,6 +1,9 @@
 name: Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
 
 jobs:
   build:
@@ -34,6 +37,7 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
+          token: ${{ github.event.pull_request.head.repo.fork == true && secrets.CODECOV_TOKEN || ''}}
           files: ./build/reports/jacoco/test/jacocoTestReport.xml
           fail_ci_if_error: 'true'
           verbose: 'true'
