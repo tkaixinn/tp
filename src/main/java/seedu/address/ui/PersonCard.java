@@ -63,7 +63,15 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        culture.setText(person.getCulture().value);
+
+        if (!person.getCulture().value.equals("")) {
+            culture.setVisible(true);
+            culture.setText(person.getCulture().value);
+        } else {
+            culture.setVisible(false);
+            culture.setManaged(false);
+        }
+
         if (person.getPreferredChannel() != null) {
             channel.setVisible(true);
             channel.setText(person.getPreferredChannel().name());
@@ -74,7 +82,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (!isNull(person.getCountry())) {
             country.setVisible(true);
-            country.setText(person.getCountry().countryName);
+            country.setText(person.getCountry().value);
         } else {
             country.setVisible(false);
             country.setManaged(false);
