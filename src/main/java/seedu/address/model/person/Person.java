@@ -145,7 +145,6 @@ public class Person {
     public enum CommunicationChannel {
         PHONE,
         EMAIL,
-        PLATFORM,
         SMS,
         WHATSAPP,
         TELEGRAM

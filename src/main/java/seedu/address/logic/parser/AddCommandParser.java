@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Culture culture = ParserUtil.parseCulture(argMultimap.getValue(PREFIX_NOTE).orElse(""));
-        Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.PLATFORM;
+        Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.EMAIL;
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
             String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
             switch(channelInput) {
