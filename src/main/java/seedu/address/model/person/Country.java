@@ -8,15 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Country names should only contain letters, spaces, hyphens and apostrophes.";
+    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.";
 
     /*
      * Allows alphabetic words separated by spaces.
      */
     public static final String VALIDATION_REGEX = "([\\p{L}][\\p{L} '\\-]*)?";
 
-    public final String countryName;
+    public final String value;
 
     /**
      * Constructs a {@code Country}.
@@ -25,7 +24,7 @@ public class Country {
      */
     public Country(String country) {
         checkArgument(isValidCountry(country), MESSAGE_CONSTRAINTS);
-        countryName = country;
+        value = country;
     }
 
     /**
@@ -37,7 +36,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return countryName;
+        return value;
     }
 
     @Override
@@ -52,12 +51,12 @@ public class Country {
         }
 
         Country otherCountry = (Country) other;
-        return countryName.equals(otherCountry.countryName);
+        return value.equals(otherCountry.value);
     }
 
     @Override
     public int hashCode() {
-        return countryName.hashCode();
+        return value.hashCode();
     }
 
 }
