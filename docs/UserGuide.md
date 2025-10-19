@@ -82,6 +82,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: c
 * Automatically adds a tag with the person's country if a country code is provided with the phone number.
 * A person can have any number of tags (including 0).
 * Country field can be left blank but prefix must be present
+* Channel field must be one of the following: PHONE, EMAIL, SMS, WHATSAPP, TELEGRAM
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 country:Singapore note:Vegetarian`
