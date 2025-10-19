@@ -12,8 +12,7 @@ import java.util.Set;
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.\n"
-            + "Case sensitive and should be in the list of countries available in the help window (type help to view).";
+    public static final String MESSAGE_CONSTRAINTS = "Country names are case sensitive and should match the list of countries available in the help window (type help to view).";
 
     /*
      * Allows alphabetic words separated by spaces.
