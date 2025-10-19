@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -7,12 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-
 
 /**
  * Controller for a help page
@@ -35,10 +38,14 @@ public class HelpWindow extends UiPart<Stage> {
     private TableView<CommandEntry> commandTableView;
 
     @FXML
+    private ListView<String> countryListView;
+
+    @FXML
     private TableColumn<CommandEntry, String> actionColumn;
 
     @FXML
     private TableColumn<CommandEntry, String> formatColumn;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -89,42 +96,53 @@ public class HelpWindow extends UiPart<Stage> {
         commandTableView.setFixedCellSize(-1);
 
         commandTableView.getItems().addAll(
-                new CommandEntry("Add", "add name: NAME phone: PHONE email: EMAIL address: ADDRESS "
-                        + "channel: CHANNEL "
-                        + "[country: COUNTRY] [tag: TAG]…\n"
-                        + "e.g., add name: James Ho phone: 22224444 email: jamesho@example.com "
-                        + "address: 123, Clementi Rd, 1234665 country: Singapore tag: friend tag: colleague"),
+                new CommandEntry("Add", "add name:NAME phone:PHONE email:EMAIL address:ADDRESS "
+                        + "country:COUNTRY channel:CHANNEL " + "[note:NOTE] [tag:TAG]…\n"
+                        + "e.g., add name:James Ho phone:22224444 email:jamesho@example.com "
+                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague"),
                 new CommandEntry("Clear", "clear"),
                 new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
-                new CommandEntry("Edit", "edit INDEX [name: NAME] [phone: PHONE] [email: EMAIL] "
-                        +  "[address: ADDRESS] [channel: CHANNEL] [country: COUNTRY] [tag: TAG]…\n"
-                        + "e.g., edit 2 name: James Lee email: jameslee@example.com"),
+                new CommandEntry("Edit", "edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] "
+                        + "[address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [tag:TAG]…\n"
+                        + "e.g., edit 2 name:James Lee email:jameslee@example.com"),
                 new CommandEntry("Add cultural note",
                         "addnote name:NAME note:NOTE\n e.g. addnote name:John note:does not eat beef"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("List", "list"),
-                new CommandEntry("Help", "help")
-        );
+                new CommandEntry("Help", "help"));
+
+        List<String> countryNames = new ArrayList<>();
+        for (String countryCode : Locale.getISOCountries()) {
+            Locale locale = new Locale("", countryCode);
+            String countryName = locale.getDisplayCountry(Locale.ENGLISH);
+            countryNames.add(countryName);
+        }
+        countryNames.sort(String::compareTo);
+        countryListView.getItems().addAll(countryNames);
+        System.out.println("Added countries: " + countryNames.size());
     }
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
+     *                               <ul>
+     *                               <li>
+     *                               if this method is called on a thread other than
+     *                               the JavaFX Application Thread.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called during animation or
+     *                               layout processing.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called on the primary stage.
+     *                               </li>
+     *                               <li>
+     *                               if {@code dialogStage} is already showing.
+     *                               </li>
+     *                               </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");

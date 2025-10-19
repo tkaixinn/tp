@@ -29,7 +29,6 @@ public class Country {
             Locale locale = new Locale("", countryCode);
             String countryName = locale.getDisplayCountry(Locale.ENGLISH);
             VALID_COUNTRY_NAMES.add(countryName);
-            System.out.println(countryName);
         }
     }
 
