@@ -5,9 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -47,6 +49,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_COUNTRY + "COUNTRY] "
+            + "[" + PREFIX_NOTE + "NOTE] "
+            + "[" + PREFIX_CHANNEL + "PREFERRED CHANNEL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -107,11 +112,11 @@ public class EditCommand extends Command {
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Culture updatedCulture = personToEdit.getCulture();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        CommunicationChannel updatedChannel =
-                editPersonDescriptor.getChannel().orElse(personToEdit.getPreferredChannel());
+        CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
+                .orElse(personToEdit.getPreferredChannel());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
-            updatedCulture, updatedTags, updatedChannel);
+                updatedCulture, updatedChannel, updatedTags);
     }
 
     @Override
@@ -176,7 +181,6 @@ public class EditCommand extends Command {
         public Optional<CommunicationChannel> getChannel() {
             return Optional.ofNullable(channel);
         }
-
 
         /**
          * Returns true if at least one field is edited.

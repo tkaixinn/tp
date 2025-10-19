@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -117,22 +116,20 @@ public class ParserUtil {
         String trimmedCulture = culture.trim();
         return new Culture(trimmedCulture);
     }
+
     /**
      * Parses an optional {@code String country} into an {@code Country}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code country} is invalid.
      */
-    public static Optional<Country> parseCountry(String country) throws ParseException {
+    public static Country parseCountry(String country) throws ParseException {
         requireNonNull(country);
         String trimmedCountry = country.trim();
-        if (trimmedCountry.isEmpty()) {
-            return Optional.empty();
-        }
         if (!Country.isValidCountry(trimmedCountry)) {
             throw new ParseException(Country.MESSAGE_CONSTRAINTS);
         }
-        return Optional.of(new Country(trimmedCountry));
+        return new Country(trimmedCountry);
     }
 
     /**
@@ -149,6 +146,7 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
