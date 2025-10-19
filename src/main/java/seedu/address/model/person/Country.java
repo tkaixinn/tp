@@ -2,18 +2,37 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+
 /**
  * Represents a Person's country in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.";
+    public static final String MESSAGE_CONSTRAINTS = "Country names should only contain letters, spaces, hyphens and apostrophes.\n"
+            + "Case sensitive and should be in the list of countries available in the help window (type help to view).";
 
     /*
      * Allows alphabetic words separated by spaces.
      */
-    public static final String VALIDATION_REGEX = "([\\p{L}][\\p{L} '\\-]*)?";
+    public static final String VALIDATION_REGEX = "([\\p{L}][\\p{L} '\\-,.&()]*|\\p{L}+([\\p{L} '\\-,.&()]*[\\p{L}])?)?";
+
+    /*
+     * Construct set of valid country names for validation matching.
+     */
+    private static final Set<String> VALID_COUNTRY_NAMES = new HashSet<>();
+
+    static {
+        for (String countryCode : Locale.getISOCountries()) {
+            Locale locale = new Locale("", countryCode);
+            String countryName = locale.getDisplayCountry(Locale.ENGLISH);
+            VALID_COUNTRY_NAMES.add(countryName);
+            System.out.println(countryName);
+        }
+    }
 
     public final String value;
 
@@ -28,10 +47,11 @@ public class Country {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid country name.
      */
     public static boolean isValidCountry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean inCountryList = test.isEmpty() || VALID_COUNTRY_NAMES.contains(test.trim());
+        return test.matches(VALIDATION_REGEX) && inCountryList;
     }
 
     @Override
