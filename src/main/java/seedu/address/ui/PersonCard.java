@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static java.util.Objects.isNull;
-
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -80,7 +78,7 @@ public class PersonCard extends UiPart<Region> {
             channel.setManaged(false);
         }
 
-        if (!isNull(person.getCountry())) {
+        if (!person.getCountry().value.equals("")) {
             country.setVisible(true);
             country.setText(person.getCountry().value);
         } else {
