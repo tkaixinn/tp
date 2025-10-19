@@ -77,14 +77,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: CHANNEL [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: country:COUNTRY CHANNEL [note:NOTE] [tag:TAG]…​`
 
 * Automatically adds a tag with the person's country if a country code is provided with the phone number.
 * A person can have any number of tags (including 0).
+* Country field can be left blank but prefix must be present
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 country:Singapore note:Vegetarian`
-* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 tag:criminal`
+* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 country: tag:criminal`
 
 ### Listing all persons : `list`
 
@@ -101,6 +102,7 @@ Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [c
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `tah:` without
     specifying any tags after it.
@@ -154,7 +156,7 @@ Examples:
 
 Finds persons who are tagged with all of the given keywords.
 
-Format: `findtag TAG`
+Format: `findtag TAG [MORE_TAGS]`
 
 * The search is case-sensitive. e.g `hans` will match `hans` but not `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -212,11 +214,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS [tag:TAG]…​` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 tag:friend tag:colleague`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS country:COUNTRY channel:CHANNEL [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 country: channel:WHATSAPP tag:friend tag:colleague`
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
