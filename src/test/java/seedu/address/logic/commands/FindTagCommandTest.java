@@ -7,16 +7,11 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -82,7 +77,8 @@ public class FindTagCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Collections.singletonList(new Tag("keyword")));
+        PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(
+                Collections.singletonList(new Tag("keyword")));
         FindTagCommand findTagCommand = new FindTagCommand(predicate);
         String expected = FindTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findTagCommand.toString());

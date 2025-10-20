@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCountryCommand;
@@ -17,12 +16,14 @@ public class FindCountryCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCountryCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCountryCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidCountry_throwsParseException() {
-        assertParseFailure(parser, "hello", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCountryCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "hello",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCountryCommand.MESSAGE_USAGE));
     }
 
     @Test
