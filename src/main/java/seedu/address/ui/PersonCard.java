@@ -58,7 +58,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        name.getStyleClass().add("bold-label");
         phone.setText(person.getPhone().value);
+        phone.getStyleClass().add("bold-label");
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
@@ -88,6 +90,19 @@ public class PersonCard extends UiPart<Region> {
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+
+                    // Highlight only if it matches the person's country value (case-insensitive)
+                    if (!person.getCountry().value.isEmpty()
+                            && tag.tagName.equalsIgnoreCase(person.getCountry().value)) {
+                        tagLabel.getStyleClass().add("country-tag");
+                    } else {
+                        tagLabel.getStyleClass().add("normal-tag");
+                    }
+
+                    tags.getChildren().add(tagLabel);
+                });
+
     }
 }
