@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ListView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -38,13 +39,19 @@ public class HelpWindow extends UiPart<Stage> {
     private TableView<CommandEntry> commandTableView;
 
     @FXML
-    private ListView<String> countryListView;
-
-    @FXML
     private TableColumn<CommandEntry, String> actionColumn;
 
     @FXML
     private TableColumn<CommandEntry, String> formatColumn;
+
+    @FXML
+    private TableView<CountryEntry> countryTableView;
+
+    @FXML
+    private TableColumn<CountryEntry, String> countryNameColumn;
+
+    @FXML
+    private TableColumn<CountryEntry, String> countryCodeColumn;
 
     /**
      * Creates a new HelpWindow.
@@ -112,15 +119,22 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("List", "list"),
                 new CommandEntry("Help", "help"));
 
-        List<String> countryNames = new ArrayList<>();
-        for (String countryCode : Locale.getISOCountries()) {
-            Locale locale = new Locale("", countryCode);
-            String countryName = locale.getDisplayCountry(Locale.ENGLISH);
-            countryNames.add(countryName);
+        countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        countryCodeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
+
+        List<CountryEntry> countries = new ArrayList<>();
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+
+        for (String regionCode : phoneUtil.getSupportedRegions()) {
+            String countryName = new Locale("", regionCode).getDisplayCountry(Locale.ENGLISH);
+            if (!countryName.isEmpty()) {
+                String phoneCode = "+" + phoneUtil.getCountryCodeForRegion(regionCode);
+                countries.add(new CountryEntry(countryName, phoneCode));
+            }
         }
-        countryNames.sort(String::compareTo);
-        countryListView.getItems().addAll(countryNames);
-        System.out.println("Added countries: " + countryNames.size());
+
+        countries.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+        countryTableView.getItems().addAll(countries);
     }
 
     /**

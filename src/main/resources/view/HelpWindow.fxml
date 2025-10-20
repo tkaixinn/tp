@@ -54,12 +54,17 @@
 
         <!-- Country List-->
         <Region prefHeight="10"/>
-        <Label text="List of valid country names:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+        <Label text="List of Countries:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
           <padding>
             <Insets left="10"/>
           </padding>
         </Label>
-        <ListView fx:id="countryListView" prefHeight="150" prefWidth="780" />
+        <TableView fx:id="countryTableView" prefHeight="500" prefWidth="780">
+          <columns>
+            <TableColumn fx:id="countryNameColumn" text="Country Name" prefWidth="600"/>
+            <TableColumn fx:id="countryCodeColumn" text="Country Code" prefWidth="150"/>
+          </columns>
+        </TableView>
 
 
       </VBox>
