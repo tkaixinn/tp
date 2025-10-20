@@ -116,6 +116,7 @@ public class HelpWindow extends UiPart<Stage> {
                         "addnote name:NAME note:NOTE\n e.g. addnote name:John note:does not eat beef"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
+                new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
                 new CommandEntry("List", "list"),
                 new CommandEntry("Help", "help"));
 
