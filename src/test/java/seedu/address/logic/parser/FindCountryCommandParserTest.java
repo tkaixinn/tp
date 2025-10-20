@@ -32,5 +32,4 @@ public class FindCountryCommandParserTest {
                 new FindCountryCommand(new CountryContainsKeywordPredicate(new Country("Singapore")));
         assertParseSuccess(parser, "Singapore", expectedFindCountryCommand);
     }
-
 }

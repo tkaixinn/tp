@@ -31,5 +31,4 @@ public class FindTagCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n friends \n \t owesMoney  \t", expectedFindTagCommand);
     }
-
 }
