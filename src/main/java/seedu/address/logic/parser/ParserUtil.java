@@ -14,7 +14,6 @@ import seedu.address.model.person.Country;
 import seedu.address.model.person.Culture;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person.CommunicationChannel;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
