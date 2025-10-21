@@ -29,13 +29,14 @@ public class Person {
     private final Culture culture;
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
+    private final Offset offset;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Culture culture, CommunicationChannel preferredChannel, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, culture, tags);
+            Culture culture, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, culture, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +45,7 @@ public class Person {
         this.culture = culture;
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
+        this.offset = offset;
 
         removeOldCountryTags();
 
@@ -58,8 +60,8 @@ public class Person {
      * If both culture notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            Country country, Culture culture, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, culture, tags);
+            Country country, Culture culture, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, culture, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +70,7 @@ public class Person {
         this.culture = culture;
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
+        this.offset = offset;
 
         String countryName = phone.getCountryName();
         if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
@@ -124,6 +127,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Offset getOffset() {
+        return offset;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -174,13 +181,14 @@ public class Person {
                 && culture.equals(otherPerson.culture)
                 && country.equals(otherPerson.country)
                 && culture.equals(otherPerson.culture)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && offset.equals(otherPerson.offset);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel);
+        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel, offset);
     }
 
     @Override
@@ -194,6 +202,7 @@ public class Person {
                 .add("culture", culture)
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
+                .add("offset", offset)
                 .toString();
     }
 

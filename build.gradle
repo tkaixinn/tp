@@ -90,3 +90,7 @@ checkstyleMain {
 checkstyleTest {
     ignoreFailures = true
 }
+
+run {
+    enableAssertions = true
+}

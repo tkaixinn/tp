@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,6 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_COUNTRY + person.getCountry().value + " ");
         person.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        sb.append(PREFIX_OFFSET + person.getOffset().value + " ");
         return sb.toString();
     }
 
@@ -60,6 +62,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getGmtOffset().ifPresent(offset -> sb.append(PREFIX_OFFSET).append(offset.value).append(" "));
         return sb.toString();
     }
 }
