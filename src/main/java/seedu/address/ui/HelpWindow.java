@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -10,7 +14,6 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -54,6 +57,15 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private TableColumn<CountryEntry, String> countryCodeColumn;
 
+    @FXML
+    private TableView<TimezoneEntry> timezoneTable;
+
+    @FXML
+    private TableColumn<TimezoneEntry, String> regionColumn;
+
+    @FXML
+    private TableColumn<TimezoneEntry, String> offsetColumn;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -69,6 +81,54 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    private void initializeTimezones() {
+        regionColumn.setCellValueFactory(new PropertyValueFactory<>("region"));
+        offsetColumn.setCellValueFactory(new PropertyValueFactory<>("offset"));
+
+        List<TimezoneEntry> zones = getAllZones();
+        timezoneTable.getItems().addAll(zones);
+    }
+
+    /**
+     * Generates a list of all available time zones with their corresponding city/region
+     * and UTC offset, sorted by offset (from lowest to highest) and then by city name.
+     * <p>
+     * The UTC offset is displayed in the format "UTC±HH:MM". The special "Z" offset
+     * (representing UTC) is normalized to "+00:00" for display purposes.
+     * </p>
+     *
+     * @return a {@link List} of {@link TimezoneEntry} objects, each representing
+     *         a time zone with its city/region and formatted UTC offset.
+     */
+    private List<TimezoneEntry> getAllZones() {
+        List<TimezoneEntry> list = new ArrayList<>();
+        ZonedDateTime now = ZonedDateTime.now();
+
+        for (String zoneId : ZoneId.getAvailableZoneIds()) {
+            ZoneId zone = ZoneId.of(zoneId);
+            ZoneOffset offset = now.withZoneSameInstant(zone).getOffset();
+
+            String offsetString = offset.getId().equals("Z") ? "+00:00" : offset.getId();
+
+            String [] parts = zoneId.split("/");
+            String city = parts.length > 1 ? parts[parts.length - 1].replace("_", " ") : zoneId;
+            list.add(new TimezoneEntry(city, "UTC" + offsetString));
+        }
+
+        list.sort(Comparator
+                .comparingInt((TimezoneEntry entry) -> {
+                    String offsetStr = entry.getOffset().substring(3);
+                    if (offsetStr.equals("Z")) {
+                        offsetStr = "00:00";
+                    }
+                    String [] hms = offsetStr.split(":");
+                    int hours = Integer.parseInt(hms[0]);
+                    int minutes = Integer.parseInt(hms[1]);
+                    return hours * 60 + (hours < 0 ? -minutes : minutes);
+                }).thenComparing(TimezoneEntry::getRegion));
+        return list;
     }
 
     /**
@@ -105,13 +165,13 @@ public class HelpWindow extends UiPart<Stage> {
 
         commandTableView.getItems().addAll(
                 new CommandEntry("Add", "add name:NAME phone:PHONE email:EMAIL address:ADDRESS "
-                        + "country:COUNTRY channel:CHANNEL " + "[note:NOTE] [tag:TAG]…\n"
+                        + "country:COUNTRY channel:CHANNEL " + "[note:NOTE] [tag:TAG]…\n + offset: OFFSET"
                         + "e.g., add name:James Ho phone:22224444 email:jamesho@example.com "
-                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague"),
+                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague offset:+08:00"),
                 new CommandEntry("Clear", "clear"),
                 new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
                 new CommandEntry("Edit", "edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] "
-                        + "[address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [tag:TAG]…\n"
+                        + "[address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [tag:TAG]… [offset: OFFSET]\n"
                         + "e.g., edit 2 name:James Lee email:jameslee@example.com"),
                 new CommandEntry("Add cultural note",
                         "addnote name:NAME note:NOTE\n e.g. addnote name:John note:does not eat beef"),
@@ -137,6 +197,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         countries.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
         countryTableView.getItems().addAll(countries);
+
+        initializeTimezones();
     }
 
     /**

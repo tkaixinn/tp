@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     private Label culture;
     @FXML
     private Label channel;
+    @FXML
+    private Label offset;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -104,5 +106,12 @@ public class PersonCard extends UiPart<Region> {
                     tags.getChildren().add(tagLabel);
                 });
 
+        if (person.getOffset() != null) {
+            offset.setVisible(true);
+            offset.setText("OFFSET" + person.getOffset());
+        } else {
+            offset.setVisible(false);
+            offset.setManaged(false);
+        }
     }
 }
