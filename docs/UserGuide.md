@@ -79,7 +79,7 @@ Adds a person to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: country:COUNTRY CHANNEL [note:NOTE] [tag:TAG]…​`
 
-* Automatically adds a tag with the person's country if a country code is provided with the phone number.
+* Automatically adds a tag with the person's country calling code if it is included in the phone number.
 * A person can have any number of tags (including 0).
 * Country field can be left blank but prefix must be present
 * The channel field **cannot be left blank**. You must specify one of the allowed channels.
@@ -163,7 +163,7 @@ Finds persons who are tagged with all of the given keywords.
 
 Format: `findtag TAG [MORE_TAGS]`
 
-* The search is case-insensitive. 
+* The search is case-insensitive.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 
 Examples:
