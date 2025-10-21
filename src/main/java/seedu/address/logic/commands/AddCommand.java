@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
         + PREFIX_CHANNEL + "CHANNEL "
         + "[" + PREFIX_NOTE + "NOTE] "
         + "[" + PREFIX_TAG + "TAG]...\n"
+        + PREFIX_OFFSET + "OFFSET "
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
         + PREFIX_PHONE + "98765432 "
@@ -41,7 +43,8 @@ public class AddCommand extends Command {
         + PREFIX_COUNTRY + "Singapore "
         + PREFIX_NOTE + "Prefers WhatsApp "
         + PREFIX_TAG + "friends "
-        + PREFIX_TAG + "owesMoney";
+        + PREFIX_TAG + "owesMoney "
+        + PREFIX_OFFSET + "+08:00";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
@@ -76,11 +79,10 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

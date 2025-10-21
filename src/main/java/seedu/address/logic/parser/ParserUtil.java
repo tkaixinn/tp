@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,6 +15,8 @@ import seedu.address.model.person.Country;
 import seedu.address.model.person.Culture;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Offset;
+import seedu.address.model.person.Person.CommunicationChannel;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -156,5 +159,56 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a string representation of a communication channel and returns the corresponding enum constant.
+     *
+     * <p>The input string is case-insensitive and leading/trailing whitespace is ignored.
+     * Valid channel values are: EMAIL, WHATSAPP, TELEGRAM.
+     *
+     * @param channel the string to parse into a CommunicationChannel enum constant
+     * @return the parsed CommunicationChannel enum constant, or {@code null} if the input is empty or
+     *      contains only whitespace
+     * @throws ParseException if the input string does not match any valid CommunicationChannel constant
+     * @throws NullPointerException if the input channel is {@code null}
+     *
+     * @see CommunicationChannel
+     */
+    public static CommunicationChannel parseChannel(String channel) throws ParseException {
+        requireNonNull(channel);
+        String trimmedChannel = channel.trim();
+        if (trimmedChannel.isEmpty()) {
+            return null; // or Optional.empty() if you prefer
+        }
+
+        try {
+            return CommunicationChannel.valueOf(trimmedChannel.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Invalid channel! Valid options: EMAIL, WHATSAPP, TELEGRAM");
+        }
+    }
+
+    /**
+     * Parses a string representing a GMT offset and validates its format.
+     * <p>
+     * The expected format is either {@code +HH:MM} or {@code -HH:MM},
+     * where {@code HH} is between 00 and 14, and {@code MM} is between 00 and 59.
+     * </p>
+     *
+     * @param input the GMT offset string to parse
+     * @return the validated GMT offset string if it matches the expected format
+     * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
+     */
+    public static Offset parseOffset(String input) throws ParseException {
+        if (!input.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Must be +HH:MM or -HH:MM."));
+        }
+        try {
+            return new Offset(input);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 }

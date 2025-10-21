@@ -100,7 +100,8 @@ public class PersonTest {
             + ", country=" + ALICE.getCountry()
             + ", culture=" + ALICE.getCulture()
             + ", tags=" + ALICE.getTags()
-            + ", preferredChannel=" + ALICE.getPreferredChannel() + "}";
+            + ", preferredChannel=" + ALICE.getPreferredChannel()
+            + ", offset=" + ALICE.getOffset() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

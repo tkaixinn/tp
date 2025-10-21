@@ -45,7 +45,9 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         builder.append("; Channel: ")
-                .append(person.getPreferredChannel());
+                .append(person.getPreferredChannel())
+                .append("; Offset: ")
+                .append(person.getOffset());
         return builder.toString();
     }
 

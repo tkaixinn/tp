@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET);
 
         Index index;
 
@@ -46,7 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_COUNTRY);
+                PREFIX_COUNTRY, PREFIX_OFFSET);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -66,6 +67,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setCountry(ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_OFFSET).isPresent()) {
+            editPersonDescriptor.setOffset(ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).get()));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

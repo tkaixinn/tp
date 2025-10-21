@@ -7,13 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 <?import javafx.scene.layout.Region?>
-
+<?import javafx.scene.control.ScrollPane?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
@@ -59,13 +58,31 @@
             <Insets left="10"/>
           </padding>
         </Label>
-        <TableView fx:id="countryTableView" prefHeight="500" prefWidth="780">
+        <TableView fx:id="countryTableView" prefHeight="300" prefWidth="780">
           <columns>
             <TableColumn fx:id="countryNameColumn" text="Country Name" prefWidth="600"/>
             <TableColumn fx:id="countryCodeColumn" text="Country Code" prefWidth="150"/>
           </columns>
         </TableView>
 
+        <!-- Timezone Table-->
+        <Region prefHeight="10"/>
+        <Label text="World Time Zones (UTC Offsets):" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+          <padding>
+            <Insets left="10"/>
+          </padding>
+        </Label>
+
+        <ScrollPane fitToWidth="true" prefHeight="300">
+          <content>
+            <TableView fx:id = "timezoneTable" prefHeight="300" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="regionColumn" text="Region / City" prefWidth="500"/>
+                <TableColumn fx:id="offsetColumn" text="UTC Offset" prefWidth="200"/>
+              </columns>
+            </TableView>
+          </content>
+        </ScrollPane>
 
       </VBox>
     </Scene>
