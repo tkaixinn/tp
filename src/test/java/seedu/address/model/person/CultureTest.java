@@ -24,8 +24,8 @@ public class CultureTest {
         // null -> returns false
         assertFalse(culture.equals(null));
 
-        // different remark -> returns false
-        Culture differentRemark = new Culture("Bye");
-        assertFalse(culture.equals(differentRemark));
+        // different culture -> returns false
+        Culture differentCulture = new Culture("Bye");
+        assertFalse(culture.equals(differentCulture));
     }
 }
