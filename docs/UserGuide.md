@@ -163,12 +163,23 @@ Finds persons who are tagged with all of the given keywords.
 
 Format: `findtag TAG [MORE_TAGS]`
 
-* The search is case-sensitive. e.g `hans` will match `hans` but not `Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. 
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 
 Examples:
 * `findtag friends`
 * `findtag friends colleagues`
+
+### Finding contacts by country `findcountry`
+
+Finds persons who are from the given country.
+
+Format: `findcountry COUNTRY`
+
+* The search is case-sensitive. e.g `singapore` is not a valid country but `Singapore` is.
+
+Examples:
+* `findcountry Singapore`
 
 ### Clearing all entries : `clear`
 
