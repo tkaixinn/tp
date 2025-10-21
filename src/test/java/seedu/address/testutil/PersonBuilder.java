@@ -101,7 +101,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Culture} of the {@code Person} that we are building.
      */
     public PersonBuilder withCulture(String culture) {
         this.culture = new Culture(culture);
