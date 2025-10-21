@@ -49,9 +49,9 @@ public class Person {
 
         removeOldCountryTags();
 
-        String countryName = phone.getCountryName();
-        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
-            Tag countryTag = new Tag(countryName);
+        String countryCode = phone.getCountryCode();
+        if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
+            Tag countryTag = new Tag(countryCode);
             this.tags.add(countryTag);
         }
     }
@@ -72,9 +72,11 @@ public class Person {
         this.tags.addAll(tags);
         this.offset = offset;
 
-        String countryName = phone.getCountryName();
-        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
-            Tag countryTag = new Tag(countryName);
+        removeOldCountryTags();
+
+        String countryCode = phone.getCountryCode();
+        if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
+            Tag countryTag = new Tag(countryCode);
             this.tags.add(countryTag);
         }
     }

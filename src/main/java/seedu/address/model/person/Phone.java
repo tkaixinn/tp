@@ -50,35 +50,18 @@ public class Phone {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
         try {
             Phonenumber.PhoneNumber parsedNumber = phoneUtil.parse(phone, "SG");
-            String regionCode = phoneUtil.getRegionCodeForNumber(parsedNumber);
-            return regionCode != null ? regionCode : "Unknown";
+
+            int countryCallingCode = parsedNumber.getCountryCode();
+
+            return String.valueOf(countryCallingCode);
+
         } catch (NumberParseException e) {
             return "Invalid";
         }
-    }
-
-    private String deriveCountryName(String phone) {
-        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-        try {
-            Phonenumber.PhoneNumber parsedNumber = phoneUtil.parse(phone, "SG");
-            String regionCode = phoneUtil.getRegionCodeForNumber(parsedNumber);
-
-            if (regionCode == null || regionCode.isEmpty()) {
-                return "Unknown";
-            }
-
-            return new Locale("", regionCode).getDisplayCountry(Locale.ENGLISH);
-        } catch (NumberParseException e) {
-            return "Invalid";
-        }
-    }
-
-    public String getCountryName() {
-        return deriveCountryName(value);
     }
 
     public String getCountryCode() {
-        return countryCode;
+        return deriveCountryCode(value);
     }
 
     @Override
