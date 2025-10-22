@@ -108,7 +108,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getOffset() != null) {
             offset.setVisible(true);
-            offset.setText("OFFSET" + person.getOffset());
+            offset.setText("OFFSET : " + person.getOffset());
         } else {
             offset.setVisible(false);
             offset.setManaged(false);
