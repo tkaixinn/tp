@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+
 /**
  * Represents a Person's country in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -9,14 +13,29 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Country {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Country names should only contain letters, spaces, hyphens and apostrophes.";
+            "Country names are case sensitive and should match the list of countries available in the help window "
+                    + "(type help to view).";
 
     /*
      * Allows alphabetic words separated by spaces.
      */
-    public static final String VALIDATION_REGEX = "([\\p{L}][\\p{L} '\\-]*)?";
+    public static final String VALIDATION_REGEX =
+            "([\\p{L}][\\p{L} '\\-,.&()]*|\\p{L}+([\\p{L} '\\-,.&()]*[\\p{L}])?)?";
 
-    public final String countryName;
+    /*
+     * Construct set of valid country names for validation matching.
+     */
+    private static final Set<String> VALID_COUNTRY_NAMES = new HashSet<>();
+
+    static {
+        for (String countryCode : Locale.getISOCountries()) {
+            Locale locale = new Locale("", countryCode);
+            String countryName = locale.getDisplayCountry(Locale.ENGLISH);
+            VALID_COUNTRY_NAMES.add(countryName);
+        }
+    }
+
+    public final String value;
 
     /**
      * Constructs a {@code Country}.
@@ -25,19 +44,20 @@ public class Country {
      */
     public Country(String country) {
         checkArgument(isValidCountry(country), MESSAGE_CONSTRAINTS);
-        countryName = country;
+        value = country;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid country name.
      */
     public static boolean isValidCountry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean inCountryList = test.isEmpty() || VALID_COUNTRY_NAMES.contains(test.trim());
+        return test.matches(VALIDATION_REGEX) && inCountryList;
     }
 
     @Override
     public String toString() {
-        return countryName;
+        return value;
     }
 
     @Override
@@ -52,12 +72,12 @@ public class Country {
         }
 
         Country otherCountry = (Country) other;
-        return countryName.equals(otherCountry.countryName);
+        return value.equals(otherCountry.value);
     }
 
     @Override
     public int hashCode() {
-        return countryName.hashCode();
+        return value.hashCode();
     }
 
 }

@@ -12,7 +12,6 @@ public class Culture {
     /**
      * @param culture note of the person
      */
-
     public Culture(String culture) {
         requireNonNull(culture);
         value = culture;

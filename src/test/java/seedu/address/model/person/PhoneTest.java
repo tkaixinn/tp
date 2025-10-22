@@ -32,7 +32,6 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
 
-
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
@@ -42,14 +41,14 @@ public class PhoneTest {
 
     @Test
     public void countryDetection_validNumbers_success() {
-        assertEquals("SG", new Phone("+6598765432").getCountryCode());
-        assertEquals("US", new Phone("+14155552671").getCountryCode());
-        assertEquals("IN", new Phone("+919876543210").getCountryCode());
+        assertEquals("65", new Phone("+6598765432").getCountryCode());
+        assertEquals("1", new Phone("+14155552671").getCountryCode());
+        assertEquals("91", new Phone("+919876543210").getCountryCode());
     }
 
     @Test
     public void toString_formatsCorrectly() {
-        assertEquals("+6598765432 (SG)", new Phone("+6598765432").toString());
+        assertEquals("+6598765432 (65)", new Phone("+6598765432").toString());
     }
 
     @Test

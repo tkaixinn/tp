@@ -6,6 +6,16 @@ plugins {
     id 'jacoco'
 }
 
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        xml.outputLocation = file("$buildDir/reports/jacoco/test/jacocoTestReport.xml")
+        html.required = true
+        csv.required = false
+    }
+}
+
 mainClassName = 'seedu.address.Main'
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -79,4 +89,8 @@ checkstyleMain {
 }
 checkstyleTest {
     ignoreFailures = true
+}
+
+run {
+    enableAssertions = true
 }

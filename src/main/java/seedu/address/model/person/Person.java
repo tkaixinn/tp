@@ -29,41 +29,29 @@ public class Person {
     private final Culture culture;
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
+    private final Offset offset;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Culture culture, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, culture, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.country = null;
-        this.culture = culture;
-        this.tags.addAll(tags);
-        this.preferredChannel = CommunicationChannel.EMAIL;
-    }
-
-    /**
-     * If country is included in initialisation.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Country country,
+            Culture culture, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, culture, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
-        this.culture = new Culture("");
+        this.culture = culture;
+        this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
-        this.preferredChannel = CommunicationChannel.EMAIL;
+        this.offset = offset;
 
         removeOldCountryTags();
 
-        String countryName = phone.getCountryName();
-        if (!countryName.equals("Unknown") && !countryName.equals("Invalid")) {
-            Tag countryTag = new Tag(countryName);
+        String countryCode = phone.getCountryCode();
+        if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
+            Tag countryTag = new Tag(countryCode);
             this.tags.add(countryTag);
         }
     }
@@ -72,61 +60,37 @@ public class Person {
      * If both culture notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-              Country country, Culture culture, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, culture, tags);
+            Country country, Culture culture, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, culture, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
         this.culture = culture;
-        this.tags.addAll(tags);
         this.preferredChannel = CommunicationChannel.EMAIL;
+        this.tags.addAll(tags);
+        this.offset = offset;
+
+        removeOldCountryTags();
+
+        String countryCode = phone.getCountryCode();
+        if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
+            Tag countryTag = new Tag(countryCode);
+            this.tags.add(countryTag);
+        }
     }
 
     /**
-     * If both culture notes, country and channel is included in initialisation.
+     * Enumeration storing all possible communication channels.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country,
-                  Culture culture, Set<Tag> tags,
-                  CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.country = country;
-        this.culture = culture;
-        this.tags.addAll(tags);
-        this.preferredChannel = preferredChannel;
-    }
-
-    /**
-     * If only culture and channel is included in initialisation.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Culture culture,
-                  Set<Tag> tags,
-                  CommunicationChannel preferredChannel) {
-        requireAllNonNull(name, phone, email, address, tags, preferredChannel);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.country = null;
-        this.culture = culture;
-        this.tags.addAll(tags);
-        this.preferredChannel = preferredChannel;
-    }
-
     public enum CommunicationChannel {
         PHONE,
         EMAIL,
-        PLATFORM,
         SMS,
         WHATSAPP,
         TELEGRAM
     }
-
 
     public CommunicationChannel getPreferredChannel() {
         return preferredChannel;
@@ -165,6 +129,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Offset getOffset() {
+        return offset;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -183,7 +151,7 @@ public class Person {
      * (Assumes tags with names matching country names or flags)
      */
     private void removeOldCountryTags() {
-        String []isoCountries = Locale.getISOCountries();
+        String[] isoCountries = Locale.getISOCountries();
         Set<String> allCountryNames = new HashSet<>();
         for (String isoCountry : isoCountries) {
             allCountryNames.add(new Locale("", isoCountry).getDisplayCountry());
@@ -213,15 +181,16 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && culture.equals(otherPerson.culture)
-                && Objects.equals(country, otherPerson.country)
+                && country.equals(otherPerson.country)
                 && culture.equals(otherPerson.culture)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && offset.equals(otherPerson.offset);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel);
+        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel, offset);
     }
 
     @Override
@@ -235,6 +204,7 @@ public class Person {
                 .add("culture", culture)
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
+                .add("offset", offset)
                 .toString();
     }
 

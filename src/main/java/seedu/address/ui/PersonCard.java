@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static java.util.Objects.isNull;
-
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -50,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     private Label culture;
     @FXML
     private Label channel;
+    @FXML
+    private Label offset;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -60,21 +60,31 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        name.getStyleClass().add("bold-label");
         phone.setText(person.getPhone().value);
+        phone.getStyleClass().add("bold-label");
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        culture.setText(person.getCulture().value);
+
+        if (!person.getCulture().value.equals("")) {
+            culture.setVisible(true);
+            culture.setText(person.getCulture().value);
+        } else {
+            culture.setVisible(false);
+            culture.setManaged(false);
+        }
+
         if (person.getPreferredChannel() != null) {
             channel.setVisible(true);
-            channel.setText(person.getPreferredChannel().name());
+            channel.setText("Preferred communication channel: " + person.getPreferredChannel().name());
         } else {
             channel.setVisible(false);
             channel.setManaged(false);
         }
 
-        if (!isNull(person.getCountry())) {
+        if (!person.getCountry().value.equals("")) {
             country.setVisible(true);
-            country.setText(person.getCountry().countryName);
+            country.setText(person.getCountry().value);
         } else {
             country.setVisible(false);
             country.setManaged(false);
@@ -82,6 +92,26 @@ public class PersonCard extends UiPart<Region> {
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+
+                    // Highlight only if it matches the person's country value (case-insensitive)
+                    if (!person.getCountry().value.isEmpty()
+                            && tag.tagName.equalsIgnoreCase(person.getCountry().value)) {
+                        tagLabel.getStyleClass().add("country-tag");
+                    } else {
+                        tagLabel.getStyleClass().add("normal-tag");
+                    }
+
+                    tags.getChildren().add(tagLabel);
+                });
+
+        if (person.getOffset() != null) {
+            offset.setVisible(true);
+            offset.setText("OFFSET" + person.getOffset());
+        } else {
+            offset.setVisible(false);
+            offset.setManaged(false);
+        }
     }
 }
