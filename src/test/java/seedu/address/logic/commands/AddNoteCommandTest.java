@@ -13,7 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -35,14 +35,14 @@ public class AddNoteCommandTest {
     @Test
     public void execute_addNoteExistingPerson_success() throws Exception {
         Name targetName = new Name("Alice Pauline");
-        Culture note = new Culture(NOTE_STUB);
+        Note note = new Note(NOTE_STUB);
 
         Person personToEdit = model.getFilteredPersonList().stream()
             .filter(p -> p.getName().equals(targetName))
             .findFirst()
             .orElseThrow(() -> new AssertionError("Person not found in typical persons"));
 
-        Person editedPerson = new PersonBuilder(personToEdit).withCulture(NOTE_STUB).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withNote(NOTE_STUB).build();
 
         AddNoteCommand command = new AddNoteCommand(targetName, note);
 
@@ -57,14 +57,14 @@ public class AddNoteCommandTest {
     @Test
     public void execute_deleteNoteExistingPerson_success() throws Exception {
         Name targetName = new Name("Alice Pauline");
-        Culture emptyNote = new Culture("");
+        Note emptyNote = new Note("");
 
         Person personToEdit = model.getFilteredPersonList().stream()
             .filter(p -> p.getName().equals(targetName))
             .findFirst()
             .orElseThrow(() -> new AssertionError("Person not found"));
 
-        Person editedPerson = new PersonBuilder(personToEdit).withCulture("").build();
+        Person editedPerson = new PersonBuilder(personToEdit).withNote("").build();
 
         AddNoteCommand command = new AddNoteCommand(targetName, emptyNote);
 
@@ -79,7 +79,7 @@ public class AddNoteCommandTest {
     @Test
     public void execute_personNotFound_failure() {
         Name invalidName = new Name("Nonexistent Person");
-        Culture note = new Culture("Some note");
+        Note note = new Note("Some note");
         AddNoteCommand command = new AddNoteCommand(invalidName, note);
 
         // execute_personNotFound_failure
@@ -90,11 +90,11 @@ public class AddNoteCommandTest {
     @Test
     public void equals() {
         final AddNoteCommand standardCommand =
-            new AddNoteCommand(new Name("Amy Bee"), new Culture("Enjoys tea"));
+            new AddNoteCommand(new Name("Amy Bee"), new Note("Enjoys tea"));
 
         // same values -> returns true
         AddNoteCommand commandWithSameValues =
-            new AddNoteCommand(new Name("Amy Bee"), new Culture("Enjoys tea"));
+            new AddNoteCommand(new Name("Amy Bee"), new Note("Enjoys tea"));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -108,10 +108,10 @@ public class AddNoteCommandTest {
 
         // different name -> returns false
         assertFalse(standardCommand.equals(
-            new AddNoteCommand(new Name("Bob Choo"), new Culture("Enjoys tea"))));
+            new AddNoteCommand(new Name("Bob Choo"), new Note("Enjoys tea"))));
 
         // different note -> returns false
         assertFalse(standardCommand.equals(
-            new AddNoteCommand(new Name("Amy Bee"), new Culture("Loves hiking"))));
+            new AddNoteCommand(new Name("Amy Bee"), new Note("Loves hiking"))));
     }
 }

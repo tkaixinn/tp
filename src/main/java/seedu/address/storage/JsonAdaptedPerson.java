@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Offset;
@@ -34,7 +34,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String country;
-    private final String culture;
+    private final String note;
     private final String offset;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("country") String country, @JsonProperty("culture") String culture,
+                             @JsonProperty("country") String country, @JsonProperty("note") String note,
                              @JsonProperty("offset") String offset,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -52,7 +52,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.country = country;
-        this.culture = culture;
+        this.note = note;
         this.offset = offset;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -68,7 +68,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry() != null ? source.getCountry().toString() : null;
-        culture = source.getCulture().value;
+        note = source.getNote().value;
         offset = source.getOffset().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -120,7 +120,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Culture modelCulture = (culture == null) ? new Culture("") : new Culture(culture);
+        final Note modelNote = (note == null) ? new Note("") : new Note(note);
 
         final Offset modelOffset;
         if (offset == null || offset.isEmpty()) {
@@ -140,7 +140,7 @@ class JsonAdaptedPerson {
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelCulture, modelTags,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
                 modelOffset);
     }
 

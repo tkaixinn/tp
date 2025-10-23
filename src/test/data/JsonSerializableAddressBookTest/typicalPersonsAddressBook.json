@@ -7,7 +7,7 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "country": "Singapore",
-      "culture": "",
+      "note": "",
       "tags": ["friends"]
     },
     {
@@ -16,7 +16,7 @@
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
       "country": "Singapore",
-      "culture": "He can't drink alcohol!",
+      "note": "He can't drink alcohol!",
       "tags": ["owesMoney", "friends"]
     },
     {
@@ -25,7 +25,7 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "country": "United States",
-      "culture": "",
+      "note": "",
       "tags": []
     },
     {
@@ -34,7 +34,7 @@
       "email": "cornelia@example.com",
       "address": "10th street",
       "country": "Singapore",
-      "culture": "",
+      "note": "",
       "tags": ["friends"]
     },
     {
@@ -43,7 +43,7 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "country": "United States",
-      "culture": "",
+      "note": "",
       "tags": []
     },
     {
@@ -52,7 +52,7 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "country": "United States",
-      "culture": "",
+      "note": "",
       "tags": []
     },
     {
@@ -61,7 +61,7 @@
       "email": "anna@example.com",
       "address": "4th street",
       "country": "United States",
-      "culture": "",
+      "note": "",
       "tags": []
     },
     {
@@ -70,7 +70,7 @@
       "email": "jenny@example.com",
       "address": "5th street",
       "country": "China",
-      "culture": "",
+      "note": "",
       "tags": []
     }
   ]

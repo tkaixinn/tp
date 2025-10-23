@@ -27,7 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Offset;
@@ -91,14 +91,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
-        Culture updatedCulture = personToEdit.getCulture();
+        Note updatedNote = personToEdit.getNote();
         Offset updatedOffset = editPersonDescriptor.getGmtOffset().orElse(personToEdit.getOffset());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
                 .orElse(personToEdit.getPreferredChannel());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
-                updatedCulture, updatedChannel, updatedTags, updatedOffset);
+                updatedNote, updatedChannel, updatedTags, updatedOffset);
     }
 
 

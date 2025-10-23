@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Offset;
@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COUNTRY = "Singapore";
-    public static final String DEFAULT_CULTURE = "";
+    public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
 
     private Name name;
@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Country country;
-    private Culture culture;
+    private Note note;
     private Set<Tag> tags;
     private Offset offset;
 
@@ -45,7 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         country = new Country(DEFAULT_COUNTRY);
-        culture = new Culture(DEFAULT_CULTURE);
+        note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
     }
@@ -59,7 +59,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         country = personToCopy.getCountry();
-        culture = personToCopy.getCulture();
+        note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
     }
@@ -106,10 +106,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Culture} of the {@code Person} that we are building.
+     * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCulture(String culture) {
-        this.culture = new Culture(culture);
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
         return this;
     }
 
@@ -130,7 +130,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, culture, tags, offset);
+        return new Person(name, phone, email, address, country, note, tags, offset);
     }
 
 }

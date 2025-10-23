@@ -8,7 +8,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Offset;
@@ -21,14 +21,14 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Culture EMPTY_CULTURE = new Culture("");
+    public static final Note EMPTY_NOTE = new Note("");
     public static final Country EMPTY_COUNTRY = new Country("");
 
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Country("Singapore"),
-                    new Culture("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
+                    new Note("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
                     getTagSet("friends"), new Offset("+08:00"))
         };
     }

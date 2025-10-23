@@ -21,7 +21,7 @@ Class Phone
 Class Tag
 Class Country
 Class Offset
-Class Culture
+Class Note
 
 Class I #FFFFFF
 }
@@ -45,7 +45,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
-Person *--> "*" Culture
+Person *--> "*" Note
 Person *--> Country
 Person *--> Offset
 
