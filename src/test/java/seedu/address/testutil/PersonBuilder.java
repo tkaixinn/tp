@@ -5,9 +5,9 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;

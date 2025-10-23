@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 
 /**
  * Parses input arguments and creates a new {@code AddNoteCommand} object.
