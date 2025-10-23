@@ -66,9 +66,9 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows the description and format of all actions a user can perform with Worldly. Also displays a list of valid country names and their corresponding calling codes.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -164,7 +164,9 @@ Finds persons who are tagged with all of the given keywords.
 Format: `findtag TAG [MORE_TAGS]`
 
 * The search is case-insensitive.
+* Only returns contacts who match ALL the tags.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
+![result for 'findtag friends owesMoney'](images/findtag.png)
 
 Examples:
 * `findtag friends`
@@ -178,6 +180,7 @@ Format: `findcountry COUNTRY`
 
 * The search is case-sensitive. e.g `Singapore` is a valid country but not `singapore`
 * Refer to the full list of valid country names in the help window
+![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
 * `findtag friends`
@@ -238,7 +241,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Country** | `find COUNTRY`<br> e.g., `find Singapore`
-**Find Tag** | `find Tag [MORE_TAGS]`<br> e.g., `find friends`
+**Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
+**Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
 **List** | `list`
 **Help** | `help`
