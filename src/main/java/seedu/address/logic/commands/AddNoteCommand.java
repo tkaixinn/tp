@@ -7,7 +7,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -27,15 +27,15 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
 
     private final Name name;
-    private final Culture culture; // “Culture” here represents the note text
+    private final Note note; // “Note” here represents the note text
 
     /**
      * Creates an AddNoteCommand to add or update the given person's note.
      */
-    public AddNoteCommand(Name name, Culture culture) {
-        requireAllNonNull(name, culture);
+    public AddNoteCommand(Name name, Note note) {
+        requireAllNonNull(name, note);
         this.name = name;
-        this.culture = culture;
+        this.note = note;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AddNoteCommand extends Command {
             personToEdit.getEmail(),
             personToEdit.getAddress(),
             personToEdit.getCountry(),
-            culture,
+            note,
             personToEdit.getTags(),
             personToEdit.getOffset()
         );
@@ -75,7 +75,7 @@ public class AddNoteCommand extends Command {
      * Generates a command execution success message based on whether the note is added or removed.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !culture.value.isEmpty()
+        String message = !note.value.isEmpty()
             ? MESSAGE_ADD_NOTE_SUCCESS
             : MESSAGE_DELETE_NOTE_SUCCESS;
         return String.format(message, personToEdit.getName());
@@ -86,6 +86,6 @@ public class AddNoteCommand extends Command {
         return other == this
             || (other instanceof AddNoteCommand
             && name.equals(((AddNoteCommand) other).name)
-            && culture.equals(((AddNoteCommand) other).culture));
+            && note.equals(((AddNoteCommand) other).note));
     }
 }

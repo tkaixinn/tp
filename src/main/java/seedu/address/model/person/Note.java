@@ -6,15 +6,15 @@ import static java.util.Objects.requireNonNull;
  * Represents a Person's cuture notes in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Culture {
+public class Note {
     public final String value;
 
     /**
-     * @param culture note of the person
+     * @param note note of the person
      */
-    public Culture(String culture) {
-        requireNonNull(culture);
-        value = culture;
+    public Note(String note) {
+        requireNonNull(note);
+        value = note;
     }
 
     @Override
@@ -25,8 +25,8 @@ public class Culture {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof Culture // instanceof handles nulls
-            && value.equals(((Culture) other).value)); // state check
+            || (other instanceof Note // instanceof handles nulls
+            && value.equals(((Note) other).value)); // state check
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Country country;
-    private final Culture culture;
+    private final Note note;
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
@@ -35,14 +35,14 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Culture culture, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
-        requireAllNonNull(name, phone, email, address, culture, tags, offset);
+                  Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
-        this.culture = culture;
+        this.note = note;
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
@@ -57,17 +57,17 @@ public class Person {
     }
 
     /**
-     * If both culture notes and country is included in initialisation.
+     * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            Country country, Culture culture, Set<Tag> tags, Offset offset) {
-        requireAllNonNull(name, phone, email, address, culture, tags, offset);
+                  Country country, Note note, Set<Tag> tags, Offset offset) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
-        this.culture = culture;
+        this.note = note;
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
@@ -112,8 +112,8 @@ public class Person {
         return address;
     }
 
-    public Culture getCulture() {
-        return culture;
+    public Note getNote() {
+        return note;
     }
 
     public Country getCountry() {
@@ -180,9 +180,9 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && culture.equals(otherPerson.culture)
+                && note.equals(otherPerson.note)
                 && country.equals(otherPerson.country)
-                && culture.equals(otherPerson.culture)
+                && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
                 && offset.equals(otherPerson.offset);
     }
@@ -190,7 +190,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, culture, tags, preferredChannel, offset);
+        return Objects.hash(name, phone, email, address, country, note, tags, preferredChannel, offset);
     }
 
     @Override
@@ -201,7 +201,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("country", country)
-                .add("culture", culture)
+                .add("note", note)
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)

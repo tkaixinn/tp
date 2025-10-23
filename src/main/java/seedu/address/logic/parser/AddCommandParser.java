@@ -18,7 +18,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
-import seedu.address.model.person.Culture;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Offset;
@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Culture culture = ParserUtil.parseCulture(argMultimap.getValue(PREFIX_NOTE).orElse(""));
+        Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).orElse(""));
         Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.EMAIL;
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
@@ -83,7 +83,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
-        Person person = new Person(name, phone, email, address, country, culture, finalPreferredChannel, tagList,
+        Person person = new Person(name, phone, email, address, country, note, finalPreferredChannel, tagList,
                 offset);
 
         return new AddCommand(person);

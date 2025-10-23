@@ -98,7 +98,7 @@ public class PersonTest {
             + ", email=" + ALICE.getEmail()
             + ", address=" + ALICE.getAddress()
             + ", country=" + ALICE.getCountry()
-            + ", culture=" + ALICE.getCulture()
+            + ", note=" + ALICE.getNote()
             + ", tags=" + ALICE.getTags()
             + ", preferredChannel=" + ALICE.getPreferredChannel()
             + ", offset=" + ALICE.getOffset() + "}";

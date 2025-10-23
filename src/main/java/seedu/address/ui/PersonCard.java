@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label culture;
+    private Label note;
     @FXML
     private Label channel;
     @FXML
@@ -66,12 +66,12 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        if (!person.getCulture().value.equals("")) {
-            culture.setVisible(true);
-            culture.setText(person.getCulture().value);
+        if (!person.getNote().value.equals("")) {
+            note.setVisible(true);
+            note.setText(person.getNote().value);
         } else {
-            culture.setVisible(false);
-            culture.setManaged(false);
+            note.setVisible(false);
+            note.setManaged(false);
         }
 
         if (person.getPreferredChannel() != null) {
