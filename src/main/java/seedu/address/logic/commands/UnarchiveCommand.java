@@ -25,7 +25,7 @@ public class UnarchiveCommand extends Command {
             + " 1";
 
     public static final String MESSAGE_UNARCHIVE_SUCCESS = " has been unarchived";
-    public static final String MESSAGE_ALREADY_UNARCHIVED = " is already unarchived!";
+    public static final String MESSAGE_ALREADY_UNARCHIVED = " is already unarchived";
 
     private final Index index;
 
@@ -48,7 +48,7 @@ public class UnarchiveCommand extends Command {
 
         Person personToUnarchive = lastShownList.get(index.getZeroBased());
 
-        if (personToUnarchive.getArchivalStatus()) {
+        if (!personToUnarchive.getArchivalStatus()) {
             throw new CommandException(personToUnarchive.getName() + MESSAGE_ALREADY_UNARCHIVED);
         } else {
             Person editedPerson = new Person(
