@@ -8,7 +8,7 @@ title: Worldly
 
 ![Ui](images/Ui.png)
 
-**Worldly is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**Worldly is a desktop application designed for students on exchange programs to manage their contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using Worldly, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing Worldly, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
