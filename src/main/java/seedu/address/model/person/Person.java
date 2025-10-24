@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
@@ -26,6 +27,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Country country;
+    private final MetOn metOn;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
@@ -36,8 +38,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, boolean isArchived) {
-        requireAllNonNull(name, phone, email, address, note, tags, offset);
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +50,7 @@ public class Person {
         this.tags.addAll(tags);
         this.offset = offset;
         this.isArchived = isArchived;
+        this.metOn = metOn;
 
         removeOldCountryTags();
 
@@ -62,8 +65,8 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            Country country, Note note, Set<Tag> tags, Offset offset, boolean isArchived) {
-        requireAllNonNull(name, phone, email, address, note, tags, offset);
+                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -74,6 +77,7 @@ public class Person {
         this.tags.addAll(tags);
         this.offset = offset;
         this.isArchived = isArchived;
+        this.metOn = metOn;
 
         removeOldCountryTags();
 
@@ -138,6 +142,10 @@ public class Person {
 
     public Offset getOffset() {
         return offset;
+    }
+
+    public MetOn getMetOn() {
+        return metOn;
     }
 
     /**
@@ -211,6 +219,7 @@ public class Person {
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("metOn", metOn)
                 .toString();
     }
 

@@ -56,15 +56,16 @@ public class AddNoteCommand extends Command {
 
         // Create edited person with updated note
         Person editedPerson = new Person(
-                personToEdit.getName(),
-                personToEdit.getPhone(),
-                personToEdit.getEmail(),
-                personToEdit.getAddress(),
-                personToEdit.getCountry(),
-                note,
-                personToEdit.getTags(),
-                personToEdit.getOffset(),
-                false);
+            personToEdit.getName(),
+            personToEdit.getPhone(),
+            personToEdit.getEmail(),
+            personToEdit.getAddress(),
+            personToEdit.getCountry(),
+            note,
+            personToEdit.getTags(),
+            personToEdit.getOffset(),
+            personToEdit.getMetOn()
+        );
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
