@@ -60,6 +60,7 @@ public class ArchiveCommand extends Command {
                     personToArchive.getNote(),
                     personToArchive.getTags(),
                     personToArchive.getOffset(),
+                    personToArchive.getMetOn(),
                     true);
 
             model.setPerson(personToArchive, editedPerson);
