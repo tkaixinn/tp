@@ -30,12 +30,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
+    private boolean isArchived;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-                  Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -46,6 +47,7 @@ public class Person {
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.isArchived = false;
 
         removeOldCountryTags();
 
@@ -60,7 +62,7 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Country country, Note note, Set<Tag> tags, Offset offset) {
+            Country country, Note note, Set<Tag> tags, Offset offset) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -71,6 +73,7 @@ public class Person {
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.isArchived = false;
 
         removeOldCountryTags();
 
@@ -118,6 +121,18 @@ public class Person {
 
     public Country getCountry() {
         return country;
+    }
+
+    public void archive() {
+        this.isArchived = true;
+    }
+
+    public void unarchive() {
+        this.isArchived = false;
+    }
+
+    public boolean checkIfArchived() {
+        return this.isArchived;
     }
 
     /**
