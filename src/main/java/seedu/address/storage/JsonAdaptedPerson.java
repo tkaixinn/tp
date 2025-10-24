@@ -2,6 +2,8 @@ package seedu.address.storage;
 
 import static java.util.Objects.isNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -36,6 +39,7 @@ class JsonAdaptedPerson {
     private final String country;
     private final String note;
     private final String offset;
+    private final String metOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -46,6 +50,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("country") String country, @JsonProperty("note") String note,
                              @JsonProperty("offset") String offset,
+                             @JsonProperty("metOn") String metOn,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -54,6 +59,7 @@ class JsonAdaptedPerson {
         this.country = country;
         this.note = note;
         this.offset = offset;
+        this.metOn = metOn;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -70,6 +76,7 @@ class JsonAdaptedPerson {
         country = source.getCountry() != null ? source.getCountry().toString() : null;
         note = source.getNote().value;
         offset = source.getOffset().value;
+        metOn = source.getMetOn() == null ? null : source.getMetOn().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -134,6 +141,17 @@ class JsonAdaptedPerson {
             }
         }
 
+        MetOn modelMetOn;
+        if (metOn == null || metOn.isBlank()) {
+            modelMetOn = new MetOn(LocalDateTime.now());
+        } else {
+            try {
+                modelMetOn = new MetOn(LocalDateTime.parse(metOn));
+            } catch (DateTimeParseException e) {
+                modelMetOn = new MetOn(LocalDateTime.now());
+            }
+        }
+
         if (!isNull(country) && !Country.isValidCountry(country)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -141,7 +159,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
-                modelOffset);
+                modelOffset, modelMetOn);
     }
 
 }

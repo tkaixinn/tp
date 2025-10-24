@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ public class PersonBuilder {
     private Note note;
     private Set<Tag> tags;
     private Offset offset;
+    private LocalDateTime metOn;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +50,7 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
+        metOn = LocalDateTime.now();
     }
 
     /**
@@ -62,6 +65,7 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
+        metOn = personToCopy.getMetOn();
     }
 
     /**
@@ -130,7 +134,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset);
+        return new Person(name, phone, email, address, country, note, tags, offset, metOn);
     }
 
 }
