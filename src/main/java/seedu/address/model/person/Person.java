@@ -32,12 +32,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
+    private final boolean isArchived;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-                  Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -48,6 +49,7 @@ public class Person {
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.isArchived = isArchived;
         this.metOn = metOn;
 
         removeOldCountryTags();
@@ -63,7 +65,7 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn) {
+                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -74,6 +76,7 @@ public class Person {
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.isArchived = isArchived;
         this.metOn = metOn;
 
         removeOldCountryTags();
@@ -122,6 +125,10 @@ public class Person {
 
     public Country getCountry() {
         return country;
+    }
+
+    public boolean getArchivalStatus() {
+        return isArchived;
     }
 
     /**
@@ -188,7 +195,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && note.equals(otherPerson.note)
                 && country.equals(otherPerson.country)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)

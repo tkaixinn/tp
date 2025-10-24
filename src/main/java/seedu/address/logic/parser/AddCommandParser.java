@@ -87,7 +87,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
         MetOn metOn = new MetOn(LocalDateTime.now());
         Person person = new Person(name, phone, email, address, country, note, finalPreferredChannel, tagList,
-                offset, metOn);
+                offset, metOn, false);
 
         return new AddCommand(person);
     }

@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNARCHIVED;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -99,12 +99,12 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
                 .orElse(personToEdit.getPreferredChannel());
+        boolean isArchived = personToEdit.getArchivalStatus();
         MetOn updatedMetOn = personToEdit.getMetOn();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
-                updatedNote, updatedChannel, updatedTags, updatedOffset, updatedMetOn);
+                updatedNote, updatedChannel, updatedTags, updatedOffset, updatedMetOn, isArchived);
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -123,7 +123,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
