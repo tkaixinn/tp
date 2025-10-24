@@ -100,7 +100,7 @@ public class OffsetTest {
         assertEquals(ZoneOffset.of("+07:45"), zo);
         assertEquals("+07:45", zo.toString());
     }
-    
+
     @Test
     public void equals_sameValue_true() {
         assertEquals(new Offset("+02:00"), new Offset("+02:00"));
