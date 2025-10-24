@@ -79,12 +79,6 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /**
-     * Updates the archive status of the given person {@code person}.
-     * {@code person} must exist in the address book.
-     */
-    void updatePerson(Person person);
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

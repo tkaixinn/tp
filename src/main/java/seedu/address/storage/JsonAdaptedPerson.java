@@ -36,6 +36,7 @@ class JsonAdaptedPerson {
     private final String country;
     private final String note;
     private final String offset;
+    private final boolean archivalStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,8 +46,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("country") String country, @JsonProperty("note") String note,
-            @JsonProperty("offset") String offset,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("offset") String offset, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +58,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.archivalStatus = archivalStatus;
     }
 
     /**
@@ -73,6 +75,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        archivalStatus = source.getArchivalStatus();
     }
 
     /**
@@ -140,8 +143,9 @@ class JsonAdaptedPerson {
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
-                modelOffset, false);
+                modelOffset, archivalStatus);
     }
 
 }

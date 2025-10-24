@@ -51,11 +51,21 @@ public class ArchiveCommand extends Command {
         if (personToArchive.getArchivalStatus()) {
             throw new CommandException(personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
         } else {
-            personToArchive.archive();
+            Person editedPerson = new Person(
+                    personToArchive.getName(),
+                    personToArchive.getPhone(),
+                    personToArchive.getEmail(),
+                    personToArchive.getAddress(),
+                    personToArchive.getCountry(),
+                    personToArchive.getNote(),
+                    personToArchive.getTags(),
+                    personToArchive.getOffset(),
+                    true);
+
+            model.setPerson(personToArchive, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
         }
 
-        model.updatePerson(personToArchive);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
         return new CommandResult(personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
     }
 

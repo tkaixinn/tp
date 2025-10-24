@@ -48,14 +48,24 @@ public class UnarchiveCommand extends Command {
 
         Person personToUnarchive = lastShownList.get(index.getZeroBased());
 
-        if (!personToUnarchive.getArchivalStatus()) {
+        if (personToUnarchive.getArchivalStatus()) {
             throw new CommandException(personToUnarchive.getName() + MESSAGE_ALREADY_UNARCHIVED);
         } else {
-            personToUnarchive.unarchive();
+            Person editedPerson = new Person(
+                    personToUnarchive.getName(),
+                    personToUnarchive.getPhone(),
+                    personToUnarchive.getEmail(),
+                    personToUnarchive.getAddress(),
+                    personToUnarchive.getCountry(),
+                    personToUnarchive.getNote(),
+                    personToUnarchive.getTags(),
+                    personToUnarchive.getOffset(),
+                    false);
+
+            model.setPerson(personToUnarchive, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
         }
 
-        model.updatePerson(personToUnarchive);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
         return new CommandResult(personToUnarchive.getName() + MESSAGE_UNARCHIVE_SUCCESS);
     }
 

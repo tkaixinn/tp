@@ -30,7 +30,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
-    private boolean isArchived;
+    private final boolean isArchived;
 
     /**
      * Every field must be present and not null.
@@ -123,16 +123,8 @@ public class Person {
         return country;
     }
 
-    public void archive() {
-        this.isArchived = true;
-    }
-
-    public void unarchive() {
-        this.isArchived = false;
-    }
-
     public boolean getArchivalStatus() {
-        return this.isArchived;
+        return isArchived;
     }
 
     /**
@@ -195,7 +187,6 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && note.equals(otherPerson.note)
                 && country.equals(otherPerson.country)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
