@@ -50,6 +50,9 @@ public class PersonCard extends UiPart<Region> {
     private Label channel;
     @FXML
     private Label offset;
+    @FXML
+    private Label preferredLanguage;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -113,5 +116,14 @@ public class PersonCard extends UiPart<Region> {
             offset.setVisible(false);
             offset.setManaged(false);
         }
+
+        if (person.getPreferredLanguage() != null) {
+            preferredLanguage.setVisible(true);
+            preferredLanguage.setText("Language: " + person.getPreferredLanguage().toString());
+        } else {
+            preferredLanguage.setVisible(false);
+            preferredLanguage.setManaged(false);
+        }
+
     }
 }

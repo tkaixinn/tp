@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -37,6 +38,8 @@ class JsonAdaptedPerson {
     private final String note;
     private final String offset;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String preferredLanguage;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +49,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("country") String country, @JsonProperty("note") String note,
                              @JsonProperty("offset") String offset,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("preferredLanguage") String preferredLanguage) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,6 +58,7 @@ class JsonAdaptedPerson {
         this.country = country;
         this.note = note;
         this.offset = offset;
+        this.preferredLanguage = preferredLanguage;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -70,6 +75,7 @@ class JsonAdaptedPerson {
         country = source.getCountry() != null ? source.getCountry().toString() : null;
         note = source.getNote().value;
         offset = source.getOffset().value;
+        preferredLanguage = source.getPreferredLanguage().getPreferredLanguage();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -139,9 +145,19 @@ class JsonAdaptedPerson {
         }
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
+        if (preferredLanguage == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "PreferredLanguage")
+            );
+        }
+        if (!PreferredLanguage.isValidLanguage(preferredLanguage)) {
+            throw new IllegalValueException(PreferredLanguage.MESSAGE_CONSTRAINTS);
+        }
+        final PreferredLanguage modelPreferredLanguage = new PreferredLanguage(preferredLanguage);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
-                modelOffset);
+                modelOffset, modelPreferredLanguage);
     }
 
 }

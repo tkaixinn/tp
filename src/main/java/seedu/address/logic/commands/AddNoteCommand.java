@@ -62,7 +62,8 @@ public class AddNoteCommand extends Command {
             personToEdit.getCountry(),
             note,
             personToEdit.getTags(),
-            personToEdit.getOffset()
+            personToEdit.getOffset(),
+                personToEdit.getPreferredLanguage()
         );
 
         model.setPerson(personToEdit, editedPerson);

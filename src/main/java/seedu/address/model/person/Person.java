@@ -30,12 +30,15 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
+    private final PreferredLanguage preferredLanguage;
+
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-                  Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+                  Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
+                  PreferredLanguage preferredLanguage) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -46,6 +49,7 @@ public class Person {
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.preferredLanguage = preferredLanguage;
 
         removeOldCountryTags();
 
@@ -60,7 +64,8 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Country country, Note note, Set<Tag> tags, Offset offset) {
+                  Country country, Note note, Set<Tag> tags, Offset offset,
+                  PreferredLanguage preferredLanguage) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -71,6 +76,7 @@ public class Person {
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.preferredLanguage = preferredLanguage;
 
         removeOldCountryTags();
 
@@ -119,6 +125,11 @@ public class Person {
     public Country getCountry() {
         return country;
     }
+
+    public PreferredLanguage getPreferredLanguage() {
+        return preferredLanguage;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws
@@ -205,6 +216,10 @@ public class Person {
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
+                .add("suggestedGreeting", preferredLanguage == null
+                        ? "-"
+                        : GreetingLibrary.getGreeting(preferredLanguage.toString()))
                 .toString();
     }
 

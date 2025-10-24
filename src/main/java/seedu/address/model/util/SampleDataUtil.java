@@ -14,6 +14,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +30,7 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Country("Singapore"),
                     new Note("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
-                    getTagSet("friends"), new Offset("+08:00"))
+                    getTagSet("friends"), new Offset("+08:00"), new PreferredLanguage("english"))
         };
     }
 
