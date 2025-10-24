@@ -93,6 +93,32 @@ public class Person {
         }
     }
 
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn,
+                  boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.country = country;
+        this.note = note;
+        this.preferredChannel = CommunicationChannel.EMAIL;
+        this.tags.addAll(tags);
+        this.offset = offset;
+        this.isArchived = isArchived;
+        this.metOn = metOn;
+        this.preferredLanguage = new PreferredLanguage("english");
+
+        removeOldCountryTags();
+
+        String countryCode = phone.getCountryCode();
+        if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
+            Tag countryTag = new Tag(countryCode);
+            this.tags.add(countryTag);
+        }
+    }
+
     /**
      * Enumeration storing all possible communication channels.
      */
