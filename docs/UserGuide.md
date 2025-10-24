@@ -82,14 +82,13 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CH
 * A tag with the person's country calling code is automatically added if it is included in the phone number.
 * The channel field **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. If the channel field is omitted, the app will display an error and refuse to add the contact.
 * The offset refers to offset from GMT and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
-* The country field can be left blank but must be included in the command, i.e. `country:` (with no country following the prefix) is a valid input.
-* The note field can be left blank or omitted from the command entirely.
+* The country and note fields can be left blank or omitted from the command entirely.
 * A person can have any number of tags (including 0). Each tag must be added with `tag:`.
 
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
-* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 country: channel:TELEGRAM offset:+08:00 tag:criminal`
+* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 channel:TELEGRAM offset:+08:00 tag:criminal`
 
 ### Listing all persons : `list`
 
@@ -232,7 +231,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET country:COUNTRY] [note:NOTE [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
