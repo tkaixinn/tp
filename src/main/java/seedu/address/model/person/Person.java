@@ -33,12 +33,14 @@ public class Person {
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
     private final boolean isArchived;
+    private final PreferredLanguage preferredLanguage;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn,
+                  PreferredLanguage preferredLanguage, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -51,6 +53,7 @@ public class Person {
         this.offset = offset;
         this.isArchived = isArchived;
         this.metOn = metOn;
+        this.preferredLanguage = preferredLanguage;
 
         removeOldCountryTags();
 
@@ -65,7 +68,8 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn,
+                  PreferredLanguage preferredLanguage, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -78,6 +82,7 @@ public class Person {
         this.offset = offset;
         this.isArchived = isArchived;
         this.metOn = metOn;
+        this.preferredLanguage = preferredLanguage;
 
         removeOldCountryTags();
 
@@ -148,6 +153,10 @@ public class Person {
         return metOn;
     }
 
+    public PreferredLanguage getPreferredLanguage() {
+        return preferredLanguage;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -198,7 +207,8 @@ public class Person {
                 && country.equals(otherPerson.country)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
-                && offset.equals(otherPerson.offset);
+                && offset.equals(otherPerson.offset)
+                && preferredLanguage.equals(otherPerson.preferredLanguage);
     }
 
     @Override
@@ -219,7 +229,11 @@ public class Person {
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("suggestedGreeting", preferredLanguage == null
+                        ? "-"
+                        : GreetingLibrary.getGreeting(preferredLanguage.toString()))
                 .add("metOn", metOn)
+                .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
                 .toString();
     }
 

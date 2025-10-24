@@ -23,6 +23,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,6 +43,7 @@ class JsonAdaptedPerson {
     private final boolean archivalStatus;
     private final String metOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String preferredLanguage;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -53,6 +55,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("offset") String offset,
                              @JsonProperty("metOn") String metOn,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("preferredLanguage") String preferredLanguage,
                               @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
         this.phone = phone;
@@ -65,6 +68,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.preferredLanguage = preferredLanguage;
         this.archivalStatus = archivalStatus;
     }
 
@@ -84,6 +88,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         archivalStatus = source.getArchivalStatus();
+        preferredLanguage = source.getPreferredLanguage().getPreferredLanguage();
     }
 
     /**
@@ -163,8 +168,19 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        if (preferredLanguage == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "PreferredLanguage")
+            );
+        }
+        if (!PreferredLanguage.isValidLanguage(preferredLanguage)) {
+            throw new IllegalValueException(PreferredLanguage.MESSAGE_CONSTRAINTS);
+        }
+        final PreferredLanguage modelPreferredLanguage = new PreferredLanguage(preferredLanguage);
+
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
-                modelOffset, modelMetOn, archivalStatus);
+                modelOffset, modelMetOn, modelPreferredLanguage, archivalStatus);
     }
 
 }

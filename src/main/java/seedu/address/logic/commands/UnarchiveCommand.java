@@ -61,6 +61,7 @@ public class UnarchiveCommand extends Command {
                     personToUnarchive.getTags(),
                     personToUnarchive.getOffset(),
                     personToUnarchive.getMetOn(),
+                    personToUnarchive.getPreferredLanguage(),
                     false);
 
             model.setPerson(personToUnarchive, editedPerson);
