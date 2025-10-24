@@ -52,7 +52,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("country") String country, @JsonProperty("note") String note,
                              @JsonProperty("offset") String offset,
                              @JsonProperty("metOn") String metOn,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags, 
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
                               @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
         this.phone = phone;
