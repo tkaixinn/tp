@@ -79,7 +79,7 @@ Adds a person to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
 
-* Automatically adds a tag with the person's country calling code if it is included in the phone number.
+* A tag with the person's country calling code is automatically added if it is included in the phone number.
 * The channel field **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. If the channel field is omitted, the app will display an error and refuse to add the contact.
 * The offset refers to offset from GMT and must be specified in HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
 * The country field can be left blank but must be included in the command, i.e. `country:` (with no country following the prefix) is a valid input.
@@ -93,7 +93,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. The list is always sorted in alphabetical order,
 
 Format: `list`
 
