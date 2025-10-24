@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.GreetingMap;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -119,11 +120,14 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getPreferredLanguage() != null) {
             preferredLanguage.setVisible(true);
-            preferredLanguage.setText("Language: " + person.getPreferredLanguage().toString());
+            String lang = person.getPreferredLanguage().getPreferredLanguage();
+            String greeting = GreetingMap.getGreeting(lang);
+            preferredLanguage.setText("Language: " + lang + " (" + greeting + ")");
         } else {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
         }
+
 
     }
 }
