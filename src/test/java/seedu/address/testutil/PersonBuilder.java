@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -36,7 +37,7 @@ public class PersonBuilder {
     private Note note;
     private Set<Tag> tags;
     private Offset offset;
-    private LocalDateTime metOn;
+    private MetOn metOn;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,7 +51,7 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
-        metOn = LocalDateTime.now();
+        metOn = new MetOn(LocalDateTime.now());
     }
 
     /**
