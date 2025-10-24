@@ -28,7 +28,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
    * `list` : Lists all contacts.
 
-   * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 country:Singapore` : Adds a contact named `John Doe` to the Address Book.
+   * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,20 +77,20 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel: country:COUNTRY CHANNEL [note:NOTE] [tag:TAG]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
 
 * Automatically adds a tag with the person's country calling code if it is included in the phone number.
-* A person can have any number of tags (including 0).
-* Country field can be left blank but prefix must be present
 * The channel field **cannot be left blank**. You must specify one of the allowed channels.
 * It must be one of the following: PHONE, EMAIL, SMS, WHATSAPP, TELEGRAM.
 * If the channel field is omitted, the app will display an error and refuse to add the contact.
-
+* The offset refers to offset from GMT and must be specified in HH:MM.
+* The country and cultural note fields can be left blank.
+* A person can have any number of tags (including 0).
 
 
 Examples:
-* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 country:Singapore note:Vegetarian`
-* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 country: tag:criminal`
+* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
+* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 channel:telegram offset:+08:00 tag:criminal`
 
 ### Listing all persons : `list`
 
@@ -102,14 +102,14 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [channel: CHANNEL] [country:COUNTRY] [tag:TAG]…​`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [channel: CHANNEL] [offset: OFFSET] [country:COUNTRY] [tag:TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `tah:` without
+* You can remove all the person’s tags by typing `tag:` without
     specifying any tags after it.
 
 Examples:
@@ -157,6 +157,19 @@ Format: `addnote name:NAME note:NOTE`
 Examples:
 * `addnote name:John Doe note:Cannot drink alcohol`
 
+### Finding contacts by country `findcountry`
+
+Finds persons who are from the given country.
+
+Format: `findcountry COUNTRY`
+
+* The search is case-sensitive. e.g `Singapore` is a valid country but not `singapore`
+* Refer to the full list of valid country names in the help window
+  ![result for 'findcountry Singapore'](images/findcountry.png)
+
+Examples:
+* `findcountry Singapore`
+
 ### Finding contacts by tag `findtag`
 
 Finds persons who are tagged with all of the given keywords.
@@ -167,20 +180,6 @@ Format: `findtag TAG [MORE_TAGS]`
 * Only returns contacts who match ALL the tags.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 ![result for 'findtag friends owesMoney'](images/findtag.png)
-
-Examples:
-* `findtag friends`
-* `findtag friends colleagues`
-
-### Finding contacts by country `findcountry`
-
-Finds persons who are from the given country.
-
-Format: `findcountry COUNTRY`
-
-* The search is case-sensitive. e.g `Singapore` is a valid country but not `singapore`
-* Refer to the full list of valid country names in the help window
-![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
 * `findtag friends`
@@ -235,11 +234,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS country:COUNTRY channel:CHANNEL [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:James Ho phone:22224444 email:jamesho@example.com address:123, Clementi Rd, 1234665 country: channel:WHATSAPP tag:friend tag:colleague`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [offset:OFFSET] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
