@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNARCHIVED;
 
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -21,10 +22,10 @@ public class ArchiveCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the specified person. "
             + "Parameters: index: <index>\n"
             + "Example: " + COMMAND_WORD
-            + " archive 1";
+            + " 1";
 
-    public static final String MESSAGE_ARCHIVE_SUCCESS = "Person: %1$s has been archived";
-    public static final String MESSAGE_ALREADY_ARCHIVED = "Person: %1$s is already archived!";
+    public static final String MESSAGE_ARCHIVE_SUCCESS = " has been archived";
+    public static final String MESSAGE_ALREADY_ARCHIVED = " is already archived!";
 
     private final Index index;
 
@@ -34,10 +35,6 @@ public class ArchiveCommand extends Command {
     public ArchiveCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;
-    }
-
-    public ArchiveCommand(Integer index) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -51,11 +48,14 @@ public class ArchiveCommand extends Command {
         Person personToArchive = lastShownList.get(index.getZeroBased());
 
         if (personToArchive.checkIfArchived()) {
-            throw new CommandException(MESSAGE_ALREADY_ARCHIVED);
+            throw new CommandException("Person " + personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
+        } else {
+            personToArchive.archive();
         }
 
+        requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
-        return new CommandResult(MESSAGE_ARCHIVE_SUCCESS);
+        return new CommandResult("Person " + personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
     }
 
     @Override
