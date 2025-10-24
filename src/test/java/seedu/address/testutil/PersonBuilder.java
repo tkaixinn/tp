@@ -13,6 +13,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
     public static final String DEFAULT_METON = "2023-11-15T14:30:00";
+    public static final String DEFAULT_LANGUAGE = "english";
 
     private Name name;
     private Phone phone;
@@ -39,6 +41,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Offset offset;
     private MetOn metOn;
+    private PreferredLanguage preferredLanguage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,6 +56,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
         metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
+        preferredLanguage = new PreferredLanguage(DEFAULT_LANGUAGE);
     }
 
     /**
@@ -68,6 +72,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
         metOn = personToCopy.getMetOn();
+        preferredLanguage = personToCopy.getPreferredLanguage();
     }
 
     /**
@@ -144,7 +149,8 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset, metOn, false);
+        return new Person(name, phone, email, address, country, note, tags, offset, metOn,
+                          preferredLanguage, false);
     }
 
 }
