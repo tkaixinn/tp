@@ -64,7 +64,7 @@ public class AddNoteCommand extends Command {
             note,
             personToEdit.getTags(),
             personToEdit.getOffset(),
-            personToEdit.getMetOn()
+            personToEdit.getMetOn(), false
         );
 
         model.setPerson(personToEdit, editedPerson);
