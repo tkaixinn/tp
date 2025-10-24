@@ -28,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_COUNTRY = "Singapore";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
+    public static final String DEFAULT_METON = "2023-11-15T14:30:00";
 
     private Name name;
     private Phone phone;
@@ -51,7 +52,7 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
-        metOn = new MetOn(LocalDateTime.now());
+        metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
     }
 
     /**
@@ -131,6 +132,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withOffset(String offset) {
         this.offset = new Offset(offset);
+        return this;
+    }
+
+    /**
+     * Sets the {@code MetOn} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMetOn(String metOn) {
+        this.metOn = new MetOn(LocalDateTime.parse(metOn));
         return this;
     }
 

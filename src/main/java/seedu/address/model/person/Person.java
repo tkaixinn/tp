@@ -192,14 +192,13 @@ public class Person {
                 && country.equals(otherPerson.country)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
-                && offset.equals(otherPerson.offset)
-                && metOn.equals(otherPerson.metOn);
+                && offset.equals(otherPerson.offset);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, note, tags, preferredChannel, offset, metOn);
+        return Objects.hash(name, phone, email, address, country, note, tags, preferredChannel, offset);
     }
 
     @Override
@@ -214,7 +213,7 @@ public class Person {
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
-                .add("met on", metOn)
+                .add("metOn", metOn)
                 .toString();
     }
 
