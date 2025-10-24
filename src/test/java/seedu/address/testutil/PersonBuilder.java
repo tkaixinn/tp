@@ -72,7 +72,6 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
         metOn = personToCopy.getMetOn();
-        preferredLanguage = personToCopy.getPreferredLanguage();
     }
 
     /**
