@@ -130,7 +130,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset);
+        return new Person(name, phone, email, address, country, note, tags, offset, false);
     }
 
 }

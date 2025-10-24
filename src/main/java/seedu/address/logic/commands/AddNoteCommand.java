@@ -63,7 +63,8 @@ public class AddNoteCommand extends Command {
                 personToEdit.getCountry(),
                 note,
                 personToEdit.getTags(),
-                personToEdit.getOffset());
+                personToEdit.getOffset(),
+                false);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);

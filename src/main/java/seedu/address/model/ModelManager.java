@@ -113,6 +113,13 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void updatePerson(Person person) {
+        requireAllNonNull(person);
+
+        addressBook.setPerson(person, person);
+    }
+
     // =========== Filtered Person List Accessors
     // =============================================================
 

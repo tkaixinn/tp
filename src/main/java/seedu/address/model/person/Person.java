@@ -36,7 +36,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -47,7 +47,7 @@ public class Person {
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
-        this.isArchived = false;
+        this.isArchived = isArchived;
 
         removeOldCountryTags();
 
@@ -62,7 +62,7 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            Country country, Note note, Set<Tag> tags, Offset offset) {
+            Country country, Note note, Set<Tag> tags, Offset offset, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset);
         this.name = name;
         this.phone = phone;
@@ -73,7 +73,7 @@ public class Person {
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
-        this.isArchived = false;
+        this.isArchived = isArchived;
 
         removeOldCountryTags();
 
@@ -131,7 +131,7 @@ public class Person {
         this.isArchived = false;
     }
 
-    public boolean checkIfArchived() {
+    public boolean getArchivalStatus() {
         return this.isArchived;
     }
 

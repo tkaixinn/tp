@@ -39,6 +39,7 @@ public class ArchiveCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -47,15 +48,15 @@ public class ArchiveCommand extends Command {
 
         Person personToArchive = lastShownList.get(index.getZeroBased());
 
-        if (personToArchive.checkIfArchived()) {
-            throw new CommandException("Person " + personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
+        if (personToArchive.getArchivalStatus()) {
+            throw new CommandException(personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
         } else {
             personToArchive.archive();
         }
 
-        requireNonNull(model);
+        model.updatePerson(personToArchive);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
-        return new CommandResult("Person " + personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
+        return new CommandResult(personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
     }
 
     @Override

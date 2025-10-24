@@ -84,7 +84,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
         Person person = new Person(name, phone, email, address, country, note, finalPreferredChannel, tagList,
-                offset);
+                offset, false);
 
         return new AddCommand(person);
     }

@@ -96,9 +96,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
                 .orElse(personToEdit.getPreferredChannel());
+        boolean isArchived = personToEdit.getArchivalStatus();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
-                updatedNote, updatedChannel, updatedTags, updatedOffset);
+                updatedNote, updatedChannel, updatedTags, updatedOffset, isArchived);
     }
 
     @Override

@@ -12,8 +12,8 @@ import seedu.address.model.person.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.checkIfArchived();
-    Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.checkIfArchived();
+    Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.getArchivalStatus();
+    Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -78,6 +78,12 @@ public interface Model {
      * existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Updates the archive status of the given person {@code person}.
+     * {@code person} must exist in the address book.
+     */
+    void updatePerson(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
