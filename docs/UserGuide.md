@@ -64,7 +64,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows the description and format of all actions a user can perform with Worldly. Also displays a list of valid country names and their corresponding calling codes.
 
@@ -80,17 +80,16 @@ Adds a person to the address book.
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [tag:TAG]…​`
 
 * Automatically adds a tag with the person's country calling code if it is included in the phone number.
-* The channel field **cannot be left blank**. You must specify one of the allowed channels.
-* It must be one of the following: PHONE, EMAIL, SMS, WHATSAPP, TELEGRAM.
-* If the channel field is omitted, the app will display an error and refuse to add the contact.
-* The offset refers to offset from GMT and must be specified in HH:MM.
-* The country and cultural note fields can be left blank.
-* A person can have any number of tags (including 0).
+* The channel field **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. If the channel field is omitted, the app will display an error and refuse to add the contact.
+* The offset refers to offset from GMT and must be specified in HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
+* The country field can be left blank but must be included in the command, i.e. `country:` (with no country following the prefix) is a valid input.
+* The note field can be left blank or omitted from the command entirely.
+* A person can have any number of tags (including 0). Each tag must be added with `tag:`.
 
 
 Examples:
 * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
-* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 channel:telegram offset:+08:00 tag:criminal`
+* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 country: channel:TELEGRAM offset:+08:00 tag:criminal`
 
 ### Listing all persons : `list`
 
@@ -104,17 +103,16 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [channel: CHANNEL] [offset: OFFSET] [country:COUNTRY] [tag:TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the currently displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `tag:` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. You can remove all the person’s tags by typing `tag:` without specifying any tags after it.
+* If the currently viewed list is not the main list (e.g. if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
 
 Examples:
-*  `edit 1 phone:91234567 email:johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 name:Betsy Crower tag:` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 phone:91234567 email:johndoe@example.com` edits the phone number and email address of the 1st person in the current list to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 name:Betsy Crower tag:` edits the name of the 2nd person in the current list to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -141,7 +139,7 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the currently displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -150,7 +148,7 @@ Examples:
 
 ### Adding a note to existing persons: `addnote`
 
-Adds a cultural note to an existing contact.
+Adds a note to an existing contact.
 
 Format: `addnote name:NAME note:NOTE`
 
@@ -178,7 +176,7 @@ Format: `findtag TAG [MORE_TAGS]`
 
 * The search is case-insensitive.
 * Only returns contacts who match ALL the tags.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Only full words will be matched e.g. `friend` will not match `friends`.
 ![result for 'findtag friends owesMoney'](images/findtag.png)
 
 Examples:
@@ -199,14 +197,14 @@ Format: `exit`
 
 ### Saving the data
 
-Worldly data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Worldly data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-Worldly data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Worldly data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Worldly will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Worldly will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause Worldly to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -234,7 +232,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET country:COUNTRY] [note:NOTE [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
@@ -244,3 +242,4 @@ Action | Format, Examples
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
