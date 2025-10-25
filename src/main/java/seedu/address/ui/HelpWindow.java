@@ -179,6 +179,9 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
                 new CommandEntry("List", "list"),
+                new CommandEntry("Archive", "archive INDEX"),
+                new CommandEntry("Archive list", "archivelist"),
+                new CommandEntry("Unarchive", "unarchive INDEX"),
                 new CommandEntry("Help", "help"));
 
         countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
