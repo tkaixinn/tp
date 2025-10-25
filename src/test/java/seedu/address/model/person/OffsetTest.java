@@ -51,16 +51,24 @@ public class OffsetTest {
 
     @Test
     public void constructor_invalid_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Offset("08:00"));    // no sign
-        assertThrows(IllegalArgumentException.class, () -> new Offset("+15:00"));   // hour > 14
-        assertThrows(IllegalArgumentException.class, () -> new Offset("+01:60"));   // minutes >= 60
-        assertThrows(IllegalArgumentException.class, () -> new Offset("abc"));      // junk
+        // no sign
+        assertThrows(IllegalArgumentException.class, () -> new Offset("08:00"));
+
+        // hour > 14
+        assertThrows(IllegalArgumentException.class, () -> new Offset("+15:00"));
+
+        // minutes >= 60
+        assertThrows(IllegalArgumentException.class, () -> new Offset("+01:60"));
+
+        // junk
+        assertThrows(IllegalArgumentException.class, () -> new Offset("abc"));
     }
 
     @Test
     public void getTotalMinutes_signAndMath() {
         assertEquals(0, new Offset("+00:00").getTotalMinutes());
-        assertEquals(0, new Offset("-00:00").getTotalMinutes());     // negative zero should still be 0
+        // negative zero should still be 0
+        assertEquals(0, new Offset("-00:00").getTotalMinutes());
         assertEquals(90, new Offset("+01:30").getTotalMinutes());
         assertEquals(-345, new Offset("-05:45").getTotalMinutes());
         assertEquals(14 * 60, new Offset("+14:00").getTotalMinutes());

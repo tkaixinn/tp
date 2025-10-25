@@ -110,6 +110,7 @@ public class CommunicationChannelTest {
             case SMS -> smsFound = true;
             case WHATSAPP -> whatsappFound = true;
             case TELEGRAM -> telegramFound = true;
+            default -> throw new AssertionError("Unknown communication channel: " + channel);
             }
         }
         assertTrue(phoneFound && emailFound && smsFound && whatsappFound && telegramFound);
