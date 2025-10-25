@@ -182,6 +182,9 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("Sort by name", "sortname"),
                 new CommandEntry("Sort by date added", "sortdate"),
                 new CommandEntry("List", "list"),
+                new CommandEntry("Archive", "archive INDEX"),
+                new CommandEntry("Archive list", "archivelist"),
+                new CommandEntry("Unarchive", "unarchive INDEX"),
                 new CommandEntry("Help", "help"));
 
         countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

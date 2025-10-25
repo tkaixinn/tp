@@ -182,6 +182,33 @@ Examples:
 * `findtag friends`
 * `findtag friends colleagues`
 
+### Archiving a contact `archive`
+
+Archives a contact.
+
+Format: `archive INDEX`
+
+* Command format and function is similar to delete, except the contact is just hidden from view and can be accessed at a later time.
+
+Examples:
+* `list` followed by `archive 2` deletes the 2nd person in the address book.
+
+### Listing all archived persons : `archivelist`
+
+Shows a list of all archived persons in the address book.
+
+Format: `archivelist`
+
+### Unarchiving a contact `unarchive`
+
+Unarchives a contact.
+
+Format: `unarchive INDEX`
+
+* Unarchives the person at the specified `INDEX` from the archive list.
+
+Examples:
+* `archivelist` followed by `unarchive 1` unarchives the 1st person in the archive list.
 ### Sort contacts by country `sortcountry`
 
 Sorts the contacts by country.
