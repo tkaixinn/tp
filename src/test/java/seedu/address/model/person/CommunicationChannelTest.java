@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -110,6 +110,7 @@ public class CommunicationChannelTest {
             case SMS -> smsFound = true;
             case WHATSAPP -> whatsappFound = true;
             case TELEGRAM -> telegramFound = true;
+            default -> throw new AssertionError("Unknown communication channel: " + channel);
             }
         }
         assertTrue(phoneFound && emailFound && smsFound && whatsappFound && telegramFound);

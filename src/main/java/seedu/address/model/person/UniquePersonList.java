@@ -129,7 +129,8 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the internal list alphabetically by each person's country. Within countries, persons are sorted by name.
+     * Sorts the internal list alphabetically by each person's country. Within
+     * countries, persons are sorted by name.
      * Contacts without a country stored are pushed to the end of the list.
      */
     public void sortByCountry() {

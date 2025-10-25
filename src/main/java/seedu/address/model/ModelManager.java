@@ -88,7 +88,7 @@ public class ModelManager implements Model {
         } else if (sortMode == SortMode.DATE) {
             addressBook.sortByDate();
         } else {
-                addressBook.sortByName();
+            addressBook.sortByName();
         }
     }
 

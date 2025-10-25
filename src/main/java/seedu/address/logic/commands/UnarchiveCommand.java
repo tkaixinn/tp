@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ARCHIVED;
 
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,8 +25,8 @@ public class UnarchiveCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1";
 
-    public static final String MESSAGE_UNARCHIVE_SUCCESS = " has been unarchived";
-    public static final String MESSAGE_ALREADY_UNARCHIVED = " is already unarchived";
+    public static final String MESSAGE_UNARCHIVE_SUCCESS = "%s has been unarchived";
+    public static final String MESSAGE_ALREADY_UNARCHIVED = "%s is already unarchived";
 
     private final Index index;
 
@@ -49,9 +50,9 @@ public class UnarchiveCommand extends Command {
         Person personToUnarchive = lastShownList.get(index.getZeroBased());
 
         if (!personToUnarchive.getArchivalStatus()) {
-            throw new CommandException(personToUnarchive.getName() + MESSAGE_ALREADY_UNARCHIVED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_UNARCHIVED, personToUnarchive.getName()));
         } else {
-            Person editedPerson = new Person(
+            Person archivedPerson = new Person(
                     personToUnarchive.getName(),
                     personToUnarchive.getPhone(),
                     personToUnarchive.getEmail(),
@@ -63,11 +64,11 @@ public class UnarchiveCommand extends Command {
                     personToUnarchive.getMetOn(),
                     false);
 
-            model.setPerson(personToUnarchive, editedPerson);
+            model.setPerson(personToUnarchive, archivedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
         }
 
-        return new CommandResult(personToUnarchive.getName() + MESSAGE_UNARCHIVE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_UNARCHIVE_SUCCESS, personToUnarchive.getName()));
     }
 
     @Override
@@ -75,5 +76,12 @@ public class UnarchiveCommand extends Command {
         return other == this
                 || (other instanceof UnarchiveCommand)
                         && index.equals(((UnarchiveCommand) other).index);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
     }
 }

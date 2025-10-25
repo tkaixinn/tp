@@ -14,9 +14,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.getArchivalStatus();
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Enum that tracks the current sort mode */
-    public enum SortMode {NAME, COUNTRY, DATE}
+    public enum SortMode {
+        NAME, COUNTRY, DATE
+    }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -94,7 +97,8 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * After every modification to the contacts list, this command reapplies the current sorting mode.
+     * After every modification to the contacts list, this command reapplies the
+     * current sorting mode.
      */
     void reapplySortMode();
 

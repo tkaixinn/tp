@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNARCHIVED;
 
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,8 +25,8 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1";
 
-    public static final String MESSAGE_ARCHIVE_SUCCESS = " has been archived";
-    public static final String MESSAGE_ALREADY_ARCHIVED = " is already archived";
+    public static final String MESSAGE_ARCHIVE_SUCCESS = "%s has been archived";
+    public static final String MESSAGE_ALREADY_ARCHIVED = "%s is already archived";
 
     private final Index index;
 
@@ -49,9 +50,9 @@ public class ArchiveCommand extends Command {
         Person personToArchive = lastShownList.get(index.getZeroBased());
 
         if (personToArchive.getArchivalStatus()) {
-            throw new CommandException(personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_ARCHIVED, personToArchive.getName()));
         } else {
-            Person editedPerson = new Person(
+            Person archivedPerson = new Person(
                     personToArchive.getName(),
                     personToArchive.getPhone(),
                     personToArchive.getEmail(),
@@ -63,11 +64,11 @@ public class ArchiveCommand extends Command {
                     personToArchive.getMetOn(),
                     true);
 
-            model.setPerson(personToArchive, editedPerson);
+            model.setPerson(personToArchive, archivedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
         }
 
-        return new CommandResult(personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ARCHIVE_SUCCESS, personToArchive.getName()));
     }
 
     @Override
@@ -76,4 +77,12 @@ public class ArchiveCommand extends Command {
                 || (other instanceof ArchiveCommand)
                         && index.equals(((ArchiveCommand) other).index);
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
+    }
+
 }

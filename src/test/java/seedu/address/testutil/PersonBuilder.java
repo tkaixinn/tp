@@ -39,6 +39,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Offset offset;
     private MetOn metOn;
+    private boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,6 +54,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
         metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
+        isArchived = false;
     }
 
     /**
@@ -68,6 +70,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
         metOn = personToCopy.getMetOn();
+        isArchived = personToCopy.getArchivalStatus();
     }
 
     /**
@@ -143,8 +146,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Person} that we are building as archived.
+     */
+    public PersonBuilder archived() {
+        this.isArchived = true;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Person} that we are building as unarchived.
+     */
+    public PersonBuilder unarchived() {
+        this.isArchived = false;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset, metOn, false);
+        return new Person(name, phone, email, address, country, note, tags, offset, metOn, isArchived);
     }
 
 }
