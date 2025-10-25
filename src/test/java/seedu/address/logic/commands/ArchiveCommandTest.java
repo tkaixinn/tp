@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,6 +31,56 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 public class ArchiveCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validIndex_personSuccessfullyArchived() {
+        Person personToArchive = model.getFilteredPersonList().stream()
+                .filter(person -> !person.getArchivalStatus())
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No unarchived persons in test data"));
+
+        int index = model.getFilteredPersonList().indexOf(personToArchive);
+
+        assertFalse(personToArchive.getArchivalStatus());
+
+        ArchiveCommand archiveCommand = new ArchiveCommand(Index.fromZeroBased(index));
+
+        try {
+            CommandResult result = archiveCommand.execute(model);
+
+            String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVE_SUCCESS, personToArchive.getName());
+            assertEquals(expectedMessage, result.getFeedbackToUser());
+
+            Person actualArchivedPerson = model.getAddressBook().getPersonList().stream()
+                    .filter(p -> p.isSamePerson(personToArchive))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("Person not found in address book after archiving"));
+
+            assertTrue(actualArchivedPerson.getArchivalStatus());
+
+        } catch (CommandException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_validIndex_personAlreadyArchived() {
+        Person personToArchive = model.getFilteredPersonList().stream()
+                .filter(person -> !person.getArchivalStatus())
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No unarchived persons in test data"));
+
+        int index = model.getFilteredPersonList().indexOf(personToArchive);
+        Person archivedPerson = new PersonBuilder(personToArchive).archived().build();
+        model.setPerson(personToArchive, archivedPerson);
+
+        ArchiveCommand archiveCommand = new ArchiveCommand(Index.fromZeroBased(index));
+
+        assertTrue(archivedPerson.getArchivalStatus());
+
+        assertCommandFailure(archiveCommand, model,
+                String.format(ArchiveCommand.MESSAGE_ALREADY_ARCHIVED, archivedPerson.getName()));
+    }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
@@ -76,6 +127,12 @@ public class ArchiveCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new ArchiveCommand(INDEX_SECOND_PERSON)));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON);
+        assertFalse(archiveCommand.equals(null));
     }
 
     @Test

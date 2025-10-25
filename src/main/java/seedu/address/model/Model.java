@@ -16,7 +16,9 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
 
     /** Enum that tracks the current sort mode */
-    public enum SortMode {NAME, COUNTRY, DATE}
+    public enum SortMode {
+        NAME, COUNTRY, DATE
+    }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -94,7 +96,8 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * After every modification to the contacts list, this command reapplies the current sorting mode.
+     * After every modification to the contacts list, this command reapplies the
+     * current sorting mode.
      */
     void reapplySortMode();
 
@@ -115,6 +118,7 @@ public interface Model {
 
     /**
      * Sets the current sorting mode.
+     * 
      * @param mode
      */
     void setSortMode(SortMode mode);
