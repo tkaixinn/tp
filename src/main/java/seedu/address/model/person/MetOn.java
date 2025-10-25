@@ -3,19 +3,23 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
  * Represents the date the user met a contact for the first time.
  */
-public class MetOn {
+public class MetOn implements Comparable<MetOn> {
 
     public final LocalDateTime localDateTime;
 
     public MetOn(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
+
+    @Override
+    public int compareTo(MetOn other) {
+        return this.localDateTime.compareTo(other.localDateTime);
     }
 
     /**
