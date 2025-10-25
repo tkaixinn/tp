@@ -7,41 +7,41 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 
-public class ArchiveCommandParserTest {
+public class UnarchiveCommandParserTest {
 
-    private ArchiveCommandParser parser = new ArchiveCommandParser();
+    private UnarchiveCommandParser parser = new UnarchiveCommandParser();
 
     @Test
-    public void parse_validArgs_returnsArchiveCommand() {
-        assertParseSuccess(parser, "1", new ArchiveCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsUnarchiveCommand() {
+        assertParseSuccess(parser, "1", new UnarchiveCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // No index specified
         assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
 
         // Negative index
         assertParseFailure(parser, "-1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
 
         // Zero index
         assertParseFailure(parser, "0",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
 
         // Non-number
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
 
         // Multiple numbers
         assertParseFailure(parser, "1 2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
 
         // Both numbers and letters
         assertParseFailure(parser, "1 test",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnarchiveCommand.MESSAGE_USAGE));
     }
 }
