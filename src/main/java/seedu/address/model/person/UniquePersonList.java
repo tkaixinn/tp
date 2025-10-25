@@ -122,6 +122,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sorts the internal list by the date each person was added.
+     */
+    public void sortByDate() {
+        internalList.sort((p1, p2) -> p1.getMetOn().compareTo(p2.getMetOn()));
+    }
+
+    /**
      * Sorts the internal list alphabetically by each person's country. Within countries, persons are sorted by name.
      * Contacts without a country stored are pushed to the end of the list.
      */

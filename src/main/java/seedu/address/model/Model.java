@@ -16,7 +16,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
 
     /** Enum that tracks the current sort mode */
-    public enum SortMode {NAME, COUNTRY}
+    public enum SortMode {NAME, COUNTRY, DATE}
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -104,9 +104,14 @@ public interface Model {
     void sortPersonsByCountry();
 
     /**
-     * Sorts the address book by country.
+     * Sorts the address book by name.
      */
     void sortPersonsByName();
+
+    /**
+     * Sorts the address book by date added.
+     */
+    void sortPersonsByDate();
 
     /**
      * Sets the current sorting mode.

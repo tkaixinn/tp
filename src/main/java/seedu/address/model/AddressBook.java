@@ -115,6 +115,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.sortByName();
     }
 
+    /**
+     * Sorts the persons list by date added.
+     */
+    public void sortByDate() {
+        persons.sortByDate();
+    }
+
     //// util methods
 
     @Override

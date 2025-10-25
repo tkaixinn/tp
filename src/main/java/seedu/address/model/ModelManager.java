@@ -84,8 +84,10 @@ public class ModelManager implements Model {
     public void reapplySortMode() {
         if (sortMode == SortMode.COUNTRY) {
             addressBook.sortByCountry();
+        } else if (sortMode == SortMode.DATE) {
+            addressBook.sortByDate();
         } else {
-            addressBook.sortByName();
+                addressBook.sortByName();
         }
     }
 
@@ -173,6 +175,13 @@ public class ModelManager implements Model {
     public void sortPersonsByName() {
         addressBook.sortByName();
         setSortMode(SortMode.NAME);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+    }
+
+    @Override
+    public void sortPersonsByDate() {
+        addressBook.sortByDate();
+        setSortMode(SortMode.DATE);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
     }
 

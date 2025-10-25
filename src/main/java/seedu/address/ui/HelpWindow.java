@@ -179,6 +179,8 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
                 new CommandEntry("Sort by country", "sortcountry"),
+                new CommandEntry("Sort by name", "sortname"),
+                new CommandEntry("Sort by date added", "sortdate"),
                 new CommandEntry("List", "list"),
                 new CommandEntry("Help", "help"));
 

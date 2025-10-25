@@ -194,6 +194,23 @@ Format: `sortcountry`
 * After calling this command, contacts remain sorted by country upon calling other commands such as add or delete.
 * Refer to the full list of valid country names in the help window.
 
+### Sort contacts by name `sortname`
+
+Sorts the contacts by alphabetical order of their names.
+
+Format: `sortname`
+
+* Functions similarly to sortcountry.
+
+### Sort contacts by name `sortdate`
+
+Sorts the contacts by the date added.
+
+Format: `sortdate`
+
+* Functions similarly to sortcountry.
+* Gives the user a timeline view of when they added their contacts.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
