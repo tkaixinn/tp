@@ -92,7 +92,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book. The list is always sorted in alphabetical order,
+Shows a list of all persons in the address book. The list is by default sorted in alphabetical order of the contacts' names.
 
 Format: `list`
 
@@ -161,7 +161,7 @@ Finds persons who are from the given country.
 Format: `findcountry COUNTRY`
 
 * The search is case-sensitive. e.g `Singapore` is a valid country but not `singapore`
-* Refer to the full list of valid country names in the help window
+* Refer to the full list of valid country names in the help window.
   ![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
@@ -181,6 +181,18 @@ Format: `findtag TAG [MORE_TAGS]`
 Examples:
 * `findtag friends`
 * `findtag friends colleagues`
+
+### Sort contacts by country `sortcountry`
+
+Sorts the contacts by country.
+
+Format: `sortcountry`
+
+* Contacts are sorted in alphabetical order of their countries.
+* Within each country, contacts are sorted in alphabetical order of their names.
+* Contacts without a country are pushed to the end of the list.
+* After calling this command, contacts remain sorted by country upon calling other commands such as add or delete.
+* Refer to the full list of valid country names in the help window.
 
 ### Clearing all entries : `clear`
 

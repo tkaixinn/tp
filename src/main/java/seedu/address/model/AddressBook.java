@@ -101,6 +101,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts the persons list by country.
+     */
+    public void sortByCountry() {
+        persons.sortByCountry();
+    }
+
+    /**
+     * Sorts the persons list by name.
+     */
+    public void sortByName() {
+        persons.sortByName();
+    }
+
     //// util methods
 
     @Override

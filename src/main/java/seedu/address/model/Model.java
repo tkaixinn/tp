@@ -15,6 +15,9 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.getArchivalStatus();
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
 
+    /** Enum that tracks the current sort mode */
+    public enum SortMode {NAME, COUNTRY}
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -89,4 +92,25 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * After every modification to the contacts list, this command reapplies the current sorting mode.
+     */
+    void reapplySortMode();
+
+    /**
+     * Sorts the address book by country.
+     */
+    void sortPersonsByCountry();
+
+    /**
+     * Sorts the address book by country.
+     */
+    void sortPersonsByName();
+
+    /**
+     * Sets the current sorting mode.
+     * @param mode
+     */
+    void setSortMode(SortMode mode);
 }
