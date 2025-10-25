@@ -29,18 +29,16 @@ public class UnarchiveCommandTest {
 
     @Test
     public void execute_validIndex_personSuccessfullyUnarchived() {
-        Person personToArchive = model.getFilteredPersonList().stream()
-                .filter(person -> !person.getArchivalStatus())
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No unarchived persons in test data"));
-
+        Person personToArchive = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person archivedPerson = new PersonBuilder(personToArchive).archived().build();
         model.setPerson(personToArchive, archivedPerson);
 
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+
         Person personToUnarchive = model.getFilteredPersonList().stream()
-                .filter(Person::getArchivalStatus)
+                .filter(person -> person.getArchivalStatus())
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No archived persons found after archiving"));
+                .orElseThrow(() -> new IllegalStateException("No archived persons in test data"));
 
         int index = model.getFilteredPersonList().indexOf(personToUnarchive);
 
@@ -70,12 +68,12 @@ public class UnarchiveCommandTest {
     @Test
     public void execute_validIndex_personAlreadyUnarchived() {
         Person personToUnarchive = model.getFilteredPersonList().stream()
-                .filter(person -> person.getArchivalStatus())
+                .filter(person -> !person.getArchivalStatus())
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No archived persons in test data"));
+                .orElseThrow(() -> new IllegalStateException("No unarchived persons in test data"));
 
         int index = model.getFilteredPersonList().indexOf(personToUnarchive);
-        Person unarchivedPerson = new PersonBuilder(personToUnarchive).build(); // Remove archived status
+        Person unarchivedPerson = new PersonBuilder(personToUnarchive).build();
 
         model.setPerson(personToUnarchive, unarchivedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
@@ -97,6 +95,10 @@ public class UnarchiveCommandTest {
         assertCommandFailure(unarchiveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
