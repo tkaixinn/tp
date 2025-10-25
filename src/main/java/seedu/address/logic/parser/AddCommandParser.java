@@ -61,23 +61,23 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
             String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
             switch (channelInput) {
-                case "PHONE":
-                    preferredChannel = Person.CommunicationChannel.PHONE;
-                    break;
-                case "EMAIL":
-                    preferredChannel = Person.CommunicationChannel.EMAIL;
-                    break;
-                case "SMS":
-                    preferredChannel = Person.CommunicationChannel.SMS;
-                    break;
-                case "WHATSAPP":
-                    preferredChannel = Person.CommunicationChannel.WHATSAPP;
-                    break;
-                case "TELEGRAM":
-                    preferredChannel = Person.CommunicationChannel.TELEGRAM;
-                    break;
-                default:
-                    throw new ParseException("Invalid communication channel. Choose another channel.");
+            case "PHONE":
+                preferredChannel = Person.CommunicationChannel.PHONE;
+                break;
+            case "EMAIL":
+                preferredChannel = Person.CommunicationChannel.EMAIL;
+                break;
+            case "SMS":
+                preferredChannel = Person.CommunicationChannel.SMS;
+                break;
+            case "WHATSAPP":
+                preferredChannel = Person.CommunicationChannel.WHATSAPP;
+                break;
+            case "TELEGRAM":
+                preferredChannel = Person.CommunicationChannel.TELEGRAM;
+                break;
+            default:
+                throw new ParseException("Invalid communication channel. Choose another channel.");
             }
         }
 
