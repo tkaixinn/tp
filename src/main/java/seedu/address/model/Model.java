@@ -14,6 +14,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.getArchivalStatus();
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Enum that tracks the current sort mode */
     public enum SortMode {

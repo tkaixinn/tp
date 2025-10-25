@@ -70,18 +70,23 @@ public class UnarchiveCommandTest {
     @Test
     public void execute_validIndex_personAlreadyUnarchived() {
         Person personToUnarchive = model.getFilteredPersonList().stream()
-                .filter(person -> !person.getArchivalStatus())
+                .filter(person -> person.getArchivalStatus())
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No unarchived persons in test data"));
+                .orElseThrow(() -> new IllegalStateException("No archived persons in test data"));
 
         int index = model.getFilteredPersonList().indexOf(personToUnarchive);
+        Person unarchivedPerson = new PersonBuilder(personToUnarchive).build(); // Remove archived status
+
+        model.setPerson(personToUnarchive, unarchivedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        int newIndex = model.getFilteredPersonList().indexOf(unarchivedPerson);
 
         UnarchiveCommand unarchiveCommand = new UnarchiveCommand(Index.fromZeroBased(index));
 
-        assertFalse(personToUnarchive.getArchivalStatus());
+        assertFalse(unarchivedPerson.getArchivalStatus());
 
         assertCommandFailure(unarchiveCommand, model,
-                String.format(UnarchiveCommand.MESSAGE_ALREADY_UNARCHIVED, personToUnarchive.getName()));
+                String.format(UnarchiveCommand.MESSAGE_ALREADY_UNARCHIVED, unarchivedPerson.getName()));
     }
 
     @Test

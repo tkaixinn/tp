@@ -52,7 +52,7 @@ public class UnarchiveCommand extends Command {
         if (!personToUnarchive.getArchivalStatus()) {
             throw new CommandException(String.format(MESSAGE_ALREADY_UNARCHIVED, personToUnarchive.getName()));
         } else {
-            Person editedPerson = new Person(
+            Person archivedPerson = new Person(
                     personToUnarchive.getName(),
                     personToUnarchive.getPhone(),
                     personToUnarchive.getEmail(),
@@ -64,7 +64,7 @@ public class UnarchiveCommand extends Command {
                     personToUnarchive.getMetOn(),
                     false);
 
-            model.setPerson(personToUnarchive, editedPerson);
+            model.setPerson(personToUnarchive, archivedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
         }
 

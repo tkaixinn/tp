@@ -67,7 +67,10 @@ public class ArchiveCommandTest {
 
         int index = model.getFilteredPersonList().indexOf(personToArchive);
         Person archivedPerson = new PersonBuilder(personToArchive).archived().build();
+
         model.setPerson(personToArchive, archivedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        int newIndex = model.getFilteredPersonList().indexOf(archivedPerson);
 
         ArchiveCommand archiveCommand = new ArchiveCommand(Index.fromZeroBased(index));
 
