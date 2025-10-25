@@ -118,7 +118,6 @@ public interface Model {
 
     /**
      * Sets the current sorting mode.
-     * 
      * @param mode
      */
     void setSortMode(SortMode mode);
