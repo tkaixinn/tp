@@ -7,6 +7,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -76,4 +77,12 @@ public class ArchiveCommand extends Command {
                 || (other instanceof ArchiveCommand)
                         && index.equals(((ArchiveCommand) other).index);
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .toString();
+    }
+
 }
