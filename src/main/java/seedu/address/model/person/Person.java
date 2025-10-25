@@ -38,7 +38,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn,
+            boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -65,7 +66,7 @@ public class Person {
      * If both note notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+            Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -198,7 +199,9 @@ public class Person {
                 && country.equals(otherPerson.country)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
-                && offset.equals(otherPerson.offset);
+                && offset.equals(otherPerson.offset)
+                && metOn.equals(otherPerson.metOn)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override

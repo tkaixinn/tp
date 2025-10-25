@@ -24,8 +24,8 @@ public class UnarchiveCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1";
 
-    public static final String MESSAGE_UNARCHIVE_SUCCESS = " has been unarchived";
-    public static final String MESSAGE_ALREADY_UNARCHIVED = " is already unarchived";
+    public static final String MESSAGE_UNARCHIVE_SUCCESS = "%s has been unarchived";
+    public static final String MESSAGE_ALREADY_UNARCHIVED = "%s is already unarchived";
 
     private final Index index;
 
@@ -49,7 +49,7 @@ public class UnarchiveCommand extends Command {
         Person personToUnarchive = lastShownList.get(index.getZeroBased());
 
         if (!personToUnarchive.getArchivalStatus()) {
-            throw new CommandException(personToUnarchive.getName() + MESSAGE_ALREADY_UNARCHIVED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_UNARCHIVED, personToUnarchive.getName()));
         } else {
             Person editedPerson = new Person(
                     personToUnarchive.getName(),
@@ -67,7 +67,7 @@ public class UnarchiveCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
         }
 
-        return new CommandResult(personToUnarchive.getName() + MESSAGE_UNARCHIVE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_UNARCHIVE_SUCCESS, personToUnarchive.getName()));
     }
 
     @Override

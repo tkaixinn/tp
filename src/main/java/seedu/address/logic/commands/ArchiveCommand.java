@@ -24,8 +24,8 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 1";
 
-    public static final String MESSAGE_ARCHIVE_SUCCESS = " has been archived";
-    public static final String MESSAGE_ALREADY_ARCHIVED = " is already archived";
+    public static final String MESSAGE_ARCHIVE_SUCCESS = "%s has been archived";
+    public static final String MESSAGE_ALREADY_ARCHIVED = "%s is already archived";
 
     private final Index index;
 
@@ -49,7 +49,7 @@ public class ArchiveCommand extends Command {
         Person personToArchive = lastShownList.get(index.getZeroBased());
 
         if (personToArchive.getArchivalStatus()) {
-            throw new CommandException(personToArchive.getName() + MESSAGE_ALREADY_ARCHIVED);
+            throw new CommandException(String.format(MESSAGE_ALREADY_ARCHIVED, personToArchive.getName()));
         } else {
             Person editedPerson = new Person(
                     personToArchive.getName(),
@@ -67,7 +67,7 @@ public class ArchiveCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
         }
 
-        return new CommandResult(personToArchive.getName() + MESSAGE_ARCHIVE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ARCHIVE_SUCCESS, personToArchive.getName()));
     }
 
     @Override
