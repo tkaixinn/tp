@@ -199,7 +199,6 @@ public class Person {
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
                 && offset.equals(otherPerson.offset)
-                && metOn.equals(otherPerson.metOn)
                 && isArchived == otherPerson.isArchived;
     }
 
