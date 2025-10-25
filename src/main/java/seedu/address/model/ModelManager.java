@@ -180,10 +180,4 @@ public class ModelManager implements Model {
     public void setSortMode(SortMode mode) {
         this.sortMode = mode;
     }
-
-    @Override
-    public SortMode getSortMode() {
-        return this.sortMode;
-    }
-
 }
