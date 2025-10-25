@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -116,11 +115,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-        public void parseCommand_archive() throws Exception {
-            ArchiveCommand command = (ArchiveCommand) parser.parseCommand(
-                    ArchiveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-            assertEquals(new ArchiveCommand(INDEX_FIRST_PERSON), command);
-        }
+    public void parseCommand_archive() throws Exception {
+        ArchiveCommand command = (ArchiveCommand) parser.parseCommand(
+                ArchiveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ArchiveCommand(INDEX_FIRST_PERSON), command);
+    }
 
     @Test
     public void parseCommand_unarchive() throws Exception {
