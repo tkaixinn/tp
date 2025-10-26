@@ -193,9 +193,10 @@ public class HelpWindow extends UiPart<Stage> {
 
         commandTableView.getItems().addAll(
                 new CommandEntry("Add", "add name:NAME phone:PHONE email:EMAIL address:ADDRESS "
-                        + "country:COUNTRY channel:CHANNEL " + "[note:NOTE] [tag:TAG]…\n + offset: OFFSET"
+                        + "country:COUNTRY channel:CHANNEL offset:OFFSET " + "[note:NOTE] [tag:TAG] [lang:LANG]…\n"
                         + "e.g., add name:James Ho phone:22224444 email:jamesho@example.com "
-                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague offset:+08:00"),
+                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague offset:+08:00"
+                        + "lang:english"),
                 new CommandEntry("Clear", "clear"),
                 new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
                 new CommandEntry("Edit", "edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] "

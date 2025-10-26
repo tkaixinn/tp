@@ -64,6 +64,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
             String languageInput = argMultimap.getValue(PREFIX_LANGUAGE).get();
             preferredLanguage = new PreferredLanguage(languageInput);
+        } else {
+            preferredLanguage = new PreferredLanguage("english");
         }
 
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {

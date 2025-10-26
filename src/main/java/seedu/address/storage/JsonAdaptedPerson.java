@@ -84,7 +84,8 @@ class JsonAdaptedPerson {
         country = source.getCountry() != null ? source.getCountry().toString() : null;
         note = source.getNote().value;
         offset = source.getOffset().value;
-        preferredLanguage = source.getPreferredLanguage().getPreferredLanguage();
+        preferredLanguage =
+                source.getPreferredLanguage() == null ? null : source.getPreferredLanguage().getPreferredLanguage();
         metOn = source.getMetOn() == null ? null : source.getMetOn().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
