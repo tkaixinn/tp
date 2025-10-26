@@ -292,7 +292,7 @@ Action | Format, Examples
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [offset:OFFSET] [tag:TAG]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [offset:OFFSET] [tag:TAG] [lang:LANGUAGE]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
