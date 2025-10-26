@@ -140,6 +140,12 @@ public class Person {
         return isArchived;
     }
 
+    public String getSuggestedGreeting() {
+        return preferredLanguage == null
+                ? "-"
+                : GreetingLibrary.getGreeting(preferredLanguage.toString());
+    }
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}

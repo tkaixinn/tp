@@ -61,6 +61,7 @@ public class UnarchiveCommand extends Command {
                     personToUnarchive.getNote(),
                     personToUnarchive.getTags(),
                     personToUnarchive.getOffset(),
+                    personToUnarchive.getPreferredLanguage(),
                     personToUnarchive.getMetOn(),
                     false);
 

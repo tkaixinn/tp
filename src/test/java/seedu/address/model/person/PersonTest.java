@@ -102,6 +102,8 @@ public class PersonTest {
             + ", tags=" + ALICE.getTags()
             + ", preferredChannel=" + ALICE.getPreferredChannel()
             + ", offset=" + ALICE.getOffset()
+            + ", preferredLanguage=" + ALICE.getPreferredLanguage()
+            + ", suggestedGreeting=" + ALICE.getSuggestedGreeting()
             + ", metOn=" + ALICE.getMetOn() + "}";
         assertEquals(expected, ALICE.toString());
     }
