@@ -43,7 +43,7 @@ class JsonAdaptedPerson {
     private final boolean archivalStatus;
     private final String metOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final String preferredLanguage;
+    private String preferredLanguage;
 
 
     /**
@@ -167,10 +167,8 @@ class JsonAdaptedPerson {
         }
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
-        if (preferredLanguage == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "PreferredLanguage")
-            );
+        if (isNull(preferredLanguage)) {
+            preferredLanguage = "english";
         }
         if (!PreferredLanguage.isValidLanguage(preferredLanguage)) {
             throw new IllegalValueException(PreferredLanguage.MESSAGE_CONSTRAINTS);

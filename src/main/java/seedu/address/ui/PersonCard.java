@@ -53,7 +53,7 @@ public class PersonCard extends UiPart<Region> {
     private Label offset;
     @FXML
     private Label preferredLanguage;
-
+    @FXML
     private Label metOn;
 
     /**
@@ -128,7 +128,6 @@ public class PersonCard extends UiPart<Region> {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
         }
-
 
         if (person.getMetOn() != null) {
             metOn.setVisible(true);

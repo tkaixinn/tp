@@ -101,9 +101,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
                 .orElse(personToEdit.getPreferredChannel());
-        PreferredLanguage updatedLang = editPersonDescriptor.getPreferredLanguage() != null
-                ? editPersonDescriptor.getPreferredLanguage()
-                : personToEdit.getPreferredLanguage();
+        PreferredLanguage updatedLang = editPersonDescriptor.getPreferredLanguage().orElse(personToEdit.getPreferredLanguage());
         boolean isArchived = personToEdit.getArchivalStatus();
         MetOn updatedMetOn = personToEdit.getMetOn();
 
@@ -170,6 +168,7 @@ public class EditCommand extends Command {
         private CommunicationChannel channel;
         private Offset offset;
         private PreferredLanguage preferredLanguage;
+        private MetOn metOn;
 
         public EditPersonDescriptor() {
         }
@@ -187,7 +186,8 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setChannel(toCopy.channel);
             setOffset(toCopy.offset);
-            setPreferredLanguage((toCopy.preferredLanguage));
+            setPreferredLanguage(toCopy.preferredLanguage);
+            setMetOn(toCopy.metOn);
         }
 
         public void setChannel(CommunicationChannel channel) {
@@ -242,6 +242,14 @@ public class EditCommand extends Command {
             this.country = country;
         }
 
+        public void setMetOn(MetOn metOn) {
+            this.metOn = metOn;
+        }
+
+        public Optional<MetOn> getMetOn() {
+            return Optional.ofNullable(metOn);
+        }
+
         public Optional<Country> getCountry() {
             return Optional.ofNullable(country);
         }
@@ -276,8 +284,8 @@ public class EditCommand extends Command {
             this.preferredLanguage = preferredLanguage;
         }
 
-        public PreferredLanguage getPreferredLanguage() {
-            return preferredLanguage;
+        public Optional<PreferredLanguage> getPreferredLanguage() {
+            return Optional.ofNullable(preferredLanguage);
         }
 
         @Override
@@ -314,6 +322,7 @@ public class EditCommand extends Command {
                     .add("channel", channel)
                     .add("offset", offset)
                     .add("language", preferredLanguage)
+                    .add("metOn", metOn)
                     .toString();
         }
     }

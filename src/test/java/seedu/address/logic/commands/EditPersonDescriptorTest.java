@@ -68,7 +68,9 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", channel="
                 + editPersonDescriptor.getChannel().orElse(null) + ", offset="
-                + editPersonDescriptor.getGmtOffset().orElse(null) + "}";
+                + editPersonDescriptor.getGmtOffset().orElse(null) + ", language="
+                + editPersonDescriptor.getPreferredLanguage().orElse(null) + ", metOn="
+                + editPersonDescriptor.getMetOn().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

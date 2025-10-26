@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +31,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
     public static final String DEFAULT_METON = "2023-11-15T14:30:00";
+    public static final String DEFAULT_LANGUAGE = "english";
 
     private Name name;
     private Phone phone;
@@ -40,6 +43,7 @@ public class PersonBuilder {
     private Offset offset;
     private MetOn metOn;
     private boolean isArchived;
+    private PreferredLanguage preferredLanguage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -55,6 +59,7 @@ public class PersonBuilder {
         offset = new Offset(DEFAULT_OFFSET);
         metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
         isArchived = false;
+        preferredLanguage = new PreferredLanguage(DEFAULT_LANGUAGE);
     }
 
     /**
@@ -71,6 +76,7 @@ public class PersonBuilder {
         offset = personToCopy.getOffset();
         metOn = personToCopy.getMetOn();
         isArchived = personToCopy.getArchivalStatus();
+        preferredLanguage = personToCopy.getPreferredLanguage();
     }
 
     /**
@@ -163,7 +169,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset, metOn, isArchived);
+        return new Person(name, phone, email, address, country, note, tags, offset, preferredLanguage, metOn, isArchived);
     }
 
 }

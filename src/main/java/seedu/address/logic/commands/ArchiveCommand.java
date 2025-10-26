@@ -61,6 +61,7 @@ public class ArchiveCommand extends Command {
                     personToArchive.getNote(),
                     personToArchive.getTags(),
                     personToArchive.getOffset(),
+                    personToArchive.getPreferredLanguage(),
                     personToArchive.getMetOn(),
                     true);
 
