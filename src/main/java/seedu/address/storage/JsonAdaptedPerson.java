@@ -3,10 +3,12 @@ package seedu.address.storage;
 import static java.util.Objects.isNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -157,7 +159,8 @@ class JsonAdaptedPerson {
             modelMetOn = new MetOn(LocalDateTime.now());
         } else {
             try {
-                modelMetOn = new MetOn(LocalDateTime.parse(metOn));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy (HH:mm)", Locale.ENGLISH);
+                modelMetOn = new MetOn(LocalDateTime.parse(metOn, formatter));
             } catch (DateTimeParseException e) {
                 modelMetOn = new MetOn(LocalDateTime.now());
             }

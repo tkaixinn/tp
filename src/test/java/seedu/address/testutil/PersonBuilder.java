@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
-import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +31,7 @@ public class PersonBuilder {
     public static final String DEFAULT_OFFSET = "+00:00";
     public static final String DEFAULT_METON = "2023-11-15T14:30:00";
     public static final String DEFAULT_LANGUAGE = "english";
+    private static final String DEFAULT_CHANNEL = "EMAIL";
 
     private Name name;
     private Phone phone;
@@ -44,6 +44,7 @@ public class PersonBuilder {
     private MetOn metOn;
     private boolean isArchived;
     private PreferredLanguage preferredLanguage;
+    private Person.CommunicationChannel channel;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,13 +54,14 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        country = new Country(DEFAULT_COUNTRY);
+        country = new Country("");
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
         metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
         isArchived = false;
         preferredLanguage = new PreferredLanguage(DEFAULT_LANGUAGE);
+        channel = Person.CommunicationChannel.valueOf(DEFAULT_CHANNEL);
     }
 
     /**
@@ -77,6 +79,7 @@ public class PersonBuilder {
         metOn = personToCopy.getMetOn();
         isArchived = personToCopy.getArchivalStatus();
         preferredLanguage = personToCopy.getPreferredLanguage();
+        channel = personToCopy.getPreferredChannel();
     }
 
     /**
@@ -145,6 +148,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code preferredChannel} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withChannel(String channel) {
+        this.channel = Person.CommunicationChannel.valueOf(channel);
+        return this;
+    }
+
+    /**
+     * Sets the {@code preferredLanguage} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLanguage(String language) {
+        this.preferredLanguage = new PreferredLanguage(language);
+        return this;
+    }
+
+    /**
      * Sets the {@code MetOn} of the {@code Person} that we are building.
      */
     public PersonBuilder withMetOn(String metOn) {
@@ -168,8 +187,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Person}.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset, preferredLanguage, metOn, isArchived);
+        return new Person(name, phone, email, address, country, note, channel, tags, offset, preferredLanguage, metOn,
+                isArchived);
     }
 
 }

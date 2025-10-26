@@ -39,7 +39,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
+                  PreferredLanguage preferredLanguage,
                   MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
@@ -67,7 +68,7 @@ public class Person {
     /**
      * If both note notes and country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address,Country country, Note note,
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Note note,
             Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
