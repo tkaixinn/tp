@@ -9,12 +9,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -22,6 +25,16 @@ import seedu.address.testutil.PersonBuilder;
 public class UniquePersonListTest {
 
     private final UniquePersonList uniquePersonList = new UniquePersonList();
+    private UniquePersonList list;
+
+    // Test persons:
+    // - Two with the same country ("China") to exercise name tie-breaker.
+    // - One with another country ("Singapore").
+    // - One with empty country to ensure it is pushed to the end in sortByCountry.
+    private Person alice; // Singapore, 2024-03-01T10:00
+    private Person bob; // China, 2024-01-01T09:00
+    private Person ann; // China, 2024-02-01T08:00
+    private Person charlie; // "" (empty), 2023-05-01T12:00
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -171,5 +184,80 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @BeforeEach
+    public void setUp() {
+        list = new UniquePersonList();
+
+        alice = new PersonBuilder()
+                .withName("Alice Pauline")
+                .withCountry("Singapore")
+                .withMetOn(String.valueOf(LocalDateTime.of(2024, 3, 1, 10, 0)))
+                .build();
+
+        bob = new PersonBuilder()
+                .withName("Bob Builder")
+                .withCountry("China")
+                .withMetOn(String.valueOf(LocalDateTime.of(2024, 1, 1, 9, 0)))
+                .build();
+
+        ann = new PersonBuilder()
+                .withName("Ann Alpha")
+                .withCountry("China")
+                .withMetOn(String.valueOf(LocalDateTime.of(2024, 2, 1, 8, 0)))
+                .build();
+
+        // Empty country string is considered "no country" in Country#isValidCountry,
+        // which your sortByCountry() pushes to the end via countryKey().
+        charlie = new PersonBuilder()
+                .withName("Charlie Zero")
+                .withCountry("") // empty
+                .withMetOn(String.valueOf(LocalDateTime.of(2023, 5, 1, 12, 0)))
+                .build();
+
+        // Add in a scrambled order so that sorts have an effect.
+        list.add(alice);
+        list.add(charlie);
+        list.add(bob);
+        list.add(ann);
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modification_throws() {
+        ObservableList<Person> exposed = list.asUnmodifiableObservableList();
+        assertThrows(UnsupportedOperationException.class, () -> exposed.remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> exposed.add(alice));
+    }
+
+    @Test
+    public void sortByName_sortsCaseInsensitiveAscending() {
+        list.sortByName();
+        List<Person> ordered = list.asUnmodifiableObservableList();
+
+        // Alphabetical by name: Alice Pauline, Ann Alpha, Bob Builder, Charlie Zero
+        assertEquals(List.of(alice, ann, bob, charlie), ordered);
+    }
+
+    @Test
+    public void sortByDate_sortsByMetOnAscending() {
+        list.sortByDate();
+        List<Person> ordered = list.asUnmodifiableObservableList();
+
+        // Ascending by metOn: 2023-05-01 (Charlie), 2024-01-01 (Bob),
+        // 2024-02-01 (Ann), 2024-03-01 (Alice)
+        assertEquals(List.of(charlie, bob, ann, alice), ordered);
+    }
+
+    @Test
+    public void sortByCountry_sortsCountryThenName_emptyCountryLast() {
+        list.sortByCountry();
+        List<Person> ordered = list.asUnmodifiableObservableList();
+
+        // Order:
+        //   China (name tie-breaker): Ann Alpha, Bob Builder
+        //   Singapore: Alice Pauline
+        //   "" (empty country) goes LAST: Charlie Zero
+        assertEquals(List.of(ann, bob, alice, charlie), ordered);
     }
 }
