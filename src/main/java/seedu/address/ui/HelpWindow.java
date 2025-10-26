@@ -5,20 +5,30 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -65,6 +75,24 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private TableColumn<TimezoneEntry, String> offsetColumn;
+
+    @FXML
+    private TextField countrySearchField;
+
+    @FXML
+    private TableView<LanguageEntry> languageTableView;
+
+    @FXML
+    private TableColumn<LanguageEntry, String> languageNameColumn;
+
+    @FXML
+    private TableColumn<LanguageEntry, String> languageCodeColumn;
+
+    @FXML
+    private TableColumn<LanguageEntry, String> languageCountriesColumn;
+
+    @FXML
+    private TextField languageSearchField;
 
     /**
      * Creates a new HelpWindow.
@@ -202,9 +230,95 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         countries.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
-        countryTableView.getItems().addAll(countries);
+        FilteredList<CountryEntry> filteredCountries = new FilteredList<>(FXCollections.observableArrayList(countries),
+                p -> true);
+        countryTableView.setItems(filteredCountries);
+
+        countrySearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String lower = newValue.toLowerCase();
+            filteredCountries.setPredicate(country -> {
+                if (lower == null || lower.isBlank()) {
+                    return true;
+                }
+                return country.getName().toLowerCase().contains(lower)
+                        || country.getCode().toLowerCase().contains(lower);
+            });
+        });
 
         initializeTimezones();
+
+        Map<String, Set<String>> languageToCountries = new HashMap<>();
+
+        for (Locale locale : Locale.getAvailableLocales()) {
+            String langCode = locale.getLanguage();
+            String langName = locale.getDisplayLanguage(Locale.ENGLISH);
+            String country = locale.getDisplayCountry(Locale.ENGLISH);
+
+            if (langCode == null || langCode.isEmpty() || langName == null || langName.isEmpty()) {
+                continue;
+            }
+
+            if (country != null && !country.isEmpty()) {
+                languageToCountries.computeIfAbsent(langCode, k -> new TreeSet<>()).add(country);
+            }
+        }
+
+        List<LanguageEntry> languages = new ArrayList<>();
+        for (Map.Entry<String, Set<String>> entry : languageToCountries.entrySet()) {
+            String code = entry.getKey();
+            String name = new Locale(code).getDisplayLanguage(Locale.ENGLISH);
+            String countriesUsed = String.join(", ", entry.getValue());
+            if (name != null && !name.isEmpty() && code != null && !code.isEmpty()) {
+                languages.add(new LanguageEntry(name, code, countriesUsed));
+            }
+        }
+
+        languages.sort(Comparator.comparing(LanguageEntry::getName));
+
+        languageNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        languageCodeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
+        languageCountriesColumn.setCellValueFactory(new PropertyValueFactory<>("countriesUsed"));
+
+        languageCountriesColumn.setCellFactory(col ->
+                new TableCell<LanguageEntry, String>() {
+                    private final StackPane pane = new StackPane();
+                    private final Label label = new Label();
+
+                    {
+                        label.setWrapText(true);
+                        pane.getChildren().add(label);
+                        pane.setPrefHeight(80);
+                    }
+
+                    @Override
+                    protected void updateItem(String countries, boolean empty) {
+                        super.updateItem(countries, empty);
+                        if (empty || countries == null) {
+                            setGraphic(null);
+                        } else {
+                            label.setText(countries);
+                            ScrollPane sp = new ScrollPane(pane);
+                            sp.setPrefHeight(80);
+                            sp.setFitToWidth(true);
+                            sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+                            sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+                            setGraphic(sp);
+                        }
+                    }
+                });
+
+
+        FilteredList<LanguageEntry> filteredLanguages = new FilteredList<>(FXCollections.observableArrayList(languages),
+                p -> true);
+        languageTableView.setItems(filteredLanguages);
+
+        languageSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String lower = newValue == null ? "" : newValue.toLowerCase();
+            filteredLanguages.setPredicate(lang -> lang.getName().toLowerCase().contains(lower)
+                    || lang.getCode().toLowerCase().contains(lower)
+                    || lang.getCountriesUsed().toLowerCase().contains(lower));
+        });
     }
 
     /**
