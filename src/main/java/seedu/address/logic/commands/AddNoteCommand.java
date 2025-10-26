@@ -64,7 +64,7 @@ public class AddNoteCommand extends Command {
             note,
             personToEdit.getTags(),
             personToEdit.getOffset(),
-            personToEdit.getPreferredLanguage()
+            personToEdit.getPreferredLanguage(),
             personToEdit.getMetOn(),
             personToEdit.getArchivalStatus()
         );
