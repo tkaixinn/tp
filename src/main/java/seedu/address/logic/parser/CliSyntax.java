@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("tag:");
     public static final Prefix PREFIX_CHANNEL = new Prefix("channel:");
     public static final Prefix PREFIX_OFFSET = new Prefix("offset:");
+    public static final Prefix PREFIX_LANGUAGE = new Prefix("lang:");
 
 }

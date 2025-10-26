@@ -31,14 +31,16 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
     private final Offset offset;
+    private final PreferredLanguage preferredLanguage;
+
     private final boolean isArchived;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, MetOn metOn,
-            boolean isArchived) {
+            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
+                  MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -49,6 +51,7 @@ public class Person {
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.preferredLanguage = preferredLanguage;
         this.isArchived = isArchived;
         this.metOn = metOn;
 
@@ -64,8 +67,8 @@ public class Person {
     /**
      * If both note notes and country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-            Country country, Note note, Set<Tag> tags, Offset offset, MetOn metOn, boolean isArchived) {
+    public Person(Name name, Phone phone, Email email, Address address,Country country, Note note,
+            Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
@@ -76,6 +79,7 @@ public class Person {
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
         this.offset = offset;
+        this.preferredLanguage = preferredLanguage;
         this.isArchived = isArchived;
         this.metOn = metOn;
 
@@ -126,6 +130,11 @@ public class Person {
     public Country getCountry() {
         return country;
     }
+
+    public PreferredLanguage getPreferredLanguage() {
+        return preferredLanguage;
+    }
+
 
     public boolean getArchivalStatus() {
         return isArchived;
@@ -221,6 +230,10 @@ public class Person {
                 .add("tags", tags)
                 .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
+                .add("suggestedGreeting", preferredLanguage == null
+                        ? "-"
+                        : GreetingLibrary.getGreeting(preferredLanguage.toString()))
                 .add("metOn", metOn)
                 .toString();
     }
