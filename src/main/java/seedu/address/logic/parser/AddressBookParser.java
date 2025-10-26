@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddNoteCommand;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.ArchiveListCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -20,6 +22,10 @@ import seedu.address.logic.commands.FindCountryCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCountryCommand;
+import seedu.address.logic.commands.SortDateCommand;
+import seedu.address.logic.commands.SortNameCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -49,7 +55,8 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // Note to developers: Change the log level in config.json to enable lower level
+        // (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
@@ -88,6 +95,24 @@ public class AddressBookParser {
 
         case FindCountryCommand.COMMAND_WORD:
             return new FindCountryCommandParser().parse(arguments);
+
+        case ArchiveListCommand.COMMAND_WORD:
+            return new ArchiveListCommand();
+
+        case ArchiveCommand.COMMAND_WORD:
+            return new ArchiveCommandParser().parse(arguments);
+
+        case UnarchiveCommand.COMMAND_WORD:
+            return new UnarchiveCommandParser().parse(arguments);
+
+        case SortCountryCommand.COMMAND_WORD:
+            return new SortCountryCommand();
+
+        case SortNameCommand.COMMAND_WORD:
+            return new SortNameCommand();
+
+        case SortDateCommand.COMMAND_WORD:
+            return new SortDateCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

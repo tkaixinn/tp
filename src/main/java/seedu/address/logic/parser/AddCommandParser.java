@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -20,6 +21,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -67,23 +69,23 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
             String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
             switch (channelInput) {
-                case "PHONE":
-                    preferredChannel = Person.CommunicationChannel.PHONE;
-                    break;
-                case "EMAIL":
-                    preferredChannel = Person.CommunicationChannel.EMAIL;
-                    break;
-                case "SMS":
-                    preferredChannel = Person.CommunicationChannel.SMS;
-                    break;
-                case "WHATSAPP":
-                    preferredChannel = Person.CommunicationChannel.WHATSAPP;
-                    break;
-                case "TELEGRAM":
-                    preferredChannel = Person.CommunicationChannel.TELEGRAM;
-                    break;
-                default:
-                    throw new ParseException("Invalid communication channel. Choose another channel.");
+            case "PHONE":
+                preferredChannel = Person.CommunicationChannel.PHONE;
+                break;
+            case "EMAIL":
+                preferredChannel = Person.CommunicationChannel.EMAIL;
+                break;
+            case "SMS":
+                preferredChannel = Person.CommunicationChannel.SMS;
+                break;
+            case "WHATSAPP":
+                preferredChannel = Person.CommunicationChannel.WHATSAPP;
+                break;
+            case "TELEGRAM":
+                preferredChannel = Person.CommunicationChannel.TELEGRAM;
+                break;
+            default:
+                throw new ParseException("Invalid communication channel. Choose another channel.");
             }
         }
 
@@ -91,8 +93,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
+        MetOn metOn = new MetOn(LocalDateTime.now());
         Person person = new Person(name, phone, email, address, country, note, finalPreferredChannel, tagList,
-                offset, preferredLanguage);
+                offset, preferredLanguage, metOn, false);
 
         return new AddCommand(person);
     }

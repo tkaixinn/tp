@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private SortMode sortMode = SortMode.NAME;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
     }
 
     public ModelManager() {
@@ -80,8 +82,20 @@ public class ModelManager implements Model {
     // ================================================================================
 
     @Override
+    public void reapplySortMode() {
+        if (sortMode == SortMode.COUNTRY) {
+            addressBook.sortByCountry();
+        } else if (sortMode == SortMode.DATE) {
+            addressBook.sortByDate();
+        } else {
+            addressBook.sortByName();
+        }
+    }
+
+    @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        reapplySortMode();
     }
 
     @Override
@@ -98,19 +112,21 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        reapplySortMode();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+        reapplySortMode();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        reapplySortMode();
     }
 
     // =========== Filtered Person List Accessors
@@ -149,4 +165,29 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public void sortPersonsByCountry() {
+        addressBook.sortByCountry();
+        setSortMode(SortMode.COUNTRY);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+    }
+
+    @Override
+    public void sortPersonsByName() {
+        addressBook.sortByName();
+        setSortMode(SortMode.NAME);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+    }
+
+    @Override
+    public void sortPersonsByDate() {
+        addressBook.sortByDate();
+        setSortMode(SortMode.DATE);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+    }
+
+    @Override
+    public void setSortMode(SortMode mode) {
+        this.sortMode = mode;
+    }
 }

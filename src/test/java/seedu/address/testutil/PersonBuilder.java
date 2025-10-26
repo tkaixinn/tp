@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -26,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_COUNTRY = "Singapore";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
+    public static final String DEFAULT_METON = "2023-11-15T14:30:00";
 
     private Name name;
     private Phone phone;
@@ -35,6 +38,8 @@ public class PersonBuilder {
     private Note note;
     private Set<Tag> tags;
     private Offset offset;
+    private MetOn metOn;
+    private boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +53,8 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
+        metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
+        isArchived = false;
     }
 
     /**
@@ -62,6 +69,8 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
+        metOn = personToCopy.getMetOn();
+        isArchived = personToCopy.getArchivalStatus();
     }
 
     /**
@@ -129,8 +138,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code MetOn} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMetOn(String metOn) {
+        this.metOn = new MetOn(LocalDateTime.parse(metOn));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Person} that we are building as archived.
+     */
+    public PersonBuilder archived() {
+        this.isArchived = true;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Person} that we are building as unarchived.
+     */
+    public PersonBuilder unarchived() {
+        this.isArchived = false;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, country, note, tags, offset);
+        return new Person(name, phone, email, address, country, note, tags, offset, metOn, isArchived);
     }
 
 }

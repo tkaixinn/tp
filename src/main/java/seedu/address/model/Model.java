@@ -12,7 +12,14 @@ import seedu.address.model.person.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
+    Predicate<Person> PREDICATE_SHOW_ALL_UNARCHIVED = unused -> !unused.getArchivalStatus();
+    Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED = unused -> unused.getArchivalStatus();
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** Enum that tracks the current sort mode */
+    public enum SortMode {
+        NAME, COUNTRY, DATE
+    }
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,7 +60,8 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in
+     * the address book.
      */
     boolean hasPerson(Person person);
 
@@ -72,7 +80,8 @@ public interface Model {
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another
+     * existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -80,8 +89,37 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered person list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * After every modification to the contacts list, this command reapplies the
+     * current sorting mode.
+     */
+    void reapplySortMode();
+
+    /**
+     * Sorts the address book by country.
+     */
+    void sortPersonsByCountry();
+
+    /**
+     * Sorts the address book by name.
+     */
+    void sortPersonsByName();
+
+    /**
+     * Sorts the address book by date added.
+     */
+    void sortPersonsByDate();
+
+    /**
+     * Sets the current sorting mode.
+     * @param mode
+     */
+    void setSortMode(SortMode mode);
 }
