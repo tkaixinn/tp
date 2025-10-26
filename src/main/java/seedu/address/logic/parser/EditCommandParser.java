@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET);
+                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET, PREFIX_LANGUAGE);
 
         Index index;
 
@@ -47,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_COUNTRY, PREFIX_OFFSET);
+                PREFIX_COUNTRY, PREFIX_OFFSET, PREFIX_LANGUAGE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -71,6 +72,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_OFFSET).isPresent()) {
             editPersonDescriptor.setOffset(ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).get()));
         }
+
+        if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
+            editPersonDescriptor.setPreferredLanguage(
+                    ParserUtil.parsePreferredLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get()));
+        }
+
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
