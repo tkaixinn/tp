@@ -32,6 +32,8 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="country" styleClass="cell_small_label" text="$country" />
+      <Label fx:id="event" styleClass="cell_small_label" text="$event" />
+      <Label fx:id="note" styleClass="cell_small_label" text="$note" />
       <Label fx:id="offset" styleClass="cell_small_label" text="$offset"/>
       <Label fx:id="channel" styleClass="cell_small_label" text="$channel" />
       <Label fx:id="preferredLanguage" styleClass="cell_small_label" text="$preferredLanguage"/>
