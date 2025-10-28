@@ -25,19 +25,19 @@ public class PreferredLanguageTest {
     @Test
     public void validLanguages_variousCases() {
         String[] languages = {
-                "German", "Italian", "Portuguese", "Russian", "Arabic", "Hindi",
-                "Japanese", "Korean", "Vietnamese", "Thai", "Bengali", "Tamil",
-                "Urdu", "Malay", "Indonesian", "Filipino", "Swahili", "Zulu",
-                "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin", "Norwegian",
-                "Swedish", "Danish", "Finnish", "Polish", "Czech", "Slovak",
-                "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
-                "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
-                "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
-                "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
-                "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
-                "Hmong White", "Inuktitut", "Quechua", "Aymara", "Chamorro Guam",
-                "Chamorro North", "Armenian Eastern", "Armenian Western", "Abkhaz",
-                "Adyghe", "Afrikaans", "Akkadian", "Albanian GH", "Albanian TO", "Aleut"
+            "German", "Italian", "Portuguese", "Russian", "Arabic", "Hindi",
+            "Japanese", "Korean", "Vietnamese", "Thai", "Bengali", "Tamil",
+            "Urdu", "Malay", "Indonesian", "Filipino", "Swahili", "Zulu",
+            "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin", "Norwegian",
+            "Swedish", "Danish", "Finnish", "Polish", "Czech", "Slovak",
+            "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
+            "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
+            "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
+            "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
+            "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
+            "Hmong White", "Inuktitut", "Quechua", "Aymara", "Chamorro Guam",
+            "Chamorro North", "Armenian Eastern", "Armenian Western", "Abkhaz",
+            "Adyghe", "Afrikaans", "Akkadian", "Albanian GH", "Albanian TO", "Aleut"
         };
 
         for (String lang : languages) {
@@ -112,14 +112,14 @@ public class PreferredLanguageTest {
     @Test
     public void mixedLanguages_loopTest() {
         String[] validLanguages = {
-                "Zulu", "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin",
-                "Norwegian", "Swedish", "Danish", "Finnish", "Polish", "Czech",
-                "Slovak", "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
-                "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
-                "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
-                "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
-                "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
-                "Hmong White", "Inuktitut", "Quechua", "Aymara"
+            "Zulu", "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin",
+            "Norwegian", "Swedish", "Danish", "Finnish", "Polish", "Czech",
+            "Slovak", "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
+            "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
+            "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
+            "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
+            "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
+            "Hmong White", "Inuktitut", "Quechua", "Aymara"
         };
 
         for (String lang : validLanguages) {
@@ -132,13 +132,13 @@ public class PreferredLanguageTest {
     @Test
     public void invalidLanguages_loopTest() {
         String[] invalids = {
-                "English123", "French!", "@Spanish", "123", "Mandarin1", "Zulu#", "Xhosa$",
-                "Afr1kaans", "Hebrew123", "Greek!", "Latin@", "Norwegian1", "Swedish#",
-                "Danish$", "Finnish123", "Polish!", "Czech@", "Slovak1", "Hungarian#", "Romanian$",
-                "Serbian1", "Croatian@", "Bosnian!", "Bulgarian123", "Ukrainian#", "Macedonian$",
-                "Slovene1", "Lithuanian@", "Latvian!", "Estonian123", "Icelandic#", "Irish$",
-                "Welsh1", "Scottish Gaelic@", "Basque!", "Catalan123", "Galician#", "Esperanto$",
-                "Luxembourgish1", "Maltese@", "Maori!", "Samoan123", "Tongan#", "Fijian$"
+            "English123", "French!", "@Spanish", "123", "Mandarin1", "Zulu#", "Xhosa$",
+            "Afr1kaans", "Hebrew123", "Greek!", "Latin@", "Norwegian1", "Swedish#",
+            "Danish$", "Finnish123", "Polish!", "Czech@", "Slovak1", "Hungarian#", "Romanian$",
+            "Serbian1", "Croatian@", "Bosnian!", "Bulgarian123", "Ukrainian#", "Macedonian$",
+            "Slovene1", "Lithuanian@", "Latvian!", "Estonian123", "Icelandic#", "Irish$",
+            "Welsh1", "Scottish Gaelic@", "Basque!", "Catalan123", "Galician#", "Esperanto$",
+            "Luxembourgish1", "Maltese@", "Maori!", "Samoan123", "Tongan#", "Fijian$"
         };
 
         for (String lang : invalids) {

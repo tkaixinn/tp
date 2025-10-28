@@ -1,16 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Event;
+import seedu.address.model.person.Name;
 
 public class AddEventCommandParserTest {
 
@@ -46,9 +46,11 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
 
         // no name
-        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + PREFIX_EVENT + VALID_EVENT, expectedMessage);
+        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + PREFIX_EVENT + VALID_EVENT,
+            expectedMessage);
 
         // no event
-        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME, expectedMessage);
+        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME,
+            expectedMessage);
     }
 }

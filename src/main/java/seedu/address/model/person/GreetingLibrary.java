@@ -1,12 +1,16 @@
 package seedu.address.model.person;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+/**
+ * Provides localized greetings based on language.
+ * Loads greetings from /data/greetings.json at class initialization.
+ */
 public class GreetingLibrary {
     private static Map<String, String> greetings;
 
@@ -22,10 +26,10 @@ public class GreetingLibrary {
     }
 
     public static String getGreeting(String language) {
-        if (language == null) return "(No greeting available)";
+        if (language == null) {
+            return "(No greeting available)";
+        }
         String greeting = greetings.get(language.toLowerCase());
         return greeting != null ? greeting : "(No greeting available)";
     }
 }
-
-
