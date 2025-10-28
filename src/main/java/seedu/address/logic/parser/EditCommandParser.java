@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -20,6 +21,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Person.CommunicationChannel;
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET, PREFIX_LANGUAGE);
+                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET, PREFIX_LANGUAGE, PREFIX_CHANNEL);
 
         Index index;
 
@@ -48,7 +52,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_COUNTRY, PREFIX_OFFSET, PREFIX_LANGUAGE);
+                PREFIX_COUNTRY, PREFIX_OFFSET, PREFIX_LANGUAGE, PREFIX_CHANNEL);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -78,6 +82,15 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parsePreferredLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get()));
         }
 
+        if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
+            String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
+            try {
+                Person.CommunicationChannel channel = Person.CommunicationChannel.valueOf(channelInput);
+                editPersonDescriptor.setChannel(channel);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException("Invalid communication channel: " + channelInput);
+            }
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

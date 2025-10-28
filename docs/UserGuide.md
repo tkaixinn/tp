@@ -194,14 +194,28 @@ Examples:
 
 ### Archiving a contact `archive`
 
-Archives a contact.
+Archives the person at the specified `INDEX` from the current list.
 
 Format: `archive INDEX`
 
-* Command format and function is similar to delete, except the contact is just hidden from view and can be accessed at a later time.
+* Command format and function is similar to delete, except the contact is just moved to a separate list accessible
+with `archivelist` and can be unarchived at a later time.
+* Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g. `find`).
 
 Examples:
-* `list` followed by `archive 2` deletes the 2nd person in the address book.
+* `list` followed by `archive 2` archives the 2nd person in the address book.
+
+### Unarchiving a contact `unarchive`
+
+Unarchives the person at the specified `INDEX` from the current list.
+
+Format: `unarchive INDEX`
+
+* Unarchives the person at the specified `INDEX` from the current list, moving them back to the main list (`list`).
+* Displayed list will be archive list (`archivelist`) after archiving is done, regardless of previously applied filters (e.g. `find`).
+
+Examples:
+* `archivelist` followed by `unarchive 1` unarchives the 1st person in the archive list.
 
 ### Listing all archived persons : `archivelist`
 
@@ -209,16 +223,6 @@ Shows a list of all archived persons in the address book.
 
 Format: `archivelist`
 
-### Unarchiving a contact `unarchive`
-
-Unarchives a contact.
-
-Format: `unarchive INDEX`
-
-* Unarchives the person at the specified `INDEX` from the archive list.
-
-Examples:
-* `archivelist` followed by `unarchive 1` unarchives the 1st person in the archive list.
 ### Sort contacts by country `sortcountry`
 
 Sorts the contacts by country.
@@ -302,10 +306,16 @@ Action | Format, Examples
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [offset:OFFSET] [tag:TAG] [lang:LANGUAGE]…​`<br> e.g.,`edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [offset:OFFSET] [tag:TAG] [lang:LANGUAGE]…​`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
+**Archive** | `archive INDEX`<br> e.g., `archive 2`
+**Unarchive** | `unarchive INDEX`<br> e.g., `unarchive 1`
+**List Archived** | `archivelist`
+**Sort by Name** | `sortname`
+**Sort by Country** | `sortcountry`
+**Sort by Date Added** | `sortdate`

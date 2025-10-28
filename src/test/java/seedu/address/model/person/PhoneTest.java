@@ -138,6 +138,99 @@ public class PhoneTest {
     }
 
     @Test
+    public void countryDetection_longerPrefixes_success() {
+        // Finland (+358), not "+35"
+        assertEquals("358", new Phone("+358401234567").getCountryCode());
+        assertEquals("358", new Phone("+358 40 123 4567").getCountryCode());
+
+        // UAE (+971)
+        assertEquals("971", new Phone("+971501234567").getCountryCode());
+
+        // UK (+44)
+        assertEquals("44", new Phone("+447911123456").getCountryCode());
+
+        // Japan (+81)
+        assertEquals("81", new Phone("+81-90-1234-5678").getCountryCode());
+
+        // Australia (+61)
+        assertEquals("61", new Phone("+61 (4) 1234 5678").getCountryCode());
+
+        // Germany (+49)
+        assertEquals("49", new Phone("+49 1512 3456789").getCountryCode());
+    }
+
+    @Test
+    public void countryDetection_withSeparators_success() {
+        // Spaces and dashes
+        assertEquals("65", new Phone("+65 9876-5432").getCountryCode());
+
+        // Parentheses around area parts (should still detect +65)
+        assertEquals("65", new Phone("+65 (123) 456 7890").getCountryCode());
+
+        // Mixed separators with NANP (+1)
+        assertEquals("1", new Phone("+1 (415) 555-2671").getCountryCode());
+
+        // Trunk (0) often included domestically; must not affect +44
+        assertEquals("44", new Phone("+44 (0)20 7946 0958").getCountryCode());
+    }
+
+    @Test
+    public void leadingPlus_edgeCases() {
+        // Plus but too short overall
+        assertFalse(Phone.isValidPhone("+6"));
+        assertFalse(Phone.isValidPhone("+65"));
+
+        // Non-digit right after plus
+        assertFalse(Phone.isValidPhone("+A123456"));
+        //assertFalse(Phone.isValidPhone("++6512345678"));
+        //assertFalse(Phone.isValidPhone("+-6512345678"));
+
+        // Valid once enough digits exist
+        assertTrue(Phone.isValidPhone("+65 9"));
+        assertTrue(Phone.isValidPhone("+65 98"));
+        assertTrue(Phone.isValidPhone("+65 987"));
+    }
+
+    @Test
+    public void countryDetection_equivalentFormats_sameResult() {
+        String[] formats = new String[] {
+                "+6598765432",
+                "+65 9876 5432",
+                "+65-9876-5432",
+                "+65 (9876) 5432",
+                "+65 (0) 9876 5432"
+        };
+        for (String fmt : formats) {
+            assertEquals("65", new Phone(fmt).getCountryCode(), "Failed for format: " + fmt);
+        }
+    }
+
+    @Test
+    public void toString_withVariousFormats_showsDetectedCode() {
+        assertEquals("+65 9876-5432 (65)", new Phone("+65 9876-5432").toString());
+        assertEquals("+1 (415) 555-2671 (1)", new Phone("+1 (415) 555-2671").toString());
+        assertEquals("+44 7911 123456 (44)", new Phone("+44 7911 123456").toString());
+        assertEquals("+358 40 123 4567 (358)", new Phone("+358 40 123 4567").toString());
+    }
+
+    @Test
+    public void countryDetection_nanp_staysOne() {
+        assertEquals("1", new Phone("+12015550123").getCountryCode()); // US DC area code 201 is just NANP detail
+        assertEquals("1", new Phone("+16175550123").getCountryCode()); // US Boston
+        assertEquals("1", new Phone("+19025550123").getCountryCode()); // US Memphis
+    }
+
+    @Test
+    public void countryDetection_variety_sanity() {
+        assertEquals("33", new Phone("+33 6 12 34 56 78").getCountryCode());  // France
+        assertEquals("34", new Phone("+34 612 34 56 78").getCountryCode());   // Spain
+        assertEquals("39", new Phone("+39 347 123 4567").getCountryCode());   // Italy
+        assertEquals("52", new Phone("+52 55 1234 5678").getCountryCode());   // Mexico
+        assertEquals("62", new Phone("+62 812-1234-5678").getCountryCode());  // Indonesia
+        assertEquals("82", new Phone("+82 10-1234-5678").getCountryCode());   // South Korea
+    }
+
+    @Test
     public void equals_sameValue() {
         Phone phone1 = new Phone("999");
         Phone phone2 = new Phone("999");
@@ -230,5 +323,71 @@ public class PhoneTest {
         int third = phone.hashCode();
         assertEquals(first, second);
         assertEquals(second, third);
+    }
+    @Test
+    public void isValidPhone_multipleLeadingSigns() {
+        assertFalse(Phone.isValidPhone("++6598765432"));
+        assertFalse(Phone.isValidPhone("+-6598765432"));
+        assertFalse(Phone.isValidPhone("+--1234567"));
+
+        assertTrue(Phone.isValidPhone("+6598765432"));
+        assertTrue(Phone.isValidPhone("+1 123-456-7890"));
+    }
+
+    @Test
+    public void isValidPhone_plusInsideNumber_invalid() {
+        assertFalse(Phone.isValidPhone("123+456789"));
+        assertFalse(Phone.isValidPhone("12+34+56"));
+        assertFalse(Phone.isValidPhone("123456+"));
+    }
+
+    @Test
+    public void isValidPhone_onlyDigitsAndAllowedSymbols() {
+        assertTrue(Phone.isValidPhone("1234567890"));
+        assertTrue(Phone.isValidPhone("123 456 7890"));
+        assertTrue(Phone.isValidPhone("(123) 456-7890"));
+
+        assertFalse(Phone.isValidPhone("123*456"));
+        assertFalse(Phone.isValidPhone("123#456"));
+        assertFalse(Phone.isValidPhone("123@456"));
+    }
+
+    @Test
+    public void constructor_invalidPhone_multipleSigns_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Phone("++6598765432"));
+        assertThrows(IllegalArgumentException.class, () -> new Phone("+-6598765432"));
+    }
+
+    @Test
+    public void constructor_invalidPhone_plusInside_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Phone("123+456789"));
+    }
+
+    @Test
+    public void isValidPhone_maxLength() {
+        // 15 digits -> valid
+        assertTrue(Phone.isValidPhone("123456789012345"));
+        assertTrue(Phone.isValidPhone("+651234567890123")); // including country code
+
+        // 16 digits -> invalid
+        assertFalse(Phone.isValidPhone("1234567890123456"));
+        assertFalse(Phone.isValidPhone("+6512345678901234")); // including country code
+    }
+
+    @Test
+    public void constructor_invalidPhone_exceedsMaxLength() {
+        // 16 digits should throw IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> new Phone("1234567890123456"));
+        assertThrows(IllegalArgumentException.class, () -> new Phone("+6512345678901234"));
+    }
+
+    @Test
+    public void constructor_validPhone_maxLength() {
+        // 15 digits should be allowed
+        Phone phone1 = new Phone("123456789012345");
+        assertEquals("123456789012345", phone1.value);
+
+        Phone phone2 = new Phone("+651234567890123");
+        assertEquals("+651234567890123", phone2.value);
     }
 }

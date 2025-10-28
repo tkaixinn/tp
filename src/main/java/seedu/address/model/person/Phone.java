@@ -17,7 +17,7 @@ public class Phone {
             + "(e.g. +6598765432) "
             + "or contain at least 3 digits if no country code is provided.";
 
-    public static final String VALIDATION_REGEX = "^[+]?([0-9\\-()\\s]){3,}$";
+    public static final String VALIDATION_REGEX = "^\\+?[0-9\\-()\\s]*[0-9][0-9][0-9][0-9]*$";
     public final String value;
     public final String countryCode;
 
@@ -37,7 +37,29 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test == null) {
+            throw new NullPointerException();
+        }
+
+        if (!test.matches("^\\+?[0-9\\-()\\s]*$")) {
+            return false;
+        }
+
+        String digitsOnly = test.replaceAll("\\D", "");
+        if (digitsOnly.length() < 3 || digitsOnly.length() > 15) {
+            return false;
+        }
+
+        if(test.startsWith("+")) {
+            if(test.length() < 2 || !Character.isDigit(test.charAt(1))) {
+                return false;
+            }
+        }
+
+        if(test.substring(1).contains("+")) {
+            return false;
+        }
+        return true;
     }
 
     /**

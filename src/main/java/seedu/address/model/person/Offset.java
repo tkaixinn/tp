@@ -35,8 +35,40 @@ public class Offset implements Comparable<Offset> {
     }
 
     public static boolean isValidOffset(String test) {
-        return test != null && test.matches(VALIDATION_REGEX);
-    }
+        if (test == null) {
+            return false;
+        }
+
+        // Must match +HH:MM or -HH:MM
+        if (!test.matches("^[+-](\\d{2}):(\\d{2})$")) {
+            return false;
+        }
+
+        // Parse hours and minutes
+        int hours = Integer.parseInt(test.substring(1, 3));
+        int minutes = Integer.parseInt(test.substring(4, 6));
+
+        // Check range
+        if (hours > 14 || minutes >= 60) {
+            return false;
+        }
+
+        // Enforce realistic timezone range
+        if (test.startsWith("+") && hours == 14 && minutes > 0) {
+            // +14:00 is max, but +14:01 not allowed
+            return false;
+        }
+
+        if (test.startsWith("-") && hours > 12) {
+            // -12:00 is min, disallow -13:00 etc.
+            return false;
+        }
+
+        if(test.startsWith("-") && hours == 12 && minutes > 0) {
+            return false;
+        }
+        return true;
+    };
 
     /**
      * Returns the total offset in minutes.
