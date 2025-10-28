@@ -11,6 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -84,6 +85,24 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withCountry(String country) {
         descriptor.setCountry(new Country(country));
+        return this;
+    }
+
+    /**
+     * Sets the {@code preferredChannel} of the {@code EditPersonDescriptor} that we are
+     * building.
+     */
+    public EditPersonDescriptorBuilder withChannel(String channel) {
+        descriptor.setChannel(Person.CommunicationChannel.valueOf(channel));
+        return this;
+    }
+
+    /**
+     * Sets the {@code preferredLanguage} of the {@code EditPersonDescriptor} that we are
+     * building.
+     */
+    public EditPersonDescriptorBuilder withLanguage(String language) {
+        descriptor.setPreferredLanguage(new PreferredLanguage(language));
         return this;
     }
 
