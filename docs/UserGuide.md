@@ -80,8 +80,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [note:NOTE] [tag:TAG] [lang: LANGUAGE]
-]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [channel:CHANNEL] [lang: LANGUAGE] [event:EVENT] [note:NOTE] [tag:TAG]…​`
 
 * A tag with the person's country calling code is automatically added if it is included in the phone number.
 * The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
