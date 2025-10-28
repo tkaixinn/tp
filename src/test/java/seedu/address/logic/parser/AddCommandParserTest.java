@@ -236,4 +236,77 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_OFFSET_DESC, "Invalid command format! \n" + "Must be +HH:MM or -HH:MM.");
     }
+
+    // Channel parsing tests
+
+    @Test
+    public void parse_validChannel_success() {
+        // Minimal valid command with channel
+        Person expected = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND)
+                .withChannel(VALID_CHANNEL_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
+                        + CHANNEL_DESC_BOB,
+                new AddCommand(expected));
+    }
+
+    @Test
+    public void parse_validChannelWithOtherOptionalFields_success() {
+        // With note and language as well
+        Person expected = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND)
+                .withNote(VALID_NOTE_BOB)
+                .withChannel(VALID_CHANNEL_BOB)
+                .withLanguage(VALID_LANGUAGE_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
+                        + NOTE_DESC_BOB + CHANNEL_DESC_BOB + LANGUAGE_DESC_BOB,
+                new AddCommand(expected));
+    }
+
+    @Test
+    public void parse_invalidChannel_failure() {
+        // assume valid channels are like EMAIL, TELEGRAM, WHATSAPP, etc.
+        String invalidChannel = " channel:FAKE ";
+        String expectedMessage = "Invalid communication channel. Choose another channel.";
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + invalidChannel,
+                expectedMessage);
+    }
+
+    @Test
+    public void parse_missingChannel_success() {
+        // channel is optional, should parse successfully without it
+        Person expected = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND)
+                .build();
+
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expected));
+    }
+
+    @Test
+    public void parse_channelCaseInsensitivity_success() {
+        Person expected = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND)
+                .withChannel("EMAIL") // normalized
+                .build();
+
+        String lowerCaseChannel = " channel:email ";
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
+                        + lowerCaseChannel,
+                new AddCommand(expected));
+    }
 }
