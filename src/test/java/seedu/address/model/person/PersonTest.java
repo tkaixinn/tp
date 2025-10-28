@@ -98,6 +98,7 @@ public class PersonTest {
             + ", email=" + ALICE.getEmail()
             + ", address=" + ALICE.getAddress()
             + ", country=" + ALICE.getCountry()
+            + ", event=" + ALICE.getEvent()
             + ", note=" + ALICE.getNote()
             + ", tags=" + ALICE.getTags()
             + ", preferredChannel=" + ALICE.getPreferredChannel()

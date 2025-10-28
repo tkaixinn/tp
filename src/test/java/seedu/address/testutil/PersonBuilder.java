@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COUNTRY = "Singapore";
+    public static final String DEFAULT_EVENT = "";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
     public static final String DEFAULT_METON = "2023-11-15T14:30:00";
@@ -38,6 +40,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Country country;
+    private Event event;
     private Note note;
     private Set<Tag> tags;
     private Offset offset;
@@ -55,6 +58,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         country = new Country("");
+        event = new Event(DEFAULT_EVENT);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
@@ -73,6 +77,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         country = personToCopy.getCountry();
+        event = personToCopy.getEvent();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
@@ -120,6 +125,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Event} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEvent(String event) { // <<<<< ADDED
+        this.event = new Event(event);
         return this;
     }
 
@@ -191,8 +204,8 @@ public class PersonBuilder {
      * Builds the {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, country, note, channel, tags, offset, preferredLanguage, metOn,
-                isArchived);
+        return new Person(name, phone, email, address, country, event, note, channel, tags, offset, preferredLanguage,
+                metOn, isArchived);
     }
 
 }

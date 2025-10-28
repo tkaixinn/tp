@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -21,6 +22,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -44,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_NOTE, PREFIX_TAG, PREFIX_CHANNEL, PREFIX_OFFSET,
+                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_EVENT, PREFIX_NOTE, PREFIX_TAG, PREFIX_CHANNEL, PREFIX_OFFSET,
                 PREFIX_LANGUAGE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFSET)
@@ -58,6 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Event event = ParserUtil.parseEvent(argMultimap.getValue(PREFIX_EVENT).orElse(""));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).orElse(""));
         Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.EMAIL;
@@ -97,7 +100,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
         MetOn metOn = new MetOn(LocalDateTime.now());
-        Person person = new Person(name, phone, email, address, country, note, finalPreferredChannel, tagList,
+        Person person = new Person(name, phone, email, address, country, event, note, finalPreferredChannel, tagList,
                 offset, preferredLanguage, metOn, false);
 
         return new AddCommand(person);

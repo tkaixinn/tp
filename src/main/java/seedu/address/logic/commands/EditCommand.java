@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -29,6 +30,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -55,6 +57,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COUNTRY + "COUNTRY] "
+            + "[" + PREFIX_EVENT + "EVENT] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_CHANNEL + "PREFERRED CHANNEL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -95,6 +98,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
+        Event updatedEvent = personToEdit.getEvent();
         Note updatedNote = personToEdit.getNote();
         Offset updatedOffset = editPersonDescriptor.getGmtOffset().orElse(personToEdit.getOffset());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -105,7 +109,7 @@ public class EditCommand extends Command {
         boolean isArchived = personToEdit.getArchivalStatus();
         MetOn updatedMetOn = personToEdit.getMetOn();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedEvent,
                 updatedNote, updatedChannel, updatedTags, updatedOffset, updatedLang, updatedMetOn, isArchived);
     }
 
