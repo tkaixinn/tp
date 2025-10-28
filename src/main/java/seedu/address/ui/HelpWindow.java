@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,7 +38,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-f14b-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -48,6 +49,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private TableView<CommandEntry> commandTableView;
@@ -326,6 +330,8 @@ public class HelpWindow extends UiPart<Stage> {
                     || lang.getCode().toLowerCase().contains(lower)
                     || lang.getCountriesUsed().toLowerCase().contains(lower));
         });
+
+        tabPane.getTabs().forEach(tab -> tab.setClosable(false));
     }
 
     /**
