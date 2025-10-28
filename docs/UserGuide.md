@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [channel:CHANNEL] [lang: LANGUAGE] [event:EVENT] [note:NOTE] [tag:TAG]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]…​`
 
 * A tag with the person's country calling code is automatically added if it is included in the phone number.
 * The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
@@ -104,7 +104,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [channel: CHANNEL] [lang:LANGUAGE] [tag:TAG]…​`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [channel: CHANNEL] [language:LANGUAGE] [tag:TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the currently displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -305,7 +305,7 @@ Furthermore, certain edits can cause Worldly to behave in unexpected ways (e.g.,
 Action | Format and Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [lang:LANGUAGE] [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
 **List** | `list`
 **Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]…​`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
