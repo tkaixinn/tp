@@ -66,14 +66,14 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         name.getStyleClass().add("bold-label");
-        phone.setText(person.getPhone().value);
+        phone.setText("Phone: " + person.getPhone().value);
         phone.getStyleClass().add("bold-label");
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
 
         if (!person.getNote().value.equals("")) {
             note.setVisible(true);
-            note.setText(person.getNote().value);
+            note.setText("Note: " + person.getNote().value);
         } else {
             note.setVisible(false);
             note.setManaged(false);
@@ -81,7 +81,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getPreferredChannel() != null) {
             channel.setVisible(true);
-            channel.setText("Preferred communication channel: " + person.getPreferredChannel().name());
+            channel.setText("Preferred Communication Channel: " + person.getPreferredChannel().name());
         } else {
             channel.setVisible(false);
             channel.setManaged(false);
@@ -113,7 +113,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getOffset() != null) {
             offset.setVisible(true);
-            offset.setText("OFFSET : " + person.getOffset());
+            offset.setText("Timezone: UTC" + person.getOffset());
         } else {
             offset.setVisible(false);
             offset.setManaged(false);
@@ -123,7 +123,7 @@ public class PersonCard extends UiPart<Region> {
             preferredLanguage.setVisible(true);
             String lang = person.getPreferredLanguage().getPreferredLanguage();
             String greeting = GreetingMap.getGreeting(lang);
-            preferredLanguage.setText("Language: " + lang + " (" + greeting + ")");
+            preferredLanguage.setText("Preferred Language: " + toTitleCase(lang) + " (" + greeting + ")");
         } else {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
@@ -131,10 +131,29 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getMetOn() != null) {
             metOn.setVisible(true);
-            metOn.setText("Met on: " + person.getMetOn());
+            metOn.setText("Met On: " + person.getMetOn());
         } else {
             metOn.setVisible(false);
             metOn.setManaged(false);
         }
+    }
+
+    public static String toTitleCase(String input) {
+        StringBuilder result = new StringBuilder(input.length());
+        boolean capitaliseNext = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                capitaliseNext = true;
+            } else {
+                if (capitaliseNext) {
+                    c = Character.toTitleCase(c);
+                }
+                capitaliseNext = false;
+            }
+            result.append(c);
+        }
+
+        return result.toString();
     }
 }
