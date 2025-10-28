@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Locale;
 
+import seedu.address.model.util.StringUtils;
+
 public class PreferredLanguage {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -33,7 +35,7 @@ public class PreferredLanguage {
 
     @Override
     public String toString() {
-        return language;
+        return StringUtils.toTitleCase(language);
     }
 
     @Override

@@ -221,7 +221,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, note, tags, preferredChannel, offset, metOn,
+        return Objects.hash(name, phone, email, address, offset, country, preferredChannel, preferredLanguage, metOn, note, tags,
                 isArchived);
     }
 
@@ -232,16 +232,16 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("country", country)
-                .add("note", note)
-                .add("tags", tags)
-                .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("country", country.value.equals("") ? "-" : country)
+                .add("preferredChannel", preferredChannel)
                 .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
                 .add("suggestedGreeting", preferredLanguage == null
                         ? "-"
                         : GreetingLibrary.getGreeting(preferredLanguage.toString()))
                 .add("metOn", metOn)
+                .add("note", note)
+                .add("tags", tags)
                 .toString();
     }
 

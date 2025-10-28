@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.GreetingMap;
+import seedu.address.model.util.StringUtils;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -123,7 +125,7 @@ public class PersonCard extends UiPart<Region> {
             preferredLanguage.setVisible(true);
             String lang = person.getPreferredLanguage().getPreferredLanguage();
             String greeting = GreetingMap.getGreeting(lang);
-            preferredLanguage.setText("Preferred Language: " + toTitleCase(lang) + " (" + greeting + ")");
+            preferredLanguage.setText("Preferred Language: " + StringUtils.toTitleCase(lang) + " (" + greeting + ")");
         } else {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
@@ -136,24 +138,5 @@ public class PersonCard extends UiPart<Region> {
             metOn.setVisible(false);
             metOn.setManaged(false);
         }
-    }
-
-    public static String toTitleCase(String input) {
-        StringBuilder result = new StringBuilder(input.length());
-        boolean capitaliseNext = true;
-
-        for (char c : input.toCharArray()) {
-            if (Character.isSpaceChar(c)) {
-                capitaliseNext = true;
-            } else {
-                if (capitaliseNext) {
-                    c = Character.toTitleCase(c);
-                }
-                capitaliseNext = false;
-            }
-            result.append(c);
-        }
-
-        return result.toString();
     }
 }
