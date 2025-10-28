@@ -91,7 +91,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (!person.getCountry().value.equals("")) {
             country.setVisible(true);
-            country.setText(person.getCountry().value);
+            country.setText("Country: " + person.getCountry().value);
         } else {
             country.setVisible(false);
             country.setManaged(false);

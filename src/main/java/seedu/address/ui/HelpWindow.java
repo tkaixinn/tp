@@ -71,6 +71,9 @@ public class HelpWindow extends UiPart<Stage> {
     private TableView<TimezoneEntry> timezoneTable;
 
     @FXML
+    private TextField timezoneSearchField;
+
+    @FXML
     private TableColumn<TimezoneEntry, String> regionColumn;
 
     @FXML
@@ -116,7 +119,16 @@ public class HelpWindow extends UiPart<Stage> {
         offsetColumn.setCellValueFactory(new PropertyValueFactory<>("offset"));
 
         List<TimezoneEntry> zones = getAllZones();
-        timezoneTable.getItems().addAll(zones);
+
+        FilteredList<TimezoneEntry> filteredZones = new FilteredList<>(FXCollections.observableArrayList(zones),
+                p -> true);
+        timezoneTable.setItems(filteredZones);
+
+        timezoneSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String lower = newValue == null ? "" : newValue.toLowerCase();
+            filteredZones.setPredicate(zone -> zone.getRegion().toLowerCase().contains(lower) ||
+                    zone.getOffset().toLowerCase().contains(lower));
+        });
     }
 
     /**
