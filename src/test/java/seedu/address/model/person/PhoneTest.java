@@ -362,4 +362,32 @@ public class PhoneTest {
     public void constructor_invalidPhone_plusInside_throwsException() {
         assertThrows(IllegalArgumentException.class, () -> new Phone("123+456789"));
     }
+
+    @Test
+    public void isValidPhone_maxLength() {
+        // 15 digits -> valid
+        assertTrue(Phone.isValidPhone("123456789012345"));
+        assertTrue(Phone.isValidPhone("+651234567890123")); // including country code
+
+        // 16 digits -> invalid
+        assertFalse(Phone.isValidPhone("1234567890123456"));
+        assertFalse(Phone.isValidPhone("+6512345678901234")); // including country code
+    }
+
+    @Test
+    public void constructor_invalidPhone_exceedsMaxLength() {
+        // 16 digits should throw IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> new Phone("1234567890123456"));
+        assertThrows(IllegalArgumentException.class, () -> new Phone("+6512345678901234"));
+    }
+
+    @Test
+    public void constructor_validPhone_maxLength() {
+        // 15 digits should be allowed
+        Phone phone1 = new Phone("123456789012345");
+        assertEquals("123456789012345", phone1.value);
+
+        Phone phone2 = new Phone("+651234567890123");
+        assertEquals("+651234567890123", phone2.value);
+    }
 }

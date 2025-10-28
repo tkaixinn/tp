@@ -46,7 +46,7 @@ public class Phone {
         }
 
         String digitsOnly = test.replaceAll("\\D", "");
-        if (digitsOnly.length() < 3) {
+        if (digitsOnly.length() < 3 || digitsOnly.length() > 15) {
             return false;
         }
 
