@@ -38,6 +38,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -307,6 +308,43 @@ public class AddCommandParserTest {
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
                         + lowerCaseChannel,
+                new AddCommand(expected));
+    }
+
+    // Language parsing tests
+
+    @Test
+    public void parse_validLanguage_success() {
+        Person expected = new PersonBuilder(BOB)
+                .withLanguage(VALID_LANGUAGE_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
+                        + LANGUAGE_DESC_BOB,
+                new AddCommand(expected));
+    }
+
+    //@Test
+    public void parse_duplicateLanguage_failure() {
+        // lang: specified twice should fail
+        assertParseFailure(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB
+                        + LANGUAGE_DESC_BOB + LANGUAGE_DESC_BOB,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LANGUAGE));
+    }
+
+    //@Test
+    public void parse_languageCaseNormalization_success() {
+        Person expected = new PersonBuilder(BOB).withLanguage("English").build();
+
+        String lowerCaseLang = " lang:english ";
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB
+                        + lowerCaseLang,
                 new AddCommand(expected));
     }
 }
