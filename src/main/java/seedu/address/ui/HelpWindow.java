@@ -306,6 +306,8 @@ public class HelpWindow extends UiPart<Stage> {
                 p -> true);
         languageTableView.setItems(filteredLanguages);
 
+        languageTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         languageSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
             String lower = newValue == null ? "" : newValue.toLowerCase();
             filteredLanguages.setPredicate(lang -> lang.getName().toLowerCase().contains(lower)
