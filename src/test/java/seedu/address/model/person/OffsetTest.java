@@ -46,7 +46,6 @@ public class OffsetTest {
         assertTrue(Offset.isValidOffset("+01:30"));
         assertTrue(Offset.isValidOffset("-05:45"));
         assertTrue(Offset.isValidOffset("+14:00")); // upper hour bound allowed by regex
-        assertTrue(Offset.isValidOffset("-13:59"));
     }
 
     @Test
@@ -72,7 +71,6 @@ public class OffsetTest {
         assertEquals(90, new Offset("+01:30").getTotalMinutes());
         assertEquals(-345, new Offset("-05:45").getTotalMinutes());
         assertEquals(14 * 60, new Offset("+14:00").getTotalMinutes());
-        assertEquals(-(13 * 60 + 59), new Offset("-13:59").getTotalMinutes());
     }
 
     @Test
@@ -127,4 +125,57 @@ public class OffsetTest {
         assertEquals(x1, x2);
         assertEquals(x1.hashCode(), x2.hashCode());
     }
+
+    @Test
+    public void isValidOffset_multipleOrMisplacedPlusSigns_false() {
+        assertFalse(Offset.isValidOffset("++08:00"));
+        assertFalse(Offset.isValidOffset("+ +08:00"));
+
+        assertFalse(Offset.isValidOffset("+-08:00"));
+        assertFalse(Offset.isValidOffset("-+08:00"));
+
+        assertFalse(Offset.isValidOffset("08:+00"));
+        assertFalse(Offset.isValidOffset("08:00+"));
+        assertFalse(Offset.isValidOffset("8+00"));
+
+        assertFalse(Offset.isValidOffset("+"));
+        assertFalse(Offset.isValidOffset("+:00"));
+
+        assertFalse(Offset.isValidOffset("+08:+00"));
+        assertFalse(Offset.isValidOffset("+08:0+0"));
+
+        assertFalse(Offset.isValidOffset("+  +08:00"));
+    }
+
+    @Test
+    public void isValidOffset_multipleOrMisplacedMinusSigns_false() {
+        assertFalse(Offset.isValidOffset("--08:00"));
+        assertFalse(Offset.isValidOffset("- -08:00"));
+
+        assertFalse(Offset.isValidOffset("-+08:00"));
+        assertFalse(Offset.isValidOffset("+-08:00"));
+
+        assertFalse(Offset.isValidOffset("08:-00"));
+        assertFalse(Offset.isValidOffset("08:00-"));
+        assertFalse(Offset.isValidOffset("8-00"));
+
+        assertFalse(Offset.isValidOffset("-"));
+        assertFalse(Offset.isValidOffset("-:00"));
+    }
+
+    @Test
+    public void isValidOffset_outOfRealWorldRange_false() {
+        // Beyond +14:00
+        assertFalse(Offset.isValidOffset("+14:01"));
+        assertFalse(Offset.isValidOffset("+15:00"));
+
+        // Beyond -12:00
+        assertFalse(Offset.isValidOffset("-12:01"));
+        assertFalse(Offset.isValidOffset("-13:00"));
+
+        // Borderline valid ones
+        assertTrue(Offset.isValidOffset("+14:00"));
+        assertTrue(Offset.isValidOffset("-12:00"));
+    }
 }
+
