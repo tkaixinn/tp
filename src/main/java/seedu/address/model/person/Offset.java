@@ -34,6 +34,12 @@ public class Offset implements Comparable<Offset> {
         this.totalMinutes = (input.charAt(0) == '+' ? 1 : -1) * (hours * 60 + minutes);
     }
 
+    /**
+     * Checks if a given string is a valid GMT offset.
+     *
+     * @param test the string to validate
+     * @return true if {@code test} is a valid GMT offset, false otherwise
+     */
     public static boolean isValidOffset(String test) {
         if (test == null) {
             return false;
@@ -64,7 +70,7 @@ public class Offset implements Comparable<Offset> {
             return false;
         }
 
-        if(test.startsWith("-") && hours == 12 && minutes > 0) {
+        if (test.startsWith("-") && hours == 12 && minutes > 0) {
             return false;
         }
         return true;
@@ -72,6 +78,8 @@ public class Offset implements Comparable<Offset> {
 
     /**
      * Returns the total offset in minutes.
+     *
+     * @return total offset in minutes
      */
     public int getTotalMinutes() {
         return totalMinutes;
