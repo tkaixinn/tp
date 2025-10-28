@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -11,6 +10,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code AddNoteCommand}.
@@ -66,7 +65,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_addNoteExistingPerson_specialCharacters_success() throws Exception {
+    public void execute_addNoteSpecial_success() throws Exception {
         Name targetName = new Name("Alice Pauline");
         Note note = new Note(NOTE_SPECIAL);
 
@@ -192,7 +191,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_whitespaceNote_preserved_success() throws Exception {
+    public void execute_whitespace_success() throws Exception {
         Person target = model.getFilteredPersonList().get(0);
         AddNoteCommand cmd = new AddNoteCommand(target.getName(), new Note(WS_NOTE));
 
@@ -233,7 +232,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_personNotFound_failure_message() {
+    public void execute_personNotFound_failureMessage() {
         Name invalid = new Name("Nobody Here");
         AddNoteCommand cmd = new AddNoteCommand(invalid, new Note("x"));
         String expected = String.format(AddNoteCommand.MESSAGE_PERSON_NOT_FOUND, invalid.fullName);

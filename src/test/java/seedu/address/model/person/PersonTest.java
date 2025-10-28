@@ -97,15 +97,15 @@ public class PersonTest {
             + ", phone=" + ALICE.getPhone()
             + ", email=" + ALICE.getEmail()
             + ", address=" + ALICE.getAddress()
+            + ", offset=" + ALICE.getOffset()
             + ", country=" + ALICE.getCountry()
             + ", event=" + ALICE.getEvent()
-            + ", note=" + ALICE.getNote()
-            + ", tags=" + ALICE.getTags()
             + ", preferredChannel=" + ALICE.getPreferredChannel()
-            + ", offset=" + ALICE.getOffset()
             + ", preferredLanguage=" + ALICE.getPreferredLanguage()
             + ", suggestedGreeting=" + ALICE.getSuggestedGreeting()
-            + ", metOn=" + ALICE.getMetOn() + "}";
+            + ", metOn=" + ALICE.getMetOn()
+            + ", note=" + ALICE.getNote()
+            + ", tags=" + ALICE.getTags()+ "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -50,13 +50,13 @@ public class Phone {
             return false;
         }
 
-        if(test.startsWith("+")) {
-            if(test.length() < 2 || !Character.isDigit(test.charAt(1))) {
+        if (test.startsWith("+")) {
+            if (test.length() < 2 || !Character.isDigit(test.charAt(1))) {
                 return false;
             }
         }
 
-        if(test.substring(1).contains("+")) {
+        if (test.substring(1).contains("+")) {
             return false;
         }
         return true;

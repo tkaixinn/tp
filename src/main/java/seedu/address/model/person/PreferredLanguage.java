@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Locale;
 
+import seedu.address.model.util.StringUtils;
+
 /**
  * Represents a person's preferred language in the address book.
  * Guarantees: immutable; value is always valid (non-null and matches validation constraints).
@@ -37,7 +39,7 @@ public class PreferredLanguage {
 
     @Override
     public String toString() {
-        return language;
+        return StringUtils.toTitleCase(language);
     }
 
     @Override
@@ -57,4 +59,3 @@ public class PreferredLanguage {
     }
 
 }
-

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
@@ -25,26 +26,29 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-        + "Parameters: "
+        + "\nParameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
         + PREFIX_EMAIL + "EMAIL "
         + PREFIX_ADDRESS + "ADDRESS "
-        + PREFIX_CHANNEL + "CHANNEL "
+        + PREFIX_OFFSET + "UTC OFFSET "
+        + "[" + PREFIX_COUNTRY + "COUNTRY] "
+        + "[" + PREFIX_CHANNEL + "CHANNEL] "
+        + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
         + "[" + PREFIX_NOTE + "NOTE] "
         + "[" + PREFIX_TAG + "TAG]...\n"
-        + PREFIX_OFFSET + "OFFSET "
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "
         + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-        + PREFIX_CHANNEL + "PHONE "
+        + PREFIX_OFFSET + "+08:00"
         + PREFIX_COUNTRY + "Singapore "
+        + PREFIX_CHANNEL + "PHONE "
+        + PREFIX_LANGUAGE + "English "
         + PREFIX_NOTE + "Prefers WhatsApp "
         + PREFIX_TAG + "friends "
-        + PREFIX_TAG + "owesMoney "
-        + PREFIX_OFFSET + "+08:00";
+        + PREFIX_TAG + "owesMoney ";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

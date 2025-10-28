@@ -42,12 +42,20 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Timezone (UTC offset): ")
+                .append(person.getOffset());
+
+        if (person.getCountry() != null && !person.getCountry().toString().isBlank()) {
+            builder.append("; Country: ").append(person.getCountry());
+        }
+
         builder.append("; Channel: ")
                 .append(person.getPreferredChannel())
-                .append("; Offset: ")
-                .append(person.getOffset());
+                .append("; Language: ")
+                .append(person.getPreferredLanguage())
+                .append("; Tags: ");
+
+        person.getTags().forEach(builder::append);
         return builder.toString();
     }
 
