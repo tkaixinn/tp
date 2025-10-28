@@ -231,4 +231,42 @@ public class PhoneTest {
         assertEquals(first, second);
         assertEquals(second, third);
     }
+    @Test
+    public void isValidPhone_multipleLeadingSigns() {
+        assertFalse(Phone.isValidPhone("++6598765432"));
+        assertFalse(Phone.isValidPhone("+-6598765432"));
+        assertFalse(Phone.isValidPhone("+--1234567"));
+
+        assertTrue(Phone.isValidPhone("+6598765432"));
+        assertTrue(Phone.isValidPhone("+1 123-456-7890"));
+    }
+
+    @Test
+    public void isValidPhone_plusInsideNumber_invalid() {
+        assertFalse(Phone.isValidPhone("123+456789"));
+        assertFalse(Phone.isValidPhone("12+34+56"));
+        assertFalse(Phone.isValidPhone("123456+"));
+    }
+
+    @Test
+    public void isValidPhone_onlyDigitsAndAllowedSymbols() {
+        assertTrue(Phone.isValidPhone("1234567890"));
+        assertTrue(Phone.isValidPhone("123 456 7890"));
+        assertTrue(Phone.isValidPhone("(123) 456-7890"));
+
+        assertFalse(Phone.isValidPhone("123*456"));
+        assertFalse(Phone.isValidPhone("123#456"));
+        assertFalse(Phone.isValidPhone("123@456"));
+    }
+
+    @Test
+    public void constructor_invalidPhone_multipleSigns_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Phone("++6598765432"));
+        assertThrows(IllegalArgumentException.class, () -> new Phone("+-6598765432"));
+    }
+
+    @Test
+    public void constructor_invalidPhone_plusInside_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> new Phone("123+456789"));
+    }
 }
