@@ -239,9 +239,87 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+## **Data Archiving & Sorting**
 
-_{Explain here how the data archiving feature will be implemented}_
+### Archiving Contacts
+
+The app now supports **archiving and unarchiving** contacts to help users keep their address book relevant and organized.
+
+#### Commands
+
+| Action        | Command Format & Example |
+|---------------|-------------------------|
+| Archive       | `archive INDEX` <br> e.g., `archive 1` → archives the first contact in the current view. |
+| Unarchive     | `unarchive INDEX` <br> e.g., `unarchive 2` → restores the second contact from the archived list. |
+| List Archives | `archivelist` <br> e.g., `archivelist` → displays all archived contacts. |
+
+#### Implementation
+
+- Each `Person` object contains an **archival status** flag (`true` for archived, `false` for unarchived`).
+- **Archiving a person** (`ArchiveCommand`) replaces the original `Person` in the model with a copy that has `archivalStatus = true`.
+- **Unarchiving** (`UnarchiveCommand`) similarly creates a copy with `archivalStatus = false`.
+- `ArchiveListCommand` updates the filtered list to show only archived contacts.
+- Commands validate the index against the current filtered list and return appropriate errors if:
+    - Index is invalid
+    - Contact is already archived/unarchived
+
+#### Interaction with Model and UI
+
+- Commands update the **filtered person list** in the `Model` via predicates:
+    - `PREDICATE_SHOW_ALL_UNARCHIVED` → shows only active contacts
+    - `PREDICATE_SHOW_ALL_ARCHIVED` → shows only archived contacts
+- The UI observes the filtered list and automatically refreshes when changes occur.
+- Archiving does **not remove contacts from storage**, preserving the full address book.
+
+#### Example Scenario
+
+1. User executes `archive 1` on the first contact:
+    - `ArchiveCommand` validates the index.
+    - Creates a new `Person` object with `archivalStatus = true`.
+    - Updates the `Model` and refreshes the view to show only unarchived contacts.
+2. User executes `archivelist`:
+    - `ArchiveListCommand` updates the filtered list to show archived contacts only.
+3. User executes `unarchive 1`:
+    - `UnarchiveCommand` validates the index in the archived list.
+    - Replaces the archived person with an unarchived version.
+    - Updates the view to show archived contacts or returns to unarchived view depending on predicate.
+
+#### Manual Test Cases
+
+| Test | Command | Expected Outcome |
+|------|---------|-----------------|
+| Archive a contact | `archive 1` | Contact is moved from unarchived list; success message displayed. |
+| Archive an already archived contact | `archive 1` | Error message: contact already archived. |
+| List archives | `archivelist` | Only archived contacts displayed. |
+| Unarchive a contact | `unarchive 1` | Contact restored to unarchived list; success message displayed. |
+| Unarchive an unarchived contact | `unarchive 1` | Error message: contact already unarchived. |
+
+---
+
+### Sorting Contacts
+
+The app also supports sorting contacts by various criteria:
+
+| Action            | Command Format & Example |
+|------------------|-------------------------|
+| Sort by Name      | `sortname` <br> e.g., `sortname` → sorts all visible contacts alphabetically by name. |
+| Sort by Country   | `sortcountry` <br> e.g., `sortcountry` → sorts contacts alphabetically by country. |
+| Sort by Met Date  | `sortdate` <br> e.g., `sortdate` → sorts contacts chronologically by first met date. |
+
+#### Implementation
+
+- Sorting operates on the **filtered list** in the `Model` so it respects current filters (e.g., after `find`, `archivelist`).
+- The `ObservableList` is updated after sorting, triggering automatic UI refresh.
+- Sorting is **stable**: contacts with equal keys maintain their relative order.
+
+#### Manual Test Cases
+
+| Test | Command | Expected Outcome |
+|------|---------|-----------------|
+| Sort by name | `sortname` | Contacts listed alphabetically by name. |
+| Sort by country | `sortcountry` | Contacts listed alphabetically by country. |
+| Sort by date met | `sortdate` | Contacts listed from earliest to latest first met date. |
+| Sort after find | `find Singapore` then `sortname` | Only filtered contacts are sorted; others hidden. |
 
 
 --------------------------------------------------------------------------------------------------------------------
