@@ -282,29 +282,21 @@ public class HelpWindow extends UiPart<Stage> {
 
         languageCountriesColumn.setCellFactory(col ->
                 new TableCell<LanguageEntry, String>() {
-                    private final StackPane pane = new StackPane();
-                    private final Label label = new Label();
+                    private final javafx.scene.text.Text text = new javafx.scene.text.Text();
 
                     {
-                        label.setWrapText(true);
-                        pane.getChildren().add(label);
-                        pane.setPrefHeight(80);
+                        text.wrappingWidthProperty().bind(languageCountriesColumn.widthProperty().subtract(15));
+                        setGraphic(text);
+                        setPrefHeight(USE_COMPUTED_SIZE);
                     }
 
                     @Override
                     protected void updateItem(String countries, boolean empty) {
                         super.updateItem(countries, empty);
                         if (empty || countries == null) {
-                            setGraphic(null);
+                            text.setText(null);
                         } else {
-                            label.setText(countries);
-                            ScrollPane sp = new ScrollPane(pane);
-                            sp.setPrefHeight(80);
-                            sp.setFitToWidth(true);
-                            sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-                            sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
-                            setGraphic(sp);
+                            text.setText(countries);
                         }
                     }
                 });
