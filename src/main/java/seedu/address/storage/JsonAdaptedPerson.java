@@ -19,13 +19,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
-import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +41,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String country;
+    private final String event;
     private final String note;
     private final String offset;
     private final boolean archivalStatus;
@@ -55,16 +57,18 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("country") String country, @JsonProperty("note") String note,
+                             @JsonProperty("event") String event,
                              @JsonProperty("offset") String offset,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("preferredLanguage") String preferredLanguage,
                              @JsonProperty("metOn") String metOn,
-                              @JsonProperty("archivalStatus") boolean archivalStatus) {
+                             @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.event = event;
         this.note = note;
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
@@ -84,6 +88,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry() != null ? source.getCountry().toString() : null;
+        event = source.getEvent().value;
         note = source.getNote().value;
         offset = source.getOffset().value;
         preferredLanguage =
@@ -140,6 +145,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Event modelEvent = (event == null) ? new Event("") : new Event(event);
+
         final Note modelNote = (note == null) ? new Note("") : new Note(note);
 
         final Offset modelOffset;
@@ -181,8 +188,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelNote, modelTags,
-                modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelEvent, modelNote,
+                modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
     }
 
 }

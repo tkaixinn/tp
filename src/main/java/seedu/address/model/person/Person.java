@@ -27,6 +27,7 @@ public class Person {
     private final Address address;
     private final Country country;
     private final MetOn metOn;
+    private final Event event;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
     private final CommunicationChannel preferredChannel;
@@ -38,7 +39,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country,
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Event event,
             Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
                   PreferredLanguage preferredLanguage,
                   MetOn metOn, boolean isArchived) {
@@ -48,6 +49,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.country = country;
+        this.event = event;
         this.note = note;
         this.preferredChannel = preferredChannel;
         this.tags.addAll(tags);
@@ -68,7 +70,7 @@ public class Person {
     /**
      * If both note notes and country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Note note,
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Event event, Note note,
             Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage, MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
@@ -76,6 +78,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.country = country;
+        this.event = event;
         this.note = note;
         this.preferredChannel = CommunicationChannel.EMAIL;
         this.tags.addAll(tags);
@@ -124,6 +127,10 @@ public class Person {
         return address;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
     public Note getNote() {
         return note;
     }
@@ -135,7 +142,6 @@ public class Person {
     public PreferredLanguage getPreferredLanguage() {
         return preferredLanguage;
     }
-
 
     public boolean getArchivalStatus() {
         return isArchived;
@@ -212,6 +218,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && country.equals(otherPerson.country)
+                && event.equals(otherPerson.event)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
                 && offset.equals(otherPerson.offset)
@@ -221,7 +228,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, offset, country, preferredChannel, preferredLanguage, metOn, note, tags,
+        return Objects.hash(name, phone, email, address, offset, country, event, preferredChannel, preferredLanguage, metOn, note, tags,
                 isArchived);
     }
 
@@ -234,6 +241,7 @@ public class Person {
                 .add("address", address)
                 .add("offset", offset)
                 .add("country", country.value.equals("") ? "-" : country)
+                .add("event", event)
                 .add("preferredChannel", preferredChannel)
                 .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
                 .add("suggestedGreeting", preferredLanguage == null

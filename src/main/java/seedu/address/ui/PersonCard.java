@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label event;
+    @FXML
     private Label note;
     @FXML
     private Label channel;
@@ -79,6 +81,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             note.setVisible(false);
             note.setManaged(false);
+        }
+
+        if (!person.getNote().value.equals("")) {
+            event.setVisible(true);
+            event.setText("Event: " + person.getEvent().value);
+        } else {
+            event.setVisible(false);
+            event.setManaged(false);
         }
 
         if (person.getPreferredChannel() != null) {

@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -31,8 +32,9 @@ public class SampleDataUtil {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Country("Singapore"),
-                    new Note("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
-                    getTagSet("friends"), new Offset("+08:00"), new PreferredLanguage("english"), new MetOn(LocalDateTime.now()), false)
+                    new Event("University Assembly"), new Note("follows Chinese Traditions"),
+                    Person.CommunicationChannel.EMAIL, getTagSet("friends"), new Offset("+08:00"),
+                    new PreferredLanguage("english"), new MetOn(LocalDateTime.now()), false)
         };
     }
 

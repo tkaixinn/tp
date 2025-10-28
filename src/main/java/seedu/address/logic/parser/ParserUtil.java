@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Event;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -103,6 +104,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String event} into an {@code Event}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code event} is invalid.
+     */
+    public static Event parseEvent(String event) throws ParseException {
+        if (event == null) {
+            throw new ParseException("Event cannot be null");
+        }
+        // Allow empty or whitespace-only input
+        String trimmedEvent = event.trim();
+        return new Event(trimmedEvent);
     }
 
     /**
