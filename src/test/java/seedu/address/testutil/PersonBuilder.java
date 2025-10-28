@@ -12,6 +12,7 @@ import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
+import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredLanguage;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COUNTRY = "Singapore";
+    public static final String DEFAULT_ORGANISATION = "";
     public static final String DEFAULT_EVENT = "";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
@@ -40,6 +42,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Country country;
+    private Organisation organisation;
     private Event event;
     private Note note;
     private Set<Tag> tags;
@@ -58,6 +61,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         country = new Country("");
+        organisation = new Organisation(DEFAULT_ORGANISATION);
         event = new Event(DEFAULT_EVENT);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
@@ -77,6 +81,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         country = personToCopy.getCountry();
+        organisation = personToCopy.getOrganisation();
         event = personToCopy.getEvent();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
@@ -125,6 +130,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Organisation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOrganisation(String organisation) { // <<<<< ADDED
+        this.organisation = new Organisation(organisation);
         return this;
     }
 
@@ -204,8 +217,8 @@ public class PersonBuilder {
      * Builds the {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, country, event, note, channel, tags, offset, preferredLanguage,
-                metOn, isArchived);
+        return new Person(name, phone, email, address, country, organisation, event, note, channel, tags, offset,
+            preferredLanguage, metOn, isArchived);
     }
 
 }

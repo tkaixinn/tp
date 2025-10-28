@@ -24,6 +24,7 @@ import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
+import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredLanguage;
@@ -44,6 +45,7 @@ class JsonAdaptedPerson {
     private final String event;
     private final String note;
     private final String offset;
+    private final String organisation;
     private final boolean archivalStatus;
     private final String metOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -57,6 +59,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("country") String country, @JsonProperty("note") String note,
+                             @JsonProperty("organisation") String organisation,
                              @JsonProperty("event") String event,
                              @JsonProperty("offset") String offset,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
@@ -68,6 +71,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.country = country;
+        this.organisation = organisation;
         this.event = event;
         this.note = note;
         this.offset = offset;
@@ -88,6 +92,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry() != null ? source.getCountry().toString() : null;
+        organisation = source.getOrganisation().value;
         event = source.getEvent().value;
         note = source.getNote().value;
         offset = source.getOffset().value;
@@ -143,7 +148,11 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+
         final Address modelAddress = new Address(address);
+
+        final Organisation modelOrganisation = (organisation == null) ? new Organisation("")
+            : new Organisation(organisation);
 
         final Event modelEvent = (event == null) ? new Event("") : new Event(event);
 
@@ -188,8 +197,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelEvent, modelNote,
-                modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelOrganisation,
+            modelEvent, modelNote, modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
     }
 
 }

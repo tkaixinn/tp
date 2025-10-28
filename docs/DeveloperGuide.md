@@ -133,6 +133,18 @@ The `Model` component,
 
 </div>
 
+### Extended Person Model
+
+The `Person` class has been extended to support three new optional fields:
+- **`Organisation`**: Represents the institution (e.g., company, school) the person is affiliated with.
+- **`Event`**: Records meeting contexts or future interactions (e.g., "Met at NUS Career Fair").
+- **`Note`**: Stores cultural or personal notes (e.g., "Prefers Western cuisine").
+
+All three fields are:
+- Immutable and validated
+- Optional (default to empty string)
+- Fully serializable to JSON
+- Positioned in the constructor as: `(Name, Phone, Email, Address, Country, Organisation, Event, Note, ...)`
 
 ### Storage component
 
@@ -154,6 +166,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Extended Person Model
+
+The `Person` class has been extended to support three new optional fields:
+- **`Organisation`**: Represents the institution (e.g., company, school) the person is affiliated with.
+- **`Event`**: Records meeting contexts or future interactions (e.g., "Met at NUS Career Fair").
+- **`Note`**: Stores cultural or personal notes (e.g., "Prefers WhatsApp").
+
+All three fields are:
+- Immutable and validated
+- Optional (default to empty string)
+- Fully serializable to JSON
+- Positioned in the constructor as: `(Name, Phone, Email, Address, Country, Organisation, Event, Note, ...)`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -463,6 +488,8 @@ etc. "Invalid name. Only letters, spaces, hyphens, and apostrophes are allowed, 
 * **Cultural note**: A short user-generated entry recording cultural tips, etiquette reminders, or unique local insights (e.g., greetings, taboos)
 * **First Meet Circumstances**: A note describing how/where the user first met the contact (e.g., “Met at orientation event,” “Group project partner”), to strengthen recall. 
 * **Alias**: A shortcut keyword (e.g., typing t for “todo,” e for “event”) to speed up data entry.
+* **Organisation**: The institution (e.g., company, university) a contact is affiliated with.
+* **Event**: A recorded interaction or planned meeting with a contact.
 
 --------------------------------------------------------------------------------------------------------------------
 

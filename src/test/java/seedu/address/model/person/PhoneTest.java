@@ -194,11 +194,11 @@ public class PhoneTest {
     @Test
     public void countryDetection_equivalentFormats_sameResult() {
         String[] formats = new String[] {
-                "+6598765432",
-                "+65 9876 5432",
-                "+65-9876-5432",
-                "+65 (9876) 5432",
-                "+65 (0) 9876 5432"
+            "+6598765432",
+            "+65 9876 5432",
+            "+65-9876-5432",
+            "+65 (9876) 5432",
+            "+65 (0) 9876 5432"
         };
         for (String fmt : formats) {
             assertEquals("65", new Phone(fmt).getCountryCode(), "Failed for format: " + fmt);
@@ -222,12 +222,12 @@ public class PhoneTest {
 
     @Test
     public void countryDetection_variety_sanity() {
-        assertEquals("33", new Phone("+33 6 12 34 56 78").getCountryCode());  // France
-        assertEquals("34", new Phone("+34 612 34 56 78").getCountryCode());   // Spain
-        assertEquals("39", new Phone("+39 347 123 4567").getCountryCode());   // Italy
-        assertEquals("52", new Phone("+52 55 1234 5678").getCountryCode());   // Mexico
-        assertEquals("62", new Phone("+62 812-1234-5678").getCountryCode());  // Indonesia
-        assertEquals("82", new Phone("+82 10-1234-5678").getCountryCode());   // South Korea
+        assertEquals("33", new Phone("+33 6 12 34 56 78").getCountryCode()); // France
+        assertEquals("34", new Phone("+34 612 34 56 78").getCountryCode()); // Spain
+        assertEquals("39", new Phone("+39 347 123 4567").getCountryCode()); // Italy
+        assertEquals("52", new Phone("+52 55 1234 5678").getCountryCode()); // Mexico
+        assertEquals("62", new Phone("+62 812-1234-5678").getCountryCode()); // Indonesia
+        assertEquals("82", new Phone("+82 10-1234-5678").getCountryCode()); // South Korea
     }
 
     @Test
@@ -353,13 +353,13 @@ public class PhoneTest {
     }
 
     @Test
-    public void constructor_invalidPhone_multipleSigns_throwsException() {
+    public void constructor_invalidPhoneMultipleSigns_throwsException() {
         assertThrows(IllegalArgumentException.class, () -> new Phone("++6598765432"));
         assertThrows(IllegalArgumentException.class, () -> new Phone("+-6598765432"));
     }
 
     @Test
-    public void constructor_invalidPhone_plusInside_throwsException() {
+    public void constructor_invalidPhonePlusInside_throwsException() {
         assertThrows(IllegalArgumentException.class, () -> new Phone("123+456789"));
     }
 

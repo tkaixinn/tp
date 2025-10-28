@@ -88,7 +88,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CH
 * PreferredLanguage is optional. If omitted, the contact’s preferred language defaults to English.
 
 Examples:
-* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
+* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore organisation:NUS event:NUS alumni gathering note:does not drink alcohol tag:friends`
 * `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 channel:TELEGRAM tag:criminal offset:+08:00 lang:chinese `
 
 ### Listing all persons : `list`
@@ -146,11 +146,28 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an organisation to existing persons: `addorg`
+
+Adds or updates the existing contact's organisation.
+
+Format: `addorg name:NAME organisation:ORGANISATION`
+
+To remove an existing contact's organisation record:
+
+Format: `addorg name:NAME organisation:`
+
+Examples:
+* `addorg name: John Doe organisation: National University of Singapore`
+
 ### Adding an event to existing persons: `addevent`
 
 Adds or updates an event for an existing contact.
 
 Format: `addevent name:NAME event:EVENT`
+
+To remove an event from an existing contact:
+
+Format: `addevent name:NAME event:`
 
 Examples:
 * `addevent name:John Doe event:Met at NUS Career Fair 2024`
@@ -160,6 +177,10 @@ Examples:
 Adds a note to an existing contact.
 
 Format: `addnote name:NAME note:NOTE`
+
+To remove a note from an existing contact:
+
+Format: `addnote name:NAME note:`
 
 Examples:
 * `addnote name:John Doe note:Cannot drink alcohol`
@@ -302,6 +323,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [note:NOTE] [lang:LANGUAGE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
+**Add Organisation** | `addorg name:NAME organisation:ORGANISATION` <br> e.g., `addorg name:John Doe organisation:National University of Singapore`
 **Add Event** | `addevent name:NAME event:EVENT` <br> e.g., `addevent name:John Doe event:Met at NUS Career Fair 2024`
 **Add Note** | `add name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
 **Clear** | `clear`

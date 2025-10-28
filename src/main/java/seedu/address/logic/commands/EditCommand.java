@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNARCHIVED;
@@ -35,6 +36,7 @@ import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
+import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Person.CommunicationChannel;
 import seedu.address.model.person.Phone;
@@ -57,6 +59,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COUNTRY + "COUNTRY] "
+            + "[" + PREFIX_ORGANISATION + "ORGANISATION] "
             + "[" + PREFIX_EVENT + "EVENT] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_CHANNEL + "PREFERRED CHANNEL] "
@@ -98,6 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
+        Organisation updatedOrganisation = personToEdit.getOrganisation();
         Event updatedEvent = personToEdit.getEvent();
         Note updatedNote = personToEdit.getNote();
         Offset updatedOffset = editPersonDescriptor.getGmtOffset().orElse(personToEdit.getOffset());
@@ -109,8 +113,9 @@ public class EditCommand extends Command {
         boolean isArchived = personToEdit.getArchivalStatus();
         MetOn updatedMetOn = personToEdit.getMetOn();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedEvent,
-                updatedNote, updatedChannel, updatedTags, updatedOffset, updatedLang, updatedMetOn, isArchived);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedOrganisation,
+            updatedEvent, updatedNote, updatedChannel, updatedTags, updatedOffset, updatedLang, updatedMetOn,
+            isArchived);
     }
 
     @Override

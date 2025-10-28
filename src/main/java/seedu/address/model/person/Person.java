@@ -27,6 +27,7 @@ public class Person {
     private final Address address;
     private final Country country;
     private final MetOn metOn;
+    private final Organisation organisation;
     private final Event event;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
@@ -39,8 +40,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Event event,
-            Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
+                  Event event, Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
                   PreferredLanguage preferredLanguage,
                   MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
@@ -49,6 +50,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.country = country;
+        this.organisation = organisation;
         this.event = event;
         this.note = note;
         this.preferredChannel = preferredChannel;
@@ -70,14 +72,16 @@ public class Person {
     /**
      * If both note notes and country is included in initialisation.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Country country, Event event, Note note,
-            Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage, MetOn metOn, boolean isArchived) {
+    public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
+                  Event event, Note note, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
+                  MetOn metOn, boolean isArchived) {
         requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.organisation = organisation;
         this.event = event;
         this.note = note;
         this.preferredChannel = CommunicationChannel.EMAIL;
@@ -125,6 +129,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Organisation getOrganisation() {
+        return organisation;
     }
 
     public Event getEvent() {
@@ -218,6 +226,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && country.equals(otherPerson.country)
+                && organisation.equals(otherPerson.organisation)
                 && event.equals(otherPerson.event)
                 && note.equals(otherPerson.note)
                 && tags.equals(otherPerson.tags)
@@ -228,8 +237,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, event, note, tags, preferredChannel, offset, metOn,
-                isArchived);
+        return Objects.hash(name, phone, email, address, country, organisation, note, tags, preferredChannel, offset,
+            metOn, isArchived);
     }
 
     @Override
@@ -240,6 +249,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("country", country)
+                .add("organisation", organisation)
                 .add("event", event)
                 .add("note", note)
                 .add("tags", tags)

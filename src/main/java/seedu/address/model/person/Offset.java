@@ -34,6 +34,13 @@ public class Offset implements Comparable<Offset> {
         this.totalMinutes = (input.charAt(0) == '+' ? 1 : -1) * (hours * 60 + minutes);
     }
 
+    /**
+     * Returns true if the given string is a valid UTC offset in the format {@code +HH:MM} or {@code -HH:MM},
+     * within the allowed timezone range.
+     *
+     * @param test The string to validate.
+     * @return True if the string represents a valid offset, false otherwise.
+     */
     public static boolean isValidOffset(String test) {
         if (test == null) {
             return false;
@@ -64,7 +71,7 @@ public class Offset implements Comparable<Offset> {
             return false;
         }
 
-        if(test.startsWith("-") && hours == 12 && minutes > 0) {
+        if (test.startsWith("-") && hours == 12 && minutes > 0) {
             return false;
         }
         return true;

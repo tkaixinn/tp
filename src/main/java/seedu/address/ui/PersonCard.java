@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label organisation;
+    @FXML
     private Label event;
     @FXML
     private Label note;
@@ -73,20 +75,28 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
 
+        if (!person.getOrganisation().value.equals("")) {
+            organisation.setVisible(true);
+            organisation.setText("Organisation: " + person.getOrganisation().value);
+        } else {
+            organisation.setVisible(false);
+            organisation.setManaged(false);
+        }
+
+        if (!person.getEvent().value.equals("")) {
+            event.setVisible(true);
+            event.setText("Event: " + person.getEvent().value);
+        } else {
+            event.setVisible(false);
+            event.setManaged(false);
+        }
+
         if (!person.getNote().value.equals("")) {
             note.setVisible(true);
             note.setText("Note: " + person.getNote().value);
         } else {
             note.setVisible(false);
             note.setManaged(false);
-        }
-
-        if (!person.getNote().value.equals("")) {
-            event.setVisible(true);
-            event.setText("Event: " + person.getEvent().value);
-        } else {
-            event.setVisible(false);
-            event.setManaged(false);
         }
 
         if (person.getPreferredChannel() != null) {
@@ -148,6 +158,14 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 
+    /**
+     * Converts the given string into title case, where the first letter of each word is capitalised.
+     * Words are detected based on space characters. Characters that are not spaces are preserved
+     * as-is except when they are the first character of a word.
+     *
+     * @param input The string to be converted to title case. Assumed to be non-null.
+     * @return A new string with each word capitalised.
+     */
     public static String toTitleCase(String input) {
         StringBuilder result = new StringBuilder(input.length());
         boolean capitaliseNext = true;

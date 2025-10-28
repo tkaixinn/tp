@@ -58,6 +58,7 @@ public class ArchiveCommand extends Command {
                     personToArchive.getEmail(),
                     personToArchive.getAddress(),
                     personToArchive.getCountry(),
+                    personToArchive.getOrganisation(),
                     personToArchive.getEvent(),
                     personToArchive.getNote(),
                     personToArchive.getTags(),
