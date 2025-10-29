@@ -168,8 +168,6 @@
                                                 <columns>
                                                     <TableColumn fx:id="languageNameColumn"
                                                         text="Language Name" prefWidth="360" />
-                                                    <TableColumn fx:id="languageCodeColumn"
-                                                        text="Language Code" prefWidth="120" />
                                                     <TableColumn fx:id="languageCountriesColumn"
                                                         text="Countries Used" prefWidth="360" />
                                                 </columns>

@@ -53,7 +53,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
   e.g `name:NAME [tag:TAG]` can be used as `name:John Doe tag:friend` or as `name:John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times, including not at all.<br>
-  e.g. `[tag:TAG]…​` can be used as ` ` (i.e. 0 times), `tag:friend`, `tag:friend tag:family` etc.
+  e.g. `[tag:TAG]...` can be used as ` ` (i.e. 0 times), `tag:friend`, `tag:friend tag:family` etc.
 
 * Parameters can be in any order.<br>
   e.g. If the command specifies `name:NAME phone:PHONE_NUMBER`, `phone:PHONE_NUMBER name:NAME` is also acceptable.
@@ -80,9 +80,9 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]…​`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
-* A tag with the person's country calling code is automatically added if it is included in the phone number.
+* A tag with the person's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
 * The language field is optional, but if omitted, defaults to English. It is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
@@ -104,15 +104,14 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [channel: CHANNEL] [language:LANGUAGE] [tag:TAG]…​`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [channel: CHANNEL] [language:LANGUAGE] [tag:TAG]...`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the currently displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the currently displayed person list. The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. You can remove all the person’s tags by typing `tag:` without specifying any tags after it.
 * If the currently viewed list is not the main list (e.g. if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
-* Notes and events must be updated with `addnote` and `addevent` respectively.
 
 Examples:
 *  `edit 1 phone:91234567 email:johndoe@example.com` edits the phone number and email address of the 1st person in the current list to be `91234567` and `johndoe@example.com` respectively.
@@ -131,41 +130,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Adding an organisation to existing persons: `addorg`
-
-Adds or updates the existing contact's organisation.
-
-Format: `addorg name:NAME organisation:ORGANISATION`
-
-To remove an existing contact's organisation record:
-
-Format: `addorg name:NAME organisation:`
-
-Examples:
-* `addorg name: John Doe organisation: National University of Singapore`
-
-### Adding an event to existing persons: `addevent`
-
-Adds or updates an event for an existing person.
-
-Format: `addevent name:NAME event:EVENT`
-
-* `event:` clears the existing event if any.
-
-Examples:
-* `addevent name:John Doe event:Met at NUS Career Fair 2024`
-
-### Adding a note to existing persons: `addnote`
-
-Adds or updates a note to an existing person.
-
-Format: `addnote name:NAME note:NOTE`
-
-* `note:` clears the existing note if any.
-
-Examples:
-* `addnote name:John Doe note:Cannot drink alcohol`
 
 ### Finding persons by name: `find`
 
@@ -301,7 +265,7 @@ Furthermore, certain edits can cause Worldly to behave in unexpected ways (e.g.,
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Worldly home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -318,13 +282,10 @@ Furthermore, certain edits can cause Worldly to behave in unexpected ways (e.g.,
 Action | Format and Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]…​` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
 **List** | `list`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]…​`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Add Event** | `addevent name:NAME event:EVENT` <br> e.g., `addevent name:John Doe event:Met at NUS Career Fair 2024`
-**Add Note** | `addnote name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
-**Add Organisation** | `addorg name:NAME organisation:ORGANISATION` <br> e.g., `addorg name:John Doe organisation:National University of Singapore`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
