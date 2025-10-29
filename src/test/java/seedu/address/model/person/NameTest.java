@@ -165,4 +165,15 @@ public class NameTest {
         assertEquals(longName, name.fullName);
     }
 
+    @Test
+    public void isValidName_exceedsMaxLength_returnsFalse() {
+        String longName = "a".repeat(71);
+        assertFalse(Name.isValidName(longName));
+    }
+
+    @Test
+    public void isValidName_maxLengthBoundary_returnsTrue() {
+        String validName = "a".repeat(70);
+        assertTrue(Name.isValidName(validName));
+    }
 }

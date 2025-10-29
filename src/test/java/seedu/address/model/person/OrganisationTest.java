@@ -53,4 +53,16 @@ public class OrganisationTest {
         Organisation org2 = new Organisation("Google");
         assertEquals(org1.hashCode(), org2.hashCode());
     }
+
+    @Test
+    public void isValidOrganisation_exceedsMaxLength_returnsFalse() {
+        String longOrganisation = "a".repeat(61);
+        assertFalse(Organisation.isValidOrganisation(longOrganisation));
+    }
+
+    @Test
+    public void isValidOrganisation_maxLengthBoundary_returnsTrue() {
+        String validOrganisation = "a".repeat(60);
+        assertTrue(Organisation.isValidOrganisation(validOrganisation));
+    }
 }

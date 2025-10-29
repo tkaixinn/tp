@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final int MAX_NUMBER_OF_CONTACTS = 500;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
         + "\nParameters: "
@@ -70,6 +71,11 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.getAddressBook().getPersonList().size() >= MAX_NUMBER_OF_CONTACTS) {
+            throw new CommandException("Cannot add more contacts. The address book is full (maximum " +
+                    MAX_NUMBER_OF_CONTACTS + " contacts).");
         }
 
         model.addPerson(toAdd);

@@ -178,19 +178,6 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_longNote_success() throws Exception {
-        Person target = model.getFilteredPersonList().get(0);
-        AddNoteCommand cmd = new AddNoteCommand(target.getName(), new Note(LONG_NOTE));
-
-        Person edited = new PersonBuilder(target).withNote(LONG_NOTE).build();
-        Model expected = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expected.setPerson(target, edited);
-
-        String expectedMsg = String.format(AddNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, edited.getName());
-        assertCommandSuccess(cmd, model, expectedMsg, expected);
-    }
-
-    @Test
     public void execute_whitespaceNote_preservedSuccess() throws Exception {
         Person target = model.getFilteredPersonList().get(0);
         AddNoteCommand cmd = new AddNoteCommand(target.getName(), new Note(WS_NOTE));

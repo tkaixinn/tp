@@ -103,6 +103,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        if (tagList.size() > 10) {
+            throw new ParseException("You can only have a maximum of 10 tags per contact.");
+        }
+
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
         MetOn metOn = new MetOn(LocalDateTime.now());

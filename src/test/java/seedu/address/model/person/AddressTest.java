@@ -35,6 +35,18 @@ public class AddressTest {
     }
 
     @Test
+    public void isValidAddress_exceedsMaxLength_returnsFalse() {
+        String longAddress = "a".repeat(256);
+        assertFalse(Address.isValidAddress(longAddress));
+    }
+
+    @Test
+    public void isValidAddress_maxLengthBoundary_returnsTrue() {
+        String validAddress = "a".repeat(255);
+        assertTrue(Address.isValidAddress(validAddress));
+    }
+
+    @Test
     public void equals() {
         Address address = new Address("Valid Address");
 
