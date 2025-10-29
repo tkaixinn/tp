@@ -237,8 +237,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, organisation, note, tags, preferredChannel, offset,
-            metOn, isArchived);
+        return Objects.hash(name, phone, email, address, offset, country, organisation, event, preferredChannel,
+                preferredLanguage, metOn, note, tags, isArchived);
     }
 
     @Override
@@ -248,18 +248,18 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("country", country)
-                .add("organisation", organisation)
-                .add("event", event)
-                .add("note", note)
-                .add("tags", tags)
-                .add("preferredChannel", preferredChannel)
                 .add("offset", offset)
+                .add("country", country.value.equals("") ? "-" : country)
+                .add("organisation", organisation.value.equals("") ? "-" : organisation)
+                .add("event", event.value.equals("") ? "-" : event)
+                .add("preferredChannel", preferredChannel)
                 .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
                 .add("suggestedGreeting", preferredLanguage == null
                         ? "-"
                         : GreetingLibrary.getGreeting(preferredLanguage.toString()))
                 .add("metOn", metOn)
+                .add("note", note)
+                .add("tags", tags)
                 .toString();
     }
 

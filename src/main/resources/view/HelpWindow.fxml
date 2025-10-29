@@ -17,141 +17,172 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextField?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage"
-         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 
-  <icons>
-    <Image url="@/images/help_icon.png" />
-  </icons>
+    <icons>
+        <Image url="@/images/help_icon.png" />
+    </icons>
 
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@HelpWindow.css" />
-      </stylesheets>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@HelpWindow.css" />
+            </stylesheets>
 
-      <VBox spacing="10" alignment="TOP_LEFT" prefWidth="800" prefHeight="700">
-        <padding>
-          <Insets top="10" right="10" bottom="10" left="10"/>
-        </padding>
-
-        <!-- Help message + Copy button -->
-        <HBox alignment="CENTER_LEFT" spacing="10">
-          <children>
-            <Label fx:id="helpMessage" text="User Guide: https://..." style="-fx-text-fill: #333333;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="copyButton" text="Copy URL" onAction="#copyUrl"/>
-          </children>
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
-          </padding>
-        </HBox>
-
-        <TabPane prefWidth = "780" prefHeight="700">
-          <tabs>
-            <Tab text="Commands">
-              <content>
-                <!-- Command Reference Table -->
-                <TableView fx:id="commandTableView" prefHeight="500" prefWidth="780">
-                  <columns>
-                    <TableColumn fx:id="actionColumn" text="Action" prefWidth="150"/>
-                    <TableColumn fx:id="formatColumn" text="Format, Examples" prefWidth="600"/>
-                  </columns>
-                </TableView>
-              </content>
-            </Tab>
-
-        <Tab text="Countries">
-          <content>
-            <VBox spacing="10" alignment="TOP_LEFT">
-              <!-- Country List-->
-              <Region prefHeight="10"/>
-              <Label text="List of Countries:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+            <VBox spacing="10" alignment="TOP_LEFT" prefWidth="800" prefHeight="700">
                 <padding>
-                  <Insets left="10"/>
+                    <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
-              </Label>
 
-              <HBox spacing="10" alignment="CENTER_LEFT">
-                  <padding>
-                    <Insets left="10"/>
-                  </padding>
-                <Label text="Search"/>
-                <TextField fx:id="countrySearchField" promptText="Enter country name..." prefWidth="300"/>
-              </HBox>
-
-              <TableView fx:id="countryTableView" prefHeight="700" prefWidth="780">
-                <columns>
-                  <TableColumn fx:id="countryNameColumn" text="Country Name" prefWidth="600"/>
-                  <TableColumn fx:id="countryCodeColumn" text="Country Code" prefWidth="150"/>
-                </columns>
-              </TableView>
-            </VBox>
-          </content>
-        </Tab>
-
-        <Tab text="Timezones">
-          <content>
-            <VBox spacing="10" alignment="TOP_LEFT">
-              <!-- Timezone Table-->
-              <Region prefHeight="10"/>
-              <Label text="World Time Zones (UTC Offsets):" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
-                <padding>
-                  <Insets left="10"/>
-                </padding>
-              </Label>
-
-              <ScrollPane fitToWidth="true" prefHeight="700">
-                <content>
-                  <TableView fx:id = "timezoneTable" prefHeight="700" VBox.vgrow="ALWAYS">
-                    <columns>
-                      <TableColumn fx:id="regionColumn" text="Region / City" prefWidth="500"/>
-                      <TableColumn fx:id="offsetColumn" text="UTC Offset" prefWidth="200"/>
-                    </columns>
-                  </TableView>
-                </content>
-              </ScrollPane>
-            </VBox>
-          </content>
-        </Tab>
-
-            <Tab text="Languages">
-              <content>
-                <VBox spacing="10" alignment="TOP_LEFT">
-                  <Label text="List of Languages:"
-                         style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
-                    <padding>
-                      <Insets left="10"/>
-                    </padding>
-                  </Label>
-
-                  <HBox spacing="10" alignment="CENTER_LEFT">
-                    <padding>
-                      <Insets left="10"/>
-                    </padding>
+                <!-- Help message + Copy button -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
                     <children>
-                      <Label text="Search"/>
-                      <TextField fx:id="languageSearchField" promptText="Enter language ..." prefWidth="300"/>
+                        <Label fx:id="helpMessage" text="User Guide: https://..."
+                            style="-fx-text-fill: #333333;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="copyButton" text="Copy URL" onAction="#copyUrl" />
                     </children>
-                  </HBox>
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                </HBox>
 
-                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="700" prefWidth="780">
-                    <content>
-                      <TableView fx:id="languageTableView" prefHeight="700" prefWidth="780">
-                        <columns>
-                          <TableColumn fx:id="languageNameColumn" text="Language Name" prefWidth="360"/>
-                          <TableColumn fx:id="languageCodeColumn" text="Language Code" prefWidth="120"/>
-                          <TableColumn fx:id="languageCountriesColumn" text="Countries Used" prefWidth="360"/>
-                        </columns>
-                      </TableView>
-                    </content>
-                  </ScrollPane>
-                </VBox>
-              </content>
-            </Tab>
-          </tabs>
-        </TabPane>
+                <TabPane fx:id="tabPane" prefWidth="780" prefHeight="700">
+                    <tabs>
+                        <Tab text="Commands">
+                            <content>
+                                <!-- Command Reference Table -->
+                                <TableView fx:id="commandTableView" prefHeight="500" prefWidth="780">
+                                    <columns>
+                                        <TableColumn fx:id="actionColumn" text="Action"
+                                            prefWidth="150" />
+                                        <TableColumn fx:id="formatColumn" text="Format, Examples"
+                                            prefWidth="600" />
+                                    </columns>
+                                </TableView>
+                            </content>
+                        </Tab>
 
-      </VBox>
-    </Scene>
-  </scene>
+                        <Tab text="Countries">
+                            <content>
+                                <VBox spacing="10" alignment="TOP_LEFT">
+                                    <!-- Country List-->
+                                    <Region prefHeight="10" />
+                                    <Label text="List of Countries:"
+                                        style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                    </Label>
+
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                        <Label text="Search" />
+                                        <TextField fx:id="countrySearchField"
+                                            promptText="Enter country name..." prefWidth="300" />
+                                    </HBox>
+
+                                    <TableView fx:id="countryTableView" prefHeight="700"
+                                        prefWidth="780">
+                                        <columns>
+                                            <TableColumn fx:id="countryNameColumn"
+                                                text="Country Name" prefWidth="600" />
+                                            <TableColumn fx:id="countryCodeColumn"
+                                                text="Country Code" prefWidth="150" />
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+                            </content>
+                        </Tab>
+
+                        <Tab text="Timezones">
+                            <content>
+                                <VBox spacing="10" alignment="TOP_LEFT">
+                                    <!-- Timezone Table-->
+                                    <Region prefHeight="10" />
+                                    <Label text="World Time Zones (UTC Offsets):"
+                                        style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                    </Label>
+
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                        <children>
+                                            <Label text="Search" />
+                                            <TextField fx:id="timezoneSearchField"
+                                                promptText="Enter region or offset..."
+                                                prefWidth="300" />
+                                        </children>
+                                    </HBox>
+
+                                    <ScrollPane fitToWidth="true" prefHeight="700">
+                                        <content>
+                                            <TableView fx:id="timezoneTable" prefHeight="700"
+                                                VBox.vgrow="ALWAYS">
+                                                <columns>
+                                                    <TableColumn fx:id="regionColumn"
+                                                        text="Region / City" prefWidth="500" />
+                                                    <TableColumn fx:id="offsetColumn"
+                                                        text="UTC Offset" prefWidth="200" />
+                                                </columns>
+                                            </TableView>
+                                        </content>
+                                    </ScrollPane>
+                                </VBox>
+                            </content>
+                        </Tab>
+
+                        <Tab text="Languages">
+                            <content>
+                                <VBox spacing="10" alignment="TOP_LEFT">
+                                    <Region prefHeight="10" />
+                                    <Label text="List of Languages:"
+                                        style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333333;">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                    </Label>
+
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <padding>
+                                            <Insets left="10" />
+                                        </padding>
+                                        <children>
+                                            <Label text="Search" />
+                                            <TextField fx:id="languageSearchField"
+                                                promptText="Enter language..." prefWidth="300" />
+                                        </children>
+                                    </HBox>
+
+                                    <ScrollPane fitToHeight="true" fitToWidth="true"
+                                        prefHeight="700" prefWidth="780">
+                                        <content>
+                                            <TableView fx:id="languageTableView" prefHeight="700"
+                                                prefWidth="780">
+                                                <columns>
+                                                    <TableColumn fx:id="languageNameColumn"
+                                                        text="Language Name" prefWidth="360" />
+                                                    <TableColumn fx:id="languageCodeColumn"
+                                                        text="Language Code" prefWidth="120" />
+                                                    <TableColumn fx:id="languageCountriesColumn"
+                                                        text="Countries Used" prefWidth="360" />
+                                                </columns>
+                                            </TableView>
+                                        </content>
+                                    </ScrollPane>
+                                </VBox>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+
+            </VBox>
+        </Scene>
+    </scene>
 </fx:root>

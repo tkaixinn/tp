@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.GreetingMap;
+import seedu.address.model.util.StringUtils;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -109,7 +110,7 @@ public class PersonCard extends UiPart<Region> {
 
         if (!person.getCountry().value.equals("")) {
             country.setVisible(true);
-            country.setText(person.getCountry().value);
+            country.setText("Country: " + person.getCountry().value);
         } else {
             country.setVisible(false);
             country.setManaged(false);
@@ -143,7 +144,7 @@ public class PersonCard extends UiPart<Region> {
             preferredLanguage.setVisible(true);
             String lang = person.getPreferredLanguage().getPreferredLanguage();
             String greeting = GreetingMap.getGreeting(lang);
-            preferredLanguage.setText("Preferred Language: " + toTitleCase(lang) + " (" + greeting + ")");
+            preferredLanguage.setText("Preferred Language: " + StringUtils.toTitleCase(lang) + " (" + greeting + ")");
         } else {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
@@ -156,32 +157,5 @@ public class PersonCard extends UiPart<Region> {
             metOn.setVisible(false);
             metOn.setManaged(false);
         }
-    }
-
-    /**
-     * Converts the given string into title case, where the first letter of each word is capitalised.
-     * Words are detected based on space characters. Characters that are not spaces are preserved
-     * as-is except when they are the first character of a word.
-     *
-     * @param input The string to be converted to title case. Assumed to be non-null.
-     * @return A new string with each word capitalised.
-     */
-    public static String toTitleCase(String input) {
-        StringBuilder result = new StringBuilder(input.length());
-        boolean capitaliseNext = true;
-
-        for (char c : input.toCharArray()) {
-            if (Character.isSpaceChar(c)) {
-                capitaliseNext = true;
-            } else {
-                if (capitaliseNext) {
-                    c = Character.toTitleCase(c);
-                }
-                capitaliseNext = false;
-            }
-            result.append(c);
-        }
-
-        return result.toString();
     }
 }

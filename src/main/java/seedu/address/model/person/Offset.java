@@ -79,6 +79,8 @@ public class Offset implements Comparable<Offset> {
 
     /**
      * Returns the total offset in minutes.
+     *
+     * @return total offset in minutes
      */
     public int getTotalMinutes() {
         return totalMinutes;

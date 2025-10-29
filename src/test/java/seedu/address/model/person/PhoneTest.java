@@ -200,6 +200,7 @@ public class PhoneTest {
             "+65 (9876) 5432",
             "+65 (0) 9876 5432"
         };
+
         for (String fmt : formats) {
             assertEquals("65", new Phone(fmt).getCountryCode(), "Failed for format: " + fmt);
         }
