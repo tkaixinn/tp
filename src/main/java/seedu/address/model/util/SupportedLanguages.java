@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,8 +29,22 @@ public class SupportedLanguages {
         }
     }
 
+    /**
+     * Checks whether the given language is supported.
+     * <p>
+     * The input language string is normalized by converting it to lowercase
+     * and replacing spaces with underscores before checking against the
+     * {@code SUPPORTED_LANGUAGES} map.
+     * </p>
+     *
+     * @param language the language to check; may be {@code null}
+     * @return {@code true} if the normalized language exists in {@code SUPPORTED_LANGUAGES},
+     *         {@code false} otherwise or if {@code language} is {@code null}
+     */
     public static boolean isSupported(String language) {
-        if (language == null) return false;
+        if (language == null) {
+            return false;
+        }
         String key = language.toLowerCase().replace(" ", "_");
         return SUPPORTED_LANGUAGES.containsKey(key);
     }

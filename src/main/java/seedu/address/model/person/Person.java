@@ -250,8 +250,8 @@ public class Person {
                 .add("address", address)
                 .add("offset", offset)
                 .add("country", country.value.equals("") ? "-" : country)
-                .add("organisation", organisation.value.equals("") ? "-" : organisation)
-                .add("event", event.value.equals("") ? "-" : event)
+                .add("organisation", organisation.value.equals("") ? "" : organisation)
+                .add("event", event.value.equals("") ? "" : event)
                 .add("preferredChannel", preferredChannel)
                 .add("preferredLanguage", preferredLanguage == null ? "-" : preferredLanguage)
                 .add("suggestedGreeting", preferredLanguage == null
