@@ -235,7 +235,8 @@ public class AddCommandParserTest {
 
         //Offset beyond bounds
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_OFFSET_DESC, "Invalid command format! \n" + "Must be +HH:MM or -HH:MM.");
+                + INVALID_OFFSET_DESC,
+                "Invalid command format! \n" + "Offset must be in the format +HH:MM or -HH:MM.");
     }
 
     // Channel parsing tests

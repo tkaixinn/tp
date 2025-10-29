@@ -104,7 +104,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
-        Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
+        Offset offset = ParserUtil.parseOffsetAdd(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
         MetOn metOn = new MetOn(LocalDateTime.now());
         Person person = new Person(name, phone, email, address, country, organisation, event, note,
             finalPreferredChannel, tagList, offset, preferredLanguage, metOn, false);

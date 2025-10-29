@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
@@ -228,10 +230,43 @@ public class ParserUtil {
      * @return the validated GMT offset string if it matches the expected format
      * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
      */
-    public static Offset parseOffset(String input) throws ParseException {
+    public static Offset parseOffsetAdd(String input) throws ParseException {
+        long colonCount = input.chars().filter(ch -> ch == ':').count();
+        if (colonCount > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
         if (!input.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Must be +HH:MM or -HH:MM."));
+                    "Offset must be in the format +HH:MM or -HH:MM."));
+        }
+        try {
+            return new Offset(input);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses a string representing a GMT offset and validates its format.
+     * <p>
+     * The expected format is either {@code +HH:MM} or {@code -HH:MM},
+     * where {@code HH} is between 00 and 14, and {@code MM} is between 00 and 59.
+     * </p>
+     *
+     * @param input the GMT offset string to parse
+     * @return the validated GMT offset string if it matches the expected format
+     * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
+     */
+    public static Offset parseOffsetEdit(String input) throws ParseException {
+        long colonCount = input.chars().filter(ch -> ch == ':').count();
+        if (colonCount > 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        if (!input.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Offset must be in the format +HH:MM or -HH:MM."));
         }
         try {
             return new Offset(input);
