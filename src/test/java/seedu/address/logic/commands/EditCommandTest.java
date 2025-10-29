@@ -30,11 +30,25 @@ import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ *
+ * <p>These tests verify that the {@code EditCommand} correctly:
+ * <ul>
+ *   <li>Edits person details using an index in the currently displayed list</li>
+ *   <li>Preserves unmodified fields when editing</li>
+ *   <li>Handles duplicate person validation</li>
+ *   <li>Validates index bounds in both unfiltered and filtered lists</li>
+ *   <li>Maintains correct equality and string representation</li>
+ *   <li>Supports editing of extended fields: note, event, organisation</li>
+ * </ul>
  */
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Verifies that editing all fields of a person in the unfiltered list succeeds.
+     * The edited person should replace the original person in the model.
+     */
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
@@ -49,6 +63,10 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Verifies that editing only some fields of a person in the unfiltered list succeeds.
+     * Unspecified fields should retain their original values.
+     */
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
@@ -70,6 +88,10 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Verifies that executing an edit command with no fields specified returns a success message
+     * without modifying the person (since no changes were requested).
+     */
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
@@ -82,6 +104,10 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Verifies that editing a person in a filtered list (e.g., after a {@code find} command) succeeds.
+     * The index refers to the position in the filtered list, not the full address book.
+     */
     @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -99,6 +125,92 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Verifies that editing the note field of a person succeeds.
+     * The note should be updated while other fields remain unchanged.
+     */
+    @Test
+    public void execute_editNote_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String newNote = "Prefers WhatsApp";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withNote(newNote).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withNote(newNote).build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Verifies that editing the event field of a person succeeds.
+     * The event should be updated while other fields remain unchanged.
+     */
+    @Test
+    public void execute_editEvent_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String newEvent = "Met at NUS Career Fair";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withEvent(newEvent).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withEvent(newEvent).build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Verifies that editing the organisation field of a person succeeds.
+     * The organisation should be updated while other fields remain unchanged.
+     */
+    @Test
+    public void execute_editOrganisation_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String newOrganisation = "National University of Singapore";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withOrganisation(newOrganisation).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withOrganisation(newOrganisation).build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Verifies that clearing the note field (empty string) succeeds.
+     */
+    @Test
+    public void execute_clearNote_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+            .withNote("").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withNote("").build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Verifies that editing a person to match an existing person in the unfiltered list fails with a duplicate error.
+     * Duplicate detection uses the {@code isSamePerson} and {@code equals} methods of {@code Person}.
+     */
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -108,6 +220,10 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
+    /**
+     * Verifies that editing a person in a filtered list to match an existing person in the full address book fails.
+     * This ensures duplicate validation works across the entire address book, not just the filtered list.
+     */
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -120,6 +236,9 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
+    /**
+     * Verifies that editing an index larger than the size of the unfiltered list fails with an invalid index error.
+     */
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);

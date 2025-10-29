@@ -178,4 +178,3 @@ public class OffsetTest {
         assertTrue(Offset.isValidOffset("-12:00"));
     }
 }
-
