@@ -81,7 +81,7 @@ public class Phone {
     }
 
     public String getCountryCode() {
-        return deriveCountryCode(value);
+        return "+" + deriveCountryCode(value);
     }
 
     @Override

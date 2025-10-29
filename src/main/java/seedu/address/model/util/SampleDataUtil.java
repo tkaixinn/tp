@@ -31,7 +31,7 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Person(new Name("Alex Yeoh"), new Phone("+6587438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Country("Singapore"),
                     new Organisation("National University of Singapore (NUS)"), new Event("University Assembly"),
                     new Note("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
