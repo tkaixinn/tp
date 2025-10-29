@@ -137,6 +137,13 @@ public class NameTest {
     }
 
     @Test
+    public void equals_caseInsensitive_returnsTrue() {
+        Name name1 = new Name("John Doe");
+        Name name2 = new Name("john doe");
+        assertTrue(name1.equals(name2));
+    }
+
+    @Test
     public void immutability_test() {
         Name name = new Name("Immutable");
         String original = name.fullName;
