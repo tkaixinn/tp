@@ -212,8 +212,8 @@ public class HelpWindow extends UiPart<Stage> {
                         + "tag:friend tag:colleague"),
                 new CommandEntry("List", "list"),
                 new CommandEntry("Edit", "edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] "
-                        + "[address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] "
-                        + "[channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...\n"
+                        + "[address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [organisation:ORGANISATION] "
+                        + "[event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...\n"
                         + "e.g. edit 2 name:James Lee email:jameslee@example.com"),
                 new CommandEntry("Delete", "delete INDEX\n e.g. delete 3"),
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g. find James Jake"),

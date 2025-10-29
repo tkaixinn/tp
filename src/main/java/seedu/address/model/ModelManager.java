@@ -190,4 +190,9 @@ public class ModelManager implements Model {
     public void setSortMode(SortMode mode) {
         this.sortMode = mode;
     }
+
+    @Override
+    public int checkListSize() {
+        return filteredPersons.size();
+    }
 }
