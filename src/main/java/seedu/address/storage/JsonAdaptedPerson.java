@@ -50,6 +50,7 @@ class JsonAdaptedPerson {
     private final String metOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private String preferredLanguage;
+    private final String preferredChannel;
 
 
     /**
@@ -64,6 +65,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("offset") String offset,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("preferredLanguage") String preferredLanguage,
+                             @JsonProperty("preferredChannel") String preferredChannel,
                              @JsonProperty("metOn") String metOn,
                              @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
@@ -76,6 +78,7 @@ class JsonAdaptedPerson {
         this.note = note;
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
+        this.preferredChannel = preferredChannel;
         this.metOn = metOn;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -98,6 +101,9 @@ class JsonAdaptedPerson {
         offset = source.getOffset().value;
         preferredLanguage =
                 source.getPreferredLanguage() == null ? null : source.getPreferredLanguage().getPreferredLanguage();
+        preferredChannel = source.getPreferredChannel() == null
+                ? null
+                : source.getPreferredChannel().toString();
         metOn = source.getMetOn() == null ? null : source.getMetOn().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -197,8 +203,19 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final Person.CommunicationChannel modelChannel;
+        if (preferredChannel == null || preferredChannel.isBlank()) {
+            modelChannel = null;
+        } else {
+            try {
+                modelChannel = Person.CommunicationChannel.valueOf(preferredChannel.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException("Invalid communication channel: " + preferredChannel);
+            }
+        }
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelOrganisation,
-            modelEvent, modelNote, modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
+            modelEvent, modelNote, modelChannel, modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
     }
 
 }
