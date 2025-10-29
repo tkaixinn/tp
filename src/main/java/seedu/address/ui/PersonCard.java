@@ -102,7 +102,8 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getPreferredChannel() != null) {
             channel.setVisible(true);
-            channel.setText("Preferred Communication Channel: " + person.getPreferredChannel().name());
+            channel.setText("Preferred Communication Channel: " + person.getPreferredChannel().toString());
+
         } else {
             channel.setVisible(false);
             channel.setManaged(false);
