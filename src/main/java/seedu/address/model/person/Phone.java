@@ -69,7 +69,7 @@ public class Phone {
     private String deriveCountryCode(String phone) {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
         try {
-            Phonenumber.PhoneNumber parsedNumber = phoneUtil.parse(phone, "SG");
+            Phonenumber.PhoneNumber parsedNumber = phoneUtil.parse(phone, "");
 
             int countryCallingCode = parsedNumber.getCountryCode();
 
