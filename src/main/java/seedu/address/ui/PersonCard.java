@@ -100,15 +100,6 @@ public class PersonCard extends UiPart<Region> {
             note.setManaged(false);
         }
 
-        if (person.getPreferredChannel() != null) {
-            channel.setVisible(true);
-            channel.setText("Preferred Communication Channel: " + person.getPreferredChannel().toString());
-
-        } else {
-            channel.setVisible(false);
-            channel.setManaged(false);
-        }
-
         if (!person.getCountry().value.equals("")) {
             country.setVisible(true);
             country.setText("Country: " + person.getCountry().value);
@@ -141,15 +132,27 @@ public class PersonCard extends UiPart<Region> {
             offset.setManaged(false);
         }
 
-        if (person.getPreferredLanguage() != null) {
+        if (person.getPreferredChannel() != null) {
+            channel.setVisible(true);
+            channel.setText("Preferred Communication Channel: "
+                    + person.getPreferredChannel().toString());
+        } else {
+            channel.setVisible(false);
+            channel.setManaged(false);
+        }
+
+        if (person.getPreferredLanguage() != null
+                && !person.getPreferredLanguage().getPreferredLanguage().trim().isEmpty()) {
             preferredLanguage.setVisible(true);
             String lang = person.getPreferredLanguage().getPreferredLanguage();
             String greeting = GreetingMap.getGreeting(lang);
-            preferredLanguage.setText("Preferred Language: " + StringUtils.toTitleCase(lang) + " (" + greeting + ")");
+            preferredLanguage.setText("Preferred Language: "
+                    + StringUtils.toTitleCase(lang) + " (" + greeting + ")");
         } else {
             preferredLanguage.setVisible(false);
             preferredLanguage.setManaged(false);
         }
+
 
         if (person.getMetOn() != null) {
             metOn.setVisible(true);
