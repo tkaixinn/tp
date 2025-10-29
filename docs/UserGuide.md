@@ -10,56 +10,93 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## :zap: Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Ensure you have Java `17` or above installed on your Computer.<br>
+   **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+<br>
 
-1. Copy the file to the folder you want to use as the _home folder_ for Worldly.
+2. Download the latest `.jar` release from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar worldly.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+3. Copy the file to the folder you want to use as the _home folder_ for Worldly.
+
+<br>
+
+4. Open a command terminal (e.g., Terminal for Mac users) and navigate to the folder you put the jar file in with the commands below:
+- `cd` (Windows) or `pwd` (Mac/Linux) to check the current folder path.
+- `cd foldername` to enter a subfolder within the current folder. For example,`cd first\second` (Windows) or `cd first/second` (Mac/Linux) would enter a folder named "first", followed by a folder named "second" (located within "first").
+- `cd ..` navigates to the previous folder.
+
+<br>
+
+5. Once you are in the folder that contains the jar file, use the `java -jar worldly.jar` command to run the application.<br>
+   ![Ui](images/Ui.png)<br>
+   *Image: A GUI similar to the one above should appear in a few seconds. Note how the app contains a sample contact.*
+
+<br>
+
+6. Type your desired command in the command box and press the Enter key to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list`: Lists all persons.
+- `list`: Lists all contacts.
+- `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00`: Adds a contact named `John Doe` to the Address Book.
+- `delete 3`: Deletes the third contact shown in the current list.
+- `clear`: Deletes all contacts.
+- `exit`: Exits the app.
 
-   * `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00`: Adds a person named `John Doe` to the Address Book.
+<br>
 
-   * `delete 3`: Deletes the 3rd person shown in the current list.
-
-   * `clear`: Deletes all person.
-
-   * `exit`: Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+Please refer to the [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## :star: Features
+
+### Create new contacts
+* Add up to 500 contacts with only 4 mandatory fields to start (name, phone number, email and address)
+* Edit contacts for details you may have initially left out
+* Tag each contact with up to 9 custom tags
+
+### Organise your contact list
+* Archive and unarchive contacts to hide them from the main list while keeping their details stored
+* Sort contacts by name, country or date added
+
+### Save and edit your data
+
+Worldly's data is saved in the hard disk automatically after any command that changes the data, with no need to save manually.
+The data is saved as a JSON file at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file render its format invalid, Worldly may behave in unexpected ways, potentially discarding all data and starting with an empty data file at the next run. It is therefore recommended to take a backup of the file before editing it.
+</div>
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## :speech_balloon: Commands
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * `UPPER_CASE` indicates the parameters to be supplied by the user.<br>
-  e.g. In `add name:NAME`, `NAME` is a parameter which can be used as `add name:John Doe`.
+  e.g., In `add name:NAME`, `NAME` is a parameter which can be used as `add name:John Doe`.
 
 * Parameters in square brackets are optional.<br>
-  e.g `name:NAME [tag:TAG]` can be used as `name:John Doe tag:friend` or as `name:John Doe`.
+  e.g.,`name:NAME [tag:TAG]` can be used as `name:John Doe tag:friend` or as `name:John Doe`.
 
 * Parameters with `…`​ after them can be used multiple times, including not at all.<br>
-  e.g. `[tag:TAG]...` can be used as ` ` (i.e. 0 times), `tag:friend`, `tag:friend tag:family` etc.
+  e.g., `[tag:TAG]...` can be used as ` ` (i.e. 0 times), `tag:friend`, `tag:friend tag:family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. If the command specifies `name:NAME phone:PHONE_NUMBER`, `phone:PHONE_NUMBER name:NAME` is also acceptable.
+  e.g., If the command specifies `name:NAME phone:PHONE_NUMBER`, `phone:PHONE_NUMBER name:NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. If the command specifies `help 123`, it will be interpreted as `help`.
+  e.g., If the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -76,162 +113,193 @@ Shows the description and format of all actions a user can perform with Worldly,
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
-* Case-insensitive uniqueness of contact names is enforced. No two contacts with the same name (regardless of case) can be added.
-* A tag with the person's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
-* The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
+* Case-sensitive uniqueness of contact names is enforced.
+* A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
-* The language field is optional, but if omitted, defaults to English. It is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
 * The country field is **case-sensitive** and must match a country in the provided list (in `help`) **exactly**.
-* The country, event and note fields can be included and left blank or omitted from the command entirely.
-* A person can have any number of tags (including 0). Each tag must be added with `tag:`.
+* The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
+* The language field is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
+* With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
+* A contact can have any number of tags (including 0). Each tag must be added with `tag:`.
+* There are limits to how long each field can be. They are as follows:<br>
+`name:`70 characters<br>
+`address:` 255 characters<br>
+`email:` 254 characters<br>
+`organisation:` 60 characters<br>
+`event:` 100 characters<br>
+`note:` 500 characters <br>
+`tag:` 10 tags, 30 characters per tag
+
+<br>
+<!-- To insert image -->
+
+*Image: Upon successfully adding a contact, you should see a confirmation message.*
+
 
 Examples:
-* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 channel:EMAIL offset:+08:00 country:Singapore note:does not drink alcohol tag:friends`
-* `add name:Betsy Crowe tag:friend email:betsycrowe@example.com address:Newgate Prison phone:1234567 offset:+08:00 channel:TELEGRAM language:chinese tag:criminal`
+* `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel: email note:does not drink alcohol tag:friends`
+* `add name:Betsy Crowe phone:1234567 email:betsycrowe@example.com address:Newgate Prison offset:+08:00 channel:Telegram language:chinese tag:criminal tag:friend`
 
-### Listing all persons: `list`
+### Listing all contacts: `list`
 
-Shows a list of all persons in the address book. The list is sorted in alphabetical order of the persons' names by default, but if a sort command was previously run (e.g. `sortdate`), it will follow the last requested order.
+Shows a list of all contacts in the address book. The list is sorted in alphabetical order of the contacts' names by default, but if a sort command was previously run (e.g., `sortdate`), it will follow the last requested order.
 
 Format: `list`
 
-### Editing a person: `edit`
+### Editing a contact: `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [channel: CHANNEL] [language:LANGUAGE] [tag:TAG]...`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel: CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the currently displayed person list. The index **must be a positive integer** 1, 2, 3, ...
+* Edits the contact at the specified `INDEX`. The index refers to the number shown in the currently displayed list beside the contact's name. The index must be a **positive integer**, i.e. 1, 2, 3...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. You can remove all the person’s tags by typing `tag:` without specifying any tags after it.
-* If the currently viewed list is not the main list (e.g. if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
+* If the currently viewed list is not the main list (e.g., if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
+
+<br>
+<!-- To insert image -->
+
+*Image: Upon successfully editing a contact, you should see a confirmation message.*
+
 
 Examples:
-*  `edit 1 phone:91234567 email:johndoe@example.com` edits the phone number and email address of the 1st person in the current list to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 name:Betsy Crower tag:` edits the name of the 2nd person in the current list to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 phone:91234567 email:johndoe@example.com` edits the phone number and email address of the first contact in the current list to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 name:Betsy Crower tag:` edits the name of the second contact in the current list to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person: `delete`
+### Deleting a contact: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the number shown beside a person's name in the currently displayed list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the number shown beside a contact's name in the currently displayed list.
 * The index **must be a positive integer**.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the second contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the first contact in the results of the `find` command.
 
-### Finding persons by name: `find`
+### Finding contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The search is case-insensitive. e.g.,`hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search),
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* Only full words will be matched e.g., `Han` will not match `Hans`.
+* Contacts matching at least one keyword will be returned (i.e. `OR` search),
+  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Finding persons by country: `findcountry`
+### Finding contacts by country: `findcountry`
 
-Finds persons who are from the given country.
+Finds contacts who are from the given country.
 
 Format: `findcountry COUNTRY`
 
-* The search is **case-sensitive**. e.g `Singapore` is a valid country but not `singapore`.
+* The search is **case-sensitive**. e.g.,`Singapore` is a valid country but not `singapore`.
 * Refer to the full list of valid country names in the help window.
   ![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
 * `findcountry Singapore`
 
-### Finding persons by tag: `findtag`
+### Finding contacts by tag: `findtag`
 
-Finds persons who are tagged with all of the given keywords.
+Finds contacts who are tagged with all of the given keywords.
 
 Format: `findtag TAG [MORE_TAGS]`
 
 * The search is **case-insensitive**.
-* Only returns persons who match ALL the tags.
-* Only full words will be matched e.g. `friend` will not match `friends`.
+* Only returns contacts who match ALL the tags.
+* Only full words will be matched e.g., `friend` will not match `friends`.
 ![result for 'findtag friends owesMoney'](images/findtag.png)
 
 Examples:
 * `findtag friends`
 * `findtag friends colleagues`
 
-### Archiving a person: `archive`
+### Archiving a contact: `archive`
 
-Archives the person at the specified `INDEX` from the current list.
+Archives the contact at the specified `INDEX` from the current list.
 
 Format: `archive INDEX`
 
-* Command format and function is similar to delete, except the person is just moved to a separate list accessible
+* Command format and function is similar to delete, except the contact is just moved to a separate list accessible
 with `archivelist` and can be unarchived at a later time.
-* Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g. `find`).
+* Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g., `find`).
+
+<br>
+<!-- To insert image -->
+
+*Image: By archiving NAME, the contact disappears from the main list. NAME can be found in the archive list, accessible with `archivelist`.*
 
 Examples:
-* `list` followed by `archive 2` archives the 2nd person in the address book.
+* `list` followed by `archive 2` archives the 2nd contact in the address book.
 
-### Unarchiving a person: `unarchive`
+### Unarchiving a contact: `unarchive`
 
-Unarchives the person at the specified `INDEX` from the current list.
+Unarchives the contact at the specified `INDEX` from the current list.
 
 Format: `unarchive INDEX`
 
-* Unarchives the person at the specified `INDEX` from the current list, moving them back to the main list (`list`).
-* Displayed list will be archive list (`archivelist`) after archiving is done, regardless of previously applied filters (e.g. `find`).
+* Unarchives the contact at the specified `INDEX` from the current list, moving them back to the main list (`list`).
+* Displayed list will be archive list (`archivelist`) after archiving is done, regardless of previously applied filters (e.g., `find`).
 
 Examples:
-* `archivelist` followed by `unarchive 1` unarchives the 1st person in the archive list.
+* `archivelist` followed by `unarchive 1` unarchives the first contact in the archive list.
 
-### Listing all archived persons: `archivelist`
+### Listing all archived contacts: `archivelist`
 
-Shows a list of all archived persons in the address book.
+Shows a list of all archived contacts in the address book.
 
 Format: `archivelist`
 
-### Sorting persons by name: `sortname`
+### Sorting contacts by name: `sortname`
 
-Sorts the persons by alphabetical order of their names.
+Sorts the contacts by alphabetical order of their names.
 
 Format: `sortname`
 
 * This is the default sorting order upon opening the app.
 
-### Sorting persons by country: `sortcountry`
+<br>
+<!-- To insert image -->
 
-Sorts the persons by country.
+*Image: An example of a sorted list can be seen above.*
+
+
+### Sorting contacts by country: `sortcountry`
+
+Sorts the contacts by country.
 
 Format: `sortcountry`
 
-* Persons are sorted in alphabetical order of their countries.
-* Within each country, persons are sorted in alphabetical order of their names.
-* Persons without a country are pushed to the end of the list.
-* After calling this command, persons remain sorted by country upon calling other commands such as add or delete.
+* contacts are sorted in alphabetical order of their countries.
+* Within each country, contacts are sorted in alphabetical order of their names.
+* contacts without a country are pushed to the end of the list.
+* After calling this command, contacts remain sorted by country upon calling other commands such as add or delete.
 * Refer to the full list of valid country names in the help window.
 
-### Sorting persons by date: `sortdate`
+### Sorting contacts by date: `sortdate`
 
-Sorts the persons by the date added.
+Sorts the contacts by the date added.
 
 Format: `sortdate`
 
@@ -249,36 +317,43 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
-
-Worldly's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Worldly data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Worldly will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
-Furthermore, certain edits can cause Worldly to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## :question: FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Worldly home folder.
 
+<br>
+
+**Q**: Can I sync Worldly between multiple computers?<br>
+**A**: Worldly does not currently support automatic syncing. You must manually copy the `data/addressbook.json` file between computers.
+
+<br>
+
+**Q:** If I archive a contact, will it still appear in search results or when sorting?<br>
+**A:** Yes, the `find` functions search the entire list of contacts, both archived and unarchived.
+
+<br>
+
+**Q:** Can I undo a command if I delete or edit a contact by mistake?<br>
+**A:** Worldly does not currently have an undo feature. Deletions or edits are immediate, thus it is recommended to make periodic backups of `data/addressbook.json`.
+
+<br>
+
+**Q:** Are command parameters case-sensitive?<br>
+**A:** Some parameters are case-sensitive, while others are not. Refer to the `add` command's details under [Commands](#commands) for more information.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
+## :jigsaw: Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+* **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+* **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## :earth_asia: Command Summary
 
 Action | Format and Examples
 --------|------------------
