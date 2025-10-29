@@ -85,7 +85,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CH
 * A tag with the person's country calling code is automatically added if it is included in the phone number.
 * The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
-* The language field is optional, but if omitted, defaults to English. It is **case-insensitive** and must match a country in the provided list (in `help`) **exactly**.
+* The language field is optional, but if omitted, defaults to English. It is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
 * The country field is **case-sensitive** and must match a country in the provided list (in `help`) **exactly**.
 * The country, event and note fields can be included and left blank or omitted from the command entirely.
 * A person can have any number of tags (including 0). Each tag must be added with `tag:`.

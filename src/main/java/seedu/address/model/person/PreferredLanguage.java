@@ -29,11 +29,15 @@ public class PreferredLanguage {
     public PreferredLanguage(String language) {
         requireNonNull(language);
         checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
-        checkArgument(SupportedLanguages.isSupported(language),
-                "Unsupported language: " + language + ". Must be one of the supported languages.");
-        this.language = language;
-    }
 
+        // Normalize to lowercase for internal storage
+        String normalizedLanguage = language.trim().toLowerCase(Locale.ROOT);
+
+        checkArgument(SupportedLanguages.isSupported(normalizedLanguage),
+                "Unsupported language: " + language + ". Must be one of the supported languages.");
+
+        this.language = normalizedLanguage;
+    }
 
     /**
      * Returns true if a given string is a valid language.
