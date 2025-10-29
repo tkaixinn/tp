@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,8 +41,10 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_TAG, PREFIX_OFFSET, PREFIX_LANGUAGE, PREFIX_CHANNEL);
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_OFFSET, PREFIX_COUNTRY,
+                PREFIX_ORGANISATION, PREFIX_EVENT, PREFIX_CHANNEL, PREFIX_LANGUAGE, PREFIX_NOTE, PREFIX_TAG);
 
         Index index;
 
@@ -49,8 +54,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_COUNTRY, PREFIX_OFFSET, PREFIX_LANGUAGE, PREFIX_CHANNEL);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+            PREFIX_OFFSET, PREFIX_COUNTRY, PREFIX_ORGANISATION,
+            PREFIX_EVENT, PREFIX_CHANNEL, PREFIX_LANGUAGE, PREFIX_NOTE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -69,8 +76,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_COUNTRY).isPresent()) {
             editPersonDescriptor.setCountry(ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get()));
         }
+        if (argMultimap.getValue(PREFIX_ORGANISATION).isPresent()) {
+            editPersonDescriptor.setOrganisation(
+                ParserUtil.parseOrganisation(argMultimap.getValue(PREFIX_ORGANISATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EVENT).isPresent()) {
+            editPersonDescriptor.setEvent(ParserUtil.parseEvent(argMultimap.getValue(PREFIX_EVENT).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+            editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
         if (argMultimap.getValue(PREFIX_OFFSET).isPresent()) {
             editPersonDescriptor.setOffset(ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).get()));
         }

@@ -6,10 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -43,6 +45,10 @@ public class CommandTestUtil {
     public static final String VALID_COUNTRY_BOB = "Singapore";
     public static final String VALID_NOTE_AMY = "Like German history.";
     public static final String VALID_NOTE_BOB = "Favourite pastime: Eating pasta";
+    public static final String VALID_ORGANISATION_AMY = "Google";
+    public static final String VALID_ORGANISATION_BOB = "Microsoft";
+    public static final String VALID_EVENT_AMY = "TechFair 2025";
+    public static final String VALID_EVENT_BOB = "React Meetup 2025";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_OFFSET_AMY = "+00:00";
@@ -54,6 +60,10 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String ORGANISATION_DESC_AMY = " " + PREFIX_ORGANISATION + VALID_ORGANISATION_AMY;
+    public static final String ORGANISATION_DESC_BOB = " " + PREFIX_ORGANISATION + VALID_ORGANISATION_BOB;
+    public static final String EVENT_DESC_AMY = " " + PREFIX_EVENT + VALID_EVENT_AMY;
+    public static final String EVENT_DESC_BOB = " " + PREFIX_EVENT + VALID_EVENT_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
@@ -82,15 +92,31 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withCountry(VALID_COUNTRY_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withCountry(VALID_COUNTRY_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY = new EditPersonDescriptorBuilder()
+            .withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withAddress(VALID_ADDRESS_AMY)
+            .withCountry(VALID_COUNTRY_AMY)
+            .withOrganisation(VALID_ORGANISATION_AMY)
+            .withEvent(VALID_EVENT_AMY)
+            .withNote(VALID_NOTE_AMY)
+            .withTags(VALID_TAG_FRIEND)
+            .build();
+
+        DESC_BOB = new EditPersonDescriptorBuilder()
+            .withName(VALID_NAME_BOB)
+            .withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB)
+            .withAddress(VALID_ADDRESS_BOB)
+            .withCountry(VALID_COUNTRY_BOB)
+            .withOrganisation(VALID_ORGANISATION_BOB)
+            .withEvent(VALID_EVENT_BOB)
+            .withNote(VALID_NOTE_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
     }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>
