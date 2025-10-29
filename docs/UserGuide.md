@@ -82,6 +82,7 @@ Adds a person to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS channel:CHANNEL offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
+* Case-insensitive uniqueness of contact names is enforced. No two contacts with the same name (regardless of case) can be added.
 * A tag with the person's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * The channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
