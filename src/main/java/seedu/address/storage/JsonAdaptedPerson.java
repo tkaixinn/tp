@@ -20,7 +20,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.MetOn;
+import seedu.address.model.person.AddedOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
     private final String offset;
     private final String organisation;
     private final boolean archivalStatus;
-    private final String metOn;
+    private final String addedOn;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private String preferredLanguage;
     private final String preferredChannel;
@@ -66,7 +66,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("preferredLanguage") String preferredLanguage,
                              @JsonProperty("preferredChannel") String preferredChannel,
-                             @JsonProperty("metOn") String metOn,
+                             @JsonProperty("addedOn") String addedOn,
                              @JsonProperty("archivalStatus") boolean archivalStatus) {
         this.name = name;
         this.phone = phone;
@@ -79,7 +79,7 @@ class JsonAdaptedPerson {
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
         this.preferredChannel = preferredChannel;
-        this.metOn = metOn;
+        this.addedOn = addedOn;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -104,7 +104,7 @@ class JsonAdaptedPerson {
         preferredChannel = source.getPreferredChannel() == null
                 ? null
                 : source.getPreferredChannel().toString();
-        metOn = source.getMetOn() == null ? null : source.getMetOn().toString();
+        addedOn = source.getAddedOn() == null ? null : source.getAddedOn().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -176,15 +176,15 @@ class JsonAdaptedPerson {
             }
         }
 
-        MetOn modelMetOn;
-        if (metOn == null || metOn.isBlank()) {
-            modelMetOn = new MetOn(LocalDateTime.now());
+        AddedOn modelAddedOn;
+        if (addedOn == null || addedOn.isBlank()) {
+            modelAddedOn = new AddedOn(LocalDateTime.now());
         } else {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy (HH:mm)", Locale.ENGLISH);
-                modelMetOn = new MetOn(LocalDateTime.parse(metOn, formatter));
+                modelAddedOn = new AddedOn(LocalDateTime.parse(addedOn, formatter));
             } catch (DateTimeParseException e) {
-                modelMetOn = new MetOn(LocalDateTime.now());
+                modelAddedOn = new AddedOn(LocalDateTime.now());
             }
         }
 
@@ -215,7 +215,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelOrganisation,
-            modelEvent, modelNote, modelChannel, modelTags, modelOffset, modelPreferredLanguage, modelMetOn,
+            modelEvent, modelNote, modelChannel, modelTags, modelOffset, modelPreferredLanguage, modelAddedOn,
                 archivalStatus);
     }
 

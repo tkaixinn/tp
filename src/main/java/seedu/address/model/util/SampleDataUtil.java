@@ -11,7 +11,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.MetOn;
+import seedu.address.model.person.AddedOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -36,7 +36,7 @@ public class SampleDataUtil {
                     new Organisation("National University of Singapore (NUS)"), new Event("University Assembly"),
                     new Note("follows Chinese Traditions"), Person.CommunicationChannel.EMAIL,
                     getTagSet("friends"), new Offset("+08:00"), new PreferredLanguage("english"),
-                    new MetOn(LocalDateTime.now()), false)
+                    new AddedOn(LocalDateTime.now()), false)
         };
     }
 

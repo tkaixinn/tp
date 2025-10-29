@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label preferredLanguage;
     @FXML
-    private Label metOn;
+    private Label addedOn;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -154,12 +154,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
 
-        if (person.getMetOn() != null) {
-            metOn.setVisible(true);
-            metOn.setText("Met On: " + person.getMetOn());
+        if (person.getAddedOn() != null) {
+            addedOn.setVisible(true);
+            addedOn.setText("Added on: " + person.getAddedOn());
         } else {
-            metOn.setVisible(false);
-            metOn.setManaged(false);
+            addedOn.setVisible(false);
+            addedOn.setManaged(false);
         }
     }
 }

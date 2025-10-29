@@ -7,16 +7,16 @@ import java.util.Locale;
 /**
  * Represents the date the user met a contact for the first time.
  */
-public class MetOn implements Comparable<MetOn> {
+public class AddedOn implements Comparable<AddedOn> {
 
     public final LocalDateTime localDateTime;
 
-    public MetOn(LocalDateTime localDateTime) {
+    public AddedOn(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
     }
 
     @Override
-    public int compareTo(MetOn other) {
+    public int compareTo(AddedOn other) {
         return this.localDateTime.compareTo(other.localDateTime);
     }
 
@@ -34,7 +34,7 @@ public class MetOn implements Comparable<MetOn> {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof MetOn o)) {
+        if (!(other instanceof AddedOn o)) {
             return false;
         }
         return localDateTime.equals(o.localDateTime);

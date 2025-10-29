@@ -38,7 +38,7 @@
             <Label fx:id="event" styleClass="cell_small_label" text="$event" />
             <Label fx:id="channel" styleClass="cell_small_label" text="$channel" />
             <Label fx:id="preferredLanguage" styleClass="cell_small_label" text="$preferredLanguage" />
-            <Label fx:id="metOn" styleClass="cell_small_label" text="$metOn" />
+            <Label fx:id="addedOn" styleClass="cell_small_label" text="$addedOn" />
             <Label fx:id="note" styleClass="cell_small_label" text="$note" />
         </VBox>
     </GridPane>

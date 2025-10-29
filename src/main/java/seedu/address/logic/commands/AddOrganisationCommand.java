@@ -66,7 +66,7 @@ public class AddOrganisationCommand extends Command {
             personToEdit.getTags(),
             personToEdit.getOffset(),
             personToEdit.getPreferredLanguage(),
-            personToEdit.getMetOn(),
+            personToEdit.getAddedOn(),
             personToEdit.getArchivalStatus()
         );
 

@@ -32,7 +32,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.MetOn;
+import seedu.address.model.person.AddedOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -111,10 +111,10 @@ public class EditCommand extends Command {
         PreferredLanguage updatedLang =
                 editPersonDescriptor.getPreferredLanguage().orElse(personToEdit.getPreferredLanguage());
         boolean isArchived = personToEdit.getArchivalStatus();
-        MetOn updatedMetOn = personToEdit.getMetOn();
+        AddedOn updatedAddedOn = personToEdit.getAddedOn();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedOrganisation,
-            updatedEvent, updatedNote, updatedChannel, updatedTags, updatedOffset, updatedLang, updatedMetOn,
+            updatedEvent, updatedNote, updatedChannel, updatedTags, updatedOffset, updatedLang, updatedAddedOn,
             isArchived);
     }
 
@@ -177,7 +177,7 @@ public class EditCommand extends Command {
         private CommunicationChannel channel;
         private Offset offset;
         private PreferredLanguage preferredLanguage;
-        private MetOn metOn;
+        private AddedOn addedOn;
 
         public EditPersonDescriptor() {
         }
@@ -196,7 +196,7 @@ public class EditCommand extends Command {
             setChannel(toCopy.channel);
             setOffset(toCopy.offset);
             setPreferredLanguage(toCopy.preferredLanguage);
-            setMetOn(toCopy.metOn);
+            setAddedOn(toCopy.addedOn);
         }
 
         public void setChannel(CommunicationChannel channel) {
@@ -251,12 +251,12 @@ public class EditCommand extends Command {
             this.country = country;
         }
 
-        public void setMetOn(MetOn metOn) {
-            this.metOn = metOn;
+        public void setAddedOn(AddedOn addedOn) {
+            this.addedOn = addedOn;
         }
 
-        public Optional<MetOn> getMetOn() {
-            return Optional.ofNullable(metOn);
+        public Optional<AddedOn> getAddedOn() {
+            return Optional.ofNullable(addedOn);
         }
 
         public Optional<Country> getCountry() {
@@ -331,7 +331,7 @@ public class EditCommand extends Command {
                     .add("channel", channel)
                     .add("offset", offset)
                     .add("language", preferredLanguage)
-                    .add("metOn", metOn)
+                    .add("addedOn", addedOn)
                     .toString();
         }
     }
