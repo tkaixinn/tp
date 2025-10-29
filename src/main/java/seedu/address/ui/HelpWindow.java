@@ -91,9 +91,6 @@ public class HelpWindow extends UiPart<Stage> {
     private TableColumn<LanguageEntry, String> languageNameColumn;
 
     @FXML
-    private TableColumn<LanguageEntry, String> languageCodeColumn;
-
-    @FXML
     private TableColumn<LanguageEntry, String> languageCountriesColumn;
 
     @FXML
@@ -206,29 +203,30 @@ public class HelpWindow extends UiPart<Stage> {
         commandTableView.setFixedCellSize(-1);
 
         commandTableView.getItems().addAll(
-                new CommandEntry("Add", "add name:NAME phone:PHONE email:EMAIL address:ADDRESS "
-                        + "country:COUNTRY channel:CHANNEL offset:OFFSET " + "[note:NOTE] [tag:TAG] [lang:LANG]…\n"
-                        + "e.g., add name:James Ho phone:22224444 email:jamesho@example.com "
-                        + "address:123, Clementi Rd, 1234665 country:Singapore tag:friend tag:colleague offset:+08:00"
-                        + "lang:english"),
-                new CommandEntry("Clear", "clear"),
-                new CommandEntry("Delete", "delete INDEX\n e.g., delete 3"),
+                new CommandEntry("Help", "help"),
+                new CommandEntry("Add", "add name:NAME phone:PHONE email:EMAIL address:ADDRESS offset:OFFSET "
+                        + "[country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] "
+                        + "[language:LANGUAGE] [note:NOTE] [tag:TAG]...\n"
+                        + "e.g. add name:James Ho phone:22224444 email:jamesho@example.com "
+                        + "address:123, Clementi Rd, 1234665  offset:+08:00 country:Singapore language:English "
+                        + "tag:friend tag:colleague"),
+                new CommandEntry("List", "list"),
                 new CommandEntry("Edit", "edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] "
-                        + "[address:ADDRESS] [country:COUNTRY] [channel:CHANNEL] [tag:TAG]… [offset: OFFSET]\n"
-                        + "e.g., edit 2 name:James Lee email:jameslee@example.com"),
-                new CommandEntry("Add cultural note",
-                        "addnote name:NAME note:NOTE\n e.g. addnote name:John note:does not eat beef"),
-                new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g., find James Jake"),
+                        + "[address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] "
+                        + "[channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...\n"
+                        + "e.g. edit 2 name:James Lee email:jameslee@example.com"),
+                new CommandEntry("Delete", "delete INDEX\n e.g. delete 3"),
+                new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g. find James Jake"),
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
+                new CommandEntry("Archive", "archive INDEX"),
+                new CommandEntry("Unarchive", "unarchive INDEX"),
+                new CommandEntry("Archive list", "archivelist"),
                 new CommandEntry("Sort by country", "sortcountry"),
                 new CommandEntry("Sort by name", "sortname"),
                 new CommandEntry("Sort by date added", "sortdate"),
-                new CommandEntry("List", "list"),
-                new CommandEntry("Archive", "archive INDEX"),
-                new CommandEntry("Archive list", "archivelist"),
-                new CommandEntry("Unarchive", "unarchive INDEX"),
-                new CommandEntry("Help", "help"));
+                new CommandEntry("Clear", "clear"),
+                new CommandEntry("Exit", "exit"));
 
         countryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         countryCodeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -291,7 +289,6 @@ public class HelpWindow extends UiPart<Stage> {
         languages.sort(Comparator.comparing(LanguageEntry::getName));
 
         languageNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        languageCodeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
         languageCountriesColumn.setCellValueFactory(new PropertyValueFactory<>("countriesUsed"));
 
         languageCountriesColumn.setCellFactory(col ->
