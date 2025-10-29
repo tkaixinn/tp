@@ -182,6 +182,11 @@ public class AddCommandTest {
         public void reapplySortMode() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int checkListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

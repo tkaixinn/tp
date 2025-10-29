@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ARCHIVED;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_UNARCHIVED;
 
 import java.util.List;
 
@@ -68,7 +69,12 @@ public class UnarchiveCommand extends Command {
                     false);
 
             model.setPerson(personToUnarchive, archivedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
+
+            if (model.checkListSize() > 0) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ARCHIVED);
+            } else {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+            }
         }
 
         return new CommandResult(String.format(MESSAGE_UNARCHIVE_SUCCESS, personToUnarchive.getName()));

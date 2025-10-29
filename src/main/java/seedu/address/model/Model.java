@@ -122,4 +122,9 @@ public interface Model {
      * @param mode
      */
     void setSortMode(SortMode mode);
+
+    /**
+     * Returns the size of the filtered persons list.
+     */
+    int checkListSize();
 }
