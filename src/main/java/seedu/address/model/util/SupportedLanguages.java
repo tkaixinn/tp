@@ -42,10 +42,8 @@ public class SupportedLanguages {
      *         {@code false} otherwise or if {@code language} is {@code null}
      */
     public static boolean isSupported(String language) {
-        if (language == null) {
-            return false;
-        }
-        String key = language.toLowerCase().replace(" ", "_");
+        if (language == null) return false;
+        String key = language.toLowerCase();
         return SUPPORTED_LANGUAGES.containsKey(key);
     }
 

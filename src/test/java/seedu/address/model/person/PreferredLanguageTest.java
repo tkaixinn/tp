@@ -38,18 +38,6 @@ public class PreferredLanguageTest {
     }
 
     @Test
-    public void validLanguages_spaces() {
-        PreferredLanguage pl = new PreferredLanguage("Hmong White");
-        assert pl.getPreferredLanguage().equals("Hmong White");
-
-        pl = new PreferredLanguage("Scottish Gaelic");
-        assert pl.getPreferredLanguage().equals("Scottish Gaelic");
-
-        pl = new PreferredLanguage("Albanian TO");
-        assert pl.getPreferredLanguage().equals("Albanian TO");
-    }
-
-    @Test
     public void equalsMethod_tests() {
         PreferredLanguage pl1 = new PreferredLanguage("English");
         PreferredLanguage pl2 = new PreferredLanguage("english");
