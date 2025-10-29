@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Locale;
 
 import seedu.address.model.util.StringUtils;
+import seedu.address.model.util.SupportedLanguages;
 
 /**
  * Represents a person's preferred language in the address book.
@@ -24,11 +25,15 @@ public class PreferredLanguage {
      * Constructs a {@code PreferredLanguage}.
      * @param language The language string. Must be non-null and valid.
      */
+
     public PreferredLanguage(String language) {
         requireNonNull(language);
         checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
+        checkArgument(SupportedLanguages.isSupported(language),
+                "Unsupported language: " + language + ". Must be one of the supported languages.");
         this.language = language;
     }
+
 
     /**
      * Returns true if a given string is a valid language.

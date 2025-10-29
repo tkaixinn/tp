@@ -64,13 +64,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).orElse(""));
         Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.EMAIL;
-        PreferredLanguage preferredLanguage = null;
+        PreferredLanguage preferredLanguage;
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
             String languageInput = argMultimap.getValue(PREFIX_LANGUAGE).get();
-            preferredLanguage = new PreferredLanguage(languageInput);
+            try {
+                preferredLanguage = new PreferredLanguage(languageInput);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException("Invalid language: " + e.getMessage());
+            }
         } else {
             preferredLanguage = new PreferredLanguage("english");
         }
+
 
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
             String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
