@@ -90,6 +90,9 @@ public class Offset implements Comparable<Offset> {
      */
     @Override
     public String toString() {
+        if (totalMinutes == 0) {
+            return "+00:00";
+        }
         return value;
     }
 
@@ -105,7 +108,7 @@ public class Offset implements Comparable<Offset> {
      * Converts to a {@link ZoneOffset}.
      */
     public ZoneOffset toZoneOffset() {
-        return ZoneOffset.of(value);
+        return ZoneOffset.of(totalMinutes == 0 ? "+00:00" : value);
     }
 
     @Override
