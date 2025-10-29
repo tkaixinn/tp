@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import seedu.address.model.util.SupportedLanguages;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,42 +10,17 @@ public class PreferredLanguageTest {
 
     @Test
     public void validLanguages_basic() {
-        PreferredLanguage pl = new PreferredLanguage("English");
-        assert pl.getPreferredLanguage().equals("English");
+        PreferredLanguage pl = new PreferredLanguage("english");
+        assert pl.getPreferredLanguage().equals("english");
 
-        pl = new PreferredLanguage("Mandarin");
-        assert pl.getPreferredLanguage().equals("Mandarin");
+        pl = new PreferredLanguage("spanish");
+        assert pl.getPreferredLanguage().equals("spanish");
 
-        pl = new PreferredLanguage("Spanish");
-        assert pl.getPreferredLanguage().equals("Spanish");
+        pl = new PreferredLanguage("mandarin");
+        assert pl.getPreferredLanguage().equals("mandarin");
 
-        pl = new PreferredLanguage("French");
-        assert pl.getPreferredLanguage().equals("French");
-    }
-
-    @Test
-    public void validLanguages_variousCases() {
-        String[] languages = {
-            "German", "Italian", "Portuguese", "Russian", "Arabic", "Hindi",
-            "Japanese", "Korean", "Vietnamese", "Thai", "Bengali", "Tamil",
-            "Urdu", "Malay", "Indonesian", "Filipino", "Swahili", "Zulu",
-            "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin", "Norwegian",
-            "Swedish", "Danish", "Finnish", "Polish", "Czech", "Slovak",
-            "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
-            "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
-            "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
-            "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
-            "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
-            "Hmong White", "Inuktitut", "Quechua", "Aymara", "Chamorro Guam",
-            "Chamorro North", "Armenian Eastern", "Armenian Western", "Abkhaz",
-            "Adyghe", "Afrikaans", "Akkadian", "Albanian GH", "Albanian TO", "Aleut"
-        };
-
-        for (String lang : languages) {
-            PreferredLanguage pl = new PreferredLanguage(lang);
-            assert pl.getPreferredLanguage().equals(lang);
-            assert PreferredLanguage.isValidLanguage(lang);
-        }
+        pl = new PreferredLanguage("french");
+        assert pl.getPreferredLanguage().equals("french");
     }
 
     @Test
@@ -107,26 +83,6 @@ public class PreferredLanguageTest {
         assertFalse(PreferredLanguage.isValidLanguage("Fr@nçais!"));
         assertFalse(PreferredLanguage.isValidLanguage("Mandarin!"));
         assertTrue(PreferredLanguage.isValidLanguage("Scottish Gaelic"));
-    }
-
-    @Test
-    public void mixedLanguages_loopTest() {
-        String[] validLanguages = {
-            "Zulu", "Xhosa", "Afrikaans", "Hebrew", "Greek", "Latin",
-            "Norwegian", "Swedish", "Danish", "Finnish", "Polish", "Czech",
-            "Slovak", "Hungarian", "Romanian", "Serbian", "Croatian", "Bosnian",
-            "Bulgarian", "Ukrainian", "Macedonian", "Slovene", "Lithuanian",
-            "Latvian", "Estonian", "Icelandic", "Irish", "Welsh", "Scottish Gaelic",
-            "Basque", "Catalan", "Galician", "Esperanto", "Luxembourgish",
-            "Maltese", "Maori", "Samoan", "Tongan", "Fijian", "Haitian Creole",
-            "Hmong White", "Inuktitut", "Quechua", "Aymara"
-        };
-
-        for (String lang : validLanguages) {
-            PreferredLanguage pl = new PreferredLanguage(lang);
-            assertTrue(PreferredLanguage.isValidLanguage(lang));
-            assert pl.getPreferredLanguage().equals(lang);
-        }
     }
 
     @Test
