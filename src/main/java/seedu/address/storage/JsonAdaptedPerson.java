@@ -215,7 +215,8 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelOrganisation,
-            modelEvent, modelNote, modelChannel, modelTags, modelOffset, modelPreferredLanguage, modelMetOn, archivalStatus);
+            modelEvent, modelNote, modelChannel, modelTags, modelOffset, modelPreferredLanguage, modelMetOn,
+                archivalStatus);
     }
 
 }
