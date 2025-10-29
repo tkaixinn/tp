@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ADDRESS, PREFIX_COUNTRY, PREFIX_ORGANISATION, PREFIX_EVENT, PREFIX_NOTE, PREFIX_TAG,
                 PREFIX_CHANNEL, PREFIX_OFFSET, PREFIX_LANGUAGE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_OFFSET)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_OFFSET, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -67,8 +67,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Event event = ParserUtil.parseEvent(argMultimap.getValue(PREFIX_EVENT).orElse(""));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).orElse(""));
-        Person.CommunicationChannel preferredChannel = Person.CommunicationChannel.EMAIL;
-        PreferredLanguage preferredLanguage;
+        Person.CommunicationChannel preferredChannel = null;
+        PreferredLanguage preferredLanguage = null;
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
             String languageInput = argMultimap.getValue(PREFIX_LANGUAGE).get();
             try {
@@ -76,10 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             } catch (IllegalArgumentException e) {
                 throw new ParseException("Invalid language: " + e.getMessage());
             }
-        } else {
-            preferredLanguage = new PreferredLanguage("english");
         }
-
 
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
             String channelInput = argMultimap.getValue(PREFIX_CHANNEL).get().toUpperCase();
