@@ -82,7 +82,7 @@ public class PersonCard extends UiPart<Region> {
             note.setManaged(false);
         }
 
-        if (!person.getNote().value.equals("")) {
+        if (!person.getEvent().value.equals("")) {
             event.setVisible(true);
             event.setText("Event: " + person.getEvent().value);
         } else {
