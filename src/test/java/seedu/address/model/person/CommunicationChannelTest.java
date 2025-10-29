@@ -29,18 +29,18 @@ public class CommunicationChannelTest {
 
     @Test
     public void testToStringOutput() {
-        assertEquals("PHONE", Person.CommunicationChannel.PHONE.toString());
-        assertEquals("EMAIL", Person.CommunicationChannel.EMAIL.toString());
-        assertEquals("SMS", Person.CommunicationChannel.SMS.toString());
-        assertEquals("WHATSAPP", Person.CommunicationChannel.WHATSAPP.toString());
-        assertEquals("TELEGRAM", Person.CommunicationChannel.TELEGRAM.toString());
+        assertEquals("Phone", Person.CommunicationChannel.PHONE.toString());
+        assertEquals("Email", Person.CommunicationChannel.EMAIL.toString());
+        assertEquals("Sms", Person.CommunicationChannel.SMS.toString());
+        assertEquals("Whatsapp", Person.CommunicationChannel.WHATSAPP.toString());
+        assertEquals("Telegram", Person.CommunicationChannel.TELEGRAM.toString());
     }
 
     @Test
     public void testSwitchLogic() {
         Person.CommunicationChannel channel = Person.CommunicationChannel.SMS;
         String message;
-        switch(channel) {
+        switch (channel) {
         case PHONE -> message = "Call user";
         case EMAIL -> message = "Send email";
         case SMS -> message = "Send text";
@@ -104,7 +104,7 @@ public class CommunicationChannelTest {
         boolean whatsappFound = false;
         boolean telegramFound = false;
         for (Person.CommunicationChannel channel : channels) {
-            switch(channel) {
+            switch (channel) {
             case PHONE -> phoneFound = true;
             case EMAIL -> emailFound = true;
             case SMS -> smsFound = true;
@@ -128,7 +128,7 @@ public class CommunicationChannelTest {
     public void testSwitchAllChannels() {
         for (Person.CommunicationChannel channel : Person.CommunicationChannel.values()) {
             String action;
-            switch(channel) {
+            switch (channel) {
             case PHONE -> action = "Call";
             case EMAIL -> action = "Email";
             case SMS -> action = "Text";
@@ -178,11 +178,13 @@ public class CommunicationChannelTest {
     }
 
     @Test
-    public void testToStringMatchesName() {
+    public void testToStringMatchesTitleCase() {
         for (Person.CommunicationChannel channel : Person.CommunicationChannel.values()) {
-            assertEquals(channel.name(), channel.toString());
+            String expected = channel.name().charAt(0) + channel.name().substring(1).toLowerCase();
+            assertEquals(expected, channel.toString());
         }
     }
+
 
     @Test
     public void testEnhancedForLoopIteration() {
@@ -198,7 +200,7 @@ public class CommunicationChannelTest {
     public void testSwitchDefaultNeverTriggered() {
         for (Person.CommunicationChannel channel : Person.CommunicationChannel.values()) {
             String result;
-            switch(channel) {
+            switch (channel) {
             case PHONE -> result = "phone";
             case EMAIL -> result = "email";
             case SMS -> result = "sms";
@@ -289,7 +291,7 @@ public class CommunicationChannelTest {
         for (int i = 0; i < 3; i++) {
             for (Person.CommunicationChannel channel : Person.CommunicationChannel.values()) {
                 String result;
-                switch(channel) {
+                switch (channel) {
                 case PHONE -> result = "call";
                 case EMAIL -> result = "email";
                 case SMS -> result = "sms";
@@ -308,9 +310,11 @@ public class CommunicationChannelTest {
         Person.CommunicationChannel[] channels = Person.CommunicationChannel.values();
         for (Person.CommunicationChannel channel : channels) {
             assertEquals(channel, Person.CommunicationChannel.values()[channel.ordinal()]);
-            assertEquals(channel.name(), channel.toString());
+            String expected = channel.name().charAt(0) + channel.name().substring(1).toLowerCase();
+            assertEquals(expected, channel.toString());
         }
     }
 }
+
 
 

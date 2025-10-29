@@ -70,7 +70,7 @@ public class Person {
     }
 
     /**
-     * If both note notes and country is included in initialisation.
+     * If both notes and country is included in initialisation.
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
                   Event event, Note note, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
@@ -84,7 +84,7 @@ public class Person {
         this.organisation = organisation;
         this.event = event;
         this.note = note;
-        this.preferredChannel = CommunicationChannel.EMAIL;
+        this.preferredChannel = null;
         this.tags.addAll(tags);
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
@@ -108,7 +108,13 @@ public class Person {
         EMAIL,
         SMS,
         WHATSAPP,
-        TELEGRAM
+        TELEGRAM;
+
+        @Override
+        public String toString() {
+            String lower = name().toLowerCase();
+            return lower.substring(0, 1).toUpperCase() + lower.substring(1);
+        }
     }
 
     public CommunicationChannel getPreferredChannel() {
