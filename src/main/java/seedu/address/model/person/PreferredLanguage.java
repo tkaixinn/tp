@@ -29,8 +29,6 @@ public class PreferredLanguage {
     public PreferredLanguage(String language) {
         requireNonNull(language);
         checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
-
-        // Normalize to lowercase for internal storage
         String normalizedLanguage = language.trim().toLowerCase(Locale.ROOT);
 
         checkArgument(SupportedLanguages.isSupported(normalizedLanguage),
