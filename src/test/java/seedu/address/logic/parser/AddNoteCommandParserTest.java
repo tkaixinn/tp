@@ -45,9 +45,11 @@ public class AddNoteCommandParserTest {
         assertParseFailure(parser, AddNoteCommand.COMMAND_WORD, expectedMessage);
 
         // no name
-        assertParseFailure(parser, AddNoteCommand.COMMAND_WORD + " " + PREFIX_NOTE + VALID_NOTE, expectedMessage);
+        assertParseFailure(parser, AddNoteCommand.COMMAND_WORD + " " + PREFIX_NOTE + VALID_NOTE,
+            expectedMessage);
 
         // no note
-        assertParseFailure(parser, AddNoteCommand.COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME, expectedMessage);
+        assertParseFailure(parser, AddNoteCommand.COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME,
+            expectedMessage);
     }
 }

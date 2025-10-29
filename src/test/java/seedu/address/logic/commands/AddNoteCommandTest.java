@@ -65,7 +65,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_addNoteSpecial_success() throws Exception {
+    public void executeAddNoteExistingPerson_specialCharacters_success() throws Exception {
         Name targetName = new Name("Alice Pauline");
         Note note = new Note(NOTE_SPECIAL);
 
@@ -191,7 +191,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    public void execute_whitespace_success() throws Exception {
+    public void execute_whitespaceNote_preservedSuccess() throws Exception {
         Person target = model.getFilteredPersonList().get(0);
         AddNoteCommand cmd = new AddNoteCommand(target.getName(), new Note(WS_NOTE));
 

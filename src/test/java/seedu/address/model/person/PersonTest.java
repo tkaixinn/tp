@@ -99,13 +99,14 @@ public class PersonTest {
             + ", address=" + ALICE.getAddress()
             + ", offset=" + ALICE.getOffset()
             + ", country=" + ALICE.getCountry()
+            + ", organisation=" + ALICE.getOrganisation()
             + ", event=" + ALICE.getEvent()
             + ", preferredChannel=" + ALICE.getPreferredChannel()
             + ", preferredLanguage=" + ALICE.getPreferredLanguage()
             + ", suggestedGreeting=" + ALICE.getSuggestedGreeting()
             + ", metOn=" + ALICE.getMetOn()
             + ", note=" + ALICE.getNote()
-            + ", tags=" + ALICE.getTags()+ "}";
+            + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -35,10 +35,11 @@ public class Offset implements Comparable<Offset> {
     }
 
     /**
-     * Checks if a given string is a valid GMT offset.
+     * Returns true if the given string is a valid UTC offset in the format {@code +HH:MM} or {@code -HH:MM},
+     * within the allowed timezone range.
      *
-     * @param test the string to validate
-     * @return true if {@code test} is a valid GMT offset, false otherwise
+     * @param test The string to validate.
+     * @return True if the string represents a valid offset, false otherwise.
      */
     public static boolean isValidOffset(String test) {
         if (test == null) {

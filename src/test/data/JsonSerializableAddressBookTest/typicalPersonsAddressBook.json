@@ -16,6 +16,8 @@
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
       "country": "Singapore",
+      "organisation": "NUS",
+      "event": "University briefing",
       "note": "He can't drink alcohol!",
       "tags": ["owesMoney", "friends"]
     },

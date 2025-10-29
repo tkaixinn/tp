@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label organisation;
+    @FXML
     private Label event;
     @FXML
     private Label note;
@@ -74,12 +76,12 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
 
-        if (!person.getNote().value.equals("")) {
-            note.setVisible(true);
-            note.setText("Note: " + person.getNote().value);
+        if (!person.getOrganisation().value.equals("")) {
+            organisation.setVisible(true);
+            organisation.setText("Organisation: " + person.getOrganisation().value);
         } else {
-            note.setVisible(false);
-            note.setManaged(false);
+            organisation.setVisible(false);
+            organisation.setManaged(false);
         }
 
         if (!person.getEvent().value.equals("")) {
@@ -88,6 +90,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             event.setVisible(false);
             event.setManaged(false);
+        }
+
+        if (!person.getNote().value.equals("")) {
+            note.setVisible(true);
+            note.setText("Note: " + person.getNote().value);
+        } else {
+            note.setVisible(false);
+            note.setManaged(false);
         }
 
         if (person.getPreferredChannel() != null) {

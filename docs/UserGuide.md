@@ -132,6 +132,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an organisation to existing persons: `addorg`
+
+Adds or updates the existing contact's organisation.
+
+Format: `addorg name:NAME organisation:ORGANISATION`
+
+To remove an existing contact's organisation record:
+
+Format: `addorg name:NAME organisation:`
+
+Examples:
+* `addorg name: John Doe organisation: National University of Singapore`
+
 ### Adding an event to existing persons: `addevent`
 
 Adds or updates an event for an existing person.
@@ -311,6 +324,7 @@ Action | Format and Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Event** | `addevent name:NAME event:EVENT` <br> e.g., `addevent name:John Doe event:Met at NUS Career Fair 2024`
 **Add Note** | `addnote name:NAME note:NOTE` <br> e.g., `addnote name:John Doe note:Cannot drink alcohol`
+**Add Organisation** | `addorg name:NAME organisation:ORGANISATION` <br> e.g., `addorg name:John Doe organisation:National University of Singapore`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`

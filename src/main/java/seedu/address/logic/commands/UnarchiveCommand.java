@@ -58,6 +58,7 @@ public class UnarchiveCommand extends Command {
                     personToUnarchive.getEmail(),
                     personToUnarchive.getAddress(),
                     personToUnarchive.getCountry(),
+                    personToUnarchive.getOrganisation(),
                     personToUnarchive.getEvent(),
                     personToUnarchive.getNote(),
                     personToUnarchive.getTags(),

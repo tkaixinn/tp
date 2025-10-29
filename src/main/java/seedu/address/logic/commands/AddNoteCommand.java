@@ -61,6 +61,7 @@ public class AddNoteCommand extends Command {
             personToEdit.getEmail(),
             personToEdit.getAddress(),
             personToEdit.getCountry(),
+            personToEdit.getOrganisation(),
             personToEdit.getEvent(),
             note,
             personToEdit.getTags(),
