@@ -6,7 +6,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Event;
 import seedu.address.model.person.Name;
