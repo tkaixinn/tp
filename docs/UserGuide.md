@@ -6,7 +6,7 @@ title: User Guide
 Worldly is a **desktop app for exchange students looking to manage their contacts**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Worldly will get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -87,7 +87,7 @@ If your changes to the data file render its format invalid, Worldly may behave i
 **:information_source: Notes about the command format:**<br>
 
 * Offset must be typed **immediately after the prefix**.
-<br>
+  <br>
   e.g., `offset: +08:00` will not work, but `offset:+08:00` will.
 
 * `UPPER_CASE` indicates the parameters to be supplied by the user.<br>
@@ -116,9 +116,7 @@ Shows the description and format of all actions a user can perform with Worldly,
 * A table of valid languages for the `language:LANGUAGE` field and the countries that use them.
 * Shortcut: You can also open the help window by pressing `F1` or selecting *Help → User Guide* from the menu bar.
 
-
 ![help message](images/helpWindow.png)
-
 Format: `help`
 
 
@@ -138,13 +136,13 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
 * A contact can have up to 10 tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
-`name:`70 characters<br>
-`email:` 254 characters<br>
-`address:` 255 characters<br>
-`organisation:` 60 characters<br>
-`event:` 100 characters<br>
-`note:` 500 characters <br>
-`tag:` 30 characters per tag
+  `name:`70 characters<br>
+  `email:` 254 characters<br>
+  `address:` 255 characters<br>
+  `organisation:` 60 characters<br>
+  `event:` 100 characters<br>
+  `note:` 500 characters <br>
+  `tag:` 30 characters per tag
 
 <br>
 <!-- To insert image -->
@@ -224,12 +222,25 @@ Finds contacts who are from the given country.
 
 Format: `findcountry COUNTRY`
 
-* The search is **case-sensitive**. e.g.,`Singapore` is a valid country but not `singapore`.
+* The search is **case-insensitive**. e.g.,`Singapore` is a valid country, as well as `singapore` and `sinGApore`.
 * Refer to the full list of valid country names in the help window.
   ![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
 * `findcountry Singapore`
+
+### Finding contacts by organisation: `findorganisation`
+
+Finds contacts who are from the given organisation.
+
+Format: `findorganisation ORGANISATION`
+
+* The search is **case-sensitive**. e.g.,`NUS` will return contacts that has Google as their organisation, not `nus`.
+* Refer to the full list of valid country names in the help window.
+  ![result for 'findorganisation NUS'](images/findorganisation.png)
+
+Examples:
+* `findorganisation NUS`
 
 ### Finding contacts by tag: `findtag`
 
@@ -240,7 +251,7 @@ Format: `findtag TAG [MORE_TAGS]`
 * The search is **case-insensitive**.
 * Only returns contacts who match ALL the tags.
 * Only full words will be matched e.g., `friend` will not match `friends`.
-![result for 'findtag friends owesMoney'](images/findtag.png)
+  ![result for 'findtag friends owesMoney'](images/findtag.png)
 
 Examples:
 * `findtag friends`
@@ -253,10 +264,10 @@ Archives the contact at the specified `INDEX` from the current list.
 Format: `archive INDEX`
 
 * Command format and function is similar to delete, except the contact is just moved to a separate list accessible
-with `archivelist` and can be unarchived at a later time.
+  with `archivelist` and can be unarchived at a later time.
 * Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g., `find`).
-![result for 'archive 3'](images/archive.jpg)
-![result for 'archivelist'](images/archivelist.jpg)
+  ![result for 'archive 3'](images/archive.jpg)
+  ![result for 'archivelist'](images/archivelist.jpg)
 
 <br>
 
@@ -382,6 +393,7 @@ Action | Format and Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
+**Find Organisation** | `findorganisation ORGANISATION`<br> e.g., `find Google`
 **Archive** | `archive INDEX`<br> e.g., `archive 2`
 **Unarchive** | `unarchive INDEX`<br> e.g., `unarchive 1`
 **List Archived** | `archivelist`
