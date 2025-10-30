@@ -117,7 +117,7 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
 * Case-sensitive uniqueness of contact names is enforced.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
@@ -129,8 +129,8 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * A contact can have any number of tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
 `name:`70 characters<br>
-`address:` 255 characters<br>
 `email:` 254 characters<br>
+`address:` 255 characters<br>
 `organisation:` 60 characters<br>
 `event:` 100 characters<br>
 `note:` 500 characters <br>
@@ -156,7 +156,7 @@ Format: `list`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel: CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [organisation:ORGANISATION][event:EVENT] [channel: CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`
 
 * Edits the contact at the specified `INDEX`. The index refers to the number shown in the currently displayed list beside the contact's name. The index must be a **positive integer**, i.e. 1, 2, 3...
 * At least one of the optional fields must be provided.
@@ -358,9 +358,9 @@ Format: `exit`
 Action | Format and Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
 **List** | `list`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
