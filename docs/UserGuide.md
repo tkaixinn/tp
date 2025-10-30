@@ -15,7 +15,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 1. Ensure you have Java `17` or above installed on your Computer.<br>
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-   **Tip:** You can check your installed Java version by typing `java -version` in your terminal.If it shows a version below 17, please install a newer JDK before running Worldly.
+   **Tip:** You can check your installed Java version by typing `java -version` in your terminal. If it shows a version below 17, please install a newer JDK before running Worldly.
 
 <br>
 
