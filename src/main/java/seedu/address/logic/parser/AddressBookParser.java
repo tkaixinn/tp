@@ -60,69 +60,28 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case AddOrganisationCommand.COMMAND_WORD:
-            return new AddOrganisationCommandParser().parse(arguments);
-
-        case AddNoteCommand.COMMAND_WORD:
-            return new AddNoteCommandParser().parse(arguments);
-
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventCommandParser().parse(arguments);
-
-        case FindTagCommand.COMMAND_WORD:
-            return new FindTagCommandParser().parse(arguments);
-
-        case FindCountryCommand.COMMAND_WORD:
-            return new FindCountryCommandParser().parse(arguments);
-
-        case ArchiveListCommand.COMMAND_WORD:
-            return new ArchiveListCommand();
-
-        case ArchiveCommand.COMMAND_WORD:
-            return new ArchiveCommandParser().parse(arguments);
-
-        case UnarchiveCommand.COMMAND_WORD:
-            return new UnarchiveCommandParser().parse(arguments);
-
-        case SortCountryCommand.COMMAND_WORD:
-            return new SortCountryCommand();
-
-        case SortNameCommand.COMMAND_WORD:
-            return new SortNameCommand();
-
-        case SortDateCommand.COMMAND_WORD:
-            return new SortDateCommand();
-
-        default:
+        return switch (commandWord) {
+        case AddCommand.COMMAND_WORD -> new AddCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD -> new EditCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD -> new DeleteCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD -> new ClearCommand();
+        case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD -> new ListCommand();
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        case FindTagCommand.COMMAND_WORD -> new FindTagCommandParser().parse(arguments);
+        case FindCountryCommand.COMMAND_WORD -> new FindCountryCommandParser().parse(arguments);
+        case ArchiveListCommand.COMMAND_WORD -> new ArchiveListCommand();
+        case ArchiveCommand.COMMAND_WORD -> new ArchiveCommandParser().parse(arguments);
+        case UnarchiveCommand.COMMAND_WORD -> new UnarchiveCommandParser().parse(arguments);
+        case SortCountryCommand.COMMAND_WORD -> new SortCountryCommand();
+        case SortNameCommand.COMMAND_WORD -> new SortNameCommand();
+        case SortDateCommand.COMMAND_WORD -> new SortDateCommand();
+        default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+        };
     }
 
 }

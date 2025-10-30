@@ -9,6 +9,18 @@ import org.junit.jupiter.api.Test;
 public class NoteTest {
 
     @Test
+    public void isValidNote_exceedsMaxLength_returnsFalse() {
+        String longNote = "a".repeat(501);
+        assertFalse(Note.isValidNote(longNote));
+    }
+
+    @Test
+    public void isValidNote_maxLengthBoundary_returnsTrue() {
+        String validNote = "a".repeat(500);
+        assertTrue(Note.isValidNote(validNote));
+    }
+
+    @Test
     public void equals() {
         Note note = new Note("Hello");
 

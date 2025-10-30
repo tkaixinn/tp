@@ -25,6 +25,16 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND0;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND1;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND2;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND3;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND4;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND5;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND6;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND7;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND8;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND9;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CHANNEL_BOB;
@@ -235,7 +245,8 @@ public class AddCommandParserTest {
 
         //Offset beyond bounds
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_OFFSET_DESC, "Invalid command format! \n" + "Must be +HH:MM or -HH:MM.");
+                + INVALID_OFFSET_DESC,
+                "Invalid command format! \n" + "Offset must be in the format +HH:MM or -HH:MM.");
     }
 
     // Channel parsing tests
@@ -346,5 +357,14 @@ public class AddCommandParserTest {
                         + COUNTRY_DESC_BOB + OFFSET_DESC_BOB
                         + lowerCaseLang,
                 new AddCommand(expected));
+    }
+
+    @Test
+    public void parse_moreThanTenTags_failure() {
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_FRIEND0 + TAG_DESC_FRIEND1 +
+                TAG_DESC_FRIEND2 + TAG_DESC_FRIEND3 + TAG_DESC_FRIEND4 + TAG_DESC_FRIEND5 + TAG_DESC_FRIEND6 +
+                TAG_DESC_FRIEND7 + TAG_DESC_FRIEND8 + TAG_DESC_FRIEND9,
+                "You can only have a maximum of 10 tags per contact.");
     }
 }

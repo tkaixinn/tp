@@ -57,20 +57,33 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
+    /**
+     * Tests that the {@code toString()} method of {@code EditPersonDescriptor}
+     * produces the expected string representation.
+     *
+     * <p>This test constructs a new, empty {@code EditPersonDescriptor} and manually
+     * builds the expected output string by concatenating all field values in the same
+     * order that {@code EditPersonDescriptor#toString()} is expected to print them.
+     * The test then verifies that the actual {@code toString()} output matches the
+     * expected string exactly.</p>
+     */
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getCountry().orElse(null) + ", country="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", channel="
-                + editPersonDescriptor.getChannel().orElse(null) + ", offset="
-                + editPersonDescriptor.getGmtOffset().orElse(null) + ", language="
-                + editPersonDescriptor.getPreferredLanguage().orElse(null) + ", addedOn="
-                + editPersonDescriptor.getAddedOn().orElse(null) + "}";
+            + editPersonDescriptor.getName().orElse(null) + ", phone="
+            + editPersonDescriptor.getPhone().orElse(null) + ", email="
+            + editPersonDescriptor.getEmail().orElse(null) + ", address="
+            + editPersonDescriptor.getAddress().orElse(null) + ", country="
+            + editPersonDescriptor.getCountry().orElse(null) + ", organisation="
+            + editPersonDescriptor.getOrganisation().orElse(null) + ", event="
+            + editPersonDescriptor.getEvent().orElse(null) + ", note="
+            + editPersonDescriptor.getNote().orElse(null) + ", tags="
+            + editPersonDescriptor.getTags().orElse(null) + ", channel="
+            + editPersonDescriptor.getChannel().orElse(null) + ", offset="
+            + editPersonDescriptor.getGmtOffset().orElse(null) + ", language="
+            + editPersonDescriptor.getPreferredLanguage().orElse(null) + ", metOn="
+            + editPersonDescriptor.getAddedOn().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

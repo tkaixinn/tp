@@ -56,8 +56,19 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_COUNTRY, PREFIX_OFFSET, PREFIX_LANGUAGE, PREFIX_CHANNEL);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                PREFIX_NAME,
+                PREFIX_PHONE,
+                PREFIX_EMAIL,
+                PREFIX_ADDRESS,
+                PREFIX_COUNTRY,
+                PREFIX_ORGANISATION,
+                PREFIX_EVENT,
+                PREFIX_NOTE,
+                PREFIX_OFFSET,
+                PREFIX_LANGUAGE,
+                PREFIX_CHANNEL
+        );
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -102,6 +113,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        if (tagList.size() > 10) {
+            throw new ParseException("You can only have a maximum of 10 tags per contact.");
+        }
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).orElse(""));

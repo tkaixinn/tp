@@ -101,9 +101,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Country updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
-        Organisation updatedOrganisation = personToEdit.getOrganisation();
-        Event updatedEvent = personToEdit.getEvent();
-        Note updatedNote = personToEdit.getNote();
+        Organisation updatedOrganisation = editPersonDescriptor.getOrganisation()
+            .orElse(personToEdit.getOrganisation());
+        Event updatedEvent = editPersonDescriptor.getEvent().orElse(personToEdit.getEvent());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Offset updatedOffset = editPersonDescriptor.getGmtOffset().orElse(personToEdit.getOffset());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         CommunicationChannel updatedChannel = editPersonDescriptor.getChannel()
@@ -173,6 +174,9 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Country country;
+        private Organisation organisation;
+        private Event event;
+        private Note note;
         private Set<Tag> tags;
         private CommunicationChannel channel;
         private Offset offset;
@@ -192,6 +196,9 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setCountry(toCopy.country);
+            setEvent(toCopy.event);
+            setNote(toCopy.note);
+            setOrganisation(toCopy.organisation);
             setTags(toCopy.tags);
             setChannel(toCopy.channel);
             setOffset(toCopy.offset);
@@ -211,8 +218,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, country, tags, channel, offset,
-                                               preferredLanguage);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, offset, country, organisation, event,
+                                               channel, preferredLanguage, note, tags);
         }
 
         public void setName(Name name) {
@@ -263,6 +270,16 @@ public class EditCommand extends Command {
             return Optional.ofNullable(country);
         }
 
+        public Optional<Organisation> getOrganisation() {
+            return Optional.ofNullable(organisation);
+        }
+        public Optional<Event> getEvent() {
+            return Optional.ofNullable(event);
+        }
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -293,6 +310,18 @@ public class EditCommand extends Command {
             this.preferredLanguage = preferredLanguage;
         }
 
+        public void setOrganisation(Organisation organisation) {
+            this.organisation = organisation;
+        }
+
+        public void setEvent(Event event) {
+            this.event = event;
+        }
+
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
         public Optional<PreferredLanguage> getPreferredLanguage() {
             return Optional.ofNullable(preferredLanguage);
         }
@@ -315,6 +344,9 @@ public class EditCommand extends Command {
                     && Objects.equals(country, otherEditPersonDescriptor.country)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(channel, otherEditPersonDescriptor.channel)
+                    && Objects.equals(event, otherEditPersonDescriptor.event)
+                    && Objects.equals(note, otherEditPersonDescriptor.note)
+                    && Objects.equals(organisation, otherEditPersonDescriptor.organisation)
                     && Objects.equals(offset, otherEditPersonDescriptor.offset)
                     && Objects.equals(preferredLanguage, otherEditPersonDescriptor.preferredLanguage);
         }
@@ -322,17 +354,20 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("country", country)
-                    .add("tags", tags)
-                    .add("channel", channel)
-                    .add("offset", offset)
-                    .add("language", preferredLanguage)
-                    .add("addedOn", addedOn)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("country", country)
+                .add("organisation", organisation)
+                .add("event", event)
+                .add("note", note)
+                .add("tags", tags)
+                .add("channel", channel)
+                .add("offset", offset)
+                .add("language", preferredLanguage)
+                .add("addedOn", metOn)
+                .toString();
         }
     }
 }
