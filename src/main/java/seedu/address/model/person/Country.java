@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Represents a Person's country in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidCountry(String)}
  */
 public class Country {
 

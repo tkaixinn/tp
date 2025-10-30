@@ -12,7 +12,7 @@ public class Offset implements Comparable<Offset> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "GMT offset must be in the format +HH:MM or -HH:MM, where HH is 00-14 and MM is 00-59.";
-    public static final String VALIDATION_REGEX = "^[+-](?:0\\d|1[0-4]):[0-5]\\d$";
+    public static final String VALIDATION_REGEX = "^[+-](\\d{2}):(\\d{2})$";
 
     public final String value;
     private final int totalMinutes; // offset in minutes
@@ -47,7 +47,7 @@ public class Offset implements Comparable<Offset> {
         }
 
         // Must match +HH:MM or -HH:MM
-        if (!test.matches("^[+-](\\d{2}):(\\d{2})$")) {
+        if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
 
@@ -75,7 +75,7 @@ public class Offset implements Comparable<Offset> {
             return false;
         }
         return true;
-    };
+    }
 
     /**
      * Returns the total offset in minutes.

@@ -17,7 +17,7 @@ public class Phone {
             + "(e.g. +6598765432) "
             + "or contain at least 3 digits if no country code is provided.";
 
-    public static final String VALIDATION_REGEX = "^\\+?[0-9\\-()\\s]*[0-9][0-9][0-9][0-9]*$";
+    public static final String VALIDATION_REGEX = "^\\+?[0-9\\-()\\s]*$";
     public final String value;
     public final String countryCode;
 
@@ -41,7 +41,7 @@ public class Phone {
             throw new NullPointerException();
         }
 
-        if (!test.matches("^\\+?[0-9\\-()\\s]*$")) {
+        if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
 

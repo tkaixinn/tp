@@ -88,7 +88,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_OFFSET).isPresent()) {
-            editPersonDescriptor.setOffset(ParserUtil.parseOffsetEdit(argMultimap.getValue(PREFIX_OFFSET).get()));
+            editPersonDescriptor.setOffset(ParserUtil.parseOffset(argMultimap.getValue(PREFIX_OFFSET).get()));
         }
 
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
