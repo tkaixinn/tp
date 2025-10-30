@@ -9,7 +9,7 @@ import seedu.address.model.person.CountryContainsKeywordPredicate;
 
 /**
  * Finds and lists all persons in address book who comes from the country specified in the argument.
- * Country matching is case sensitive.
+ * Country matching is case-insensitive.
  */
 public class FindCountryCommand extends Command {
 
