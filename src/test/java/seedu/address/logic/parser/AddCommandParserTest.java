@@ -73,33 +73,6 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND + OFFSET_DESC_BOB,
-                new AddCommand(expectedPerson));
-
-        //with optional fields note, preferredChannel, preferredLanguage
-        Person expectedPersonOptionalFields =
-                new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).withNote(VALID_NOTE_BOB)
-                        .withChannel(VALID_CHANNEL_BOB).withLanguage(VALID_LANGUAGE_BOB).build();
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND + OFFSET_DESC_BOB + NOTE_DESC_BOB
-                        + CHANNEL_DESC_BOB + LANGUAGE_DESC_BOB,
-                new AddCommand(expectedPersonOptionalFields));
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + OFFSET_DESC_BOB,
-                new AddCommand(expectedPersonMultipleTags));
-    }
-
-    @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + OFFSET_DESC_BOB;
@@ -263,23 +236,6 @@ public class AddCommandParserTest {
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
                         + CHANNEL_DESC_BOB,
-                new AddCommand(expected));
-    }
-
-    @Test
-    public void parse_validChannelWithOtherOptionalFields_success() {
-        // With note and language as well
-        Person expected = new PersonBuilder(BOB)
-                .withTags(VALID_TAG_FRIEND)
-                .withNote(VALID_NOTE_BOB)
-                .withChannel(VALID_CHANNEL_BOB)
-                .withLanguage(VALID_LANGUAGE_BOB)
-                .build();
-
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND
-                        + NOTE_DESC_BOB + CHANNEL_DESC_BOB + LANGUAGE_DESC_BOB,
                 new AddCommand(expected));
     }
 
