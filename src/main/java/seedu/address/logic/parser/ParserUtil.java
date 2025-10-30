@@ -231,17 +231,18 @@ public class ParserUtil {
      * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
      */
     public static Offset parseOffsetAdd(String input) throws ParseException {
-        long colonCount = input.chars().filter(ch -> ch == ':').count();
+        String trimmedInput = input.trim();
+        long colonCount = trimmedInput.chars().filter(ch -> ch == ':').count();
         if (colonCount > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        if (!input.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
+        if (!trimmedInput.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     "Offset must be in the format +HH:MM or -HH:MM."));
         }
         try {
-            return new Offset(input);
+            return new Offset(trimmedInput);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
@@ -259,17 +260,18 @@ public class ParserUtil {
      * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
      */
     public static Offset parseOffsetEdit(String input) throws ParseException {
-        long colonCount = input.chars().filter(ch -> ch == ':').count();
+        String trimmedInput = input.trim();
+        long colonCount = trimmedInput.chars().filter(ch -> ch == ':').count();
         if (colonCount > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        if (!input.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
+        if (!trimmedInput.matches("^[+-](?:0\\d|1[0-4]):[0-5]\\d$")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     "Offset must be in the format +HH:MM or -HH:MM."));
         }
         try {
-            return new Offset(input);
+            return new Offset(trimmedInput);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
