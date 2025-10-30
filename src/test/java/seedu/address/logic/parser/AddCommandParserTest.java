@@ -362,9 +362,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_moreThanTenTags_failure() {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_FRIEND0 + TAG_DESC_FRIEND1 +
-                TAG_DESC_FRIEND2 + TAG_DESC_FRIEND3 + TAG_DESC_FRIEND4 + TAG_DESC_FRIEND5 + TAG_DESC_FRIEND6 +
-                TAG_DESC_FRIEND7 + TAG_DESC_FRIEND8 + TAG_DESC_FRIEND9,
+                + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_FRIEND0 + TAG_DESC_FRIEND1
+                + TAG_DESC_FRIEND2 + TAG_DESC_FRIEND3 + TAG_DESC_FRIEND4 + TAG_DESC_FRIEND5 + TAG_DESC_FRIEND6
+                + TAG_DESC_FRIEND7 + TAG_DESC_FRIEND8 + TAG_DESC_FRIEND9,
                 "You can only have a maximum of 10 tags per contact.");
     }
 }

@@ -125,7 +125,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the internal list by the date each person was added.
      */
     public void sortByDate() {
-        internalList.sort((p1, p2) -> p1.getMetOn().compareTo(p2.getMetOn()));
+        internalList.sort((p1, p2) -> p1.getAddedOn().compareTo(p2.getAddedOn()));
     }
 
     /**

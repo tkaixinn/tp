@@ -9,10 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Organisation {
 
-    public final String value;
     public static final String MESSAGE_CONSTRAINTS = "Organisations must not exceed 60 characters.";
 
     public static final int MAX_LENGTH = 60;
+
+    public final String value;
 
     /**
      * Constructs an {@code Organisation}.

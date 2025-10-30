@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.AddedOn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -28,12 +28,11 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_COUNTRY = "Singapore";
     public static final String DEFAULT_ORGANISATION = "";
     public static final String DEFAULT_EVENT = "";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_OFFSET = "+00:00";
-    public static final String DEFAULT_METON = "2023-11-15T14:30:00";
+    public static final String DEFAULT_ADDEDON = "2023-11-15T14:30:00";
     public static final String DEFAULT_LANGUAGE = "english";
     private static final String DEFAULT_CHANNEL = "EMAIL";
 
@@ -47,7 +46,7 @@ public class PersonBuilder {
     private Note note;
     private Set<Tag> tags;
     private Offset offset;
-    private MetOn metOn;
+    private AddedOn addedOn;
     private boolean isArchived;
     private PreferredLanguage preferredLanguage;
     private Person.CommunicationChannel channel;
@@ -66,7 +65,7 @@ public class PersonBuilder {
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
         offset = new Offset(DEFAULT_OFFSET);
-        metOn = new MetOn(LocalDateTime.parse(DEFAULT_METON));
+        addedOn = new AddedOn(LocalDateTime.parse(DEFAULT_ADDEDON));
         isArchived = false;
         preferredLanguage = new PreferredLanguage(DEFAULT_LANGUAGE);
         channel = Person.CommunicationChannel.valueOf(DEFAULT_CHANNEL);
@@ -86,7 +85,7 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         offset = personToCopy.getOffset();
-        metOn = personToCopy.getMetOn();
+        addedOn = personToCopy.getAddedOn();
         isArchived = personToCopy.getArchivalStatus();
         preferredLanguage = personToCopy.getPreferredLanguage();
         channel = personToCopy.getPreferredChannel();
@@ -190,10 +189,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code MetOn} of the {@code Person} that we are building.
+     * Sets the {@code AddedOn} of the {@code Person} that we are building.
      */
-    public PersonBuilder withMetOn(String metOn) {
-        this.metOn = new MetOn(LocalDateTime.parse(metOn));
+    public PersonBuilder withAddedOn(String addedOn) {
+        this.addedOn = new AddedOn(LocalDateTime.parse(addedOn));
         return this;
     }
 
@@ -218,7 +217,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, phone, email, address, country, organisation, event, note, channel, tags, offset,
-            preferredLanguage, metOn, isArchived);
+            preferredLanguage, addedOn, isArchived);
     }
 
 }

@@ -27,7 +27,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withCountry("Singapore")
-            .withTags("friends").withOffset("+00:00").withMetOn("2023-11-15T14:30:00").build();
+            .withTags("friends").withOffset("+00:00").withAddedOn("2023-11-15T14:30:00").build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withOrganisation("NUS").withEvent("University briefing")

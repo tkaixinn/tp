@@ -20,11 +20,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AddedOn;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Country;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Event;
-import seedu.address.model.person.MetOn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Offset;
@@ -120,9 +120,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;
         Offset offset = ParserUtil.parseOffsetAdd(argMultimap.getValue(PREFIX_OFFSET).orElse(""));
-        MetOn metOn = new MetOn(LocalDateTime.now());
+        AddedOn addedOn = new AddedOn(LocalDateTime.now());
         Person person = new Person(name, phone, email, address, country, organisation, event, note,
-            finalPreferredChannel, tagList, offset, preferredLanguage, metOn, false);
+            finalPreferredChannel, tagList, offset, preferredLanguage, addedOn, false);
 
         return new AddCommand(person);
     }

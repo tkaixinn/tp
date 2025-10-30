@@ -193,19 +193,19 @@ public class UniquePersonListTest {
         alice = new PersonBuilder()
                 .withName("Alice Pauline")
                 .withCountry("Singapore")
-                .withMetOn(String.valueOf(LocalDateTime.of(2024, 3, 1, 10, 0)))
+                .withAddedOn(String.valueOf(LocalDateTime.of(2024, 3, 1, 10, 0)))
                 .build();
 
         bob = new PersonBuilder()
                 .withName("Bob Builder")
                 .withCountry("China")
-                .withMetOn(String.valueOf(LocalDateTime.of(2024, 1, 1, 9, 0)))
+                .withAddedOn(String.valueOf(LocalDateTime.of(2024, 1, 1, 9, 0)))
                 .build();
 
         ann = new PersonBuilder()
                 .withName("Ann Alpha")
                 .withCountry("China")
-                .withMetOn(String.valueOf(LocalDateTime.of(2024, 2, 1, 8, 0)))
+                .withAddedOn(String.valueOf(LocalDateTime.of(2024, 2, 1, 8, 0)))
                 .build();
 
         // Empty country string is considered "no country" in Country#isValidCountry,
@@ -213,7 +213,7 @@ public class UniquePersonListTest {
         charlie = new PersonBuilder()
                 .withName("Charlie Zero")
                 .withCountry("") // empty
-                .withMetOn(String.valueOf(LocalDateTime.of(2023, 5, 1, 12, 0)))
+                .withAddedOn(String.valueOf(LocalDateTime.of(2023, 5, 1, 12, 0)))
                 .build();
 
         // Add in a scrambled order so that sorts have an effect.
@@ -240,11 +240,11 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void sortByDate_sortsByMetOnAscending() {
+    public void sortByDate_sortsByAddedOnAscending() {
         list.sortByDate();
         List<Person> ordered = list.asUnmodifiableObservableList();
 
-        // Ascending by metOn: 2023-05-01 (Charlie), 2024-01-01 (Bob),
+        // Ascending by addedOn: 2023-05-01 (Charlie), 2024-01-01 (Bob),
         // 2024-02-01 (Ann), 2024-03-01 (Alice)
         assertEquals(List.of(charlie, bob, ann, alice), ordered);
     }

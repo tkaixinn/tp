@@ -64,7 +64,7 @@ public class ArchiveCommand extends Command {
                     personToArchive.getTags(),
                     personToArchive.getOffset(),
                     personToArchive.getPreferredLanguage(),
-                    personToArchive.getMetOn(),
+                    personToArchive.getAddedOn(),
                     true);
 
             model.setPerson(personToArchive, archivedPerson);

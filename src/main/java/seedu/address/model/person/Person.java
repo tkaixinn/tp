@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Country country;
-    private final MetOn metOn;
+    private final AddedOn addedOn;
     private final Organisation organisation;
     private final Event event;
     private final Note note;
@@ -43,8 +43,8 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
                   Event event, Note note, CommunicationChannel preferredChannel, Set<Tag> tags, Offset offset,
                   PreferredLanguage preferredLanguage,
-                  MetOn metOn, boolean isArchived) {
-        requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
+                  AddedOn addedOn, boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset, addedOn);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,7 +58,7 @@ public class Person {
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
         this.isArchived = isArchived;
-        this.metOn = metOn;
+        this.addedOn = addedOn;
 
         removeOldCountryTags();
 
@@ -74,8 +74,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Country country, Organisation organisation,
                   Event event, Note note, Set<Tag> tags, Offset offset, PreferredLanguage preferredLanguage,
-                  MetOn metOn, boolean isArchived) {
-        requireAllNonNull(name, phone, email, address, note, tags, offset, metOn);
+                  AddedOn addedOn, boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, note, tags, offset, addedOn);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -89,7 +89,7 @@ public class Person {
         this.offset = offset;
         this.preferredLanguage = preferredLanguage;
         this.isArchived = isArchived;
-        this.metOn = metOn;
+        this.addedOn = addedOn;
 
         removeOldCountryTags();
 
@@ -180,8 +180,8 @@ public class Person {
         return offset;
     }
 
-    public MetOn getMetOn() {
-        return metOn;
+    public AddedOn getAddedOn() {
+        return addedOn;
     }
 
     /**
@@ -244,7 +244,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, offset, country, organisation, event, preferredChannel,
-                preferredLanguage, metOn, note, tags, isArchived);
+                preferredLanguage, addedOn, note, tags, isArchived);
     }
 
     @Override
@@ -263,7 +263,7 @@ public class Person {
                 .add("suggestedGreeting", preferredLanguage == null
                         ? "-"
                         : GreetingLibrary.getGreeting(preferredLanguage.toString()))
-                .add("metOn", metOn)
+                .add("addedOn", addedOn)
                 .add("note", note)
                 .add("tags", tags)
                 .toString();

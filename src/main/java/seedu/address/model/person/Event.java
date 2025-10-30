@@ -9,10 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Event {
 
-    public final String value;
     public static final String MESSAGE_CONSTRAINTS = "Events must not exceed 100 characters.";
 
     public static final int MAX_LENGTH = 100;
+
+    public final String value;
 
     /**
      * Constructs an {@code Event}.
