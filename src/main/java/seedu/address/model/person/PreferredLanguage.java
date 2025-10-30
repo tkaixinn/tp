@@ -23,6 +23,7 @@ public class PreferredLanguage {
 
     /**
      * Constructs a {@code PreferredLanguage}.
+     *
      * @param language The language string. Must be non-null and valid.
      */
 
