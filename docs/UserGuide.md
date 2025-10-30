@@ -126,7 +126,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
 * The language field is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
 * With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
-* A contact can have any number of tags (including 0). Each tag must be added with `tag:`.
+* A contact can have up to 10 tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
 `name:`70 characters<br>
 `email:` 254 characters<br>
@@ -134,7 +134,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 `organisation:` 60 characters<br>
 `event:` 100 characters<br>
 `note:` 500 characters <br>
-`tag:` 10 tags, 30 characters per tag
+`tag:` 30 characters per tag
 
 <br>
 <!-- To insert image -->
