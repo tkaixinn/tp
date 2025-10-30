@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -20,8 +21,10 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -82,6 +85,19 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(ALICE);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
+    }
+
+    @Test
+    public void execute_addressBookFull_throwsCommandException() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        for (int i = 0; i < 500; i++) {
+            model.addPerson(new PersonBuilder().withName("Person " + i).build());
+        }
+        Person extra = new PersonBuilder().withName("Extra Person").build();
+        AddCommand command = new AddCommand(extra);
+
+        assertCommandFailure(command, model,
+                "Cannot add more contacts. The address book is full (maximum 500 contacts).");
     }
 
     /**

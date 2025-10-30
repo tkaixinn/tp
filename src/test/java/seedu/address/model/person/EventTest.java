@@ -9,6 +9,18 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
 
     @Test
+    public void isValidEvent_exceedsMaxLength_returnsFalse() {
+        String longEvent = "a".repeat(101);
+        assertFalse(Event.isValidEvent(longEvent));
+    }
+
+    @Test
+    public void isValidEvent_maxLengthBoundary_returnsTrue() {
+        String validEvent = "a".repeat(100);
+        assertTrue(Event.isValidEvent(validEvent));
+    }
+
+    @Test
     public void equals() {
         Event event = new Event("Met at conference");
 

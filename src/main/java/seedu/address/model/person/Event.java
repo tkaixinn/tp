@@ -1,14 +1,18 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's event note in the address book.
- * Guarantees: immutable; is always valid.
+ * Guarantees: immutable.
  */
 public class Event {
 
     public final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Events must not exceed 100 characters.";
+
+    public static final int MAX_LENGTH = 100;
 
     /**
      * Constructs an {@code Event}.
@@ -17,7 +21,15 @@ public class Event {
      */
     public Event(String event) {
         requireNonNull(event);
+        checkArgument(isValidEvent(event), MESSAGE_CONSTRAINTS);
         value = event;
+    }
+
+    /**
+     * Returns true if a given string is a valid event.
+     */
+    public static boolean isValidEvent(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override

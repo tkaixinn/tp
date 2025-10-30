@@ -1,20 +1,32 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's cuture notes in the address book.
- * Guarantees: immutable; is always valid
+ * Guarantees: immutable
  */
 public class Note {
     public final String value;
+    public static final int MAX_LENGTH = 500;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Notes must not exceed 500 characters.";
 
     /**
      * @param note note of the person
      */
     public Note(String note) {
         requireNonNull(note);
+        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         value = note;
+    }
+
+    /**
+     * Returns true if a given string is a valid note.
+     */
+    public static boolean isValidNote(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override

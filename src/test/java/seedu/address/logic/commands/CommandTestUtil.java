@@ -71,6 +71,16 @@ public class CommandTestUtil {
     public static final String COUNTRY_DESC_AMY = " " + PREFIX_COUNTRY + VALID_COUNTRY_AMY;
     public static final String COUNTRY_DESC_BOB = " " + PREFIX_COUNTRY + VALID_COUNTRY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_FRIEND1 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "1";
+    public static final String TAG_DESC_FRIEND2 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "2";
+    public static final String TAG_DESC_FRIEND3 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "3";
+    public static final String TAG_DESC_FRIEND4 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "4";
+    public static final String TAG_DESC_FRIEND5 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "5";
+    public static final String TAG_DESC_FRIEND6 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "6";
+    public static final String TAG_DESC_FRIEND7 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "7";
+    public static final String TAG_DESC_FRIEND8 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "8";
+    public static final String TAG_DESC_FRIEND9 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "9";
+    public static final String TAG_DESC_FRIEND0 = " " + PREFIX_TAG + VALID_TAG_FRIEND + "0";
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String OFFSET_DESC_AMY = " " + PREFIX_OFFSET + VALID_OFFSET_AMY;
     public static final String OFFSET_DESC_BOB = " " + PREFIX_OFFSET + VALID_OFFSET_BOB;

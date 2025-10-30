@@ -85,4 +85,16 @@ public class EmailTest {
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
     }
+
+    @Test
+    public void isValidEmail_exceedsMaxLength_returnsFalse() {
+        String longEmail = "a".repeat(245) + "@gmail.com";
+        assertFalse(Email.isValidEmail(longEmail));
+    }
+
+    @Test
+    public void isValidEmail_maxLengthBoundary_returnsTrue() {
+        String validEmail = "a".repeat(244) + "@gmail.com";
+        assertTrue(Email.isValidEmail(validEmail));
+    }
 }
