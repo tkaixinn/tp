@@ -231,6 +231,7 @@ public class ParserUtil {
      * @throws ParseException if the input does not match the required {@code +HH:MM} or {@code -HH:MM} format
      */
     public static Offset parseOffsetAdd(String input) throws ParseException {
+        requireNonNull(input);
         String trimmedInput = input.trim();
         long colonCount = trimmedInput.chars().filter(ch -> ch == ':').count();
         if (colonCount > 1) {
