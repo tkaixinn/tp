@@ -86,7 +86,7 @@ If your changes to the data file render its format invalid, Worldly may behave i
 
 **:information_source: Notes about the command format:**<br>
 
-* Parameters must be typed **immediately after the prefix**.
+* Offset must be typed **immediately after the prefix**.
 <br>
   e.g., `offset: +08:00` will not work, but `offset:+08:00` will.
 
@@ -128,6 +128,7 @@ Adds a contact to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
+*Do not include : in any field unless it follows the format*
 * Case-sensitive uniqueness of contact names is enforced.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
@@ -357,8 +358,8 @@ Format: `exit`
 
 <br>
 
-**Q:** I am typing the correct prefix but I am getting an error. What do I do?<br>
-**A:** Check that you have not left a space between the end of the prefix and the parameter. You should use `name:NAME`, not `name: NAME`.
+**Q:** I am typing the correct prefix for offset but I am getting an error. What do I do?<br>
+**A:** Check that you have not left a space between the end of the prefix and the parameter. You should use `offset:OFFSET`, not `offset: OFFSET`.
 
 --------------------------------------------------------------------------------------------------------------------
 
