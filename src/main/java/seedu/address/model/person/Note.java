@@ -8,10 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable
  */
 public class Note {
-    public final String value;
+
     public static final int MAX_LENGTH = 500;
     public static final String MESSAGE_CONSTRAINTS =
             "Notes must not exceed 500 characters.";
+
+    public final String value;
 
     /**
      * @param note note of the person

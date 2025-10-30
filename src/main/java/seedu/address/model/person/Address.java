@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, " +
-            "should not exceed 255 characters, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, "
+            + "should not exceed 255 characters, and it should not be blank";
 
     public static final int MAX_LENGTH = 255;
 

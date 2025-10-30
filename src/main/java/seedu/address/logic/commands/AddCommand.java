@@ -51,8 +51,8 @@ public class AddCommand extends Command {
         + PREFIX_TAG + "friends "
         + PREFIX_TAG + "owesMoney ";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. " +
-            PARAMETERS + EXAMPLE;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+            + PARAMETERS + EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -76,8 +76,8 @@ public class AddCommand extends Command {
         }
 
         if (model.getAddressBook().getPersonList().size() >= MAX_NUMBER_OF_CONTACTS) {
-            throw new CommandException("Cannot add more contacts. The address book is full (maximum " +
-                    MAX_NUMBER_OF_CONTACTS + " contacts).");
+            throw new CommandException("Cannot add more contacts. The address book is full (maximum "
+                    + MAX_NUMBER_OF_CONTACTS + " contacts).");
         }
 
         model.addPerson(toAdd);
