@@ -45,7 +45,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 - `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00`: Adds a contact named `John Doe` to the Address Book.
 - `delete 3`: Deletes the third contact shown in the current list.
 - `clear`: Deletes all contacts.
-- `exit`: Exits the app.
+- `exit`: Closes the app.
 
 <br>
 
@@ -313,7 +313,7 @@ Format: `clear`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Closes the program.
 
 Format: `exit`
 
