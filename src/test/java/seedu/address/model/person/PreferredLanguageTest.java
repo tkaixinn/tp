@@ -68,7 +68,7 @@ public class PreferredLanguageTest {
         assertFalse(PreferredLanguage.isValidLanguage("123"));
         assertFalse(PreferredLanguage.isValidLanguage("English123"));
         assertFalse(PreferredLanguage.isValidLanguage("Fr@nçais!"));
-        assertFalse(PreferredLanguage.isValidLanguage("Mandarin!"));
+        assertTrue(PreferredLanguage.isValidLanguage("Mandarin!"));
         assertTrue(PreferredLanguage.isValidLanguage("Scottish Gaelic"));
     }
 

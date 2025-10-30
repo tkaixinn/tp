@@ -11,7 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, must not be blank, "
+            "Names should only contain alphanumeric characters, spaces, dashes, slashes, apostrophes, fullstops"
+                    + "must not be blank, "
                     + "and must not exceed 70 characters.";
 
     public static final int MAX_LENGTH = 70;
@@ -20,7 +21,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}][\\p{L}\\p{N}\\s\\-/'’.]*";
 
     public final String fullName;
 

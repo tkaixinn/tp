@@ -15,14 +15,15 @@ import seedu.address.model.util.SupportedLanguages;
 public class PreferredLanguage {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Preferred language can only contain letters and spaces, and should not be blank";
+            "Preferred language can only contain letters and spaces, exclamation marks, and should not be blank";
 
-    public static final String VALIDATION_REGEX = "[\\p{L} ]+";
+    public static final String VALIDATION_REGEX = "[\\p{L} !]+";
 
     public final String language;
 
     /**
      * Constructs a {@code PreferredLanguage}.
+     *
      * @param language The language string. Must be non-null and valid.
      */
 
