@@ -167,6 +167,7 @@ Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [o
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
+* When editing country, take note that country is case-insensitive
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
 * If the currently viewed list is not the main list (e.g., if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
 * If you accidentally mistype a prefix (e.g., `emails:` instead of `email:`), the app will notify you with an error message and show the correct usage format.
