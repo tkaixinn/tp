@@ -64,7 +64,7 @@ public class Person {
 
         String countryCode = phone.getCountryCode();
         if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
-            Tag countryTag = new Tag(countryCode);
+            Tag countryTag = new Tag("+" + countryCode);
             this.tags.add(countryTag);
         }
     }
@@ -95,7 +95,7 @@ public class Person {
 
         String countryCode = phone.getCountryCode();
         if (!countryCode.equals("Unknown") && !countryCode.equals("Invalid")) {
-            Tag countryTag = new Tag(countryCode);
+            Tag countryTag = new Tag("+" + countryCode);
             this.tags.add(countryTag);
         }
     }
@@ -199,16 +199,10 @@ public class Person {
 
     /**
      * Removes existing country-related tags.
-     * (Assumes tags with names matching country names or flags)
+     * (Assumes tags with names matching country codes)
      */
     private void removeOldCountryTags() {
-        String[] isoCountries = Locale.getISOCountries();
-        Set<String> allCountryNames = new HashSet<>();
-        for (String isoCountry : isoCountries) {
-            allCountryNames.add(new Locale("", isoCountry).getDisplayCountry());
-        }
-        this.tags.removeIf(tag -> allCountryNames.stream()
-                .anyMatch(country -> country.equalsIgnoreCase(tag.tagName)));
+        this.tags.removeIf(tag -> tag.tagName.matches("\\+\\d+"));
     }
 
     /**
