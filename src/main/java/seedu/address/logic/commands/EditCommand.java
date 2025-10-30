@@ -366,7 +366,7 @@ public class EditCommand extends Command {
                 .add("channel", channel)
                 .add("offset", offset)
                 .add("language", preferredLanguage)
-                .add("addedOn", metOn)
+                .add("addedOn", addedOn)
                 .toString();
         }
     }
