@@ -115,7 +115,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code organisation} is invalid.
      */
-    public static Organisation parseOrganisation(String org) {
+    public static Organisation parseOrganisation(String org) throws ParseException {
+        if (org == null) {
+            throw new ParseException("Organisation cannot be null");
+        }
+
         return new Organisation(org.trim());
     }
 

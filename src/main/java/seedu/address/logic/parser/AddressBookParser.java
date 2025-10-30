@@ -18,6 +18,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCountryCommand;
+import seedu.address.logic.commands.FindOrganisationCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -71,12 +72,14 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         case FindTagCommand.COMMAND_WORD -> new FindTagCommandParser().parse(arguments);
         case FindCountryCommand.COMMAND_WORD -> new FindCountryCommandParser().parse(arguments);
+        case FindOrganisationCommand.COMMAND_WORD -> new FindOrganisationCommandParser().parse(arguments);
         case ArchiveListCommand.COMMAND_WORD -> new ArchiveListCommand();
         case ArchiveCommand.COMMAND_WORD -> new ArchiveCommandParser().parse(arguments);
         case UnarchiveCommand.COMMAND_WORD -> new UnarchiveCommandParser().parse(arguments);
         case SortCountryCommand.COMMAND_WORD -> new SortCountryCommand();
         case SortNameCommand.COMMAND_WORD -> new SortNameCommand();
         case SortDateCommand.COMMAND_WORD -> new SortDateCommand();
+
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
