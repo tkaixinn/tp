@@ -151,7 +151,6 @@ public class ParserUtilTest {
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
-    // TEST
     @Test
     public void parseCountry_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCountry((String) null));

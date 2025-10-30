@@ -167,22 +167,32 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonsByCountry() {
-        addressBook.sortByCountry();
-        setSortMode(SortMode.COUNTRY);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+        sortPersons(SortMode.COUNTRY);
     }
 
     @Override
     public void sortPersonsByName() {
-        addressBook.sortByName();
-        setSortMode(SortMode.NAME);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+        sortPersons(SortMode.NAME);
     }
 
     @Override
     public void sortPersonsByDate() {
-        addressBook.sortByDate();
-        setSortMode(SortMode.DATE);
+        sortPersons(SortMode.DATE);
+    }
+
+    /**
+     * Generic sorting helper that sorts the AddressBook according to the given SortMode,
+     * updates the mode, and refreshes the filtered list.
+     */
+    private void sortPersons(SortMode mode) {
+        switch (mode) {
+        case COUNTRY -> addressBook.sortByCountry();
+        case NAME -> addressBook.sortByName();
+        case DATE -> addressBook.sortByDate();
+        default -> throw new IllegalArgumentException("Unknown sort mode: " + mode);
+        }
+
+        setSortMode(mode);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
     }
 

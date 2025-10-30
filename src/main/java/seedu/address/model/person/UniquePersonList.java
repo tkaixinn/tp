@@ -29,6 +29,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
+    private static final String BLANK_COUNTRY_CONSTANT = "\uFFFF";
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList = FXCollections
             .unmodifiableObservableList(internalList);
@@ -149,7 +150,7 @@ public class UniquePersonList implements Iterable<Person> {
     private String countryKey(Person p) {
         Country c = p.getCountry();
         if (c.equals(new Country("")) || c.toString().isBlank()) {
-            return "\uFFFF";
+            return BLANK_COUNTRY_CONSTANT;
         }
         return c.toString().toLowerCase(Locale.ROOT);
     }

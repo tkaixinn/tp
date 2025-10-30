@@ -26,6 +26,7 @@ public class FindCountryCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /** Tests the equality logic of {@code FindCountryCommand}. */
     @Test
     public void equals() {
         CountryContainsKeywordPredicate firstPredicate =
@@ -53,6 +54,7 @@ public class FindCountryCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    /** Executes a valid country search where no person is found. */
     @Test
     public void execute_validCountry_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
@@ -63,6 +65,7 @@ public class FindCountryCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
+    /** Executes a valid country search where a matching person is found. */
     @Test
     public void execute_validCountry_personFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
@@ -73,6 +76,7 @@ public class FindCountryCommandTest {
         assertEquals(Arrays.asList(JENNY), model.getFilteredPersonList());
     }
 
+    /** Tests the string representation of {@code FindCountryCommand}. */
     @Test
     public void toStringMethod() {
         CountryContainsKeywordPredicate predicate = new CountryContainsKeywordPredicate(new Country("Singapore"));

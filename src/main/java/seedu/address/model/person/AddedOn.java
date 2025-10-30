@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Represents the date the user met a contact for the first time.
+ * Represents the date the user added a contact for the first time.
  */
 public class AddedOn implements Comparable<AddedOn> {
 
@@ -20,9 +20,6 @@ public class AddedOn implements Comparable<AddedOn> {
         return this.localDateTime.compareTo(other.localDateTime);
     }
 
-    /**
-     * Returns a string representation of the time.
-     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy (HH:mm)", Locale.ENGLISH);
