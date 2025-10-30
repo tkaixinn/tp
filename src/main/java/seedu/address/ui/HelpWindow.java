@@ -215,6 +215,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandEntry("Find", "find KEYWORD [MORE_KEYWORDS]\n e.g. find James Jake"),
                 new CommandEntry("Find tag", "findtag TAG\n e.g. findtag friends"),
                 new CommandEntry("Find country", "findcountry COUNTRY\n e.g. findcountry Singapore"),
+                new CommandEntry("Find organisation", "findorganisation ORGANISAION\n e.g. findorganisation NUS"),
                 new CommandEntry("Archive", "archive INDEX"),
                 new CommandEntry("Unarchive", "unarchive INDEX"),
                 new CommandEntry("Archive list", "archivelist"),
