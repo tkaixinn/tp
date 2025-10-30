@@ -11,7 +11,6 @@ import seedu.address.logic.parser.CliSyntax;
  */
 public class CommandValidator {
 
-
     private static final Set<String> VALID_PREFIXES = Set.of(
             CliSyntax.PREFIX_NAME.toString(),
             CliSyntax.PREFIX_PHONE.toString(),
@@ -32,13 +31,17 @@ public class CommandValidator {
      * Returns null if everything is fine, or an invalid format message if something is wrong.
      */
     public static String validateCommand(String userInput) {
-        String[] tokens = userInput.split("\\s+");
-
         Set<String> invalidPrefixes = new HashSet<>();
+
+        String[] tokens = userInput.trim().split("\\s+");
+
         for (String token : tokens) {
+            token = token.trim();
             if (token.contains(":")) {
-                String prefixCandidate = token.substring(0, token.indexOf(":") + 1);
-                if (!VALID_PREFIXES.contains(prefixCandidate)) {
+                boolean matches = VALID_PREFIXES.stream().anyMatch(token::startsWith);
+                if (!matches) {
+
+                    String prefixCandidate = token.substring(0, token.indexOf(":") + 1);
                     invalidPrefixes.add(prefixCandidate);
                 }
             }
@@ -55,4 +58,5 @@ public class CommandValidator {
         return null;
     }
 }
+
 
