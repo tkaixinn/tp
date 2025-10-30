@@ -86,6 +86,10 @@ If your changes to the data file render its format invalid, Worldly may behave i
 
 **:information_source: Notes about the command format:**<br>
 
+* Parameters must be typed **immediately after the prefix**.
+<br>
+  e.g., `offset: +08:00` will not work, but `offset:+08:00` will.
+
 * `UPPER_CASE` indicates the parameters to be supplied by the user.<br>
   e.g., In `add name:NAME`, `NAME` is a parameter which can be used as `add name:John Doe`.
 
@@ -144,7 +148,7 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 <br>
 <!-- To insert image -->
 
-*Image: Upon successfully adding a contact, you should see a confirmation message.*
+*Image: Before and after of an edit. Upon successfully adding a contact, you should see a confirmation message.*
 
 
 Examples:
@@ -167,7 +171,6 @@ Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [o
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
-* When editing country, take note that country is case-insensitive
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
 * If the currently viewed list is not the main list (e.g., if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
 * If you accidentally mistype a prefix (e.g., `emails:` instead of `email:`), the app will notify you with an error message and show the correct usage format.
@@ -251,9 +254,10 @@ Format: `archive INDEX`
 * Command format and function is similar to delete, except the contact is just moved to a separate list accessible
 with `archivelist` and can be unarchived at a later time.
 * Displayed list will be main list (`list`) after archiving is done, regardless of previously applied filters (e.g., `find`).
+![result for 'archive 3'](images/archive.jpg)
+![result for 'archivelist'](images/archivelist.jpg)
 
 <br>
-<!-- To insert image -->
 
 *Image: By archiving NAME, the contact disappears from the main list. NAME can be found in the archive list, accessible with `archivelist`.*
 
@@ -349,7 +353,12 @@ Format: `exit`
 <br>
 
 **Q:** Are command parameters case-sensitive?<br>
-**A:** Some parameters are case-sensitive, while others are not. Refer to the `add` command's details under [Commands](#commands) for more information.
+**A:** No, refer to the `add` command's details under [Commands](#commands) for more information.
+
+<br>
+
+**Q:** I am typing the correct prefix but I am getting an error. What do I do?<br>
+**A:** Check that you have not left a space between the end of the prefix and the parameter. You should use `name:NAME`, not `name: NAME`.
 
 --------------------------------------------------------------------------------------------------------------------
 
