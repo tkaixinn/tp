@@ -168,8 +168,8 @@
                                                 <columns>
                                                     <TableColumn fx:id="languageNameColumn"
                                                         text="Language Name" prefWidth="360" />
-                                                    <TableColumn fx:id="languageCountriesColumn"
-                                                        text="Countries Used" prefWidth="360" />
+                                                    <TableColumn fx:id="languageGreetingsColumn"
+                                                        text="Greetings" prefWidth="360" />
                                                 </columns>
                                             </TableView>
                                         </content>
