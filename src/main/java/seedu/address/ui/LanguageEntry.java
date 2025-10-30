@@ -6,31 +6,24 @@ package seedu.address.ui;
  */
 public class LanguageEntry {
     private final String name;
-    private final String code;
-    private final String countriesUsed;
+    private final String greeting;
 
     /**
      * Constructs a {@code LanguageEntry} with the specified name, code, and countries used.
      *
      * @param name the name of the language
-     * @param code the ISO code of the language
-     * @param countriesUsed a list or description of countries where the language is used
+     * @param greeting a list of greetings
      */
-    public LanguageEntry(String name, String code, String countriesUsed) {
+    public LanguageEntry(String name, String greeting) {
         this.name = name;
-        this.code = code;
-        this.countriesUsed = countriesUsed;
+        this.greeting = greeting;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public String getCountriesUsed() {
-        return countriesUsed;
+    public String getGreeting() {
+        return greeting;
     }
 }
