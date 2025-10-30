@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.CliSyntax;
 
 /**
@@ -10,7 +11,7 @@ import seedu.address.logic.parser.CliSyntax;
  */
 public class CommandValidator {
 
-    // Set of all valid prefixes from CliSyntax
+
     private static final Set<String> VALID_PREFIXES = Set.of(
             CliSyntax.PREFIX_NAME.toString(),
             CliSyntax.PREFIX_PHONE.toString(),
@@ -47,6 +48,7 @@ public class CommandValidator {
             return String.format(
                     Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     "Invalid prefix(es): " + String.join(", ", invalidPrefixes)
+                            + "\n" + AddCommand.MESSAGE_USAGE
             );
         }
 
