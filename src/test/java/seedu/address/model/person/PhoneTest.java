@@ -42,9 +42,9 @@ public class PhoneTest {
 
     @Test
     public void countryDetection_validNumbers_success() {
-        assertEquals("+65", new Phone("+6598765432").getCountryCode());
-        assertEquals("+1", new Phone("+14155552671").getCountryCode());
-        assertEquals("+91", new Phone("+919876543210").getCountryCode());
+        assertEquals("65", new Phone("+6598765432").getCountryCode());
+        assertEquals("1", new Phone("+14155552671").getCountryCode());
+        assertEquals("91", new Phone("+919876543210").getCountryCode());
     }
 
     @Test
@@ -132,46 +132,46 @@ public class PhoneTest {
 
     @Test
     public void countryCode_derivation_validNumbers() {
-        assertEquals("+65", new Phone("+6598765432").getCountryCode());
-        assertEquals("+1", new Phone("+14155552671").getCountryCode());
-        assertEquals("+91", new Phone("+919876543210").getCountryCode());
+        assertEquals("65", new Phone("+6598765432").getCountryCode());
+        assertEquals("1", new Phone("+14155552671").getCountryCode());
+        assertEquals("91", new Phone("+919876543210").getCountryCode());
     }
 
     @Test
     public void countryDetection_longerPrefixes_success() {
         // Finland (+358), not "+35"
-        assertEquals("+358", new Phone("+358401234567").getCountryCode());
-        assertEquals("+358", new Phone("+358 40 123 4567").getCountryCode());
+        assertEquals("358", new Phone("+358401234567").getCountryCode());
+        assertEquals("358", new Phone("+358 40 123 4567").getCountryCode());
 
         // UAE (+971)
-        assertEquals("+971", new Phone("+971501234567").getCountryCode());
+        assertEquals("971", new Phone("+971501234567").getCountryCode());
 
         // UK (+44)
-        assertEquals("+44", new Phone("+447911123456").getCountryCode());
+        assertEquals("44", new Phone("+447911123456").getCountryCode());
 
         // Japan (+81)
-        assertEquals("+81", new Phone("+81-90-1234-5678").getCountryCode());
+        assertEquals("81", new Phone("+81-90-1234-5678").getCountryCode());
 
         // Australia (+61)
-        assertEquals("+61", new Phone("+61 (4) 1234 5678").getCountryCode());
+        assertEquals("61", new Phone("+61 (4) 1234 5678").getCountryCode());
 
         // Germany (+49)
-        assertEquals("+49", new Phone("+49 1512 3456789").getCountryCode());
+        assertEquals("49", new Phone("+49 1512 3456789").getCountryCode());
     }
 
     @Test
     public void countryDetection_withSeparators_success() {
         // Spaces and dashes
-        assertEquals("+65", new Phone("+65 9876-5432").getCountryCode());
+        assertEquals("65", new Phone("+65 9876-5432").getCountryCode());
 
         // Parentheses around area parts (should still detect +65)
-        assertEquals("+65", new Phone("+65 (123) 456 7890").getCountryCode());
+        assertEquals("65", new Phone("+65 (123) 456 7890").getCountryCode());
 
         // Mixed separators with NANP (+1)
-        assertEquals("+1", new Phone("+1 (415) 555-2671").getCountryCode());
+        assertEquals("1", new Phone("+1 (415) 555-2671").getCountryCode());
 
         // Trunk (0) often included domestically; must not affect +44
-        assertEquals("+44", new Phone("+44 (0)20 7946 0958").getCountryCode());
+        assertEquals("44", new Phone("+44 (0)20 7946 0958").getCountryCode());
     }
 
     @Test
@@ -202,7 +202,7 @@ public class PhoneTest {
         };
 
         for (String fmt : formats) {
-            assertEquals("+65", new Phone(fmt).getCountryCode(), "Failed for format: " + fmt);
+            assertEquals("65", new Phone(fmt).getCountryCode(), "Failed for format: " + fmt);
         }
     }
 
@@ -216,19 +216,19 @@ public class PhoneTest {
 
     @Test
     public void countryDetection_nanp_staysOne() {
-        assertEquals("+1", new Phone("+12015550123").getCountryCode()); // US DC area code 201 is just NANP detail
-        assertEquals("+1", new Phone("+16175550123").getCountryCode()); // US Boston
-        assertEquals("+1", new Phone("+19025550123").getCountryCode()); // US Memphis
+        assertEquals("1", new Phone("+12015550123").getCountryCode()); // US DC area code 201 is just NANP detail
+        assertEquals("1", new Phone("+16175550123").getCountryCode()); // US Boston
+        assertEquals("1", new Phone("+19025550123").getCountryCode()); // US Memphis
     }
 
     @Test
     public void countryDetection_variety_sanity() {
-        assertEquals("+33", new Phone("+33 6 12 34 56 78").getCountryCode()); // France
-        assertEquals("+34", new Phone("+34 612 34 56 78").getCountryCode()); // Spain
-        assertEquals("+39", new Phone("+39 347 123 4567").getCountryCode()); // Italy
-        assertEquals("+52", new Phone("+52 55 1234 5678").getCountryCode()); // Mexico
-        assertEquals("+62", new Phone("+62 812-1234-5678").getCountryCode()); // Indonesia
-        assertEquals("+82", new Phone("+82 10-1234-5678").getCountryCode()); // South Korea
+        assertEquals("33", new Phone("+33 6 12 34 56 78").getCountryCode()); // France
+        assertEquals("34", new Phone("+34 612 34 56 78").getCountryCode()); // Spain
+        assertEquals("39", new Phone("+39 347 123 4567").getCountryCode()); // Italy
+        assertEquals("52", new Phone("+52 55 1234 5678").getCountryCode()); // Mexico
+        assertEquals("62", new Phone("+62 812-1234-5678").getCountryCode()); // Indonesia
+        assertEquals("82", new Phone("+82 10-1234-5678").getCountryCode()); // South Korea
     }
 
     @Test
