@@ -10,7 +10,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :zap: Quick Start
+## :rocket: Quick Start
 
 1. Ensure you have Java `17` or above installed on your Computer.<br>
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
