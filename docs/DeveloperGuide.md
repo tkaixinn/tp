@@ -135,16 +135,20 @@ The `Model` component,
 
 ### Extended Person Model
 
-The `Person` class has been extended to support three new optional fields:
+The `Person` class has been extended to support new optional fields:
+- **`Offset`**: Timezone offset from UTC (e.g., "+08:00").
+- **`Country`**: Represents the person's country of origin or association.
 - **`Organisation`**: Represents the institution (e.g., company, school) the person is affiliated with.
 - **`Event`**: Records meeting contexts or future interactions (e.g., "Met at NUS Career Fair").
+- **`Channel`**: Mode or platform for communication.
+- **`Preferred Language`**: Language preference for communication (e.g., "English").
 - **`Note`**: Stores cultural or personal notes (e.g., "Prefers Western cuisine").
 
 All three fields are:
 - Immutable and validated
 - Optional (default to empty string)
 - Fully serializable to JSON
-- Positioned in the constructor as: `(Name, Phone, Email, Address, Country, Organisation, Event, Note, ...)`
+- Positioned in the constructor as: `(Name, Phone, Email, Address, UTC Offset, Country, Organisation, Event, Channel, Language, Note, Tag)`
 
 ### Storage component
 
