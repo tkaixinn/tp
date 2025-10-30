@@ -275,6 +275,8 @@ The app now supports **archiving and unarchiving** contacts to help users keep t
 - **Archiving a person** (`ArchiveCommand`) replaces the original `Person` in the model with a copy that has `archivalStatus = true`.
 - **Unarchiving** (`UnarchiveCommand`) similarly creates a copy with `archivalStatus = false`.
 - `ArchiveListCommand` updates the filtered list to show only archived contacts.
+- When `archive` or `unarchive` is run, the list returns to the main list and the archive list respectively, preserving any prior sorting order.
+- If there are no contacts in the archive list after unarchiving the last one, the display will return to the main list instead.
 - Commands validate the index against the current filtered list and return appropriate errors if:
     - Index is invalid
     - Contact is already archived/unarchived
@@ -356,16 +358,16 @@ The app also supports sorting contacts by various criteria:
 
 **Target user profile**:
 
-* Exchange students on short-term programs abroad are adventurous and eager to maximise their limited time. 
+* Exchange students on short-term programs abroad are adventurous and eager to maximise their limited time.
 * They simultaneously juggle academics, cultural exploration, and networking.
-* They face challenges remembering people, maintaining connections, remembering cultural details and managing scattered communication across different apps. 
+* They face challenges remembering people, maintaining connections, remembering cultural details and managing scattered communication across different apps.
 * Their goals are forging lasting friendships and global networks.
 
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-Our app helps exchange students build and sustain meaningful global connections while avoiding cultural missteps. 
-Centralising contacts and notes makes it easier to remember people and cultural nuances. 
+Our app helps exchange students build and sustain meaningful global connections while avoiding cultural missteps.
+Centralising contacts and notes makes it easier to remember people and cultural nuances.
 Unlike scattered chat apps, it’s tailored for short but intense exchange journeys, ensuring friendships and networks last beyond the program.
 
 
@@ -418,7 +420,7 @@ Actor: User
 3a. If a field is invalid → Wordly shows an error message
 etc. “relevant error message/fields are name, number, email & country”
 
-b.  If contact already exists → Wordly shows another error message 
+b.  If contact already exists → Wordly shows another error message
 etc. “A contact with this email/phone already exists.”
 
 <br>
@@ -477,7 +479,7 @@ etc. "Invalid name. Only letters, spaces, hyphens, and apostrophes are allowed, 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Cultural note**: A short user-generated entry recording cultural tips, etiquette reminders, or unique local insights (e.g., greetings, taboos)
-* **First Meet Circumstances**: A note describing how/where the user first met the contact (e.g., “Met at orientation event,” “Group project partner”), to strengthen recall. 
+* **First Meet Circumstances**: A note describing how/where the user first met the contact (e.g., “Met at orientation event,” “Group project partner”), to strengthen recall.
 * **Alias**: A shortcut keyword (e.g., typing t for “todo,” e for “event”) to speed up data entry.
 * **Organisation**: The institution (e.g., company, university) a contact is affiliated with.
 * **Event**: A recorded interaction or planned meeting with a contact.
