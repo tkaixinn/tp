@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashSet;
@@ -13,8 +14,7 @@ import java.util.Set;
 public class Country {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Country names are case sensitive and should match the list of countries available in the help window "
-                    + "(type help to view).";
+        "Country names are case-insensitive and should match a valid country name (type 'help' to view the list).";
 
     /*
      * Allows alphabetic words separated by spaces.
@@ -43,16 +43,46 @@ public class Country {
      * @param country A valid country.
      */
     public Country(String country) {
+        requireNonNull(country);
         checkArgument(isValidCountry(country), MESSAGE_CONSTRAINTS);
-        value = country;
+
+        this.value = normalizeCountryName(country);
+    }
+
+    /**
+     * Normalizes the given country name to its canonical capitalized form.
+     * For example, "singapore" → "Singapore", "united states" → "United States".
+     */
+    private static String normalizeCountryName(String input) {
+        if (input.trim().isEmpty()) {
+            return "";
+        }
+
+        for (String validName : VALID_COUNTRY_NAMES) {
+            if (validName.equalsIgnoreCase(input.trim())) {
+                return validName; // Return the canonical form from Locale list
+            }
+        }
+
+        return input.trim(); // fallback
     }
 
     /**
      * Returns true if a given string is a valid country name.
      */
     public static boolean isValidCountry(String test) {
-        boolean inCountryList = test.isEmpty() || VALID_COUNTRY_NAMES.contains(test.trim());
-        return test.matches(VALIDATION_REGEX) && inCountryList;
+        requireNonNull(test);
+        String trimmed = test.trim();
+
+        if (trimmed.isEmpty()) {
+            return true; // allow empty
+        }
+
+        // check if country (case-insensitive) exists in the valid list
+        boolean inCountryList = VALID_COUNTRY_NAMES.stream()
+            .anyMatch(name -> name.equalsIgnoreCase(trimmed));
+
+        return trimmed.matches(VALIDATION_REGEX) && inCountryList;
     }
 
     @Override
