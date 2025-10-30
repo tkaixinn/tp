@@ -15,6 +15,8 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 1. Ensure you have Java `17` or above installed on your Computer.<br>
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
+   **Tip:** You can check your installed Java version by typing `java -version` in your terminal. If it shows a version below 17, please install a newer JDK before running Worldly.
+
 <br>
 
 2. Download the latest `.jar` release from [here](https://github.com/se-edu/addressbook-level3/releases).
@@ -59,6 +61,7 @@ Please refer to the [Commands](#commands) below for details of each command.
 * Add up to 500 contacts with only 4 mandatory fields to start (name, phone number, email and address)
 * Edit contacts for details you may have initially left out
 * Tag each contact with up to 9 custom tags
+* Worldly automatically validates your contact details (like email, offset, and country) and will reject entries that don’t match the allowed format — so your contact list always stays clean.
 
 ### Organise your contact list
 * Archive and unarchive contacts to hide them from the main list while keeping their details stored
@@ -107,6 +110,8 @@ Shows the description and format of all actions a user can perform with Worldly,
 * A table of valid country names for the `country:COUNTRY` field and their corresponding calling codes.
 * A table of various regions and their timezones with respect to UTC for reference.
 * A table of valid languages for the `language:LANGUAGE` field and the countries that use them.
+* Shortcut: You can also open the help window by pressing `F1` or selecting *Help → User Guide* from the menu bar.
+
 
 ![help message](images/helpWindow.png)
 
@@ -164,6 +169,7 @@ Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [o
 * When editing country, leaving the prefix blank (i.e. country:) will remove the existing country.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative. You can remove all the contact’s tags by typing `tag:` without specifying any tags after it.
 * If the currently viewed list is not the main list (e.g., if a `find` command was previously run), the index will refer to that of the **current list**, not the main list.
+* If you accidentally mistype a prefix (e.g., `emails:` instead of `email:`), the app will notify you with an error message and show the correct usage format.
 
 <br>
 <!-- To insert image -->
