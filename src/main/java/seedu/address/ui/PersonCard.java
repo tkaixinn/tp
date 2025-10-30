@@ -72,7 +72,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         name.getStyleClass().add("bold-label");
         phone.setText("Phone: " + person.getPhone().value);
-        phone.getStyleClass().add("bold-label");
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
 
