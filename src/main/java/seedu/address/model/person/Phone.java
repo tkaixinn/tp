@@ -81,12 +81,12 @@ public class Phone {
     }
 
     public String getCountryCode() {
-        return "+" + deriveCountryCode(value);
+        return deriveCountryCode(value);
     }
 
     @Override
     public String toString() {
-        return value + " (" + countryCode + ")";
+        return !countryCode.equals("Invalid") ? value + " (" + countryCode + ")" : value;
     }
 
     @Override
