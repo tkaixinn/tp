@@ -5,10 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHANNEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OFFSET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,6 +35,8 @@ public class AddCommand extends Command {
         + PREFIX_ADDRESS + "ADDRESS "
         + PREFIX_OFFSET + "UTC OFFSET "
         + "[" + PREFIX_COUNTRY + "COUNTRY] "
+        + "[" + PREFIX_ORGANISATION + "ORGANISATION] "
+        + "[" + PREFIX_EVENT + "EVENT] "
         + "[" + PREFIX_CHANNEL + "CHANNEL] "
         + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
         + "[" + PREFIX_NOTE + "NOTE] "
@@ -43,13 +47,15 @@ public class AddCommand extends Command {
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "
         + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-        + PREFIX_OFFSET + "+08:00"
+        + PREFIX_OFFSET + "+08:00 "
         + PREFIX_COUNTRY + "Singapore "
-        + PREFIX_CHANNEL + "PHONE "
+        + PREFIX_ORGANISATION + "NUS "
+        + PREFIX_EVENT + "NUS Hackathon "
+        + PREFIX_CHANNEL + "Whatsapp "
         + PREFIX_LANGUAGE + "English "
-        + PREFIX_NOTE + "Prefers WhatsApp "
+        + PREFIX_NOTE + "Cannot drink alcohol "
         + PREFIX_TAG + "friends "
-        + PREFIX_TAG + "owesMoney ";
+        + PREFIX_TAG + "owes money ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. " +
             PARAMETERS + EXAMPLE;

@@ -10,7 +10,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 --------------------------------------------------------------------------------------------------------------------
 
-## :zap: Quick Start
+## :rocket: Quick Start
 
 1. Ensure you have Java `17` or above installed on your Computer.<br>
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
@@ -45,7 +45,7 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 - `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00`: Adds a contact named `John Doe` to the Address Book.
 - `delete 3`: Deletes the third contact shown in the current list.
 - `clear`: Deletes all contacts.
-- `exit`: Exits the app.
+- `exit`: Closes the app.
 
 <br>
 
@@ -117,7 +117,7 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
+Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
 * Case-sensitive uniqueness of contact names is enforced.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
@@ -126,15 +126,15 @@ Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFF
 * The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
 * The language field is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
 * With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
-* A contact can have any number of tags (including 0). Each tag must be added with `tag:`.
+* A contact can have up to 10 tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
 `name:`70 characters<br>
-`address:` 255 characters<br>
 `email:` 254 characters<br>
+`address:` 255 characters<br>
 `organisation:` 60 characters<br>
 `event:` 100 characters<br>
 `note:` 500 characters <br>
-`tag:` 10 tags, 30 characters per tag
+`tag:` 30 characters per tag
 
 <br>
 <!-- To insert image -->
@@ -156,7 +156,7 @@ Format: `list`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [event:EVENT] [organisation:ORGANISATION] [channel: CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`
+Format: `edit INDEX [name:NAME] [phone:PHONE] [email:EMAIL] [address:ADDRESS] [offset: OFFSET] [country:COUNTRY] [organisation:ORGANISATION][event:EVENT] [channel: CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`
 
 * Edits the contact at the specified `INDEX`. The index refers to the number shown in the currently displayed list beside the contact's name. The index must be a **positive integer**, i.e. 1, 2, 3...
 * At least one of the optional fields must be provided.
@@ -313,7 +313,7 @@ Format: `clear`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Closes the program.
 
 Format: `exit`
 
@@ -358,9 +358,9 @@ Format: `exit`
 Action | Format and Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
+**Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
 **List** | `list`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`

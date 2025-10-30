@@ -49,11 +49,23 @@ public class Messages {
             builder.append("; Country: ").append(person.getCountry());
         }
 
-        builder.append("; Channel: ")
-                .append(person.getPreferredChannel())
-                .append("; Language: ")
-                .append(person.getPreferredLanguage())
-                .append("; Tags: ");
+        if (person.getOrganisation() != null && !person.getOrganisation().toString().isBlank()) {
+            builder.append("; Organisation: ").append(person.getOrganisation());
+        }
+
+        if (person.getEvent() != null && !person.getEvent().toString().isBlank()) {
+            builder.append("; Event: ").append(person.getEvent());
+        }
+
+        if (person.getPreferredChannel() != null && !person.getPreferredChannel().toString().isBlank()) {
+            builder.append("; Channel: ").append(person.getPreferredChannel());
+        }
+
+        if (person.getPreferredLanguage() != null && !person.getPreferredLanguage().toString().isBlank()) {
+            builder.append("; Language: ").append(person.getPreferredLanguage());
+        }
+
+        builder.append("; Tags: ");
 
         person.getTags().forEach(builder::append);
         return builder.toString();
