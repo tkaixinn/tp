@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.CommandValidator;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddedOn;
@@ -33,7 +34,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredLanguage;
 import seedu.address.model.tag.Tag;
-import seedu.address.logic.CommandValidator;
 
 
 /**
