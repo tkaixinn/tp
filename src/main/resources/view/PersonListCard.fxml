@@ -38,7 +38,7 @@
             <Label fx:id="event" styleClass="cell_small_label" text="$event" wrapText="true" maxWidth="Infinity" />
             <Label fx:id="channel" styleClass="cell_small_label" text="$channel" wrapText="true" maxWidth="Infinity" />
             <Label fx:id="preferredLanguage" styleClass="cell_small_label" text="$preferredLanguage" wrapText="true" maxWidth="Infinity" />
-            <Label fx:id="metOn" styleClass="cell_small_label" text="$metOn" wrapText="true" maxWidth="Infinity" />
+            <Label fx:id="addedOn" styleClass="cell_small_label" text="$addedOn" wrapText="true" maxWidth="Infinity" />
             <Label fx:id="note" styleClass="cell_small_label" text="$note" wrapText="true" maxWidth="Infinity" />
         </VBox>
     </GridPane>
