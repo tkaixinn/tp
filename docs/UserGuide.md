@@ -86,6 +86,10 @@ If your changes to the data file render its format invalid, Worldly may behave i
 
 **:information_source: Notes about the command format:**<br>
 
+* Parameters must be typed **immediately after the prefix**.
+<br>
+  e.g., `offset: +08:00` will not work, but `offset:+08:00` will.
+
 * `UPPER_CASE` indicates the parameters to be supplied by the user.<br>
   e.g., In `add name:NAME`, `NAME` is a parameter which can be used as `add name:John Doe`.
 
@@ -350,6 +354,11 @@ Format: `exit`
 
 **Q:** Are command parameters case-sensitive?<br>
 **A:** No, refer to the `add` command's details under [Commands](#commands) for more information.
+
+<br>
+
+**Q:** I am typing the correct prefix but I am getting an error. What do I do?<br>
+**A:** Check that you have not left a space between the end of the prefix and the parameter. You should use `name:NAME`, not `name: NAME`.
 
 --------------------------------------------------------------------------------------------------------------------
 
