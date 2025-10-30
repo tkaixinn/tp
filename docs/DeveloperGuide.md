@@ -141,7 +141,7 @@ The `Person` class has been extended to support new optional fields:
 - **`Organisation`**: Represents the institution (e.g., company, school) the person is affiliated with.
 - **`Event`**: Records meeting contexts or future interactions (e.g., "Met at NUS Career Fair").
 - **`Channel`**: Mode or platform for communication.
-- **`Preferred Language`**: Language preference for communication (e.g., "English").
+- **`Language`**: Language preference for communication (e.g., "English").
 - **`Note`**: Stores cultural or personal notes (e.g., "Prefers Western cuisine").
 
 All three fields are:
@@ -170,19 +170,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### Extended Person Model
-
-The `Person` class has been extended to support three new optional fields:
-- **`Organisation`**: Represents the institution (e.g., company, school) the person is affiliated with.
-- **`Event`**: Records meeting contexts or future interactions (e.g., "Met at NUS Career Fair").
-- **`Note`**: Stores cultural or personal notes (e.g., "Prefers WhatsApp").
-
-All three fields are:
-- Immutable and validated
-- Optional (default to empty string)
-- Fully serializable to JSON
-- Positioned in the constructor as: `(Name, Phone, Email, Address, Country, Organisation, Event, Note, ...)`
 
 ### \[Proposed\] Undo/redo feature
 
