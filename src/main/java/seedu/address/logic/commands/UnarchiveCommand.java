@@ -32,7 +32,7 @@ public class UnarchiveCommand extends Command {
     private final Index index;
 
     /**
-     * Creates an UnarchiveCommand to unarchive the person.
+     * Creates an UnarchiveCommand that unarchives the person.
      */
     public UnarchiveCommand(Index index) {
         requireAllNonNull(index);

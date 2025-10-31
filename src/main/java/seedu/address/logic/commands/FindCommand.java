@@ -27,6 +27,14 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find command and returns the result message.
+     * Updates the filtered person list in the model to show only persons
+     * whose names match any of the specified keywords.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} containing the result message.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -35,6 +43,12 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Returns true if both FindCommand objects have the same predicate.
+     *
+     * @param other another object to compare with.
+     * @return true if both commands are equal; false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

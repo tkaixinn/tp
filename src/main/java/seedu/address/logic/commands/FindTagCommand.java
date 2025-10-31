@@ -10,7 +10,7 @@ import seedu.address.model.person.PersonContainsTagsPredicate;
 /**
  * Finds and lists all persons in address book whose tag contains ALL of the
  * argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindTagCommand extends Command {
 
@@ -23,10 +23,23 @@ public class FindTagCommand extends Command {
 
     private final PersonContainsTagsPredicate predicate;
 
+    /**
+     * Creates a FindTagCommand to filter the person list using the given {@code predicate}.
+     *
+     * @param predicate the condition used to test each person for matching tags.
+     */
     public FindTagCommand(PersonContainsTagsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find tag command and returns the result message.
+     * Updates the filtered person list in the model to show only persons
+     * whose tags match all specified keywords.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} containing the result message.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -35,6 +48,12 @@ public class FindTagCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Returns true if both FindTagCommand objects have the same predicate.
+     *
+     * @param other another object to compare with.
+     * @return true if both commands are equal; false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
