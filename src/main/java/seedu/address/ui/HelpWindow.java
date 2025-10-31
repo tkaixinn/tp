@@ -345,7 +345,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Chinese Teochew", "汝好!"));
         languages.add(new LanguageEntry("Chinese", "你好!"));
         languages.add(new LanguageEntry("Chipewyan", "ʔédlánet'é!"));
-        languages.add(new LanguageEntry("Choctaw", "Halit!o"));
+        languages.add(new LanguageEntry("Choctaw", "Halito!"));
         languages.add(new LanguageEntry("Chuukese", "Ran annim!"));
         languages.add(new LanguageEntry("Chuvash", "Салам!"));
         languages.add(new LanguageEntry("Cimbrian", "Guuten takh!"));
