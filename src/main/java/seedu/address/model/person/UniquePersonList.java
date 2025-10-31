@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +30,9 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
+    private static Logger logger = Logger.getLogger("UniquePersonList");
     private static final String BLANK_COUNTRY_CONSTANT = "\uFFFF";
+
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList = FXCollections
             .unmodifiableObservableList(internalList);
@@ -53,6 +56,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
         internalList.add(toAdd);
         sortByName();
+        assert personsAreUnique(internalList) : "List must remain unique after add";
     }
 
     /**
@@ -66,15 +70,19 @@ public class UniquePersonList implements Iterable<Person> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
+            logger.warning(() -> "Target person not found for setPerson: " + target);
             throw new PersonNotFoundException();
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+            logger.warning(() -> "Edited person contains duplicated existing identity:  " + target);
             throw new DuplicatePersonException();
         }
 
         internalList.set(index, editedPerson);
+        logger.fine(() -> "Replaced person at index " + index + " with: " + editedPerson);
         sortByName();
+        assert personsAreUnique(internalList) : "List must remain unique after setPerson";
     }
 
     /**
@@ -120,6 +128,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortByName() {
         internalList.sort((p1, p2) -> p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName));
+        logger.fine("Sorted by name.");
     }
 
     /**
@@ -127,6 +136,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortByDate() {
         internalList.sort((p1, p2) -> p1.getAddedOn().compareTo(p2.getAddedOn()));
+        logger.fine("Sorted by added date.");
     }
 
     /**
@@ -145,6 +155,7 @@ public class UniquePersonList implements Iterable<Person> {
                 return p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName);
             }
         });
+        logger.fine("Sorted by country (then name).");
     }
 
     private String countryKey(Person p) {
