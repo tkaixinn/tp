@@ -345,7 +345,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Chinese Teochew", "汝好!"));
         languages.add(new LanguageEntry("Chinese", "你好!"));
         languages.add(new LanguageEntry("Chipewyan", "ʔédlánet'é!"));
-        languages.add(new LanguageEntry("Choctaw", "Halito"));
+        languages.add(new LanguageEntry("Choctaw", "Halit!o"));
         languages.add(new LanguageEntry("Chuukese", "Ran annim!"));
         languages.add(new LanguageEntry("Chuvash", "Салам!"));
         languages.add(new LanguageEntry("Cimbrian", "Guuten takh!"));
@@ -355,8 +355,8 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Corsican", "Salute!"));
         languages.add(new LanguageEntry("Cree", "ᑖᓂᓯ!"));
         languages.add(new LanguageEntry("Croatian", "Bok!"));
-        languages.add(new LanguageEntry("Crow", "Sho'daache"));
-        languages.add(new LanguageEntry("Cumbric", "Didh da"));
+        languages.add(new LanguageEntry("Crow", "Sho'daache!"));
+        languages.add(new LanguageEntry("Cumbric", "Didh da!"));
         languages.add(new LanguageEntry("Cupeño", "Míyaxwe!"));
         languages.add(new LanguageEntry("Cuyonon", "Komosta!"));
         languages.add(new LanguageEntry("Czech", "Ahoj!"));
@@ -396,7 +396,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Hausa", "Sannu!"));
         languages.add(new LanguageEntry("Hawaiian", "Aloha!"));
         languages.add(new LanguageEntry("Hebrew", "!שלום"));
-        languages.add(new LanguageEntry("Herero", "Tjike?"));
+        languages.add(new LanguageEntry("Herero", "Tjike!"));
         languages.add(new LanguageEntry("Hindi", "नमस्ते!"));
         languages.add(new LanguageEntry("Hmong White", "Nyob zoo!"));
         languages.add(new LanguageEntry("Hopi", "Navajo!"));
@@ -417,7 +417,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Jenesch", "Puiznu!"));
         languages.add(new LanguageEntry("Jèrriais", "Salut!"));
         languages.add(new LanguageEntry("Jutish", "Godaw!"));
-        languages.add(new LanguageEntry("Kabyle", "ⴰⵣⵓⵍ!"));
+        languages.add(new LanguageEntry("Kabyle", "Azul!"));
         languages.add(new LanguageEntry("Kalmyk", "Sain baina!"));
         languages.add(new LanguageEntry("Kam", "Tọi!"));
         languages.add(new LanguageEntry("Kannada", "ನಮಸ್ತೆ!"));
@@ -502,7 +502,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Norwegian Bokmal", "Hei!"));
         languages.add(new LanguageEntry("Norwegian Nynorsk", "Hei!"));
         languages.add(new LanguageEntry("Norwegian Railway", "Hallo!"));
-        languages.add(new LanguageEntry("Nyanja", "Mon!i"));
+        languages.add(new LanguageEntry("Nyanja", "Moni!"));
         languages.add(new LanguageEntry("Occitan", "Adieu!"));
         languages.add(new LanguageEntry("Ojibwe", "Boozhoo!"));
         languages.add(new LanguageEntry("Okinawan", "はいさい!"));
