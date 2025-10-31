@@ -412,7 +412,7 @@ public class HelpWindow extends UiPart<Stage> {
         languages.add(new LanguageEntry("Italian", "Ciao!"));
         languages.add(new LanguageEntry("Ivilyuat Cahuilla", "Míyaxwen!"));
         languages.add(new LanguageEntry("Jamaican", "Ello!"));
-        languages.add(new LanguageEntry("Japanese", "今日は!)");
+        languages.add(new LanguageEntry("Japanese", "今日は!"));
         languages.add(new LanguageEntry("Javanese", "Halo!"));
         languages.add(new LanguageEntry("Jenesch", "Puiznu!"));
         languages.add(new LanguageEntry("Jèrriais", "Salut!"));
