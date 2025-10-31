@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.ZoneOffset;
@@ -9,6 +11,9 @@ import java.time.ZoneOffset;
  * Guarantees: valid format +HH:MM or -HH:MM, immutable.
  */
 public class Offset implements Comparable<Offset> {
+
+
+    private static final Logger logger = Logger.getLogger(Offset.class.getName());
 
     public static final String MESSAGE_CONSTRAINTS =
             "GMT offset must be in the format +HH:MM or -HH:MM, where HH is 00-14 and MM is 00-59.";
@@ -24,6 +29,7 @@ public class Offset implements Comparable<Offset> {
      * @param input GMT offset in the format +HH:MM or -HH:MM
      */
     public Offset(String input) {
+        logger.info("Creating Offset with input: " + input);
         checkArgument(isValidOffset(input), MESSAGE_CONSTRAINTS);
         this.value = input;
 
@@ -32,50 +38,54 @@ public class Offset implements Comparable<Offset> {
         int minutes = Integer.parseInt(parts[1]);
 
         this.totalMinutes = (input.charAt(0) == '+' ? 1 : -1) * (hours * 60 + minutes);
+        logger.info("Offset created: " + this + ", totalMinutes=" + totalMinutes);
     }
 
     /**
-     * Returns true if the given string is a valid UTC offset in the format {@code +HH:MM} or {@code -HH:MM},
+     * Returns true if the given string is a valid GMT/UTC offset in the format +HH:MM or -HH:MM,
      * within the allowed timezone range.
      *
-     * @param test The string to validate.
-     * @return True if the string represents a valid offset, false otherwise.
+     * @param input The string to validate.
+     * @return True if valid, false otherwise.
      */
-    public static boolean isValidOffset(String test) {
-        if (test == null) {
+    public static boolean isValidOffset(String input) {
+        if (input == null) {
+            logger.warning("Offset is null");
             return false;
         }
 
         // Must match +HH:MM or -HH:MM
-        if (!test.matches(VALIDATION_REGEX)) {
+        if (!input.matches(VALIDATION_REGEX)) {
+            logger.warning("Offset format invalid: " + input);
             return false;
         }
 
-        // Parse hours and minutes
-        int hours = Integer.parseInt(test.substring(1, 3));
-        int minutes = Integer.parseInt(test.substring(4, 6));
+        int hours = Integer.parseInt(input.substring(1, 3));
+        int minutes = Integer.parseInt(input.substring(4, 6));
+        char sign = input.charAt(0);
 
-        // Check range
-        if (hours > 14 || minutes >= 60) {
+        // Validate minutes
+        if (minutes < 0 || minutes >= 60) {
+            logger.warning("Minutes out of range: " + minutes);
             return false;
         }
 
-        // Enforce realistic timezone range
-        if (test.startsWith("+") && hours == 14 && minutes > 0) {
-            // +14:00 is max, but +14:01 not allowed
+        // Maximum allowed hours based on sign
+        int maxHour = (sign == '+') ? 14 : 12;
+
+        if (hours < 0 || hours > maxHour) {
+            logger.warning("Hours out of range for sign " + sign + ": " + hours);
             return false;
         }
 
-        if (test.startsWith("-") && hours > 12) {
-            // -12:00 is min, disallow -13:00 etc.
+        if (hours == maxHour && minutes > 0) {
+            logger.warning("Minutes exceed max at boundary: " + input);
             return false;
         }
 
-        if (test.startsWith("-") && hours == 12 && minutes > 0) {
-            return false;
-        }
         return true;
     }
+
 
     /**
      * Returns the total offset in minutes.
