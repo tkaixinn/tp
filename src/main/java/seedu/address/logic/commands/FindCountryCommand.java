@@ -13,8 +13,13 @@ import seedu.address.model.person.CountryContainsKeywordPredicate;
  */
 public class FindCountryCommand extends Command {
 
+    /** The command word used to execute this command in the CLI. */
     public static final String COMMAND_WORD = "findcountry";
 
+    /**
+     * Usage message for the {@code findcountry} command.
+     * Shows correct format and example for user reference.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who come from "
             + "the specified country (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: COUNTRY \n"
@@ -22,10 +27,22 @@ public class FindCountryCommand extends Command {
 
     private final CountryContainsKeywordPredicate predicate;
 
+    /**
+     * Creates a {@code FindCountryCommand} with the specified {@code CountryContainsKeywordPredicate}.
+     *
+     * @param predicate the condition used to filter persons by country.
+     */
     public FindCountryCommand(CountryContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the {@code FindCountryCommand} and filters the list of persons in the model
+     * to only those whose country matches the given predicate.
+     *
+     * @param model the model containing the person list and other app data.
+     * @return a {@code CommandResult} containing the result message and updated list.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
