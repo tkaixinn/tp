@@ -60,10 +60,6 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String ORGANISATION_DESC_AMY = " " + PREFIX_ORGANISATION + VALID_ORGANISATION_AMY;
-    public static final String ORGANISATION_DESC_BOB = " " + PREFIX_ORGANISATION + VALID_ORGANISATION_BOB;
-    public static final String EVENT_DESC_AMY = " " + PREFIX_EVENT + VALID_EVENT_AMY;
-    public static final String EVENT_DESC_BOB = " " + PREFIX_EVENT + VALID_EVENT_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
@@ -84,7 +80,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String OFFSET_DESC_AMY = " " + PREFIX_OFFSET + VALID_OFFSET_AMY;
     public static final String OFFSET_DESC_BOB = " " + PREFIX_OFFSET + VALID_OFFSET_BOB;
-    public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
     public static final String CHANNEL_DESC_BOB = " " + PREFIX_CHANNEL + VALID_CHANNEL_BOB;
     public static final String LANGUAGE_DESC_BOB = " " + PREFIX_LANGUAGE + VALID_LANGUAGE_BOB;
 
@@ -95,7 +90,6 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_OFFSET_DESC = " " + PREFIX_OFFSET + "-17:00";
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

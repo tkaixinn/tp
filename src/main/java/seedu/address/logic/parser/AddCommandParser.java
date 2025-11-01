@@ -122,7 +122,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         if (tagList.size() > 10) {
-            throw new ParseException("You can only have a maximum of 10 tags per contact.");
+            throw new ParseException("Maximum of 10 tags (excluding the country code) per contact.");
         }
 
         Person.CommunicationChannel finalPreferredChannel = preferredChannel;

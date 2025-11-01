@@ -305,6 +305,6 @@ public class AddCommandParserTest {
                 + COUNTRY_DESC_BOB + OFFSET_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_FRIEND0 + TAG_DESC_FRIEND1
                 + TAG_DESC_FRIEND2 + TAG_DESC_FRIEND3 + TAG_DESC_FRIEND4 + TAG_DESC_FRIEND5 + TAG_DESC_FRIEND6
                 + TAG_DESC_FRIEND7 + TAG_DESC_FRIEND8 + TAG_DESC_FRIEND9,
-                "You can only have a maximum of 10 tags per contact.");
+                "Maximum of 10 tags (excluding the country code) per contact.");
     }
 }

@@ -131,6 +131,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        if (tagSet.size() > 10) {
+            throw new ParseException("Maximum of 10 tags (excluding the country code) per contact.");
+        }
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
