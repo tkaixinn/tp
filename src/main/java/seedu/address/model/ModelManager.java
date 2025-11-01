@@ -193,7 +193,9 @@ public class ModelManager implements Model {
         }
 
         setSortMode(mode);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_UNARCHIVED);
+        Predicate<Person> currentPredicate = filteredPersons.getPredicate() != null
+                ? (Predicate<Person>) filteredPersons.getPredicate() : PREDICATE_SHOW_ALL_UNARCHIVED;
+        updateFilteredPersonList(currentPredicate);
     }
 
     @Override
