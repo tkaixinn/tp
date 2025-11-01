@@ -127,4 +127,9 @@ public interface Model {
      * Returns the size of the filtered persons list.
      */
     int checkListSize();
+
+    /**
+     * Returns the current list predicate.
+     */
+    Predicate<Person> getCurrentPersonListPredicate();
 }

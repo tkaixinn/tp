@@ -40,6 +40,7 @@
             <Label fx:id="preferredLanguage" styleClass="cell_small_label" text="$preferredLanguage" wrapText="true" maxWidth="Infinity" />
             <Label fx:id="addedOn" styleClass="cell_small_label" text="$addedOn" wrapText="true" maxWidth="Infinity" />
             <Label fx:id="note" styleClass="cell_small_label" text="$note" wrapText="true" maxWidth="Infinity" />
+            <Label fx:id="archivalStatus" styleClass="cell_small_label" text="[ARCHIVED]" wrapText="true" maxWidth="Infinity" />
         </VBox>
     </GridPane>
 </HBox>

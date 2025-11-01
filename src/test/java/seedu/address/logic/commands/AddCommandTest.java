@@ -203,6 +203,11 @@ public class AddCommandTest {
         public int checkListSize() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Predicate<Person> getCurrentPersonListPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
