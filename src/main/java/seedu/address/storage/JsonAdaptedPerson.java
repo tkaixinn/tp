@@ -193,13 +193,15 @@ class JsonAdaptedPerson {
         }
         final Country modelCountry = isNull(country) ? null : new Country(country);
 
-        if (isNull(preferredLanguage)) {
-            preferredLanguage = "english";
+        final PreferredLanguage modelPreferredLanguage;
+        if (preferredLanguage == null || preferredLanguage.isBlank()) {
+            modelPreferredLanguage = null;
+        } else {
+            if (!PreferredLanguage.isValidLanguage(preferredLanguage)) {
+                throw new IllegalValueException(PreferredLanguage.MESSAGE_CONSTRAINTS);
+            }
+            modelPreferredLanguage = new PreferredLanguage(preferredLanguage);
         }
-        if (!PreferredLanguage.isValidLanguage(preferredLanguage)) {
-            throw new IllegalValueException(PreferredLanguage.MESSAGE_CONSTRAINTS);
-        }
-        final PreferredLanguage modelPreferredLanguage = new PreferredLanguage(preferredLanguage);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
