@@ -18,7 +18,13 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Note
 Person *--> Country
+Person *--> Organisation
+Person *--> Event
+Person *--> Note
+Person *--> Tag
 Person *--> Offset
+Person *--> PreferredLanguage
+Person *--> AddedOn
+
 @enduml
