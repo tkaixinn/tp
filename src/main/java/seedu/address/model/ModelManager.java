@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Predicate<Person> currentPersonListPredicate;
     private SortMode sortMode = SortMode.NAME;
 
     /**
@@ -146,6 +147,7 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        currentPersonListPredicate = predicate;
     }
 
     @Override
@@ -206,5 +208,12 @@ public class ModelManager implements Model {
     @Override
     public int checkListSize() {
         return filteredPersons.size();
+    }
+
+    @Override
+    public Predicate<Person> getCurrentPersonListPredicate() {
+        return currentPersonListPredicate != null
+                ? currentPersonListPredicate
+                : PREDICATE_SHOW_ALL_UNARCHIVED;
     }
 }
