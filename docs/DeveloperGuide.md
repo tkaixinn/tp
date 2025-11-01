@@ -680,7 +680,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all contacts using list.
 
-    2. Test case: <br> add n/Alex Tan p/91234567 e/alex@gmail.com a/123 Clementi Rd o/NUS c/Singapore off/+08:00 <br> Expected: Contact successfully added. Appears at the correct sorted position. Confirmation message shown in status bar.
+    2. Test case: <br> add name: Alex Tan phone: 91234567 email: alex@gmail.com address: 123 Clementi Rd organisation: NUS country: Singapore offset:+08:00 <br> Expected: Contact successfully added. Appears at the correct sorted position. Confirmation message shown in status bar.
 
 2. Add a duplicate contact
 
@@ -688,7 +688,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Add with missing required fields
 
-    1. Test case: <br> add n/Alex Tan e/alex@gmail.com a/123 Clementi Rd off/+08:00 <br> Expected: Error message indicating missing p/PHONE.
+    1. Test case: <br> add name: Alex Tan email: alex@gmail.com address: 123 Clementi Rd offset:+08:00 <br> Expected: Error message indicating field.
 
 ### Editing a person
 
@@ -696,11 +696,11 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Contact list contains at least one person.
 
-    2. Test case: <br> edit 1 n/Bob Tan p/98765432 e/bob@gmail.com a/456 Bukit Timah Rd c/Malaysia off/+07:00 <br> Expected: Contact’s details updated. Success message shown.
+    2. Test case: <br> edit 1 name: Bob Tan phone: 98765432 email: bob@gmail.com address: 456 Bukit Timah Rd country: Malaysia offset: +07:00 <br> Expected: Contact’s details updated. Success message shown.
 
 2. Edit a single field
 
-    1. Test case: <br> edit 1 n/Bobby Tan <br> Expected: Only the name field changes. Other fields remain unchanged.
+    1. Test case: <br> edit 1 name: Bobby Tan <br> Expected: Only the name field changes. Other fields remain unchanged.
 
 ### Deleting a person
 
