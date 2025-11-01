@@ -51,16 +51,16 @@ Worldly is a **desktop app for exchange students looking to manage their contact
 
 <br>
 
-Please refer to the [Commands](#commands) below for details of each command.
+Please refer to the **Commands** below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## :star: Features
 
 ### Create new contacts
-* Add up to 500 contacts with only 4 mandatory fields to start (name, phone number, email and address)
+* Add up to 500 contacts with only 5 mandatory fields to start (name, phone number, email, address and offset)
 * Edit contacts for details you may have initially left out
-* Tag each contact with up to 9 custom tags
+* Tag each contact with up to 10 custom tags
 * Worldly automatically validates your contact details (like email, offset, and country) and will reject entries that don’t match the allowed format — so your contact list always stays clean.
 
 ### Organise your contact list
@@ -113,7 +113,8 @@ If your changes to the data file render its format invalid, Worldly may behave i
 Shows the description and format of all actions a user can perform with Worldly, as well as the following in separate tabs:
 * A table of valid country names for the `country:COUNTRY` field and their corresponding calling codes.
 * A table of various regions and their timezones with respect to UTC for reference.
-* A table of valid languages for the `language:LANGUAGE` field and the countries that use them.
+<!-- TO CHECK AGAIN -->
+* A table of valid languages for the `language:LANGUAGE` field and a basic greeting in those languages.
 * Shortcut: You can also open the help window by pressing `F1` or selecting *Help → User Guide* from the menu bar.
 
 ![help message](images/helpWindow.png)
@@ -126,13 +127,15 @@ Adds a contact to the address book.
 
 Format: `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language: LANGUAGE] [note:NOTE] [tag:TAG]...`
 
-*Do not include : in any field unless it follows the format*
-* Case-sensitive uniqueness of contact names is enforced.
+* Do not include : in any field unless it follows the format. Doing so will cause an error.
+<!-- TO CHECK AGAIN -->
+* No duplicate names are allowed.
 * A tag with the contact's country calling code is automatically added if the phone number starts with `+[COUNTRY CODE]`.
+* Tags must be alphanumeric.
 * The offset refers to the timezone offset with respect to UTC and must be specified in +/-HH:MM. You may refer to the help window (with `help`) for a reference table of offset values.
-* The country field is **case-sensitive** and must match a country in the provided list (in `help`) **exactly**.
-* The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. You must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM. The channel is **case-insensitive**.
-* The language field is **case-insensitive** and must match a language in the provided list (in `help`) **exactly**.
+* The country field is **case-insensitive** but must match a country in the provided list (in `help`) **exactly**.
+* The preferred communication channel field may be omitted, but if it is included, it **cannot be left blank**. The channel field is **case-insensitive** but you must specify one of the allowed channels: PHONE, EMAIL, SMS, WHATSAPP, or TELEGRAM.
+* The language field is **case-insensitive** but must match a language in the provided list (in `help`) **exactly**.
 * With the exceptions of the channel and tag fields, optional fields can be included and left blank (e.g., `country:`), which would have the same effect as omitting them from the command entirely.
 * A contact can have up to 10 tags (including 0). Each tag must be added with `tag:`.
 * There are limits to how long each field can be. They are as follows:<br>
@@ -235,7 +238,7 @@ Finds contacts who are from the given organisation.
 
 Format: `findorganisation ORGANISATION`
 
-* The search is **case-sensitive**. e.g.,`NUS` will return contacts that has Google as their organisation, not `nus`.
+* The search is **case-sensitive**. e.g.,`NUS` will only return contacts that has `NUS` as their organisation, not `nus`.
 * Refer to the full list of valid country names in the help window.
   ![result for 'findorganisation NUS'](images/findorganisation.png)
 
@@ -283,7 +286,8 @@ Unarchives the contact at the specified `INDEX` from the current list.
 Format: `unarchive INDEX`
 
 * Unarchives the contact at the specified `INDEX` from the current list, moving them back to the main list (`list`).
-* Displayed list will be archive list (`archivelist`) after archiving is done, regardless of previously applied filters (e.g., `find`).
+* Displayed list will be archive list (`archivelist`) after unarchiving is done, regardless of previously applied filters (e.g., `find`).
+* As an exception to the previous point, unarchiving the last contact in the archive list will return the display to the main list instead.
 
 Examples:
 * `archivelist` followed by `unarchive 1` unarchives the first contact in the archive list.
@@ -362,16 +366,6 @@ Format: `exit`
 **Q:** Can I undo a command if I delete or edit a contact by mistake?<br>
 **A:** Worldly does not currently have an undo feature. Deletions or edits are immediate, thus it is recommended to make periodic backups of `data/addressbook.json`.
 
-<br>
-
-**Q:** Are command parameters case-sensitive?<br>
-**A:** No, refer to the `add` command's details under [Commands](#commands) for more information.
-
-<br>
-
-**Q:** I am typing the correct prefix for offset but I am getting an error. What do I do?<br>
-**A:** Check that you have not left a space between the end of the prefix and the parameter. You should use `offset:OFFSET`, not `offset: OFFSET`.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## :jigsaw: Known Issues
@@ -388,12 +382,12 @@ Action | Format and Examples
 **Help** | `help`
 **Add** | `add name:NAME phone:PHONE_NUMBER email:EMAIL address:ADDRESS offset:OFFSET [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...` <br> e.g., `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00 country:Singapore channel:email note:does not drink alcohol tag:friends`
 **List** | `list`
-**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
+**Edit** | `edit INDEX [name:NAME] [phone:PHONE_NUMBER] [email:EMAIL] [address:ADDRESS] [offset:OFFSET] [country:COUNTRY] [organisation:ORGANISATION] [event:EVENT] [channel:CHANNEL] [language:LANGUAGE] [note:NOTE] [tag:TAG]...`<br> e.g., `edit 2 name:James Lee email:jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
-**Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
-**Find Organisation** | `findorganisation ORGANISATION`<br> e.g., `find Google`
+**Find Country** | `findcountry COUNTRY`<br> e.g., `findcountry Singapore`
+**Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friends`
+**Find Organisation** | `findorganisation ORGANISATION`<br> e.g., `findorganisation Google`
 **Archive** | `archive INDEX`<br> e.g., `archive 2`
 **Unarchive** | `unarchive INDEX`<br> e.g., `unarchive 1`
 **List Archived** | `archivelist`
