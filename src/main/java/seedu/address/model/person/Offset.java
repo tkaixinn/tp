@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.ZoneOffset;
+import java.util.logging.Logger;
 
 /**
  * Represents a GMT offset for a person.
@@ -13,12 +12,11 @@ import java.time.ZoneOffset;
 public class Offset implements Comparable<Offset> {
 
 
-    private static final Logger logger = Logger.getLogger(Offset.class.getName());
-
     public static final String MESSAGE_CONSTRAINTS =
-            "GMT offset must be in the format +HH:MM or -HH:MM, where HH is 00-14 and MM is 00-59.";
+            "offset must be from -12:00 to +14:00 and must be +HH:MM or -HH:MM and "
+                    + "MM is one of 00, 30, or 45 only and valid existing offsets";
     public static final String VALIDATION_REGEX = "^[+-](\\d{2}):(\\d{2})$";
-
+    private static final Logger logger = Logger.getLogger(Offset.class.getName());
     public final String value;
     private final int totalMinutes; // offset in minutes
 
@@ -65,7 +63,7 @@ public class Offset implements Comparable<Offset> {
         char sign = input.charAt(0);
 
         // Validate minutes
-        if (minutes < 0 || minutes >= 60) {
+        if ((minutes < 0 || minutes >= 60) && minutes != 0 && minutes != 30 && minutes != 45) {
             logger.warning("Minutes out of range: " + minutes);
             return false;
         }
@@ -83,7 +81,15 @@ public class Offset implements Comparable<Offset> {
             return false;
         }
 
-        return true;
+        if (input.equals("+14:00") || input.equals("-12:00") || minutes == 0) {
+            return true;
+        }
+
+        return switch (input) {
+        case "-09:30", "-02:30", "-03:30", "+03:30", "+04:30", "+05:30", "+05:45", "+06:30", "+08:45",
+            "+09:30", "+10:30", "+12:45", "+13:45" -> true; //timezones with :30 and :45 includes DST adjustments
+        default -> false;
+        };
     }
 
 
