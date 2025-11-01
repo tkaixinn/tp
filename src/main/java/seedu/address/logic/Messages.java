@@ -65,6 +65,10 @@ public class Messages {
             builder.append("; Language: ").append(person.getPreferredLanguage());
         }
 
+        if (person.getNote() != null && !person.getNote().toString().isBlank()) {
+            builder.append("; Note: ").append(person.getNote());
+        }
+
         builder.append("; Tags: ");
 
         person.getTags().forEach(builder::append);
