@@ -86,9 +86,9 @@ public class Offset implements Comparable<Offset> {
         }
 
         return switch (input) {
-            case "-09:30", "-02:30", "-03:30", "+03:30", "+04:30", "+05:30", "+05:45", "+06:30", "+08:45", "+09:30",
-                 "+10:30", "+12:45", "+13:45" -> true; // timezones with :30 and :45 includes DST adjustments
-            default -> false;
+        case "-09:30", "-02:30", "-03:30", "+03:30", "+04:30", "+05:30", "+05:45", "+06:30", "+08:45",
+            "+09:30", "+10:30", "+12:45", "+13:45" -> true; //timezones with :30 and :45 includes DST adjustments
+        default -> false;
         };
     }
 

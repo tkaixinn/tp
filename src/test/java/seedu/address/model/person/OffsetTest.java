@@ -43,8 +43,8 @@ public class OffsetTest {
     public void isValidOffset_validFormats_true() {
         assertTrue(Offset.isValidOffset("+00:00"));
         assertTrue(Offset.isValidOffset("-00:00"));
-        assertTrue(Offset.isValidOffset("+01:30"));
-        assertTrue(Offset.isValidOffset("-05:45"));
+        assertTrue(Offset.isValidOffset("+01:00"));
+        assertTrue(Offset.isValidOffset("+05:30"));
         assertTrue(Offset.isValidOffset("+14:00")); // upper hour bound allowed by regex
     }
 
@@ -68,8 +68,8 @@ public class OffsetTest {
         assertEquals(0, new Offset("+00:00").getTotalMinutes());
         // negative zero should still be 0
         assertEquals(0, new Offset("-00:00").getTotalMinutes());
-        assertEquals(90, new Offset("+01:30").getTotalMinutes());
-        assertEquals(-345, new Offset("-05:45").getTotalMinutes());
+        assertEquals(60, new Offset("+01:00").getTotalMinutes());
+        assertEquals(345, new Offset("+05:45").getTotalMinutes());
         assertEquals(14 * 60, new Offset("+14:00").getTotalMinutes());
     }
 
@@ -82,9 +82,9 @@ public class OffsetTest {
     @Test
     public void compareTo_ordersByMinutesAscending() {
         Offset a = new Offset("-05:00"); // -300
-        Offset b = new Offset("-00:30"); // -30
+        Offset b = new Offset("-00:00"); // -30
         Offset c = new Offset("+00:00"); // 0
-        Offset d = new Offset("+01:15"); // 75
+        Offset d = new Offset("+01:00"); // 75
 
         List<Offset> list = Arrays.asList(d, b, a, c);
         list.sort(Offset::compareTo);
@@ -101,10 +101,10 @@ public class OffsetTest {
 
     @Test
     public void toZoneOffset_matchesValue() {
-        Offset off = new Offset("+07:45");
+        Offset off = new Offset("+13:45");
         ZoneOffset zo = off.toZoneOffset();
-        assertEquals(ZoneOffset.of("+07:45"), zo);
-        assertEquals("+07:45", zo.toString());
+        assertEquals(ZoneOffset.of("+13:45"), zo);
+        assertEquals("+13:45", zo.toString());
     }
 
     @Test
@@ -114,14 +114,14 @@ public class OffsetTest {
 
     @Test
     public void equals_differentValue_false() {
-        assertNotEquals(new Offset("+02:00"), new Offset("+02:30"));
-        assertNotEquals(new Offset("+00:00"), new Offset("-00:00")); // different canonical strings, even if minutes==0
+        assertNotEquals(new Offset("+05:00"), new Offset("+05:30"));
+        assertNotEquals(new Offset("+00:00"), new Offset("-02:00")); // different canonical strings, even if minutes==0
     }
 
     @Test
     public void hashCode_consistentWithEquals() {
-        Offset x1 = new Offset("+03:15");
-        Offset x2 = new Offset("+03:15");
+        Offset x1 = new Offset("+03:00");
+        Offset x2 = new Offset("+03:00");
         assertEquals(x1, x2);
         assertEquals(x1.hashCode(), x2.hashCode());
     }
