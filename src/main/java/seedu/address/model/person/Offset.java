@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import java.util.logging.Logger;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.ZoneOffset;
+import java.util.logging.Logger;
 
 /**
  * Represents a GMT offset for a person.
@@ -12,13 +12,11 @@ import java.time.ZoneOffset;
 public class Offset implements Comparable<Offset> {
 
 
-    private static final Logger logger = Logger.getLogger(Offset.class.getName());
-
     public static final String MESSAGE_CONSTRAINTS =
             "offset must be from -12:00 to +14:00 and must be +HH:MM or -HH:MM and "
                     + "MM is one of 00, 30, or 45 only and valid existing offsets";
     public static final String VALIDATION_REGEX = "^[+-](\\d{2}):(\\d{2})$";
-
+    private static final Logger logger = Logger.getLogger(Offset.class.getName());
     public final String value;
     private final int totalMinutes; // offset in minutes
 
