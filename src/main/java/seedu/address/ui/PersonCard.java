@@ -60,6 +60,8 @@ public class PersonCard extends UiPart<Region> {
     private Label preferredLanguage;
     @FXML
     private Label addedOn;
+    @FXML
+    private Label archivalStatus;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -159,6 +161,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             addedOn.setVisible(false);
             addedOn.setManaged(false);
+        }
+
+        if (person.getArchivalStatus()) {
+            archivalStatus.setVisible(true);
+            archivalStatus.setText("[ARCHIVED]");
+        } else {
+            archivalStatus.setVisible(false);
+            archivalStatus.setManaged(false);
         }
     }
 }

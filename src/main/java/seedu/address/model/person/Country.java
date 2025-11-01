@@ -33,6 +33,8 @@ public class Country {
             String countryName = locale.getDisplayCountry(Locale.ENGLISH);
             VALID_COUNTRY_NAMES.add(countryName);
         }
+
+        VALID_COUNTRY_NAMES.add("Côte d'Ivoire");
     }
 
     public final String value;
