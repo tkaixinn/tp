@@ -92,8 +92,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
-            editPersonDescriptor.setPreferredLanguage(
-                    ParserUtil.parsePreferredLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get()));
+            String languageInput = argMultimap.getValue(PREFIX_LANGUAGE).get();
+            try {
+                editPersonDescriptor.setPreferredLanguage(ParserUtil.parsePreferredLanguage(languageInput));
+            } catch (IllegalArgumentException e) {
+                throw new ParseException("Unsupported language: " + languageInput);
+            }
         }
 
         if (argMultimap.getValue(PREFIX_CHANNEL).isPresent()) {
