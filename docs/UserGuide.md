@@ -16,33 +16,17 @@ Worldly is a **desktop app for exchange students looking to manage their contact
    **Mac users only:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
    **Tip:** You can check your installed Java version by typing `java -version` in your terminal. If it shows a version below 17, please install a newer JDK before running Worldly.
-
-<br>
-
 2. Download the latest `.jar` release from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-<br>
-
 3. Copy the file to the folder you want to use as the _home folder_ for Worldly.
-
-<br>
-
 4. Open a command terminal (e.g., Terminal for Mac users) and navigate to the folder you put the jar file in with the commands below:
 - `cd` (Windows) or `pwd` (Mac/Linux) to check the current folder path.
 - `cd foldername` to enter a subfolder within the current folder. For example,`cd first\second` (Windows) or `cd first/second` (Mac/Linux) would enter a folder named "first", followed by a folder named "second" (located within "first").
 - `cd ..` navigates to the previous folder.
-
-<br>
-
 5. Once you are in the folder that contains the jar file, use the `java -jar worldly.jar` command to run the application.<br>
    ![Ui](images/Ui.png)<br>
    *Image: A GUI similar to the one above should appear in a few seconds. Note how the app contains a sample contact.*
-
-<br>
-
 6. Type your desired command in the command box and press the Enter key to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
 - `list`: Lists all contacts.
 - `add name:John Doe phone:98765432 email:johnd@example.com address:John street, block 123, #01-01 offset:+08:00`: Adds a contact named `John Doe` to the Address Book.
 - `delete 3`: Deletes the third contact shown in the current list.
